@@ -17,6 +17,7 @@
 		5AB8D574243B410200387EAE /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D573243B410200387EAE /* TodoUITests.swift */; };
 		5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* CardListController.swift */; };
 		5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */; };
+		5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D58C243B5CDC00387EAE /* TitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		5AB8D575243B410200387EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AB8D584243B4FC700387EAE /* CardListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListController.swift; sourceTree = "<group>"; };
 		5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogController.swift; sourceTree = "<group>"; };
+		5AB8D58C243B5CDC00387EAE /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		5AB8D550243B40FF00387EAE /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				5AB8D58B243B5CBF00387EAE /* Views */,
 				5AB8D581243B4A5200387EAE /* ViewControllers */,
 				5AB8D551243B40FF00387EAE /* AppDelegate.swift */,
 				5AB8D553243B40FF00387EAE /* SceneDelegate.swift */,
@@ -140,6 +143,14 @@
 				5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5AB8D58B243B5CBF00387EAE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5AB8D58C243B5CDC00387EAE /* TitleView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +289,7 @@
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
+				5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
