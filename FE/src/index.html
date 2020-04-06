@@ -20,7 +20,7 @@
       <div id="menu"></div>
       <div id="container">
         <div id="todo-app">
-          <div class="todo-columns">
+          <div class="todo-columns" tabindex="0">
             <div class="todo-title">
               <h2>해야할일</h2>
               <div class="btn-wrap">
@@ -38,14 +38,14 @@
               </form>
             </div>
             <div class="card-wrap">
-              <div class="card-item">
+              <div class="card-item" tabindex="0">
                 <div class="card-contents">내용이 출력됩니다.</div>
                 <p class="card-writer">added by <span>홍길동</span></p>
                 <button class="btn btn-close">
                   <span class="material-icons">close</span>
                 </button>
               </div>
-              <div class="card-item">
+              <div class="card-item" tabindex="0">
                 <div class="card-contents">내용이 출력됩니다.</div>
                 <p class="card-writer">added by <span>홍길동</span></p>
                 <button class="btn btn-close">
@@ -54,7 +54,7 @@
               </div>
             </div>
           </div>
-          <div class="todo-columns">
+          <div class="todo-columns" tabindex="0">
             <div class="todo-title">
               <h2>해야할일</h2>
               <div class="btn-wrap">
@@ -72,12 +72,30 @@
               </form>
             </div>
           </div>
-          <div class="todo-columns"></div>
-          <div class="todo-columns"></div>
-          <div class="todo-columns"></div>
+          <div class="todo-columns" tabindex="0"></div>
+          <div class="todo-columns" tabindex="0"></div>
+          <div class="todo-columns" tabindex="0"></div>
         </div>
       </div>
       <footer><p>TODOLIST TeamProject</p></footer>
+      <div id="modal">
+        <div class="modal-wrap">
+          <div class="modal-title">
+            <h2>해야할일</h2>
+            <div class="btn-wrap">
+              <button class="btn btn-close"><span class="material-icons">close</span></button>
+            </div>
+          </div>
+          <div class="modal-contents">
+            <p>Note</p>
+            <form action="">
+              <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
+              <div class="btn-wrap">
+                <button class="btn btn-add">Save note</button>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- <script src="dist/bundle.js"></script> -->
   </body>
