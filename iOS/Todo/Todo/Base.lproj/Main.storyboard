@@ -15,19 +15,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c93-Ir-yMy">
-                                <rect key="frame" x="406" y="50" width="382" height="764"/>
+                                <rect key="frame" x="204" y="44" width="192" height="556"/>
                                 <connections>
                                     <segue destination="7L4-j1-Wql" kind="embed" id="ToF-0f-0OO"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-lD-zT1">
-                                <rect key="frame" x="810" y="50" width="382" height="764"/>
+                                <rect key="frame" x="406" y="44" width="192" height="556"/>
                                 <connections>
                                     <segue destination="1T0-rv-fpg" kind="embed" id="RWn-2k-D6k"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYD-RD-Axa">
-                                <rect key="frame" x="0.0" y="50" width="382" height="764"/>
+                                <rect key="frame" x="0.0" y="44" width="192" height="556"/>
                                 <connections>
                                     <segue destination="XS7-sX-pUi" kind="embed" id="pkM-Yh-Jf1"/>
                                 </connections>
@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="892.80575539568349" y="129.64824120603015"/>
         </scene>
-        <!--Acitivitiy Log View Controller-->
+        <!--Acitivitiy Log Controller-->
         <scene sceneID="hdL-tW-mh9">
             <objects>
-                <viewController id="TBK-pc-3cw" customClass="AcitivitiyLogViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TBK-pc-3cw" customClass="AcitivitiyLogController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m4T-eG-pOW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

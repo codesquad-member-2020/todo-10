@@ -16,7 +16,7 @@
 		5AB8D569243B410200387EAE /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D568243B410200387EAE /* TodoTests.swift */; };
 		5AB8D574243B410200387EAE /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D573243B410200387EAE /* TodoUITests.swift */; };
 		5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* CardListController.swift */; };
-		5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */; };
+		5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		5AB8D573243B410200387EAE /* TodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUITests.swift; sourceTree = "<group>"; };
 		5AB8D575243B410200387EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AB8D584243B4FC700387EAE /* CardListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListController.swift; sourceTree = "<group>"; };
-		5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogViewController.swift; sourceTree = "<group>"; };
+		5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +137,7 @@
 			children = (
 				5AB8D555243B40FF00387EAE /* ToDoViewController.swift */,
 				5AB8D584243B4FC700387EAE /* CardListController.swift */,
-				5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */,
+				5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -275,7 +275,7 @@
 			files = (
 				5AB8D556243B40FF00387EAE /* ToDoViewController.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
-				5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */,
+				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
 			);
