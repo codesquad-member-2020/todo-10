@@ -58,7 +58,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Menu" id="mrC-RC-hhh">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="HLQ-Ld-LHe" kind="popoverPresentation" popoverAnchorBarButtonItem="mrC-RC-hhh" id="KKv-Jd-MHp">
+                                <segue destination="TBK-pc-3cw" kind="popoverPresentation" popoverAnchorBarButtonItem="mrC-RC-hhh" id="CjR-ZC-bpd">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -69,23 +69,20 @@
             </objects>
             <point key="canvasLocation" x="892.80575539568349" y="129.64824120603015"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="Ro3-NP-rOo">
+        <!--Acitivitiy Log View Controller-->
+        <scene sceneID="hdL-tW-mh9">
             <objects>
-                <tableViewController id="HLQ-Ld-LHe" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MpD-dw-pzH">
+                <viewController id="TBK-pc-3cw" customClass="AcitivitiyLogViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m4T-eG-pOW">
                         <rect key="frame" x="0.0" y="0.0" width="388" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="HLQ-Ld-LHe" id="ogg-pH-CVA"/>
-                            <outlet property="delegate" destination="HLQ-Ld-LHe" id="mZg-Rn-uMz"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="12d-P4-RRe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <viewLayoutGuide key="safeArea" id="3o8-8Z-eTz"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hXG-ka-5w8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="130"/>
+            <point key="canvasLocation" x="1612" y="129"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="O5V-tx-X9O">
