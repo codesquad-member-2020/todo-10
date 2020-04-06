@@ -23,8 +23,8 @@
             <div class="todo-title">
               <h2>해야할일</h2>
               <div class="btn-wrap">
-                <button>+</button>
-                <button>:</button>
+                <button class="btn"><span class="material-icons">add</span></button>
+                <button class="btn"><span class="material-icons">more_vert</span></button>
               </div>
             </div>
             <div class="todo-form">
@@ -32,28 +32,45 @@
                 <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
                 <div class="btn-wrap">
                   <button class="btn btn-add">add</button>
-                  <button class="btn">cancel</button>
+                  <button class="btn btn-close">cancel</button>
                 </div>
               </form>
             </div>
             <div class="card-wrap">
               <div class="card-item">
                 <div class="card-contents">내용이 출력됩니다.</div>
-                <p>added by <span>홍길동</span></p>
+                <p class="card-writer">added by <span>홍길동</span></p>
                 <button class="btn btn-close">
                   <span class="material-icons">close</span>
                 </button>
               </div>
               <div class="card-item">
                 <div class="card-contents">내용이 출력됩니다.</div>
-                <p>added by <span>홍길동</span></p>
+                <p class="card-writer">added by <span>홍길동</span></p>
                 <button class="btn btn-close">
                   <span class="material-icons">close</span>
                 </button>
               </div>
             </div>
           </div>
-          <div class="todo-columns"></div>
+          <div class="todo-columns">
+            <div class="todo-title">
+              <h2>해야할일</h2>
+              <div class="btn-wrap">
+                <button class="btn"><span class="material-icons">add</span></button>
+                <button class="btn"><span class="material-icons">more_vert</span></button>
+              </div>
+            </div>
+            <div class="todo-form active">
+              <form action="">
+                <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
+                <div class="btn-wrap">
+                  <button class="btn btn-add">add</button>
+                  <button class="btn btn-close">cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
           <div class="todo-columns"></div>
           <div class="todo-columns"></div>
           <div class="todo-columns"></div>
