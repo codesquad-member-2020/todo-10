@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* Layout */
+$inner-width: 1000px;
+$inner-width-small: $inner-width / 2;
+
+/* color */
+$color-default: #252525;
+$color-ci: #00c84f;
+$color-white: #fff;
+$color-error: #e65f3e;
+$color-gray: #f2f4f7;
+
+/* Font-family */
+$font-family-default: 'Noto Sans KR', sans-serif;
+
+/* Font-size */
+$font-size-mobile: 12px;
+$font-size-tablet: 14px;
+$font-size-default: 16px;
+$font-size-small: 0.75em;
+$font-size-large: 1.25em;
+$font-size-extra: 1.5em;
+$font-size-extra-large: 2em;
+
+$font-size-title: 3em;
+
+/* media query size */
+$mq-size-mobile : 480px;
+$mq-size-tablet : 768px;
+$mq-size-desktop : 1024px;

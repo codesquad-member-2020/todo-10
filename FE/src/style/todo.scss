@@ -1,0 +1,21 @@
+#todo-app {
+  display:flex;
+  flex-direction: row;
+  height: 100%;
+  padding: 2%;
+}
+.todo-title {
+  position: relative;
+  margin-bottom: 5px;
+  button {
+    position: absolute;
+  }
+}
+.todo-columns {
+  width:100%;
+  max-width:375px;
+  padding:1%;
+  border:1px solid #e5e5e5;
+  border-radius: 10px;
+  background:#eff1f3;
+}
