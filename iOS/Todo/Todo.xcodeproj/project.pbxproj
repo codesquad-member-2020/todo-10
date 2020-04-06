@@ -15,6 +15,7 @@
 		5AB8D55E243B410200387EAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AB8D55C243B410200387EAE /* LaunchScreen.storyboard */; };
 		5AB8D569243B410200387EAE /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D568243B410200387EAE /* TodoTests.swift */; };
 		5AB8D574243B410200387EAE /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D573243B410200387EAE /* TodoUITests.swift */; };
+		5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* ColumnViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		5AB8D56F243B410200387EAE /* TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB8D573243B410200387EAE /* TodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUITests.swift; sourceTree = "<group>"; };
 		5AB8D575243B410200387EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5AB8D584243B4FC700387EAE /* ColumnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				5AB8D555243B40FF00387EAE /* ToDoViewController.swift */,
+				5AB8D584243B4FC700387EAE /* ColumnViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				5AB8D556243B40FF00387EAE /* ToDoViewController.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
+				5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
