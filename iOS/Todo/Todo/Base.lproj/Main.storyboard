@@ -76,13 +76,38 @@
                     <view key="view" contentMode="scaleToFill" id="m4T-eG-pOW">
                         <rect key="frame" x="0.0" y="0.0" width="388" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaJ-N4-KG2">
+                                <rect key="frame" x="13" y="0.0" width="375" height="30"/>
+                                <color key="backgroundColor" red="0.89802831409999995" green="0.89803349970000002" blue="0.89804726840000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="C9L-ek-4YR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="35u-5A-RfR">
+                                <rect key="frame" x="13" y="30" width="375" height="637"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="35u-5A-RfR" firstAttribute="leading" secondItem="3o8-8Z-eTz" secondAttribute="leading" id="L1E-qq-RTy"/>
+                            <constraint firstItem="35u-5A-RfR" firstAttribute="top" secondItem="XaJ-N4-KG2" secondAttribute="bottom" id="QWV-1a-6sz"/>
+                            <constraint firstItem="3o8-8Z-eTz" firstAttribute="trailing" secondItem="35u-5A-RfR" secondAttribute="trailing" id="ZdV-Eb-UVn"/>
+                            <constraint firstItem="XaJ-N4-KG2" firstAttribute="top" secondItem="3o8-8Z-eTz" secondAttribute="top" id="fv4-xv-S4d"/>
+                            <constraint firstItem="XaJ-N4-KG2" firstAttribute="leading" secondItem="3o8-8Z-eTz" secondAttribute="leading" id="jb8-bL-XUr"/>
+                            <constraint firstItem="35u-5A-RfR" firstAttribute="bottom" secondItem="3o8-8Z-eTz" secondAttribute="bottom" id="vHL-gw-yqM"/>
+                            <constraint firstItem="3o8-8Z-eTz" firstAttribute="trailing" secondItem="XaJ-N4-KG2" secondAttribute="trailing" id="wyO-8V-y7D"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3o8-8Z-eTz"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXG-ka-5w8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="129"/>
+            <point key="canvasLocation" x="1611.5577889447236" y="128.77697841726621"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="O5V-tx-X9O">
@@ -107,7 +132,7 @@
             <objects>
                 <viewController id="XS7-sX-pUi" customClass="CardListController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fUy-fI-TEc">
-                        <rect key="frame" x="0.0" y="0.0" width="192" height="556"/>
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="G2R-Qm-Sku"/>
@@ -137,7 +162,7 @@
             <objects>
                 <viewController id="1T0-rv-fpg" customClass="CardListController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vlO-mV-C49">
-                        <rect key="frame" x="0.0" y="0.0" width="192" height="556"/>
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="sHA-YF-ji8"/>
