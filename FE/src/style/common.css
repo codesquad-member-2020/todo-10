@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+/* Layout */
+/* color */
+/* Font-family */
+/* Font-size */
+/* media query size */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+nav,
+ul,
+li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  color: #252525;
+  text-decoration: none;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ins {
+  background-color: #ff9;
+  color: #252525;
+  text-decoration: none;
+}
+
+mark {
+  background-color: #ff9;
+  color: #252525;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #252525;
+  border: 1px solid #d5d2d2;
+  border-radius: 4px;
+}
+
+input[type="text"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="date"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder,
+input[type="tel"]::-webkit-input-placeholder {
+  font-weight: normal;
+  font-size: 12px;
+  color: #ccc;
+}
+
+input[type="text"]:-ms-input-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="date"]:-ms-input-placeholder,
+input[type="email"]:-ms-input-placeholder,
+input[type="tel"]:-ms-input-placeholder {
+  font-weight: normal;
+  font-size: 12px;
+  color: #ccc;
+}
+
+input[type="text"]::-ms-input-placeholder,
+input[type="password"]::-ms-input-placeholder,
+input[type="date"]::-ms-input-placeholder,
+input[type="email"]::-ms-input-placeholder,
+input[type="tel"]::-ms-input-placeholder {
+  font-weight: normal;
+  font-size: 12px;
+  color: #ccc;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="date"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder {
+  font-weight: normal;
+  font-size: 12px;
+  color: #ccc;
+}
+
+select {
+  width: 100%;
+  height: 50px;
+  font-size: 12px;
+  color: #252525;
+  text-indent: 15px;
+  border: 1px solid #d5d2d2;
+  border-radius: 4px;
+  background: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus {
+  border: 1px solid #00c84f;
+}
+
+button {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.inner {
+  width: 90%;
+  margin: 0 auto;
+}
+
+header {
+  height: 5vh;
+  color: #fff;
+  background: #000;
+}
+
+header .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header .toggle-menu {
+  display: block;
+  color: #fff;
+}
+
+#container {
+  position: relative;
+  height: 90vh;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 5vh;
+  background: #eee;
+}
+
+footer p {
+  font-size: 0.75em;
+  color: #888;
+}
