@@ -9,9 +9,7 @@
 import UIKit
 
 final class AcitivitiyLogController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
 }
