@@ -1,4 +1,5 @@
 #todo-app {
+  overflow-x: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,23 +8,43 @@
       -ms-flex-direction: row;
           flex-direction: row;
   height: 100%;
-  padding: 2%;
 }
 
 .todo-title {
-  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 5px;
 }
 
-.todo-title button {
-  position: absolute;
-}
-
 .todo-columns {
-  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 375px;
   max-width: 375px;
   padding: 1%;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   background: #eff1f3;
+}
+
+.todo-columns + .todo-columns {
+  margin-left: 1%;
+}
+
+.todo-textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
 }
