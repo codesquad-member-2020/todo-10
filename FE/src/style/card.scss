@@ -3,14 +3,26 @@
 
 .card-item {
   position: relative;
-  padding: 2%;
+  padding: 5% 8%;
   margin: 10px 0;
   border: 1px solid #e5e5e5;
   border-radius: 0.25em;
+  box-shadow: 0 1px 1px rgba(27, 31, 35, 0.1);
   background: #fff;
+  .card-contents {
+    margin-bottom: 8px;
+  }
+  .card-writer {
+    color: #999;
+    span {
+      color: #333;
+    }
+  }
   .btn-close {
     position: absolute;
-    top: 2%;
-    right: 2%;
+    top: 5px;
+    right: 5px;
+    font-size: 0;
+    border: 0;
   }
 }
