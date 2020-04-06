@@ -1,0 +1,14 @@
+.card-item {
+  position: relative;
+  padding: 2%;
+  margin: 10px 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.25em;
+  background: #fff;
+}
+
+.card-item .btn-close {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}

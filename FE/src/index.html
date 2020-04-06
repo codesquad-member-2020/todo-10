@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style/common.css">
-    <link rel="stylesheet" href="./style/todo.css">
+    <link rel="stylesheet" href="./style/common.css" />
+    <link rel="stylesheet" href="./style/todo.css" />
+    <link rel="stylesheet" href="./style/card.css" />
   </head>
   <body>
     <div id="wrap">
@@ -21,28 +22,45 @@
           <div class="todo-columns">
             <div class="todo-title">
               <h2>해야할일</h2>
-              <button>+</button>
-              <button>dd</button>
+              <div class="btn-wrap">
+                <button>+</button>
+                <button>:</button>
+              </div>
             </div>
             <div class="todo-form">
               <form action="">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <button class="">add</button>
-                <button class="">cancel</button>
+                <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
+                <div class="btn-wrap">
+                  <button class="btn btn-add">add</button>
+                  <button class="btn">cancel</button>
+                </div>
               </form>
             </div>
             <div class="card-wrap">
               <div class="card-item">
                 <div class="card-contents">내용이 출력됩니다.</div>
                 <p>added by <span>홍길동</span></p>
-                <button>close</button>
+                <button class="btn btn-close">
+                  <span class="material-icons">close</span>
+                </button>
+              </div>
+              <div class="card-item">
+                <div class="card-contents">내용이 출력됩니다.</div>
+                <p>added by <span>홍길동</span></p>
+                <button class="btn btn-close">
+                  <span class="material-icons">close</span>
+                </button>
               </div>
             </div>
           </div>
-        </div> 
+          <div class="todo-columns"></div>
+          <div class="todo-columns"></div>
+          <div class="todo-columns"></div>
+          <div class="todo-columns"></div>
+        </div>
       </div>
       <footer><p>TODOLIST TeamProject</p></footer>
     </div>
-    <script src="dist/bundle.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
   </body>
 </html>
