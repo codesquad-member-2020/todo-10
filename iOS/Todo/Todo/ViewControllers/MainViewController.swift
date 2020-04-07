@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ToDoViewController: UIViewController {
+final class MainViewController: UIViewController {
     enum SegueIdentifier: String {
         case toDo
         case inProgress
