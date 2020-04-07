@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 final class CardListController: UIViewController {
     private let titleView = TitleView()
     private let cardListTable = CardListTable()
@@ -43,6 +42,12 @@ final class CardListController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         cardListTable.topAnchor.constraint(equalTo: titleView.bottomAnchor).isActive = true
         cardListTable.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
+        cardListTable.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
+    
+    func setTitle(title: TitleLabel.Title) {
+        titleView.titleLabel.text = title.description
+    }
 }
+

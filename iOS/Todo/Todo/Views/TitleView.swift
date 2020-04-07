@@ -109,6 +109,15 @@ final class Badge: UILabel {
 }
 
 final class TitleLabel: UILabel {
+    enum Title: String, CustomStringConvertible {
+        case toDo = "해야할 일"
+        case inProgress = "하고있는 일"
+        case done = "완료한 일"
+        
+        var description: String {
+            return self.rawValue
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
