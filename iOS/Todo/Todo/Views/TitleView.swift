@@ -9,17 +9,7 @@
 import UIKit
 
 final class TitleView: UIView {
-    let badge: UILabel = {
-        let badge = UILabel()
-        badge.translatesAutoresizingMaskIntoConstraints = false
-        badge.widthAnchor.constraint(equalTo: badge.heightAnchor, multiplier: 1).isActive = true
-        badge.layer.cornerRadius = badge.font.pointSize * 0.65
-        badge.layer.masksToBounds = true
-        badge.text = "1"
-        badge.backgroundColor = .white
-        badge.textAlignment = .center
-        return badge
-    }()
+    let badge = Badge()
     
     let plusButton: UIButton = {
         let plusButton = UIButton()
