@@ -49,7 +49,13 @@ TODO 웹앱 프로젝트 - 10팀
 
 ## Mockup API 문서
 
-### POST /login
+### 서버 요청 주
+
+ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
+
+### 로그인 요청
+
+POST /mock/login
 
 #### 요청 데이터
 ```
