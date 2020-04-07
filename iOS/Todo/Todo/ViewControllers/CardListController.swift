@@ -11,7 +11,6 @@ import UIKit
 final class CardListController: UIViewController {
     private let titleView : TitleView = {
         let titleView = TitleView()
-        titleView.translatesAutoresizingMaskIntoConstraints = false
         return titleView
     }()
     
