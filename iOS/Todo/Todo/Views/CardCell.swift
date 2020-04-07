@@ -30,7 +30,7 @@ final class CardCell: UITableViewCell, ReusableView {
         label.font = UIFont.boldSystemFont(ofSize: 12)
         return label
     }()
-    let contextLabel = ContextLabel()
+    let contextLabel = ContentLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

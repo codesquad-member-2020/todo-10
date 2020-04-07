@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContextLabel: UILabel {
+class ContentLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
