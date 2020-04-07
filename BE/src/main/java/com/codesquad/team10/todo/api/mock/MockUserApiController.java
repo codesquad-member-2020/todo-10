@@ -1,4 +1,4 @@
-package com.codesquad.team10.todo.api;
+package com.codesquad.team10.todo.api.mock;
 
 import com.codesquad.team10.todo.bean.ResponseData;
 import com.codesquad.team10.todo.domain.User;
