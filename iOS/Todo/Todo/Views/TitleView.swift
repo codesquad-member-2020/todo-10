@@ -54,3 +54,58 @@ final class TitleView: UIView {
     }
     
 }
+
+final class Badge: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        configureAspectRatio()
+        configureCornerRadius()
+        configureText()
+        configureBackgroundColor()
+    }
+
+    private func configureAspectRatio() {
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalTo: heightAnchor, multiplier: 1).isActive = true
+    }
+    
+    private func configureCornerRadius() {
+        layer.cornerRadius = font.pointSize * 0.65
+        layer.masksToBounds = true
+    }
+    
+    private func configureText() {
+        text = "1"
+        textAlignment = .center
+    }
+    
+    private func configureBackgroundColor() {
+        backgroundColor = .white
+    }
+}
+
+final class PlusButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        setImage(UIImage(systemName: "plus"), for: .normal)
+    }
+}
