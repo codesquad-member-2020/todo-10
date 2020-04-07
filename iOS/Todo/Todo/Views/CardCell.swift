@@ -10,7 +10,7 @@ import UIKit
 
 final class CardCell: UITableViewCell, ReusableView {
     let formatImageView = FormatImageView(frame: .zero)
-    let titleLabel = TitleLabel()
+    let titleLabel = CardTitleLabel()
     let contextLabel = ContentLabel()
     let authorLabel = AuthorLabel()
     
@@ -93,7 +93,7 @@ final class FormatImageView: UIImageView {
     }
 }
 
-final class TitleLabel: UILabel {
+final class CardTitleLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
