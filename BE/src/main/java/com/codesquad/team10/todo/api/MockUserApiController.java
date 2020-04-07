@@ -1,6 +1,7 @@
 package com.codesquad.team10.todo.api;
 
 import com.codesquad.team10.todo.bean.ResponseData;
+import com.codesquad.team10.todo.domain.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mock")
@@ -20,10 +18,10 @@ public class MockUserApiController {
     private static final Logger log = LoggerFactory.getLogger(MockUserApiController.class);
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseData> login(@RequestBody(required = false) String email, @RequestBody(required = false) String password) {
+    public ResponseEntity<ResponseData> login(@RequestBody User loginUser) {
         // 인증 과정은 추후에 구현해야함
 
-        log.debug("email: {}, password: {}", email, password);
+        log.debug("login User: {}", loginUser);
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = null;
