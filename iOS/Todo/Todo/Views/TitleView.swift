@@ -100,7 +100,6 @@ final class Badge: UILabel {
     }
     
     private func configureText() {
-        text = "1"
         textAlignment = .center
     }
     
@@ -126,7 +125,6 @@ final class TitleLabel: UILabel {
     }
     
     private func configureText() {
-        text = "해야할 일"
         font = UIFont.boldSystemFont(ofSize: 20)
     }
 }

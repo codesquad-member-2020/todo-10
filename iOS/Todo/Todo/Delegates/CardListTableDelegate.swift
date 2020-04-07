@@ -8,5 +8,5 @@
 
 import UIKit
 
-class CardListTableDelegate: NSObject,UITableViewDelegate {
+final class CardListTableDelegate: NSObject,UITableViewDelegate {
 }
