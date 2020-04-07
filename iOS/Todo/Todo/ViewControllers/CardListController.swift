@@ -45,9 +45,5 @@ final class CardListController: UIViewController {
         cardListTable.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
-    
-    func setTitle(title: TitleLabel.Title) {
-        titleView.titleLabel.text = title.description
-    }
 }
 
