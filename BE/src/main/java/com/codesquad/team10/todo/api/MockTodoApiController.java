@@ -30,8 +30,8 @@ public class MockTodoApiController {
                     "            \"id\": \"1\"," +
                     "            \"title\": \"해야 할 일\"," +
                     "            \"cards\": [" +
-                    "                { \"id\": \"2\", \"content\": \"내용2 출력됩니다.\" }," +
-                    "                { \"id\": \"1\", \"content\": \"내용1 출력됩니다.\" }" +
+                    "                { \"id\": \"3\", \"title\": \"제목3\", \"content\": \"내용1 출력됩니다.\" }," +
+                    "                { \"id\": \"4\", \"title\": \"제목22\", \"content\": \"내용2 출력됩니다.\" }" +
                     "            ]" +
                     "        }," +
                     "        {" +
@@ -78,7 +78,7 @@ public class MockTodoApiController {
                     "        }," +
                     "        {" +
                     "            \"action\": \"removed\"," +
-                    "            \"card\": \"README.md 수\"," +
+                    "            \"card\": \"README.md 수정\"," +
                     "            \"source\": \"해야 할 일\"," +
                     "            \"destination\": null," +
                     "            \"createdDateTime\": \"2020-03-24\"" +
