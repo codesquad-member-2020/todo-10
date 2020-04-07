@@ -197,11 +197,11 @@ POST /mock/section/{sectionId}/card
     "status": "SUCCESS",
     "content": {
         "id": 2,
-        "title": "ㅎㅎ",
-        "content": "일찍자라",
+        "title": "README.md 추가",
+        "content": "구현 API 내용 작성",
         "route": "Web",
-        "createdDateTime": "2020-04-08 03:25:23",
-        "updatedDateTime": "2020-04-08 03:25:23"
+        "createdDateTime": "2020-04-07 15:25:23",
+        "updatedDateTime": "2020-04-07 15:25:23"
     }
 }
 ```
