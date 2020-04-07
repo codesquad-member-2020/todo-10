@@ -15,19 +15,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c93-Ir-yMy">
-                                <rect key="frame" x="406" y="50" width="382" height="764"/>
+                                <rect key="frame" x="204" y="44" width="192" height="556"/>
                                 <connections>
                                     <segue destination="7L4-j1-Wql" kind="embed" identifier="inProgress" id="ToF-0f-0OO"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-lD-zT1">
-                                <rect key="frame" x="810" y="50" width="382" height="764"/>
+                                <rect key="frame" x="406" y="44" width="192" height="556"/>
                                 <connections>
                                     <segue destination="1T0-rv-fpg" kind="embed" identifier="done" id="RWn-2k-D6k"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYD-RD-Axa">
-                                <rect key="frame" x="0.0" y="50" width="382" height="764"/>
+                                <rect key="frame" x="0.0" y="44" width="192" height="556"/>
                                 <connections>
                                     <segue destination="XS7-sX-pUi" kind="embed" identifier="toDo" id="pkM-Yh-Jf1"/>
                                 </connections>
