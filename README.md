@@ -20,7 +20,7 @@ TODO 웹앱 프로젝트 - 10팀
 * 작업을 시작할 때: 자신의 클래스 개발 브랜치에서 `feature-<클래스>/issue-<이슈번호>`로 브랜치 생성
   * `feature-<BE>/issueXXX` : 백엔드 피쳐 개발 브랜치
   * `feature-<FE>/issueXXX` : 프론트엔드 피쳐 개발 브랜치
-  * `feature<iOS>/issueXXX` : 모바일 iOS 피쳐 개발 브랜치
+  * `feature-<iOS>/issueXXX` : 모바일 iOS 피쳐 개발 브랜치
 * 커밋 메시지에 `Closes #n` 등을 포함시켜 이슈를 닫을 수 있다. 
 * 자신의 클래스 피쳐 개발 브랜치에서 작업 후 `dev` 브랜치를 향해 Pull Request를 생성하고 **마스터 리뷰**를 받는다.
   * **머지를 완료했으면 기능(feature)브랜치는 github과 local git에 모두 삭제한다.**
@@ -49,7 +49,7 @@ TODO 웹앱 프로젝트 - 10팀
 
 ## Mockup API 문서
 
-### 서버 요청 주
+### 서버 요청 주소 (변경될 수 있음)
 
 ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
@@ -65,106 +65,109 @@ POST /mock/login
 }
 ```
 
-- 현재는 어떤 email이나 password 값을 넣어도 응답을 성공적으로 반환합니다.
+- 현재는 email와 password에 어떤 값을 넣어도 응답을 성공적으로 반환합니다.
 
 #### JSON 응답
 
 ```
 {
-    "columns": [
-        {
-            "id": "1",
-            "title": "해야 할 일",
-            "cards": [
-                {
-                    "id": "3",
-                    "title": "제목3",
-                    "content": "내용1 출력됩니다."
-                },
-                {
-                    "id": "4",
-                    "title": "제목22",
-                    "content": "내용2 출력됩니다."
-                }
-            ]
-        },
-        {
-            "id": "2",
-            "title": "하고 있는 일",
-            "cards": [
-                {
-                    "id": "3",
-                    "title": "제목1",
-                    "content": "내용3 출력됩니다."
-                },
-                {
-                    "id": "4",
-                    "title": null,
-                    "content": "내용5 출력됩니다."
-                },
-                {
-                    "id": "3",
-                    "title": "제목3",
-                    "content": "내용6 출력됩니다."
-                },
-                {
-                    "id": "4",
-                    "title": null,
-                    "content": "내용4 출력됩니다."
-                },
-                {
-                    "id": "3",
-                    "title": null,
-                    "content": "내용3 출력됩니다."
-                }
-            ]
-        },
-        {
-            "id": "3",
-            "title": "완료 된 일",
-            "cards": [
-                {
-                    "id": "5",
-                    "title": "제목9",
-                    "content": "내용5 출력됩니다."
-                },
-                {
-                    "id": "6",
-                    "title": null,
-                    "content": "내용1 출력됩니다."
-                }
-            ]
-        }
-    ],
-    "logs": [
-        {
-            "action": "moved",
-            "card": "github 공부하기",
-            "source": "해야 할 일",
-            "destination": "완료 된 일",
-            "createdDateTime": "2020-03-02"
-        },
-        {
-            "action": "updated",
-            "card": "스켈레톤 작성",
-            "source": null,
-            "destination": null,
-            "createdDateTime": "2020-03-05"
-        },
-        {
-            "action": "added",
-            "card": "데모 환경 구성",
-            "source": null,
-            "destination": "하고 있는 일",
-            "createdDateTime": "2020-04-11"
-        },
-        {
-            "action": "removed",
-            "card": "README.md 수정",
-            "source": "해야 할 일",
-            "destination": null,
-            "createdDateTime": "2020-03-24"
-        }
-    ]
+    "status": "SUCCESS",
+    "contents": {
+        "columns": [
+            {
+                "id": "1",
+                "title": "해야 할 일",
+                "cards": [
+                    {
+                        "id": "3",
+                        "title": "제목3",
+                        "content": "내용1 출력됩니다."
+                    },
+                    {
+                        "id": "4",
+                        "title": "제목22",
+                        "content": "내용2 출력됩니다."
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "title": "하고 있는 일",
+                "cards": [
+                    {
+                        "id": "3",
+                        "title": "제목1",
+                        "content": "내용3 출력됩니다."
+                    },
+                    {
+                        "id": "4",
+                        "title": null,
+                        "content": "내용5 출력됩니다."
+                    },
+                    {
+                        "id": "3",
+                        "title": "제목3",
+                        "content": "내용6 출력됩니다."
+                    },
+                    {
+                        "id": "4",
+                        "title": null,
+                        "content": "내용4 출력됩니다."
+                    },
+                    {
+                        "id": "3",
+                        "title": null,
+                        "content": "내용3 출력됩니다."
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "title": "완료 된 일",
+                "cards": [
+                    {
+                        "id": "5",
+                        "title": "제목9",
+                        "content": "내용5 출력됩니다."
+                    },
+                    {
+                        "id": "6",
+                        "title": null,
+                        "content": "내용1 출력됩니다."
+                    }
+                ]
+            }
+        ],
+        "logs": [
+            {
+                "action": "moved",
+                "card": "github 공부하기",
+                "source": "해야 할 일",
+                "destination": "완료 된 일",
+                "createdDateTime": "2020-03-02"
+            },
+            {
+                "action": "updated",
+                "card": "스켈레톤 작성",
+                "source": null,
+                "destination": null,
+                "createdDateTime": "2020-03-05"
+            },
+            {
+                "action": "added",
+                "card": "데모 환경 구성",
+                "source": null,
+                "destination": "하고 있는 일",
+                "createdDateTime": "2020-04-11"
+            },
+            {
+                "action": "removed",
+                "card": "README.md 수정",
+                "source": "해야 할 일",
+                "destination": null,
+                "createdDateTime": "2020-03-24"
+            }
+        ]
+    }
 }
 ```
