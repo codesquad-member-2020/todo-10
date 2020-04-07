@@ -9,43 +9,19 @@
 import UIKit
 
 final class CardCell: UITableViewCell, ReusableView {
-    let formatImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "text.justify")!
-        return imageView
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Github 공부하기"
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        return label
-    }()
-    let authorLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "author By iOS"
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        return label
-    }()
+    let formatImageView = FormatImageView(frame: .zero)
+    let titleLabel = TitleLabel()
     let contextLabel = ContentLabel()
+    let authorLabel = AuthorLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureFormatImageView()
-        configureTitle()
-        configureContext()
-        configureDetailText()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureFormatImageView()
-        configureTitle()
-        configureContext()
-        configureDetailText()
+        configure()
     }
     
     override func awakeFromNib() {
@@ -54,6 +30,13 @@ final class CardCell: UITableViewCell, ReusableView {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    private func configure() {
+        configureFormatImageView()
+        configureTitle()
+        configureContext()
+        configureDetailText()
     }
     
     private func configureFormatImageView() {
@@ -90,5 +73,89 @@ final class CardCell: UITableViewCell, ReusableView {
         authorLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant:  constant).isActive = true
         authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
         authorLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -constant).isActive = true
+    }
+}
+
+final class FormatImageView: UIImageView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        image = UIImage(systemName: "text.justify")!
+    }
+}
+
+final class TitleLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        confugureText()
+    }
+    
+    private func confugureText() {
+        text = "Github 공부하기"
+        font = UIFont.boldSystemFont(ofSize: 15)
+    }
+}
+
+final class ContentLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        configureText()
+    }
+    
+    private func configureText() {
+        lineBreakMode = .byWordWrapping
+        numberOfLines = 3
+        text = "contextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimension"
+    }
+}
+
+final class AuthorLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        configureText()
+    }
+    
+    private func configureText() {
+        text = "author By iOS"
+        font = UIFont.boldSystemFont(ofSize: 12)
     }
 }
