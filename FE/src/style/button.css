@@ -1,0 +1,33 @@
+.btn-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  border-radius: 0.25em;
+  border: 1px solid rgba(27, 31, 35, 0.2);
+}
+
+button.btn {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+button.btn + .btn {
+  margin-left: 5px;
+}
+
+button.btn-add {
+  color: #fff;
+  background: #1a72e5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1a72e5), to(rgba(26, 114, 229, 0.7)));
+  background: linear-gradient(180deg, #1a72e5 0%, rgba(26, 114, 229, 0.7) 100%);
+}
+
+button span.material-icons {
+  font-size: 16px;
+}
