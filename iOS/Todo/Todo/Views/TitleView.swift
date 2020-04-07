@@ -10,18 +10,23 @@ import UIKit
 
 final class TitleView: UIView {
     let badge = Badge()
+    let titleLabel = TitleLabel()
     let plusButton = PlusButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureTitleView()
-        configureBadge()
-        configurePlusButton()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        configureTitleView()
         configureBadge()
+        configureTitleLabel()
         configurePlusButton()
     }
     
@@ -40,6 +45,17 @@ final class TitleView: UIView {
                                        constant: constant).isActive = true
         badge.bottomAnchor.constraint(equalTo: self.bottomAnchor,
                                       constant: -constant).isActive = true
+    }
+    
+    private func configureTitleLabel() {
+        addSubview(titleLabel)
+        let constant: CGFloat = 13
+        titleLabel.leadingAnchor.constraint(equalTo: badge.trailingAnchor,
+                                            constant: constant).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: self.topAnchor,
+                                        constant: constant).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
+                                           constant: -constant).isActive = true
     }
     
     private func configurePlusButton() {
@@ -72,7 +88,7 @@ final class Badge: UILabel {
         configureText()
         configureBackgroundColor()
     }
-
+    
     private func configureAspectRatio() {
         translatesAutoresizingMaskIntoConstraints = false
         widthAnchor.constraint(equalTo: heightAnchor, multiplier: 1).isActive = true
@@ -90,6 +106,28 @@ final class Badge: UILabel {
     
     private func configureBackgroundColor() {
         backgroundColor = .white
+    }
+}
+
+final class TitleLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        configureText()
+    }
+    
+    private func configureText() {
+        text = "해야할 일"
+        font = UIFont.boldSystemFont(ofSize: 20)
     }
 }
 
