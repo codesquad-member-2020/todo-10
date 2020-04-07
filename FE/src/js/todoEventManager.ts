@@ -1,32 +1,38 @@
-import { getElement } from './util/commonUtil.js';
-import { cardClick } from './events/card.js';
-
+import { cardClickHandle } from './events/card.js';
+import { columnClickHandle } from './events/column.js';
+import { formClickHandle, formSubmitHandle } from './events/form.js';
 
 class TodoEventManager {
     constructor(module) {
         this.todoView = module.todoView;
-        this.module = module;
+        this.todoModel = module.todoModel;
     }
 
     init() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
+        this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
     }
 
     clickEventDelegation({ target }) {
-        const testNode = target.closest('.TEST');
-        if (!testNode) return;
-        switch (testNode.dataset.type) {
-            case 'column': this.columnClick(target);
+        const contentWrap = target.closest('.content-wrap');
+        if (!contentWrap) return;
+        switch (contentWrap.dataset.type) {
+            case 'column': columnClickHandle(target);
                 break;
-            case 'card': cardClick(target);
+            case 'card': cardClickHandle(target);
+                break;
+            case 'form': formClickHandle(target);
                 break;
             default: break;
         }
     }
 
-    columnClick(target) {
-        if (!target.parentElement.classList.contains('toggle-form')) return;
-        target.closest('.TEST').querySelector('.todo-form').classList.toggle('active');
+    submitEventDelegation(evt) {
+        switch (evt.target.dataset.type) {
+            case 'form': formSubmitHandle(evt);
+                break;
+            default: break;
+        }
     }
 }
 

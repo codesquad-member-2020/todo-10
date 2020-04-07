@@ -1,3 +1,3 @@
-export function cardClick(target) {
-    console.log(target);
+function cardClickHandle(target) {
 }
+export { cardClickHandle, };

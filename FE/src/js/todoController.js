@@ -4,7 +4,7 @@ class TodoController {
         this.todoModel = module.todoModel;
         this.todoEventManager = module.todoEventManager;
     }
-    async todoInit() {
+    async runTodoApp() {
         await this.todoModel.getTodoData();
         this.todoView.render(this.todoModel.todoData);
         this.todoEventManager.init();

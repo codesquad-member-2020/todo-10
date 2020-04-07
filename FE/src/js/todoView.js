@@ -6,7 +6,7 @@ class TodoView {
     render(data) {
         this.todoApp.innerHTML = data.columns.reduce((acc, column) => {
             acc +=
-                `<div class="todo-columns TEST" data-type="column" data-column-id="${column.id}" tabindex="0">
+                `<div class="todo-columns content-wrap" data-type="column" data-column-id="${column.id}" tabindex="0">
                     <div class="todo-title">
                     <h2><span class="todo-count">${column.cards.length}</span> ${column.title}</h2>
                     <div class="btn-wrap">
@@ -15,11 +15,11 @@ class TodoView {
                     </div>
                     </div>
                     <div class="todo-form">
-                        <form action="">
+                        <form action="" class="content-wrap" data-type="form">
                             <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
                             <div class="btn-wrap">
-                            <button class="btn btn-add">add</button>
-                            <button class="btn btn-close">cancel</button>
+                            <button type="submit" class="btn btn-add">add</button>
+                            <button type="reset" class="btn btn-close">cancel</button>
                             </div>
                         </form>
                     </div>
@@ -33,7 +33,7 @@ class TodoView {
     makeCard(cards) {
         return cards.reduce((acc, card) => {
             acc +=
-                `<div class="card-item TEST"  data-type="card" data-card-id="${card.id}" tabindex="0">
+                `<div class="card-item content-wrap" data-type="card" data-card-id="${card.id}" tabindex="0">
                     <div class="card-contents">${card.content}</div>
                     <p class="card-writer">added by <span>홍길동</span></p>
                     <button class="btn btn-close">

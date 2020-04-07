@@ -1,4 +1,3 @@
-import { getData } from './util/commonUtil.js';
 import data from '../_data/mockdata.js';
 
 class TodoModel {

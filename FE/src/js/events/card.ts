@@ -1,5 +1,7 @@
-// 더블클릭, 카드 삭제 이벤트
+function cardClickHandle(target) {
 
-export function cardClick(target) {
-    console.log(target);
+}
+
+export {
+    cardClickHandle,
 }
