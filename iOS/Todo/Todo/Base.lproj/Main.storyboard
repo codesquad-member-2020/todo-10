@@ -77,16 +77,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="388" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="x9v-NM-V7e">
-                                <rect key="frame" x="0.0" y="28" width="388" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x9v-NM-V7e" id="8Za-ji-dGm">
-                                    <rect key="frame" x="13" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="fNb-KW-dc6" id="loj-Ex-eYC"/>
                             <outlet property="delegate" destination="fNb-KW-dc6" id="FOD-zc-ltB"/>
@@ -122,7 +112,7 @@
                     <view key="view" contentMode="scaleToFill" id="fUy-fI-TEc">
                         <rect key="frame" x="0.0" y="0.0" width="382" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="G2R-Qm-Sku"/>
                     </view>
                 </viewController>
@@ -137,7 +127,7 @@
                     <view key="view" contentMode="scaleToFill" id="F82-d0-wrh">
                         <rect key="frame" x="0.0" y="0.0" width="382" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mrF-lf-bum"/>
                     </view>
                 </viewController>
@@ -152,7 +142,7 @@
                     <view key="view" contentMode="scaleToFill" id="vlO-mV-C49">
                         <rect key="frame" x="0.0" y="0.0" width="382" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="sHA-YF-ji8"/>
                     </view>
                 </viewController>
