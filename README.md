@@ -66,14 +66,15 @@ POST /mock/login
 ```
 
 - 현재는 email와 password에 어떤 값을 넣어도 응답을 성공적으로 반환합니다.
+- 추후에는 인증된 사용자인 경우 헤더에 JWT를 담아서 보내줄 예정입니다.
 
 #### JSON 응답
 
 ```
 {
     "status": "SUCCESS",
-    "contents": {
-        "columns": [
+    "content": {
+        "sections": [
             {
                 "id": "1",
                 "title": "해야 할 일",
@@ -168,6 +169,39 @@ POST /mock/login
                 "createdDateTime": "2020-03-24"
             }
         ]
+    }
+}
+```
+### 카드 추가 요청
+
+POST /mock/section/{sectionId}/card
+
+#### 요청 데이터
+
+- 카드 추가 요청 시, URL에 `sectionId`와 Body 데이터를 전달해 합니다.
+
+```
+{
+    "title": "README.md 추가",
+    "content": "구현 API 내용 작성",
+    "route": "Web"
+}
+```
+
+- 프론트에서는 content에 카드 내용을 담아주세요.
+- route 값은 프론트에서는 "Web", iOS에서는 "iOS"을 저장해서 보내주세요.
+
+#### JSON 응답
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "id": 2,
+        "title": "ㅎㅎ",
+        "content": "일찍자라",
+        "route": "Web",
+        "createdDateTime": "2020-04-08 03:25:23",
+        "updatedDateTime": "2020-04-08 03:25:23"
     }
 }
 ```
