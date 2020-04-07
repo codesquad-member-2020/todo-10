@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A874630243C15AA00FD1751 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87462F243C15AA00FD1751 /* Badge.swift */; };
-		5A874632243C1AEB00FD1751 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874631243C1AEB00FD1751 /* PlusButton.swift */; };
 		5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874633243C1D4E00FD1751 /* CardListTable.swift */; };
 		5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463B243C1F2900FD1751 /* CardCell.swift */; };
 		5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */; };
@@ -45,8 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A87462F243C15AA00FD1751 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
-		5A874631243C1AEB00FD1751 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		5A874633243C1D4E00FD1751 /* CardListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTable.swift; sourceTree = "<group>"; };
 		5A87463B243C1F2900FD1751 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableDataSource.swift; sourceTree = "<group>"; };
@@ -181,8 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				5AB8D58C243B5CDC00387EAE /* TitleView.swift */,
-				5A87462F243C15AA00FD1751 /* Badge.swift */,
-				5A874631243C1AEB00FD1751 /* PlusButton.swift */,
 				5A874633243C1D4E00FD1751 /* CardListTable.swift */,
 				5A87463B243C1F2900FD1751 /* CardCell.swift */,
 				5A874640243C2D3300FD1751 /* ReusableView.swift */,
@@ -322,12 +316,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */,
-				5A874630243C15AA00FD1751 /* Badge.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
 				5AB8D556243B40FF00387EAE /* ToDoViewController.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
-				5A874632243C1AEB00FD1751 /* PlusButton.swift in Sources */,
 				5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
