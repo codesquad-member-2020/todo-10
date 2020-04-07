@@ -1,105 +1,115 @@
 #todo-app {
-  overflow-x: auto;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
 }
 .todo-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-  button {
-    font-size: 0;
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    .todo-count {
+        display: inline-block;
+        min-width: 22px;
+        padding: 5px;
+        margin-right: 5px;
+        color: #333;
+        text-align: center;
+        border-radius: 10px;
+        background: #ccc;
+    }
+    button {
+        font-size: 0;
+    }
 }
 .todo-columns {
-  display: flex;
-  flex-direction: column;
-  min-width: 375px;
-  max-width: 375px;
-  padding: 1%;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
-  background: #eff1f3;
-  & + .todo-columns {
-    margin-left: 1%;
-  }
-  &:focus {
-    border-color: #1a72e5;
-    box-shadow: 0 0 0 0.2em rgba(26, 114, 229, 0.3);
-  }
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+    max-width: 375px;
+    padding: 1%;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #eff1f3;
+    & + .todo-columns {
+        margin-left: 1%;
+    }
+    &:focus {
+        border-color: #1a72e5;
+        box-shadow: 0 0 0 0.2em rgba(26, 114, 229, 0.3);
+    }
 }
 .todo-form {
-  display: none;
-  &.active {
-    display: block;
-  }
-  .btn-wrap {
-    margin-top: 5px;
-  }
-  .btn {
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 30px;
-  }
-}
-
-.todo-textarea {
-  width: 100%;
-  height: 100px;
-  border: 1px solid rgba(27, 31, 35, 0.2);
-  border-radius: 5px;
-  resize: vertical;
-}
-
-#modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  &.active {
-    display: flex;
-  }
-  .modal-wrap {
-    position: relative;
-    width: 500px;
-    min-height: 300px;
-    border-radius: 5px;
-    background: #fff;
-    .modal-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 15px;
-      border-bottom: 1px solid #e5e5e5;
-      border-radius: 5px 5px 0 0;
-      background: #eff1f3;
-      button {
-        font-size: 0;
-      }
+    display: none;
+    &.active {
+        display: block;
     }
-    .modal-contents {
-      padding: 15px;
-      p {
-        font-size: 14px;
-      }
-      .todo-textarea {
-        height: 200px;
-        margin: 5px 0;
-      }
-      .btn-add {
-        flex: none;
-        padding: 0 20px;
+    .btn-wrap {
+        margin-top: 5px;
+    }
+    .btn {
         font-weight: bold;
         font-size: 14px;
         line-height: 30px;
-      }
     }
-  }
+}
+
+.todo-textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid rgba(27, 31, 35, 0.2);
+    border-radius: 5px;
+    resize: vertical;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    &.active {
+        display: flex;
+    }
+    .modal-wrap {
+        position: relative;
+        width: 500px;
+        min-height: 300px;
+        border-radius: 5px;
+        background: #fff;
+        .modal-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 1px solid #e5e5e5;
+            border-radius: 5px 5px 0 0;
+            background: #eff1f3;
+            button {
+                font-size: 0;
+            }
+        }
+        .modal-contents {
+            padding: 15px;
+            p {
+                font-size: 14px;
+            }
+            .todo-textarea {
+                height: 200px;
+                margin: 5px 0;
+            }
+            .btn-add {
+                flex: none;
+                padding: 0 20px;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 30px;
+            }
+        }
+    }
 }
