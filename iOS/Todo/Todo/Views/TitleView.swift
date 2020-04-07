@@ -10,13 +10,7 @@ import UIKit
 
 final class TitleView: UIView {
     let badge = Badge()
-    
-    let plusButton: UIButton = {
-        let plusButton = UIButton()
-        plusButton.translatesAutoresizingMaskIntoConstraints = false
-        plusButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        return plusButton
-    }()
+    let plusButton = PlusButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
