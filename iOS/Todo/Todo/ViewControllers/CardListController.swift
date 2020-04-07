@@ -9,14 +9,15 @@
 import UIKit
 
 final class CardListController: UIViewController {
-    private let titleView : TitleView = {
-        let titleView = TitleView()
-        return titleView
-    }()
+    private let titleView = TitleView()
+    private let cardListTable = CardListTable()
+    private let cardListTableDataSource = CardListTableDataSource()
+    private let cardListTableDelegate = CardListTableDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTitleView()
+        configureTableView()
     }
     
     private func configureTitleView() {
@@ -28,4 +29,20 @@ final class CardListController: UIViewController {
         titleView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
     }
     
+    
+    private func configureTableView() {
+        cardListTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
+        cardListTable.dataSource = cardListTableDataSource
+        cardListTable.delegate = cardListTableDelegate
+        configureTableConstraints()
+    }
+    
+    private func configureTableConstraints() {
+        view.addSubview(cardListTable)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        cardListTable.topAnchor.constraint(equalTo: titleView.bottomAnchor).isActive = true
+        cardListTable.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
+        cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+    }
 }

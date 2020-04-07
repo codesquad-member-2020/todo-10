@@ -18,19 +18,19 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c93-Ir-yMy">
                                 <rect key="frame" x="406" y="50" width="382" height="764"/>
                                 <connections>
-                                    <segue destination="7L4-j1-Wql" kind="embed" id="ToF-0f-0OO"/>
+                                    <segue destination="7L4-j1-Wql" kind="embed" identifier="" id="ToF-0f-0OO"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-lD-zT1">
                                 <rect key="frame" x="810" y="50" width="382" height="764"/>
                                 <connections>
-                                    <segue destination="1T0-rv-fpg" kind="embed" id="RWn-2k-D6k"/>
+                                    <segue destination="1T0-rv-fpg" kind="embed" identifier="" id="RWn-2k-D6k"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYD-RD-Axa">
                                 <rect key="frame" x="0.0" y="50" width="382" height="764"/>
                                 <connections>
-                                    <segue destination="XS7-sX-pUi" kind="embed" id="pkM-Yh-Jf1"/>
+                                    <segue destination="XS7-sX-pUi" kind="embed" identifier="" id="pkM-Yh-Jf1"/>
                                 </connections>
                             </containerView>
                         </subviews>
