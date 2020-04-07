@@ -13,11 +13,11 @@ final class TitleView: UIView {
         let badge = UILabel()
         badge.translatesAutoresizingMaskIntoConstraints = false
         badge.widthAnchor.constraint(equalTo: badge.heightAnchor, multiplier: 1).isActive = true
-        badge.layer.cornerRadius = badge.font.pointSize * 0.60
+        badge.layer.cornerRadius = badge.font.pointSize * 0.65
         badge.layer.masksToBounds = true
         badge.text = "1"
-        badge.textAlignment = .center
         badge.backgroundColor = .white
+        badge.textAlignment = .center
         return badge
     }()
     
@@ -30,6 +30,10 @@ final class TitleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        backgroundColor = .lightGray
+        
         configureBadge()
         configurePlusButton()
     }
@@ -42,24 +46,24 @@ final class TitleView: UIView {
     
     private func configureBadge() {
         addSubview(badge)
-        let constant: CGFloat = 8
+        let constant: CGFloat = 13
         badge.topAnchor.constraint(equalTo: self.topAnchor,
                                    constant: constant).isActive = true
         badge.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                        constant: constant).isActive = true
         badge.bottomAnchor.constraint(equalTo: self.bottomAnchor,
-                                      constant: constant).isActive = true
+                                      constant: -constant).isActive = true
     }
     
     private func configurePlusButton() {
         addSubview(plusButton)
-        let constant: CGFloat = 8
+        let constant: CGFloat = 13
         plusButton.topAnchor.constraint(equalTo: self.topAnchor,
                                         constant: constant).isActive = true
         plusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                              constant: -constant).isActive = true
         plusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor,
-                                           constant: constant).isActive = true
+                                           constant: -constant).isActive = true
     }
     
 }
