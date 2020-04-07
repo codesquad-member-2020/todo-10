@@ -58,29 +58,37 @@ final class CardCell: UITableViewCell, ReusableView {
     
     private func configureFormatImageView() {
         contentView.addSubview(formatImageView)
-        formatImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
-        formatImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8).isActive = true
+        
+        let constant: CGFloat = 8
+        formatImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: constant).isActive = true
+        formatImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: constant).isActive = true
     }
     
     private func configureTitle() {
         contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: 8).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
+        
+        let constant: CGFloat = 8
+        titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: constant).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: constant).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
     }
     
     private func configureContext() {
         contentView.addSubview(contextLabel)
-        contextLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-        contextLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: 8).isActive = true
-        contextLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
+        
+        let constant: CGFloat = 8
+        contextLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: constant).isActive = true
+        contextLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: constant).isActive = true
+        contextLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
     }
     
     private func configureDetailText() {
         contentView.addSubview(authorLabel)
-        authorLabel.topAnchor.constraint(equalTo: contextLabel.bottomAnchor, constant: 8).isActive = true
-        authorLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant:  8).isActive = true
-        authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
-        authorLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
+        
+        let constant: CGFloat = 8
+        authorLabel.topAnchor.constraint(equalTo: contextLabel.bottomAnchor, constant: constant).isActive = true
+        authorLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant:  constant).isActive = true
+        authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
+        authorLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -constant).isActive = true
     }
 }
