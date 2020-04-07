@@ -24,7 +24,6 @@ final class TitleView: UIView {
     let plusButton: UIButton = {
         let plusButton = UIButton()
         plusButton.translatesAutoresizingMaskIntoConstraints = false
-        plusButton.tintColor = .black
         plusButton.setImage(UIImage(systemName: "plus"), for: .normal)
         return plusButton
     }()
@@ -43,16 +42,24 @@ final class TitleView: UIView {
     
     private func configureBadge() {
         addSubview(badge)
-        badge.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        badge.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        badge.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        let constant: CGFloat = 8
+        badge.topAnchor.constraint(equalTo: self.topAnchor,
+                                   constant: constant).isActive = true
+        badge.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                       constant: constant).isActive = true
+        badge.bottomAnchor.constraint(equalTo: self.bottomAnchor,
+                                      constant: constant).isActive = true
     }
     
     private func configurePlusButton() {
         addSubview(plusButton)
-        plusButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        plusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        plusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        let constant: CGFloat = 8
+        plusButton.topAnchor.constraint(equalTo: self.topAnchor,
+                                        constant: constant).isActive = true
+        plusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                             constant: -constant).isActive = true
+        plusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor,
+                                           constant: constant).isActive = true
     }
     
 }
