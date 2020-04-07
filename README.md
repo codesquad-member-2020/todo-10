@@ -49,15 +49,23 @@ TODO 웹앱 프로젝트 - 10팀
 
 ## Mockup API 문서
 
-### POST /login
+### 서버 요청 주
+
+ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
+
+### 로그인 요청
+
+POST /mock/login
 
 #### 요청 데이터
 ```
 {
-    email: "nigayo@ggmail.com",
-    password: "1234"
+    "email": "nigayo@ggmail.com",
+    "password": "1234"
 }
 ```
+
+- 현재는 어떤 email이나 password 값을 넣어도 응답을 성공적으로 반환합니다.
 
 #### JSON 응답
 
@@ -69,12 +77,14 @@ TODO 웹앱 프로젝트 - 10팀
             "title": "해야 할 일",
             "cards": [
                 {
-                    "id": "2",
-                    "content": "내용2 출력됩니다."
+                    "id": "3",
+                    "title": "제목3",
+                    "content": "내용1 출력됩니다."
                 },
                 {
-                    "id": "1",
-                    "content": "내용1 출력됩니다."
+                    "id": "4",
+                    "title": "제목22",
+                    "content": "내용2 출력됩니다."
                 }
             ]
         },
@@ -150,7 +160,7 @@ TODO 웹앱 프로젝트 - 10팀
         },
         {
             "action": "removed",
-            "card": "README.md 수",
+            "card": "README.md 수정",
             "source": "해야 할 일",
             "destination": null,
             "createdDateTime": "2020-03-24"
