@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlusButton: UIButton {
+final class PlusButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
