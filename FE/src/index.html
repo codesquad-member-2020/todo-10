@@ -17,14 +17,46 @@
           <a class="toggle-menu" href="#">MENU</a>
         </div>
       </header>
-      <div id="menu"></div>
+      <div id="menu">
+        <div class="menu-header">
+          <h2>☰ menu</h2>
+          <div class="btn-wrap">
+            <button class="btn btn-close"><span class="material-icons">close</span></button>
+          </div>
+        </div>
+        <div class="menu-container">
+          <div class="menu-title"><span class="material-icons">notifications_active</span>Activity</div>
+          <div class="activity-log">
+            <div class="log">
+              <p class="log-msg"><span class="user">@User생략가능</span>액션상태<strong>할일제목</strong></p>
+              <p class="log-time">3 hours ago</p>
+            </div>
+            <div class="log">
+              <p class="log-msg"><span class="user">@User</span>add<strong>할일제목</strong>to<strong>특정액션</strong></p>
+              <p class="log-time">3 hours ago</p>
+            </div>
+            <div class="log">
+              <p class="log-msg"><span class="user">@User</span>moved<strong>할일제목</strong>from<strong>특정액션</strong></p>
+              <p class="log-time">3 hours ago</p>
+            </div>
+            <div class="log">
+              <p class="log-msg"><span class="user">@User</span>remove<strong>할일제목</strong></strong></p>
+              <p class="log-time">3 hours ago</p>
+            </div>
+            <div class="log">
+              <p class="log-msg"><span class="user">@User</span>update<strong>할일제목</strong></strong></p>
+              <p class="log-time">3 hours ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="container">
         <div id="todo-app">
           <div class="todo-columns" tabindex="0">
             <div class="todo-title">
               <h2>해야할일</h2>
               <div class="btn-wrap">
-                <button class="btn"><span class="material-icons">add</span></button>
+                <button class="btn btn-toggle"><span class="material-icons">add</span></button>
                 <button class="btn"><span class="material-icons">more_vert</span></button>
               </div>
             </div>
