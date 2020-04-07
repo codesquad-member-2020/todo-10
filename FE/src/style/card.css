@@ -1,3 +1,7 @@
+.card-wrap {
+  overflow-y: auto;
+}
+
 .card-item {
   position: relative;
   padding: 5% 8%;
