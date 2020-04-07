@@ -23,5 +23,4 @@ class PlusButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         setImage(UIImage(systemName: "plus"), for: .normal)
     }
-
 }

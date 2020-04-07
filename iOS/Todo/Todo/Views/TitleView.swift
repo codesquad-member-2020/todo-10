@@ -14,10 +14,7 @@ final class TitleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
-        heightAnchor.constraint(equalToConstant: 50).isActive = true
-        backgroundColor = .lightGray
-        
+        configureTitleView()
         configureBadge()
         configurePlusButton()
     }
@@ -26,6 +23,12 @@ final class TitleView: UIView {
         super.init(coder: coder)
         configureBadge()
         configurePlusButton()
+    }
+    
+    private func configureTitleView() {
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        backgroundColor = .lightGray
     }
     
     private func configureBadge() {
