@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+final class CardViewModels {
+    private let cardViewModels: [CardViewModel]
+    
+    init(_ cardViewModels: [CardViewModel]) {
+        self.cardViewModels = cardViewModels
+    }
+    
+    func bind(at index: Int, cardCell: CardCell) {
+        guard index < cardViewModels.count else { return }
+        cardViewModels[index].bind(cardCell)
+    }
+
+    var count: Int {
+        return cardViewModels.count
+    }
+}
