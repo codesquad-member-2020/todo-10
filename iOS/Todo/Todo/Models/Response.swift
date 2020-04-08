@@ -28,14 +28,8 @@ struct Log: Codable {
 
 struct Section: Codable {
     var id: String?
-    var title: String?
-    var cards: [Card]?
-}
-
-struct Card: Codable {
-    var id: String?
-    var title: String?
-    var content: String?
+    var title: String
+    var cards: [Card]
 }
 
 

@@ -8,11 +8,12 @@
 
 import UIKit
 final class CardListController: UIViewController {
-    var cardList: Section?
+    //MARK:- internal property
     private let titleView = TitleView()
-    private let cardListTable = CardListTable()
-    private let cardListTableDataSource = CardListTableDataSource()
-    private let cardListTableDelegate = CardListTableDelegate()
+    private var titleViewModel: TitleViewModel!
+    private var cardListTable = CardListTable()
+    private var cardListTableDataSource: CardListTableDataSource!
+    private var cardListTableDelegate = CardListTableDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,6 @@ final class CardListController: UIViewController {
     
     private func configureTableView() {
         cardListTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
-        cardListTable.dataSource = cardListTableDataSource
         cardListTable.delegate = cardListTableDelegate
         configureTableConstraints()
     }
@@ -45,6 +45,31 @@ final class CardListController: UIViewController {
         cardListTable.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
         cardListTable.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+    }
+    
+    var cardList: Section? {
+        didSet {
+            configureTitleViewModel()
+            configureDataSource()
+        }
+    }
+    
+    private func configureTitleViewModel() {
+        guard let cardList = cardList else { return }
+        titleViewModel = TitleViewModel(titleModel: TitleModel(title: cardList.title,
+                                                               cardsCount: cardList.cards.count),
+                                        changed: { titleModel in
+                                            guard let titleModel = titleModel else { return }
+                                                self.titleView.badge.text = String(titleModel.cardsCount)
+                                                self.titleView.titleLabel.text = titleModel.title
+        })
+    }
+    
+    private func configureDataSource() {
+        guard let cardList = cardList else { return }
+        let cardViewModels = cardList.cards.map { CardViewModel(card: $0) }
+        cardListTableDataSource = CardListTableDataSource(cardViewModels: CardViewModels(cardViewModels))
+        cardListTable.dataSource = cardListTableDataSource
     }
 }
 
