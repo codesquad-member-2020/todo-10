@@ -30,4 +30,10 @@
     border-color:#1a72e5;
     box-shadow: 0 0 0 .2em rgba(26,114,229,.3);
   }
+  &::before {
+    content:"☰";
+    position: absolute;
+    left:10px;
+    top:17px;
+  }
 }
