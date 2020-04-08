@@ -11,6 +11,8 @@
 		5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* Response.swift */; };
 		5A838E59243DC8AF0081A42F /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E58243DC8AF0081A42F /* JsonData.swift */; };
+		5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */; };
+		5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5D243DF0470081A42F /* TitleModel.swift */; };
 		5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874633243C1D4E00FD1751 /* CardListTable.swift */; };
 		5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463B243C1F2900FD1751 /* CardCell.swift */; };
 		5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */; };
@@ -52,6 +54,8 @@
 		5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		5A838E58243DC8AF0081A42F /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
+		5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
+		5A838E5D243DF0470081A42F /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
 		5A874633243C1D4E00FD1751 /* CardListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTable.swift; sourceTree = "<group>"; };
 		5A87463B243C1F2900FD1751 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableDataSource.swift; sourceTree = "<group>"; };
@@ -126,11 +130,20 @@
 			path = JsonData;
 			sourceTree = "<group>";
 		};
+		5A838E5A243DEB950081A42F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		5A87463D243C2C6600FD1751 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */,
 				5A838E53243DB4110081A42F /* Response.swift */,
+				5A838E5D243DF0470081A42F /* TitleModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -171,6 +184,7 @@
 				5A838E4C243D66460081A42F /* Network */,
 				5A874644243C4C3900FD1751 /* Delegates */,
 				5A87463D243C2C6600FD1751 /* Models */,
+				5A838E5A243DEB950081A42F /* ViewModels */,
 				5AB8D58B243B5CBF00387EAE /* Views */,
 				5AB8D581243B4A5200387EAE /* ViewControllers */,
 				5AB8D551243B40FF00387EAE /* AppDelegate.swift */,
@@ -363,10 +377,12 @@
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
 				5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */,
 				5A838E59243DC8AF0081A42F /* JsonData.swift in Sources */,
+				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */,
 				5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
+				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
 				5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */,
