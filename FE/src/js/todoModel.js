@@ -1,4 +1,4 @@
-import data from '../_data/mockdata.js';
+import data from './_data/mockdata.js';
 class TodoModel {
     constructor() {
         this.todoData = data;
