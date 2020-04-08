@@ -1,7 +1,7 @@
-import { getElement } from './util/commonUtil.js';
+import { getEl } from './util/commonUtil.js';
 class TodoView {
     constructor() {
-        this.todoApp = getElement('#todo-app');
+        this.todoApp = getEl('#todo-app');
     }
     render(data) {
         this.todoApp.innerHTML = data.columns.reduce((acc, column) => {
