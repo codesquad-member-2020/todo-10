@@ -11,10 +11,25 @@ import UIKit
 final class MainViewController: UIViewController {
     private let cardListViewControllers = [CardListController(), CardListController(), CardListController(), CardListController(), CardListController()]
     private let scrollView = CardListScrollView()
-    
+    private let networkManager = NetworkManager()
     override func viewDidLoad() {
         configureScrollView()
         configureCardLists()
+        guard let body = """
+        {
+            "email": "nigayo@ggmail.com",
+            "password": "1234"
+        }
+        """.data(using: .utf8) else { return }
+        
+        try? networkManager.getResource(from: NetworkManager.EndPoints.cardLists, method: .post,
+                                        body: body, format: Format.jsonType,
+                                        headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
+                                            guard error == nil else { return }
+                                            guard let data = data else { return }
+                                            guard let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return }
+                                            print(prettyPrintedString)
+        }
     }
     
     private func configureScrollView() {
