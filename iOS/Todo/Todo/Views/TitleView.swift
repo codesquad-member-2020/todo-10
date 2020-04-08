@@ -121,10 +121,6 @@ final class TitleLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        configureText()
-    }
-    
-    private func configureText() {
         font = UIFont.boldSystemFont(ofSize: 20)
     }
 }
