@@ -106,11 +106,6 @@ final class CardTitleLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        confugureText()
-    }
-    
-    private func confugureText() {
-        text = "Github 공부하기"
         font = UIFont.boldSystemFont(ofSize: 15)
     }
 }
@@ -128,13 +123,8 @@ final class ContentLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        configureText()
-    }
-    
-    private func configureText() {
         lineBreakMode = .byWordWrapping
         numberOfLines = 3
-        text = "contextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextcontextUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimensionUITableView.automaticDimension"
     }
 }
 
@@ -151,10 +141,6 @@ final class AuthorLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        configureText()
-    }
-    
-    private func configureText() {
         text = "author By iOS"
         font = UIFont.boldSystemFont(ofSize: 12)
     }
