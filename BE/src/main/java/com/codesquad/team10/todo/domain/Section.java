@@ -8,10 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import springfox.documentation.spring.web.json.Json;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Section {
 
@@ -53,37 +50,24 @@ public class Section {
         this.updatedDateTime = LocalDateTime.now();
     }
 
-    public void updateCard(int cardId, String title, String content) {
+    public boolean updateCard(int cardId, String title, String content) {
         for (Card card : cards) {
             if (card.getId() == cardId) {
                 card.update(title, content);
                 this.updatedDateTime = LocalDateTime.now();
-                return;
+                return true;
             }
         }
-        throw new ResourceNotFoundException();
+        return false;
     }
 
-    public List<JsonNode> deleteCard(int cardId) {
+    public boolean deleteCard(int cardId) {
         for (Card card : cards) {
             if (card.getId() == cardId) {
                 cards.remove(card);
-                return getCardOrder();
+                return true;
             }
         }
-        throw new ResourceNotFoundException();
-    }
-
-    public List<JsonNode> getCardOrder() {
-        ObjectMapper mapper = new ObjectMapper();
-        List<JsonNode> orders = new ArrayList<>();
-        try {
-            for (Card card : cards) {
-                orders.add(card.getJSONNode(mapper));
-            }
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return orders;
+        return false;
     }
 }

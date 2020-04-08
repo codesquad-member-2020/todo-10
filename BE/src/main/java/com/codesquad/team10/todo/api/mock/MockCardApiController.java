@@ -6,6 +6,8 @@ import com.codesquad.team10.todo.domain.User;
 import com.codesquad.team10.todo.exception.ResourceNotFoundException;
 import com.codesquad.team10.todo.exception.UserNotFoundException;
 import com.codesquad.team10.todo.repository.MockUserRepository;
+import com.codesquad.team10.todo.service.CardService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,8 @@ public class MockCardApiController {
 
     @Autowired
     private MockUserRepository mockUserRepository;
+    @Autowired
+    private CardService cardService;
     private static int seq = 0;
 
     @PostMapping("")
@@ -54,19 +58,22 @@ public class MockCardApiController {
 
         User dbUser = mockUserRepository.findByEmail().orElseThrow(UserNotFoundException::new);
         try {
-            dbUser.updateCard(sectionId, id, title, content);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            if(!dbUser.updateCard(sectionId, id, title, content))
+                throw new ResourceNotFoundException();
+        } catch (IndexOutOfBoundsException e) {
             throw new ResourceNotFoundException();
         }
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, "Card Updated"), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseData> delete(@PathVariable int sectionId, @PathVariable int id) {
+    public ResponseEntity<ResponseData> delete(@PathVariable int sectionId, @PathVariable int id) throws JsonProcessingException {
         User dbUser = mockUserRepository.findByEmail().orElseThrow(UserNotFoundException::new);
         List<JsonNode> orders = null;
         try {
-            orders = dbUser.deleteCard(sectionId, id);
+            if(!dbUser.deleteCard(sectionId, id))
+                throw new ResourceNotFoundException();
+            orders = cardService.getCardOder(dbUser, sectionId, id);
         } catch (IndexOutOfBoundsException e) {
             throw new ResourceNotFoundException();
         }

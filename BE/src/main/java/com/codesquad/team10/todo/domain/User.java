@@ -1,5 +1,6 @@
 package com.codesquad.team10.todo.domain;
 
+import com.codesquad.team10.todo.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
@@ -45,6 +46,14 @@ public class User {
         return sections;
     }
 
+    public Section getSection(int sectionId) {
+        for (Section section : sections) {
+            if (section.getId() == sectionId)
+                return section;
+        }
+        throw new ResourceNotFoundException();
+    }
+
     public List<Log> getLogs() {
         return logs;
     }
@@ -57,14 +66,12 @@ public class User {
         sections.get(sectionId).addCard(newCard);
     }
 
-    public void updateCard(int sectionId, int cardId, String title, String content) {
-        Section section = sections.get(sectionId);
-        section.updateCard(cardId, title, content);
+    public boolean updateCard(int sectionId, int cardId, String title, String content) {
+        return sections.get(sectionId).updateCard(cardId, title, content);
     }
 
-    public List<JsonNode> deleteCard(int sectionId, int cardId) {
-        Section section = sections.get(sectionId);
-        return section.deleteCard(cardId);
+    public boolean deleteCard(int sectionId, int cardId) {
+        return sections.get(sectionId).deleteCard(cardId);
     }
 
    @Override
