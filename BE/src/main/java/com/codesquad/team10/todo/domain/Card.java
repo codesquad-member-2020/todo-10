@@ -1,23 +1,25 @@
 package com.codesquad.team10.todo.domain;
 
 import com.codesquad.team10.todo.util.DateTimeFormatUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDateTime;
 
 public class Card {
 
-    private Long id;
+    private int id;
     private String title;
     private String content;
-    private Route route;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -37,14 +39,6 @@ public class Card {
         this.content = content;
     }
 
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
-
     public String getCreatedDateTime() {
         return DateTimeFormatUtils.localDateTimeToString(this.createdDateTime);
     }
@@ -61,13 +55,22 @@ public class Card {
         this.updatedDateTime = updatedDateTime;
     }
 
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.updatedDateTime = LocalDateTime.now();
+    }
+
+    public JsonNode getJSONNode(ObjectMapper mapper) throws JsonProcessingException {
+        return mapper.readTree("{ \"id\": \"" + id + "\" }");
+    }
+
     @Override
     public String toString() {
         return "Card{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", route=" + route +
                 ", createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
                 '}';
