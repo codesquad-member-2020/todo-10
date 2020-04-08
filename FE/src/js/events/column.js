@@ -1,5 +1,5 @@
 function columnClickHandle(target) {
-    if (!target.parentElement.classList.contains('toggle-form'))
+    if (!target.classList.contains('toggle-form'))
         return;
     target.closest('.content-wrap').querySelector('.todo-form').classList.toggle('active');
 }
