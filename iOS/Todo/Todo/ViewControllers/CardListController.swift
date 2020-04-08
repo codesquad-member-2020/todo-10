@@ -8,6 +8,7 @@
 
 import UIKit
 final class CardListController: UIViewController {
+    var cardList: Section?
     private let titleView = TitleView()
     private let cardListTable = CardListTable()
     private let cardListTableDataSource = CardListTableDataSource()

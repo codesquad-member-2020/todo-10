@@ -1,130 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="wrap">
-      <header>
-        <div class="inner">
-          <h1>TODO 서비스</h1>
-          <a class="toggle-menu" href="#">MENU</a>
-        </div>
-      </header>
-      <div id="menu">
-        <div class="menu-header">
-          <h2>☰ menu</h2>
-          <div class="btn-wrap">
-            <button class="btn btn-close"><span class="material-icons">close</span></button>
-          </div>
-        </div>
-        <div class="menu-container">
-          <div class="menu-title"><span class="material-icons">notifications_active</span>Activity</div>
-          <div class="activity-log">
-            <div class="log">
-              <p class="log-msg"><span class="user">@User생략가능</span>액션상태<strong>할일제목</strong></p>
-              <p class="log-time">3 hours ago</p>
-            </div>
-            <div class="log">
-              <p class="log-msg"><span class="user">@User</span>add<strong>할일제목</strong>to<strong>특정액션</strong></p>
-              <p class="log-time">3 hours ago</p>
-            </div>
-            <div class="log">
-              <p class="log-msg"><span class="user">@User</span>moved<strong>할일제목</strong>from<strong>특정액션</strong></p>
-              <p class="log-time">3 hours ago</p>
-            </div>
-            <div class="log">
-              <p class="log-msg"><span class="user">@User</span>remove<strong>할일제목</strong></strong></p>
-              <p class="log-time">3 hours ago</p>
-            </div>
-            <div class="log">
-              <p class="log-msg"><span class="user">@User</span>update<strong>할일제목</strong></strong></p>
-              <p class="log-time">3 hours ago</p>
-            </div>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script defer src="dist/bundle.js"></script>
+</head>
+
+<body>
+  <div id="wrap">
+    <header>
+      <div class="inner">
+        <h1>TODO 서비스</h1>
+        <a class="toggle-menu" href="#">MENU</a>
+      </div>
+    </header>
+    <div id="menu">
+      <div class="menu-header">
+        <h2>☰ menu</h2>
+        <div class="btn-wrap">
+          <button class="btn btn-close"><span class="material-icons">close</span></button>
         </div>
       </div>
-      <div id="container">
-        <div id="todo-app">
-          <div class="todo-columns" tabindex="0">
-            <div class="todo-title">
-              <h2><span class="todo-count">3</span>해야할일</h2>
-              <div class="btn-wrap">
-                <button class="btn btn-toggle"><span class="material-icons">add</span></button>
-                <button class="btn"><span class="material-icons">more_vert</span></button>
-              </div>
-            </div>
-            <div class="todo-form">
-              <form action="">
-                <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
-                <div class="btn-wrap">
-                  <button class="btn btn-add">add</button>
-                  <button class="btn btn-close">cancel</button>
-                </div>
-              </form>
-            </div>
-            <div class="card-wrap">
-              <div class="card-item" tabindex="0">
-                <div class="card-contents">내용이 출력됩니다.</div>
-                <p class="card-writer">added by <span>홍길동</span></p>
-                <button class="btn btn-close">
-                  <span class="material-icons">close</span>
-                </button>
-              </div>
-              <div class="card-item" tabindex="0">
-                <div class="card-contents">내용이 출력됩니다.</div>
-                <p class="card-writer">added by <span>홍길동</span></p>
-                <button class="btn btn-close">
-                  <span class="material-icons">close</span>
-                </button>
-              </div>
-            </div>
+      <div class="menu-container">
+        <div class="menu-title"><span class="material-icons">notifications_active</span>Activity</div>
+        <div class="activity-log">
+          <div class="log">
+            <p class="log-msg"><span class="user">@User생략가능</span>액션상태<strong>할일제목</strong></p>
+            <p class="log-time">3 hours ago</p>
           </div>
-          <div class="todo-columns" tabindex="0">
-            <div class="todo-title">
-              <h2><span class="todo-count">0</span>해야할일</h2>
-              <div class="btn-wrap">
-                <button class="btn"><span class="material-icons">add</span></button>
-                <button class="btn"><span class="material-icons">more_vert</span></button>
-              </div>
-            </div>
-            <div class="todo-form active">
-              <form action="">
-                <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
-                <div class="btn-wrap">
-                  <button class="btn btn-add">add</button>
-                  <button class="btn btn-close">cancel</button>
-                </div>
-              </form>
-            </div>
+          <div class="log">
+            <p class="log-msg"><span class="user">@User</span>add<strong>할일제목</strong>to<strong>특정액션</strong></p>
+            <p class="log-time">3 hours ago</p>
           </div>
-          <div class="todo-columns" tabindex="0"></div>
-          <div class="todo-columns" tabindex="0"></div>
-          <div class="todo-columns" tabindex="0"></div>
-        </div>
-      </div>
-      <footer><p>TODOLIST TeamProject</p></footer>
-      <div id="modal">
-        <div class="modal-wrap">
-          <div class="modal-title">
-            <h2>해야할일</h2>
-            <div class="btn-wrap">
-              <button class="btn btn-close"><span class="material-icons">close</span></button>
-            </div>
+          <div class="log">
+            <p class="log-msg"><span class="user">@User</span>moved<strong>할일제목</strong>from<strong>특정액션</strong></p>
+            <p class="log-time">3 hours ago</p>
           </div>
-          <div class="modal-contents">
-            <p>Note</p>
-            <form action="">
-              <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"></textarea>
-              <div class="btn-wrap">
-                <button class="btn btn-add">Save note</button>
-              </div>
+          <div class="log">
+            <p class="log-msg"><span class="user">@User</span>remove<strong>할일제목</strong></strong></p>
+            <p class="log-time">3 hours ago</p>
+          </div>
+          <div class="log">
+            <p class="log-msg"><span class="user">@User</span>update<strong>할일제목</strong></strong></p>
+            <p class="log-time">3 hours ago</p>
           </div>
         </div>
       </div>
     </div>
-    <script src="dist/bundle.js"></script>
-  </body>
+    <div id="container">
+      <div id="todo-app"></div>
+    </div>
+    <footer>
+      <p>TODOLIST TeamProject</p>
+    </footer>
+    <div id="modal">
+      <div class="modal-wrap">
+        <div class="modal-title">
+          <h2>해야할일</h2>
+          <div class="btn-wrap">
+            <button class="btn btn-close"><span class="material-icons">close</span></button>
+          </div>
+        </div>
+        <div class="modal-contents">
+          <p>Note</p>
+          <form action="">
+            <input type="text" class="todo-input" placeholder="enter a note">
+            <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500"
+              placeholder="enter a note"></textarea>
+            <div class="btn-wrap">
+              <button class="btn btn-add">Save note</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
