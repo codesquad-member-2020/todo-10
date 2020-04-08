@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
 
 public class Card {
-
     private int id;
     private String title;
     private String content;

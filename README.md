@@ -206,7 +206,7 @@ POST /mock/login
     }
 }
 ```
----
+
 ### 카드 추가 요청
 
 POST /mock/section/{sectionId}/card
@@ -214,6 +214,7 @@ POST /mock/section/{sectionId}/card
 #### 요청 데이터
 
 - 카드 추가 요청 시, URL에 `sectionId`와 Body 데이터를 전달해 합니다.
+
 ```
 {
     "title": "README.md 추가",
@@ -222,7 +223,6 @@ POST /mock/section/{sectionId}/card
 ```
 
 - 프론트에서는 content에 카드 내용을 담아주세요.
-
 
 #### JSON 응답
 ```
