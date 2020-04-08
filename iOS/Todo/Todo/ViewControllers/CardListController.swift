@@ -8,8 +8,9 @@
 
 import UIKit
 final class CardListController: UIViewController {
-    var cardList: Section?
+    //MARK:- internal property
     private let titleView = TitleView()
+    private var titleViewModel: TitleViewModel!
     private let cardListTable = CardListTable()
     private let cardListTableDataSource = CardListTableDataSource()
     private let cardListTableDelegate = CardListTableDelegate()
@@ -45,6 +46,35 @@ final class CardListController: UIViewController {
         cardListTable.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
         cardListTable.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+    }
+    
+    var cardList: Section? {
+        didSet {
+            processTitleViewModel()
+        }
+    }
+    
+    private func processTitleViewModel() {
+        if titleViewModel == nil {
+            configureTitleViewModel()
+        } else {
+            updateTitleViewModel()
+        }
+    }
+    
+    private func configureTitleViewModel() {
+        guard let cardList = cardList else { return }
+        titleViewModel = TitleViewModel(titleModel: TitleModel(title: cardList.title,
+                                                               cardsCount: cardList.cards.count),
+                                        changed: { titleModel in
+                                            guard let titleModel = titleModel else { return }
+                                                self.titleView.badge.text = String(titleModel.cardsCount)
+                                                self.titleView.titleLabel.text = titleModel.title
+        })
+    }
+    
+    private func updateTitleViewModel() {
+        //...
     }
 }
 
