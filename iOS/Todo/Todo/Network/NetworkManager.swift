@@ -61,3 +61,10 @@ struct NetworkManager: NetworkManagable {
         }.resume()
     }
 }
+
+struct MockNetworkSuccessStub: NetworkManagable {
+    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+                     resultHandler: @escaping (Data?, Error?) -> ()) throws {
+        resultHandler(JsonData.successResponseStub, nil)
+    }
+}

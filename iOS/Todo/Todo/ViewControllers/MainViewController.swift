@@ -10,7 +10,6 @@ import UIKit
 
 final class MainViewController: UIViewController {
     private let scrollView = CardListScrollView()
-    private let networkManager = NetworkManager()
     override func viewDidLoad() {
         configureScrollView()
         configureCardListsCase()
@@ -25,7 +24,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCardListsCase() {
-        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListControllers in
+        CardListsUseCase.makeCardLists(with: MockNetworkSuccessStub()) { cardListControllers in
             guard let cardListControllers = cardListControllers else { return }
             self.configureCardLists(cardListControllers: cardListControllers)
         }

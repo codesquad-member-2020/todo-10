@@ -7,7 +7,7 @@
 //
 
 enum JsonData {
-    static let response = """
+    static let successResponseStub = """
     {
         "status": "SUCCESS",
         "content": {
