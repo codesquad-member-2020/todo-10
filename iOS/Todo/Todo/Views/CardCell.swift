@@ -11,7 +11,7 @@ import UIKit
 final class CardCell: UITableViewCell, ReusableView {
     let formatImageView = FormatImageView(frame: .zero)
     let titleLabel = CardTitleLabel()
-    let contextLabel = ContentLabel()
+    let contentLabel = ContentLabel()
     let authorLabel = AuthorLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,19 +57,19 @@ final class CardCell: UITableViewCell, ReusableView {
     }
     
     private func configureContext() {
-        contentView.addSubview(contextLabel)
+        contentView.addSubview(contentLabel)
         
         let constant: CGFloat = 8
-        contextLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: constant).isActive = true
-        contextLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: constant).isActive = true
-        contextLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
+        contentLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: constant).isActive = true
+        contentLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: constant).isActive = true
+        contentLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
     }
     
     private func configureDetailText() {
         contentView.addSubview(authorLabel)
         
         let constant: CGFloat = 8
-        authorLabel.topAnchor.constraint(equalTo: contextLabel.bottomAnchor, constant: constant).isActive = true
+        authorLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: constant).isActive = true
         authorLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant:  constant).isActive = true
         authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
         authorLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -constant).isActive = true
