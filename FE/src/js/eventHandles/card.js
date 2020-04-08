@@ -1,14 +1,25 @@
-import { getParentEl } from '../util/commonUtil.js';
+import { getParentEl, getEl, addClass } from '../util/commonUtil.js';
 const option = {
     dragTarget: null,
     prevColumn: null,
     currColumn: null,
 };
-function cardClickHandle(target) {
+async function cardClickHandle(target, deleteCardRequest) {
     if (!target.classList.contains('btn-close'))
         return;
     if (!confirm('선택하신 카드를 삭제 하시겠습니까?'))
         return;
+    const { status } = await deleteCardRequest(1, 1);
+    if (status !== 'SUCCESS')
+        return;
+    getParentEl(target, '.todo-columns').querySelector('.todo-count').innerHTML--;
+    getParentEl(target, '.card-item').remove();
+}
+function cardDblclickHandle({ target }) {
+    const card = getParentEl(target, '.card-item');
+    if (!card)
+        return;
+    addClass(getEl('#modal'), 'active');
 }
 function cardDragStartHandle(evt) {
     resetOption();
@@ -36,4 +47,4 @@ function resetOption() {
     option.prevColumn = null;
     option.currColumn = null;
 }
-export { cardClickHandle, cardDragStartHandle, cardDragover, cardDrop, };
+export { cardClickHandle, cardDblclickHandle, cardDragStartHandle, cardDragover, cardDrop, };
