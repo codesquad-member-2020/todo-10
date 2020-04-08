@@ -1,8 +1,11 @@
-function getElement(target) {
+function getEl(target) {
     return document.querySelector(target);
 }
-function getElements(target) {
+function getEls(target) {
     return document.querySelectorAll(target);
+}
+function getParentEl(el, target) {
+    return el.closest(target);
 }
 function addClass(target, className) {
     target.classList.add(className);
@@ -10,12 +13,4 @@ function addClass(target, className) {
 function removeClass(target, className) {
     target.classList.remove(className);
 }
-function clearTransition(target) {
-    target.style.transition = '0s step-start';
-}
-const getData = async (url) => {
-    const response = await fetch(url);
-    const resPromise = await response.json();
-    return resPromise;
-};
-export { getElement, getElements, addClass, removeClass, clearTransition, getData };
+export { getEl, getEls, getParentEl, addClass, removeClass };

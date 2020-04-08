@@ -1,6 +1,6 @@
-import { cardClickHandle } from './events/card.js';
-import { columnClickHandle } from './events/column.js';
-import { formClickHandle, formSubmitHandle } from './events/form.js';
+import { cardClickHandle } from './eventHandles/card.js';
+import { columnClickHandle } from './eventHandles/column.js';
+import { formClickHandle, formSubmitHandle } from './eventHandles/form.js';
 
 class TodoEventManager {
     constructor(module) {
