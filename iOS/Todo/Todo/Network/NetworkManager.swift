@@ -36,7 +36,6 @@ protocol NetworkManagable {
 }
 
 struct NetworkManager: NetworkManagable {
-    
     enum EndPoints {
         static let cardLists = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
     }
