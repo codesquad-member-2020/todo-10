@@ -206,6 +206,7 @@ POST /mock/login
     }
 }
 ```
+---
 ### 카드 추가 요청
 
 POST /mock/section/{sectionId}/card
@@ -217,12 +218,11 @@ POST /mock/section/{sectionId}/card
 {
     "title": "README.md 추가",
     "content": "구현 API 내용 작성",
-    "route": "Web"
 }
 ```
 
 - 프론트에서는 content에 카드 내용을 담아주세요.
-- route 값은 프론트에서는 "Web", iOS에서는 "iOS"을 저장해서 보내주세요.
+
 
 #### JSON 응답
 ```
@@ -232,13 +232,12 @@ POST /mock/section/{sectionId}/card
         "id": 2,
         "title": "README.md 추가",
         "content": "구현 API 내용 작성",
-        "route": "Web",
         "createdDateTime": "2020-04-07 15:25:23",
         "updatedDateTime": "2020-04-07 15:25:23"
     }
 }
 ```
-
+---
 ### 카드 수정 요청
 
 PATCH /mock/section/{sectionId}/card/{id}
@@ -249,8 +248,8 @@ PATCH /mock/section/{sectionId}/card/{id}
 - 수정하고 싶은 내용은 Body에 넣어주세요.
 ```
 {
-	"title": "일찍 자기",
-	"content": "11시",
+    "title": "일찍 자기",
+    "content": "11시",
 }
 ```
 
@@ -264,14 +263,14 @@ PATCH /mock/section/{sectionId}/card/{id}
 }
 ```
 
-- 수정 실패 시 응답 (실패하는 경우, 잘못된 섹션 아이디값이나 카드값을 URL에 전달하는 경우)
+- 수정 실패 시 응답 (잘못된 섹션 아이디값이나 카드값을 URL에 전달하는 경우)
 ```
 {
     "status": "ERROR",
     "content": "Resource Not Found"
 }
 ```
-
+---
 ### 카드 삭제 요청
 
 DELETE /mock/section/{sectionId}/card/{id}
