@@ -18,14 +18,23 @@ enum LoginInfo {
 }
 
 struct CardListsCase {
-    static func makeCardLists(with manager: NetworkManagable, completed: @escaping () -> ()) {
+    static func makeCardLists(with manager: NetworkManagable, completed: @escaping ([CardListController]?) -> ()) {
         try? manager.getResource(from: NetworkManager.EndPoints.cardLists, method: .post,
                                  body: LoginInfo.cardLists, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                     guard error == nil else { return }
                                     guard let data = data else { return }
-                                    guard let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return }
-                                    print(prettyPrintedString)
+                                    guard let response = try? JSONDecoder().decode(Response.self, from: data) else { return }
+                                    
+                                    DispatchQueue.main.async {
+                                        let cardListControllers = response.content?.sections?.map({ section -> CardListController in
+                                            let cardListController = CardListController()
+                                            cardListController.cardList = section
+                                            return cardListController
+                                            
+                                        })
+                                        completed(cardListControllers)
+                                    }
         }
     }
 }
