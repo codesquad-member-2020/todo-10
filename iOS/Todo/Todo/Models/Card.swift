@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct Card: Codable {
+    var id: String?
+    var title: String?
+    var content: String
+}

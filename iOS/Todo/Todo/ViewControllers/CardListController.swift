@@ -11,9 +11,9 @@ final class CardListController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
-    private let cardListTable = CardListTable()
-    private let cardListTableDataSource = CardListTableDataSource()
-    private let cardListTableDelegate = CardListTableDelegate()
+    private var cardListTable = CardListTable()
+    private var cardListTableDataSource: CardListTableDataSource!
+    private var cardListTableDelegate = CardListTableDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,6 @@ final class CardListController: UIViewController {
     
     private func configureTableView() {
         cardListTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
-        cardListTable.dataSource = cardListTableDataSource
         cardListTable.delegate = cardListTableDelegate
         configureTableConstraints()
     }
@@ -50,15 +49,8 @@ final class CardListController: UIViewController {
     
     var cardList: Section? {
         didSet {
-            processTitleViewModel()
-        }
-    }
-    
-    private func processTitleViewModel() {
-        if titleViewModel == nil {
             configureTitleViewModel()
-        } else {
-            updateTitleViewModel()
+            configureDataSource()
         }
     }
     
@@ -73,8 +65,11 @@ final class CardListController: UIViewController {
         })
     }
     
-    private func updateTitleViewModel() {
-        //...
+    private func configureDataSource() {
+        guard let cardList = cardList else { return }
+        let cardViewModels = cardList.cards.map { CardViewModel(card: $0) }
+        cardListTableDataSource = CardListTableDataSource(cardViewModels: CardViewModels(cardViewModels))
+        cardListTable.dataSource = cardListTableDataSource
     }
 }
 

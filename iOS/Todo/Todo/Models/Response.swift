@@ -32,11 +32,5 @@ struct Section: Codable {
     var cards: [Card]
 }
 
-struct Card: Codable {
-    var id: String?
-    var title: String?
-    var content: String?
-}
-
 
 

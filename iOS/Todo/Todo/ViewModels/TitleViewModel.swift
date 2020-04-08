@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol ViewModelBinding {
-    associatedtype Key
-    func updateNotify(changed handler: @escaping (Key) -> ())
-}
-
 final class TitleViewModel: ViewModelBinding {
     typealias Key = TitleModel?
     private var titleModel : Key = nil {
