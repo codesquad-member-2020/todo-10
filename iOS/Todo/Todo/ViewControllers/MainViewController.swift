@@ -25,7 +25,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCardListsCase() {
-        CardListsCase.makeCardLists(with: NetworkManager()) { cardListControllers in
+        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListControllers in
             guard let cardListControllers = cardListControllers else { return }
             self.configureCardLists(cardListControllers: cardListControllers)
         }
