@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol NetworkManagable {
-    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, Error?) -> ()) throws
-}
-
 enum Format {
     static let jsonType = "application/json"
 }
@@ -35,7 +30,13 @@ enum NetworkErrorCase: Error {
     case notFound
 }
 
+protocol NetworkManagable {
+    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+                     resultHandler: @escaping (Data?, Error?) -> ()) throws
+}
+
 struct NetworkManager: NetworkManagable {
+    
     enum EndPoints {
         static let cardLists = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
     }
