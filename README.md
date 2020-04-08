@@ -70,6 +70,40 @@ POST /mock/login
 
 #### JSON 응답
 
+- 현재 DB에 아무 데이터가 없는 경우 (최초 접속 시)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "logs": [],
+        "sections": [
+            {
+                "id": 0,
+                "title": "해야 할 일",
+                "cards": [],
+                "createdDateTime": "2020-04-08 21:41:01",
+                "updatedDateTime": "2020-04-08 21:41:01"
+            },
+            {
+                "id": 1,
+                "title": "하고 있는 일",
+                "cards": [],
+                "createdDateTime": "2020-04-08 21:41:01",
+                "updatedDateTime": "2020-04-08 21:41:01"
+            },
+            {
+                "id": 2,
+                "title": "완료한 일",
+                "cards": [],
+                "createdDateTime": "2020-04-08 21:41:01",
+                "updatedDateTime": "2020-04-08 21:41:01"
+            }
+        ]
+    }
+}
+```
+
+- DB에 데이터가 존재하는 경우
 ```
 {
     "status": "SUCCESS",
@@ -179,7 +213,6 @@ POST /mock/section/{sectionId}/card
 #### 요청 데이터
 
 - 카드 추가 요청 시, URL에 `sectionId`와 Body 데이터를 전달해 합니다.
-
 ```
 {
     "title": "README.md 추가",
@@ -203,5 +236,73 @@ POST /mock/section/{sectionId}/card
         "createdDateTime": "2020-04-07 15:25:23",
         "updatedDateTime": "2020-04-07 15:25:23"
     }
+}
+```
+
+### 카드 수정 요청
+
+PATCH /mock/section/{sectionId}/card/{id}
+
+#### 요청 데이터
+
+- 수정이 발생하는 Section 아이디와 Card 아이디는 URL에 포함시켜주세요.
+- 수정하고 싶은 내용은 Body에 넣어주세요.
+```
+{
+	"title": "일찍 자기",
+	"content": "11시",
+}
+```
+
+#### JSON 응답
+
+- 수정 성공 시 응답
+```
+{
+    "status": "SUCCESS",
+    "content": "Card Updated"
+}
+```
+
+- 수정 실패 시 응답 (실패하는 경우, 잘못된 섹션 아이디값이나 카드값을 URL에 전달하는 경우)
+```
+{
+    "status": "ERROR",
+    "content": "Resource Not Found"
+}
+```
+
+### 카드 삭제 요청
+
+DELETE /mock/section/{sectionId}/card/{id}
+
+#### 요청 데이터
+
+- 삭제가 발생하는 Section 아이디와 삭제할 Card 아이디는 URL에 포함시켜주세요.
+- Body에는 필요한 데이터가 없습니다.
+
+#### JSON 응답
+
+- 삭제 성공 시 응답
+- 삭제가 발생한 Section의 Card 리스트를 반환합니다. (id는 Card의 id를 의미합니다.)
+```
+{
+    "status": "SUCCESS",
+    "content": [
+        {
+            "id": "1"
+        },
+        {
+            "id": "2"
+        }
+    ]
+}
+```
+
+- 삭제 실패 시 응답
+```
+{
+    "status": "ERROR",
+    "content": "Resource Not Found"
 }
 ```
