@@ -29,6 +29,7 @@ final class CardListScrollView: UIScrollView {
     
     private func configureStackView() {
         addSubview(stackView)
+        
         stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
