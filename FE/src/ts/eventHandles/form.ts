@@ -1,11 +1,11 @@
-import {isEmpty} from '../util/commonUtil'
+import { isEmpty } from '../util/commonUtil'
 
-function formClickHandle(target) {
+function closeForm(target) {
     if (!target.classList.contains('btn-close')) return;
     target.closest('.todo-form').classList.toggle('active');
 }
 
-function formSubmitHandle(evt, fetchCallBack) {
+function submitForm(evt, fetchCallBack) {
     evt.preventDefault();
     // 서버 통신
     // fetchCallBack();
@@ -28,8 +28,8 @@ function addCardTempFunc(evt) {
     evt.target.closest('.todo-form').classList.toggle('active');
 }
 
-function isDisabledBtn(target){
+function isDisabledBtn(target) {
     return isEmpty(target.value);
 }
 
-export { formClickHandle, formSubmitHandle, isDisabledBtn };
+export { closeForm, submitForm, isDisabledBtn };
