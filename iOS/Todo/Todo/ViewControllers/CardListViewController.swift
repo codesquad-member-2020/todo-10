@@ -68,7 +68,7 @@ final class CardListViewController: UIViewController {
     private func configureDataSource() {
         guard let cardList = cardList else { return }
         let cardViewModels = cardList.cards.map { CardViewModel(card: $0) }
-        cardListTableDataSource = CardListTableDataSource(cardViewModels: CardViewModels(cardViewModels))
+        cardListTableDataSource = CardListTableDataSource(cardViewModels: cardViewModels)
         cardListTable.dataSource = cardListTableDataSource
     }
 }
