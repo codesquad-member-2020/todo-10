@@ -5,7 +5,7 @@ import com.codesquad.team10.todo.domain.Log;
 import com.codesquad.team10.todo.domain.Section;
 import com.codesquad.team10.todo.domain.User;
 import com.codesquad.team10.todo.exception.UserNotFoundException;
-import com.codesquad.team10.todo.repository.MockUserRepository;
+import com.codesquad.team10.todo.repository.mock.MockUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
