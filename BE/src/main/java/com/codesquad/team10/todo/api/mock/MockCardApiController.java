@@ -49,21 +49,18 @@ public class MockCardApiController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int id,
-                                               @RequestBody Map<String, String> requestBody) {
-        String title = requestBody.get("title");
-        String content = requestBody.get("content");
+    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int id, @RequestBody Card updatedCard) {
 
-        log.debug("sectionId: {}, card id: {}, title: {}, content: {}", sectionId, id, title, content);
+        updatedCard.setId(id);
+        log.debug("sectionId: {}, card id: {}, title: {}, content: {}", sectionId, updatedCard.getId(), updatedCard.getTitle(), updatedCard.getContent());
 
         User dbUser = mockUserRepository.findByEmail().orElseThrow(UserNotFoundException::new);
         try {
-            if(!dbUser.updateCard(sectionId, id, title, content))
-                throw new ResourceNotFoundException();
+            updatedCard = dbUser.updateCard(sectionId, updatedCard);
         } catch (IndexOutOfBoundsException e) {
             throw new ResourceNotFoundException();
         }
-        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, "Card Updated"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, updatedCard), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
