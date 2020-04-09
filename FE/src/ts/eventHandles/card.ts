@@ -1,7 +1,9 @@
-import { getEl, getParentEl, addClass } from '../util/commonUtil.js';
+import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js';
 
 const option = {
     dragTarget: null,
+    dummyTarget: null,
+    toTarget: null,
     prevColumn: null,
     currColumn: null,
 }
@@ -23,27 +25,40 @@ async function deleteCard(target, deleteCardRequest) {
 function showEditModal({ target }) {
     const card = getParentEl(target, '.card-item');
     if (!card) return;
-
-    addClass(getEl('#modal'), 'active');
+    const modal = getEl('#modal');
+    const content = card.querySelector('.card-contents').innerText;
+    modal.querySelector('.todo-textarea').innerText = content;
+    addClass(modal, 'active');
 }
 
 function dragStartCard(evt) {
     resetOption();
     if (evt.target.dataset.type !== 'card') return;
     option.dragTarget = evt.target;
+    option.dummyTarget = option.dragTarget;
     option.prevColumn = getParentEl(option.dragTarget, '.todo-columns');
+    addClass(option.dragTarget, 'draging');
 }
 
 function dragoverCard(evt) {
     evt.preventDefault();
 }
 
+function dragenterCard(evt) {
+    option.toTarget = getParentEl(evt.toElement, '.card-item');
+    option.currColumn = getParentEl(evt.toElement, '.todo-columns');
+    console.log(option.toTarget);
+    if (option.toTarget) option.toTarget.after(option.dummyTarget);
+    else if (option.currColumn) option.currColumn.querySelector('.card-wrap').appendChild(option.dummyTarget);
+}
+
 function dropCard(evt) {
-    if (!option.dragTarget) return;
+    removeClass(option.dragTarget, 'draging');
+    if (!option.dragTarget || !option.currColumn) return;
     let cardWrap = evt.target;
-    option.currColumn = getParentEl(cardWrap, '.todo-columns');
     if (!cardWrap.classList.contains('card-wrap')) cardWrap = option.currColumn.querySelector('.card-wrap');
-    cardWrap.appendChild(option.dragTarget);
+    if (!option.toTarget) cardWrap.appendChild(option.dragTarget);
+    else option.toTarget.after(option.dragTarget);
     option.prevColumn.querySelector('.todo-count').innerHTML--;
     option.currColumn.querySelector('.todo-count').innerHTML++;
 }
@@ -59,5 +74,6 @@ export {
     showEditModal,
     dragStartCard,
     dragoverCard,
+    dragenterCard,
     dropCard,
 }
