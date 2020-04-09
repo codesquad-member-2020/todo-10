@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-enum JsonData {
+enum StubJsonData {
     static let successResponseStub = """
     {
         "status": "SUCCESS",
