@@ -9,21 +9,17 @@
 import UIKit
 
 final class CardListTableDataSource: NSObject {
+    let cardListID: Int
     private var cardViewModels: [CardViewModel]
     
-    init(cardViewModels: [CardViewModel]) {
+    init(cardListID: Int, cardViewModels: [CardViewModel]) {
+        self.cardListID = cardListID
         self.cardViewModels = cardViewModels
     }
     
     func removeCardListModel(at index: Int){
         guard index < cardViewModels.count else { return }
         cardViewModels.remove(at: index)
-    }
-    
-    func cardListID(at index: Int) -> Int? {
-        guard index < cardViewModels.count else { return nil }
-        guard let cardListID = cardViewModels[index].cardListID else { return nil }
-        return cardListID
     }
     
     func cardID(at index: Int) -> Int? {
