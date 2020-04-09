@@ -23,4 +23,9 @@ final class CardViewModel: ViewModelBinding {
         self.changedHandler = handler
         changedHandler(card)
     }
+
+    var cardID: Int? {
+        return card?.id
+    }
+
 }

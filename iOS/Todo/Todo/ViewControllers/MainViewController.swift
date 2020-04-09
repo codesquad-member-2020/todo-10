@@ -26,16 +26,17 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCardListsCase() {
-        CardListsUseCase.makeCardLists(with: MockNetworkSuccessStub()) { cardListsDataSource in
+        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
             cardListsDataSource?.iterateCardList(with: { cardList in
-                let cardListViewController: CardListViewController = {
-                    let controller = CardListViewController()
-                    controller.cardList = cardList
-                    return controller
-                }()
-                self.addCardListViewController(cardListViewController: cardListViewController)
+                DispatchQueue.main.async {
+                    let cardListViewController: CardListViewController = {
+                        let controller = CardListViewController()
+                        controller.cardList = cardList
+                        return controller
+                    }()
+                    self.addCardListViewController(cardListViewController: cardListViewController)
+                }
             })
-            
         }
     }
     
