@@ -111,4 +111,4 @@ temp/
 package-lock.json
 
 # End of https://www.gitignore.io/api/node
-_test
+src/js
