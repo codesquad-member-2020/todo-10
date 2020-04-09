@@ -8,37 +8,25 @@ public class Log {
 
     @Id
     private Long id;
-    private User user;
     private Action action;
-    private Object target;
     private String source;
     private String destination;
-    private LocalDateTime createdDateTime;
+    private LocalDateTime createDateTime;
 
-    public Log(Long id, User user, Action action, Object target, String source, String destination) {
+    public Log(Long id, Action action, String source, String destination, LocalDateTime createDateTime) {
         this.id = id;
-        this.user = user;
         this.action = action;
-        this.target = target;
         this.source = source;
         this.destination = destination;
-        this.createdDateTime = LocalDateTime.now();
+        this.createDateTime = createDateTime;
     }
 
     public Long getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public Action getAction() {
         return action;
-    }
-
-    public Object getTarget() {
-        return target;
     }
 
     public String getSource() {
@@ -50,6 +38,6 @@ public class Log {
     }
 
     public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
+        return createDateTime;
     }
 }
