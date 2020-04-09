@@ -9,7 +9,11 @@
 import Foundation
 
 struct Response: Codable {
-    var status: String
+    enum Status: String, Codable {
+        case success = "SUCCESS"
+        case error = "ERROR"
+    }
+    var status: Status
     var content: Content
 }
 
