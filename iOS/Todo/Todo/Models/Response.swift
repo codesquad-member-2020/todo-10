@@ -27,13 +27,13 @@ struct Log: Codable {
 }
 
 struct CardList: Codable {
-    var id: Int
+    let id: Int
     var title: String
     var cards: [Card]
 }
 
 struct Card: Codable {
-    var id: Int
+    let id: Int
     var title: String?
     var content: String
     var createdDateTime: String
