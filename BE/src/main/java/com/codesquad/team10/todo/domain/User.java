@@ -66,8 +66,8 @@ public class User {
         sections.get(sectionId).addCard(newCard);
     }
 
-    public boolean updateCard(int sectionId, int cardId, String title, String content) {
-        return sections.get(sectionId).updateCard(cardId, title, content);
+    public Card updateCard(int sectionId, Card updatedCard) {
+        return sections.get(sectionId).updateCard(updatedCard);
     }
 
     public boolean deleteCard(int sectionId, int cardId) {
