@@ -13,4 +13,7 @@ function addClass(target, className) {
 function removeClass(target, className) {
     target.classList.remove(className);
 }
-export { getEl, getEls, getParentEl, addClass, removeClass };
+function isEmpty(property) {
+    return (property === null || property === "" || typeof property === "undefined");
+}
+export { getEl, getEls, getParentEl, addClass, removeClass, isEmpty };

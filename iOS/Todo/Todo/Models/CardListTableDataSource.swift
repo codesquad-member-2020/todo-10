@@ -9,18 +9,24 @@
 import UIKit
 
 final class CardListTableDataSource: NSObject {
+    private let cardViewModels: CardViewModels
     
+    init(cardViewModels: CardViewModels) {
+        self.cardViewModels = cardViewModels
+    }
 }
 
 extension CardListTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return cardViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell else {
             fatalError("Unable to Dequeue \(CardCell.reuseIdentifier)")
         }
+        let index = indexPath.row
+        cardViewModels.bind(at: index, cardCell: cardCell)
         return cardCell
     }
 }

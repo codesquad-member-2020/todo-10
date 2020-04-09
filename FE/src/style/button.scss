@@ -1,24 +1,28 @@
 .btn-wrap {
-  display: flex;
+    display: flex;
 }
 button {
-  padding: 0;
-  margin: 0;
-  border-radius: 0.25em;
-  border:1px solid rgba(27,31,35,.2);
-  &.btn {
-    flex: 1;
-    & + .btn {
-      margin-left: 5px;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.25em;
+    border: 1px solid rgba(27, 31, 35, 0.2);
+    &.btn {
+        flex: 1;
+        & + .btn {
+            margin-left: 5px;
+        }
     }
-  }
-  &.btn-add {
-    color: #fff;
-    background: rgb(26, 114, 229);
-    background: linear-gradient(180deg, rgba(26, 114, 229, 1) 0%, rgba(26, 114, 229, 0.7) 100%);
-  }
-  span.material-icons {
-    font-size: 16px;
-    pointer-events: none;
-  }
+    &.btn-add {
+        color: #fff;
+        background: rgb(26, 114, 229);
+        background: linear-gradient(180deg, rgba(26, 114, 229, 1) 0%, rgba(26, 114, 229, 0.7) 100%);
+        &:disabled {
+            background: rgb(115, 152, 201);
+            background: linear-gradient(180deg, rgba(115, 152, 201, 0.7)0%, rgba(115, 152, 201, 0.5) 100%)
+        }
+    }
+    span.material-icons {
+        font-size: 16px;
+        pointer-events: none;
+    }
 }

@@ -9,12 +9,10 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    private let cardListViewControllers = [CardListController(), CardListController(), CardListController(), CardListController(), CardListController()]
     private let scrollView = CardListScrollView()
-    
     override func viewDidLoad() {
         configureScrollView()
-        configureCardLists()
+        configureCardListsCase()
     }
     
     private func configureScrollView() {
@@ -25,8 +23,15 @@ final class MainViewController: UIViewController {
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
     
-    private func configureCardLists() {
-        cardListViewControllers.forEach {
+    private func configureCardListsCase() {
+        CardListsUseCase.makeCardLists(with: MockNetworkSuccessStub()) { cardListControllers in
+            guard let cardListControllers = cardListControllers else { return }
+            self.configureCardLists(cardListControllers: cardListControllers)
+        }
+    }
+    
+    private func configureCardLists(cardListControllers: [CardListController]) {
+        cardListControllers.forEach {
             addChild($0)
             scrollView.stackView.addArrangedSubview($0.view)
             $0.view.translatesAutoresizingMaskIntoConstraints = false
