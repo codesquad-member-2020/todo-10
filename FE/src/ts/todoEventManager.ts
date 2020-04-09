@@ -1,4 +1,4 @@
-import { cardClickHandle } from './eventHandles/card.js';
+import { cardClickHandle, cardDblClickHandle, cardDragStartHandle, cardDragover, cardDrop } from './eventHandles/card.js';
 import { columnClickHandle } from './eventHandles/column.js';
 import { formClickHandle, formSubmitHandle, isDisabledBtn } from './eventHandles/form.js';
 
@@ -11,10 +11,14 @@ class TodoEventManager {
     init() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
+        this.todoView.todoApp.addEventListener('dblclick', cardDblClickHandle);
+        this.todoView.todoApp.addEventListener('dragstart', cardDragStartHandle);
+        this.todoView.todoApp.addEventListener('dragover', cardDragover);
+        this.todoView.todoApp.addEventListener('drop', cardDrop);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
     }
 
-    checkDisabled({target}) {
+    checkDisabled({ target }) {
         const contentWrap = target.closest('.content-wrap');
         const btn = contentWrap.querySelector('.btn-add');
         isDisabledBtn(target) ? (btn.disabled = true) : (btn.disabled = false);
@@ -27,8 +31,8 @@ class TodoEventManager {
             case 'column':
                 columnClickHandle(target);
                 break;
-            case 'card':
-                cardClickHandle(target);
+            case 'card': 
+                cardClickHandle(target, this.todoModel.deleteCardRequest);
                 break;
             case 'form':
                 formClickHandle(target);
