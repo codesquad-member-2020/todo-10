@@ -9,10 +9,15 @@
 import UIKit
 
 final class CardListTableDataSource: NSObject {
-    private let cardViewModels: [CardViewModel]
+    private var cardViewModels: [CardViewModel]
     
     init(cardViewModels: [CardViewModel]) {
         self.cardViewModels = cardViewModels
+    }
+    
+    func removeCardListModel(at index: Int){
+        guard index < cardViewModels.count else { return }
+        cardViewModels.remove(at: index)
     }
 }
 
