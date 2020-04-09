@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* CardLists.swift */; };
 		5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F3243EEFFE00D59611 /* ButtonData.swift */; };
+		5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F5243F194A00D59611 /* DeleteUseCase.swift */; };
+		5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F7243F1AFA00D59611 /* CardResponse.swift */; };
+		5A7937FA243F1B1200D59611 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F9243F1B1200D59611 /* Status.swift */; };
+		5A7937FC243F251700D59611 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937FB243F251700D59611 /* CellModel.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* Response.swift */; };
@@ -56,6 +60,10 @@
 /* Begin PBXFileReference section */
 		5A7937F0243ED9FC00D59611 /* CardLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLists.swift; sourceTree = "<group>"; };
 		5A7937F3243EEFFE00D59611 /* ButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonData.swift; sourceTree = "<group>"; };
+		5A7937F5243F194A00D59611 /* DeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCase.swift; sourceTree = "<group>"; };
+		5A7937F7243F1AFA00D59611 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
+		5A7937F9243F1B1200D59611 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		5A7937FB243F251700D59611 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */,
+				5A7937F5243F194A00D59611 /* DeleteUseCase.swift */,
 			);
 			path = Coder;
 			sourceTree = "<group>";
@@ -153,9 +162,12 @@
 			isa = PBXGroup;
 			children = (
 				5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */,
-				5A838E53243DB4110081A42F /* Response.swift */,
-				5A838E5D243DF0470081A42F /* TitleModel.swift */,
 				5A7937F0243ED9FC00D59611 /* CardLists.swift */,
+				5A7937F9243F1B1200D59611 /* Status.swift */,
+				5A838E53243DB4110081A42F /* Response.swift */,
+				5A7937F7243F1AFA00D59611 /* CardResponse.swift */,
+				5A838E5D243DF0470081A42F /* TitleModel.swift */,
+				5A7937FB243F251700D59611 /* CellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -381,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
+				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
 				5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
@@ -394,12 +407,15 @@
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */,
+				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
+				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
 				5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */,
 				5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
 				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* CardListViewController.swift in Sources */,
+				5A7937FC243F251700D59611 /* CellModel.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
 				5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */,
 			);

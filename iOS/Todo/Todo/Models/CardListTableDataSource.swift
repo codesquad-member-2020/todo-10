@@ -19,6 +19,18 @@ final class CardListTableDataSource: NSObject {
         guard index < cardViewModels.count else { return }
         cardViewModels.remove(at: index)
     }
+    
+    func cardListID(at index: Int) -> Int? {
+        guard index < cardViewModels.count else { return nil }
+        guard let cardListID = cardViewModels[index].cardListID else { return nil }
+        return cardListID
+    }
+    
+    func cardID(at index: Int) -> Int? {
+        guard index < cardViewModels.count else { return nil }
+        guard let cardID = cardViewModels[index].cardID else { return nil }
+        return cardID
+    }
 }
 
 extension CardListTableDataSource: UITableViewDataSource {

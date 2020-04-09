@@ -37,7 +37,6 @@ final class MainViewController: UIViewController {
                     self.addCardListViewController(cardListViewController: cardListViewController)
                 }
             })
-            
         }
     }
     
