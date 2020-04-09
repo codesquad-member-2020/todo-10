@@ -18,4 +18,8 @@ function removeClass(target: HTMLElement, className: string) {
     target.classList.remove(className);
 }
 
-export { getEl, getEls, getParentEl, addClass, removeClass };
+function isEmpty(property: string) {
+    return (property === null || property === "" || typeof property === "undefined");
+ }
+
+export { getEl, getEls, getParentEl, addClass, removeClass, isEmpty };
