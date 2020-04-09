@@ -1,8 +1,10 @@
-function columnClickHandle(target) {
+import { getClosestEl } from '../util/commonUtil.js';
+
+function showColumnForm(target) {
     if (!target.classList.contains('toggle-form')) return;
-    target.closest('.content-wrap').querySelector('.todo-form').classList.toggle('active');
+    getClosestEl(target, '.todo-columns', '.todo-form').classList.toggle('active');
 }
 
 export {
-    columnClickHandle,
+    showColumnForm,
 }

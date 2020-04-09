@@ -1,4 +1,4 @@
-import { getParentEl, getEl, addClass } from '../util/commonUtil.js';
+import { getEl, getParentEl, addClass } from '../util/commonUtil.js';
 
 const option = {
     dragTarget: null,
@@ -6,33 +6,39 @@ const option = {
     currColumn: null,
 }
 
-async function cardClickHandle(target, deleteCardRequest) {
+async function deleteCard(target, deleteCardRequest) {
     if (!target.classList.contains('btn-close')) return;
     if (!confirm('선택하신 카드를 삭제 하시겠습니까?')) return;
-    const { status } = await deleteCardRequest(1, 1);
+    const column = getParentEl(target, '.todo-columns');
+    const card = getParentEl(target, '.card-item');
+    const columnId = column.dataset.columnId;
+    const cardId = card.dataset.cardId;
+    const { status } = await deleteCardRequest(columnId, cardId);
+
     if (status !== 'SUCCESS') return;
-    getParentEl(target, '.todo-columns').querySelector('.todo-count').innerHTML--;
-    getParentEl(target, '.card-item').remove();
+    column.querySelector('.todo-count').innerHTML--;
+    card.remove();
 }
 
-function cardDblClickHandle({ target }) {
+function showEditModal({ target }) {
     const card = getParentEl(target, '.card-item');
     if (!card) return;
+
     addClass(getEl('#modal'), 'active');
 }
 
-function cardDragStartHandle(evt) {
+function dragStartCard(evt) {
     resetOption();
     if (evt.target.dataset.type !== 'card') return;
     option.dragTarget = evt.target;
     option.prevColumn = getParentEl(option.dragTarget, '.todo-columns');
 }
 
-function cardDragover(evt) {
+function dragoverCard(evt) {
     evt.preventDefault();
 }
 
-function cardDrop(evt) {
+function dropCard(evt) {
     if (!option.dragTarget) return;
     let cardWrap = evt.target;
     option.currColumn = getParentEl(cardWrap, '.todo-columns');
@@ -43,15 +49,15 @@ function cardDrop(evt) {
 }
 
 function resetOption() {
-    option.dragTarget = null;
-    option.prevColumn = null;
-    option.currColumn = null;
+    for (let key in option) {
+        option[key] = null;
+    }
 }
 
 export {
-    cardClickHandle,
-    cardDblClickHandle,
-    cardDragStartHandle,
-    cardDragover,
-    cardDrop,
+    deleteCard,
+    showEditModal,
+    dragStartCard,
+    dragoverCard,
+    dropCard,
 }
