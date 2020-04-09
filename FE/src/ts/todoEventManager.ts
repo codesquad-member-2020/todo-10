@@ -1,4 +1,4 @@
-import { cardClickHandle, cardDblclickHandle, cardDragStartHandle, cardDragover, cardDrop } from './eventHandles/card.js';
+import { cardClickHandle, cardDblClickHandle, cardDragStartHandle, cardDragover, cardDrop } from './eventHandles/card.js';
 import { columnClickHandle } from './eventHandles/column.js';
 import { formClickHandle, formSubmitHandle } from './eventHandles/form.js';
 
@@ -10,8 +10,8 @@ class TodoEventManager {
 
     init() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
-        this.todoView.todoApp.addEventListener('dblclick', cardDblclickHandle);
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
+        this.todoView.todoApp.addEventListener('dblclick', cardDblClickHandle);
         this.todoView.todoApp.addEventListener('dragstart', cardDragStartHandle);
         this.todoView.todoApp.addEventListener('dragover', cardDragover);
         this.todoView.todoApp.addEventListener('drop', cardDrop);

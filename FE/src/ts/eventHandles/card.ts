@@ -15,7 +15,7 @@ async function cardClickHandle(target, deleteCardRequest) {
     getParentEl(target, '.card-item').remove();
 }
 
-function cardDblclickHandle({ target }) {
+function cardDblClickHandle({ target }) {
     const card = getParentEl(target, '.card-item');
     if (!card) return;
     addClass(getEl('#modal'), 'active');
@@ -50,7 +50,7 @@ function resetOption() {
 
 export {
     cardClickHandle,
-    cardDblclickHandle,
+    cardDblClickHandle,
     cardDragStartHandle,
     cardDragover,
     cardDrop,

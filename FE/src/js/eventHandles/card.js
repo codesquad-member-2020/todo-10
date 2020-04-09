@@ -15,7 +15,7 @@ async function cardClickHandle(target, deleteCardRequest) {
     getParentEl(target, '.todo-columns').querySelector('.todo-count').innerHTML--;
     getParentEl(target, '.card-item').remove();
 }
-function cardDblclickHandle({ target }) {
+function cardDblClickHandle({ target }) {
     const card = getParentEl(target, '.card-item');
     if (!card)
         return;
@@ -47,4 +47,4 @@ function resetOption() {
     option.prevColumn = null;
     option.currColumn = null;
 }
-export { cardClickHandle, cardDblclickHandle, cardDragStartHandle, cardDragover, cardDrop, };
+export { cardClickHandle, cardDblClickHandle, cardDragStartHandle, cardDragover, cardDrop, };

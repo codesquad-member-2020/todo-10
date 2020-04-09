@@ -7,7 +7,7 @@ class TodoModel {
     }
 
     getTodoData() {
-        // return fetch('https://cors-anywhere.herokuapp.com/http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login', {
+        // return fetch('http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login', {
         //     method: 'POST',
         //     mode: 'cors',
         //     headers: { 'Content-Type': 'application/json' },
@@ -21,8 +21,8 @@ class TodoModel {
     }
 
     deleteCardRequest(columnId, cardId) {
-        return fetch(`https://cors-anywhere.herokuapp.com/http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/section/${columnId}/card/${cardId}`, { method: 'DELETE' })
-            .then(res => res.json())
+        return fetch(`http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/section/${columnId}/card/${cardId}`, { mode: 'cors', method: 'DELETE' })
+            .then(res => res.json());
     }
 }
 
