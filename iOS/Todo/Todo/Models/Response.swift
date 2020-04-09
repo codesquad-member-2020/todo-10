@@ -15,7 +15,7 @@ struct Response: Codable {
 
 struct Content: Codable {
     var sections: [CardList]
-    var logs: [Log]?
+    var logs: [Log]
 }
 
 struct Log: Codable {
