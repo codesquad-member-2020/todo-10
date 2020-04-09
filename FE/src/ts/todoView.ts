@@ -52,7 +52,7 @@ class TodoView {
             .closest('.todo-columns')
             .querySelector(
                 '.card-wrap'
-            ).innerHTML += `<div class="card-item content-wrap" data-type="card" data-card-id="${data.content.id}" tabindex="0">
+            ).innerHTML += `<div class="card-item content-wrap" data-type="card" id="card-${data.content.id}" data-card-id="${data.content.id}" tabindex="0">
             <div class="card-contents">${data.content.content}</div>
             <p class="card-writer">added by <span>홍길동</span></p>
             <button class="btn btn-close">

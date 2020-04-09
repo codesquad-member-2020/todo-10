@@ -1,7 +1,8 @@
-import { isEmpty } from './util/commonUtil'
+import { isEmpty } from './util/commonUtil';
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dropCard } from './eventHandles/card.js';
 import { showColumnForm } from './eventHandles/column.js';
 import { closeForm, submitForm } from './eventHandles/form.js';
+import { closeModal, submitModal } from './eventHandles/modal';
 
 class TodoEventManager {
     constructor(module) {
@@ -18,8 +19,21 @@ class TodoEventManager {
         this.todoView.todoApp.addEventListener('drop', dropCard);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
         this.todoView.todoModal.addEventListener('input', this.checkDisabled.bind(this));
+        this.todoView.todoModal.addEventListener('submit', this.modalHandler.bind(this));
+        this.todoView.todoModal.addEventListener('click', this.clickModal.bind(this));
+    }
+    modalHandler(evt) {
+        submitModal(evt, function ({ evt, data, columnId, cardId }) {
+            console.log(evt, data, columnId, cardId);
+            document.querySelector(`#column-${columnId} #card-${cardId} .card-contents`)?.innerHTML = data.content.content;
+            document.querySelector('#modal')?.classList.remove('active');
+            document.querySelector('#modal textarea').value = '';
+        });
     }
 
+    clickModal({ target }) {
+        closeModal(target);
+    }
     checkDisabled({ target }) {
         const contentWrap = target.closest('.content-wrap');
         const btn = contentWrap.querySelector('.btn-add');
