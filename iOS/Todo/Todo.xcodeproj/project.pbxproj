@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* CardLists.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* Response.swift */; };
-		5A838E59243DC8AF0081A42F /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E58243DC8AF0081A42F /* JsonData.swift */; };
+		5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E58243DC8AF0081A42F /* StubJsonData.swift */; };
 		5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */; };
 		5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5D243DF0470081A42F /* TitleModel.swift */; };
-		5A838E60243DFCE00081A42F /* CardViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5F243DFCE00081A42F /* CardViewModels.swift */; };
 		5A838E62243DFD0E0081A42F /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E61243DFD0E0081A42F /* CardViewModel.swift */; };
 		5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E63243DFD530081A42F /* ViewModelBinding.swift */; };
 		5A838E68243DFDCA0081A42F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E67243DFDCA0081A42F /* Card.swift */; };
@@ -31,7 +31,7 @@
 		5AB8D55E243B410200387EAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AB8D55C243B410200387EAE /* LaunchScreen.storyboard */; };
 		5AB8D569243B410200387EAE /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D568243B410200387EAE /* TodoTests.swift */; };
 		5AB8D574243B410200387EAE /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D573243B410200387EAE /* TodoUITests.swift */; };
-		5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* CardListController.swift */; };
+		5AB8D585243B4FC700387EAE /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* CardListViewController.swift */; };
 		5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */; };
 		5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D58C243B5CDC00387EAE /* TitleView.swift */; };
 /* End PBXBuildFile section */
@@ -54,13 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A7937F0243ED9FC00D59611 /* CardLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLists.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		5A838E58243DC8AF0081A42F /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
+		5A838E58243DC8AF0081A42F /* StubJsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJsonData.swift; sourceTree = "<group>"; };
 		5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		5A838E5D243DF0470081A42F /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
-		5A838E5F243DFCE00081A42F /* CardViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModels.swift; sourceTree = "<group>"; };
 		5A838E61243DFD0E0081A42F /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		5A838E63243DFD530081A42F /* ViewModelBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBinding.swift; sourceTree = "<group>"; };
 		5A838E67243DFDCA0081A42F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		5AB8D56F243B410200387EAE /* TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB8D573243B410200387EAE /* TodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUITests.swift; sourceTree = "<group>"; };
 		5AB8D575243B410200387EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5AB8D584243B4FC700387EAE /* CardListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListController.swift; sourceTree = "<group>"; };
+		5AB8D584243B4FC700387EAE /* CardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
 		5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogController.swift; sourceTree = "<group>"; };
 		5AB8D58C243B5CDC00387EAE /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,7 +133,7 @@
 		5A838E55243DC85D0081A42F /* JsonData */ = {
 			isa = PBXGroup;
 			children = (
-				5A838E58243DC8AF0081A42F /* JsonData.swift */,
+				5A838E58243DC8AF0081A42F /* StubJsonData.swift */,
 			);
 			path = JsonData;
 			sourceTree = "<group>";
@@ -144,7 +144,6 @@
 				5A838E63243DFD530081A42F /* ViewModelBinding.swift */,
 				5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */,
 				5A838E61243DFD0E0081A42F /* CardViewModel.swift */,
-				5A838E5F243DFCE00081A42F /* CardViewModels.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -156,6 +155,7 @@
 				5A838E53243DB4110081A42F /* Response.swift */,
 				5A838E5D243DF0470081A42F /* TitleModel.swift */,
 				5A838E67243DFDCA0081A42F /* Card.swift */,
+				5A7937F0243ED9FC00D59611 /* CardLists.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				5AB8D555243B40FF00387EAE /* MainViewController.swift */,
-				5AB8D584243B4FC700387EAE /* CardListController.swift */,
+				5AB8D584243B4FC700387EAE /* CardListViewController.swift */,
 				5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */,
 			);
 			path = ViewControllers;
@@ -388,17 +388,17 @@
 				5A838E54243DB4110081A42F /* Response.swift in Sources */,
 				5AB8D556243B40FF00387EAE /* MainViewController.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
-				5A838E60243DFCE00081A42F /* CardViewModels.swift in Sources */,
 				5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */,
-				5A838E59243DC8AF0081A42F /* JsonData.swift in Sources */,
+				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */,
 				5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */,
+				5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
 				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,
-				5AB8D585243B4FC700387EAE /* CardListController.swift in Sources */,
+				5AB8D585243B4FC700387EAE /* CardListViewController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
 				5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */,
 				5A838E68243DFDCA0081A42F /* Card.swift in Sources */,

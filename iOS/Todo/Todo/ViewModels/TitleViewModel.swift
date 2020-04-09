@@ -10,21 +10,18 @@ import Foundation
 
 final class TitleViewModel: ViewModelBinding {
     typealias Key = TitleModel?
-    private var titleModel : Key = nil {
-        didSet {
-            changedHandler(titleModel)
-        }
-    }
+    private var titleModel : Key
     private var changedHandler : (Key) -> ()
     
     init(titleModel: TitleModel, changed handler: @escaping (Key) -> () = { _ in }) {
         self.changedHandler = handler
         self.titleModel = titleModel
-        handler(titleModel)
+        changedHandler(self.titleModel)
     }
     
-    func updateNotify(changed handler: @escaping (TitleModel?) -> ()) {
+    func bind(changed handler: @escaping (TitleModel?) -> ()) {
         self.changedHandler = handler
+        changedHandler(titleModel)
     }
 }
 

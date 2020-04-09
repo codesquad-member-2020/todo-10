@@ -9,9 +9,9 @@
 import UIKit
 
 final class CardListTableDataSource: NSObject {
-    private let cardViewModels: CardViewModels
+    private let cardViewModels: [CardViewModel]
     
-    init(cardViewModels: CardViewModels) {
+    init(cardViewModels: [CardViewModel]) {
         self.cardViewModels = cardViewModels
     }
 }
@@ -25,8 +25,12 @@ extension CardListTableDataSource: UITableViewDataSource {
         guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell else {
             fatalError("Unable to Dequeue \(CardCell.reuseIdentifier)")
         }
+        
         let index = indexPath.row
-        cardViewModels.bind(at: index, cardCell: cardCell)
+        cardViewModels[index].bind { card in
+            cardCell.titleLabel.text = card?.title
+            cardCell.contentLabel.text = card?.content
+        }
         return cardCell
     }
 }
