@@ -25,6 +25,7 @@ struct CardListsUseCase {
                                     guard error == nil else { return }
                                     guard let data = data else { return }
                                     guard let response = try? JSONDecoder().decode(Response.self, from: data) else { return }
+                                    guard response.status == .success else { return }
                                     let cardList = CardLists(cardLists: response.content.sections)
                                     completed(cardList)
         }
