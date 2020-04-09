@@ -5,8 +5,7 @@ import com.codesquad.team10.todo.domain.Card;
 import com.codesquad.team10.todo.domain.User;
 import com.codesquad.team10.todo.exception.ResourceNotFoundException;
 import com.codesquad.team10.todo.exception.UserNotFoundException;
-import com.codesquad.team10.todo.repository.MockUserRepository;
-import com.codesquad.team10.todo.service.CardService;
+import com.codesquad.team10.todo.repository.mock.MockUserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/mock/section/{sectionId}/card")
@@ -26,8 +24,6 @@ public class MockCardController {
 
     @Autowired
     private MockUserRepository mockUserRepository;
-    @Autowired
-    private CardService cardService;
     private static int seq = 0;
 
     @PostMapping("")
