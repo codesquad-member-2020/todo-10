@@ -9,10 +9,23 @@
 import UIKit
 
 final class CardListTableDataSource: NSObject {
-    private let cardViewModels: CardViewModels
+    let cardListID: Int
+    private var cardViewModels: [CardViewModel]
     
-    init(cardViewModels: CardViewModels) {
+    init(cardListID: Int, cardViewModels: [CardViewModel]) {
+        self.cardListID = cardListID
         self.cardViewModels = cardViewModels
+    }
+    
+    func removeCardListModel(at index: Int){
+        guard index < cardViewModels.count else { return }
+        cardViewModels.remove(at: index)
+    }
+    
+    func cardID(at index: Int) -> Int? {
+        guard index < cardViewModels.count else { return nil }
+        guard let cardID = cardViewModels[index].cardID else { return nil }
+        return cardID
     }
 }
 
@@ -25,8 +38,12 @@ extension CardListTableDataSource: UITableViewDataSource {
         guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell else {
             fatalError("Unable to Dequeue \(CardCell.reuseIdentifier)")
         }
+        
         let index = indexPath.row
-        cardViewModels.bind(at: index, cardCell: cardCell)
+        cardViewModels[index].bind { card in
+            cardCell.titleLabel.text = card?.title
+            cardCell.contentLabel.text = card?.content
+        }
         return cardCell
     }
 }

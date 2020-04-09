@@ -10,6 +10,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
     private let scrollView = CardListScrollView()
+    
     override func viewDidLoad() {
         configureScrollView()
         configureCardListsCase()
@@ -17,6 +18,7 @@ final class MainViewController: UIViewController {
     
     private func configureScrollView() {
         view.addSubview(scrollView)
+        
         scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
         scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -24,19 +26,26 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCardListsCase() {
-        CardListsUseCase.makeCardLists(with: MockNetworkSuccessStub()) { cardListControllers in
-            guard let cardListControllers = cardListControllers else { return }
-            self.configureCardLists(cardListControllers: cardListControllers)
+        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
+            cardListsDataSource?.iterateCardList(with: { cardList in
+                DispatchQueue.main.async {
+                    let cardListViewController: CardListViewController = {
+                        let controller = CardListViewController()
+                        controller.cardList = cardList
+                        return controller
+                    }()
+                    self.addCardListViewController(cardListViewController: cardListViewController)
+                }
+            })
         }
     }
     
-    private func configureCardLists(cardListControllers: [CardListController]) {
-        cardListControllers.forEach {
-            addChild($0)
-            scrollView.stackView.addArrangedSubview($0.view)
-            $0.view.translatesAutoresizingMaskIntoConstraints = false
-            $0.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
-            $0.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
-        }
+    private func addCardListViewController(cardListViewController: CardListViewController) {
+        addChild(cardListViewController)
+        scrollView.stackView.addArrangedSubview(cardListViewController.view)
+        
+        cardListViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        cardListViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
+        cardListViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
     }
 }

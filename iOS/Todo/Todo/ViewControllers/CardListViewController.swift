@@ -7,7 +7,7 @@
 //
 
 import UIKit
-final class CardListController: UIViewController {
+final class CardListViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
@@ -47,7 +47,7 @@ final class CardListController: UIViewController {
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
-    var cardList: Section? {
+    var cardList: CardList? {
         didSet {
             configureTitleViewModel()
             configureDataSource()
@@ -67,8 +67,9 @@ final class CardListController: UIViewController {
     
     private func configureDataSource() {
         guard let cardList = cardList else { return }
-        let cardViewModels = cardList.cards.map { CardViewModel(card: $0) }
-        cardListTableDataSource = CardListTableDataSource(cardViewModels: CardViewModels(cardViewModels))
+        let cardListID = cardList.id
+        let cardViewModels = cardList.cards.map { CardViewModel(card: $0)}
+        cardListTableDataSource = CardListTableDataSource(cardListID: cardListID, cardViewModels: cardViewModels)
         cardListTable.dataSource = cardListTableDataSource
     }
 }

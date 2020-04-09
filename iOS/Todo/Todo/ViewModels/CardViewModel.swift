@@ -10,26 +10,22 @@ import Foundation
 
 final class CardViewModel: ViewModelBinding {
     typealias Key = Card?
-    private var card: Key = nil {
-        didSet {
-            changedHandler(card)
-        }
-    }
+    private var card: Key
     private var changedHandler : (Key) -> ()
     
     init(card: Card, changed handler: @escaping (Key) -> () = { _ in }) {
         self.changedHandler = handler
         self.card = card
+        changedHandler(self.card)
+    }
+    
+    func bind(changed handler: @escaping (Card?) -> ()) {
+        self.changedHandler = handler
         changedHandler(card)
     }
-    
-    func bind(_ cardCell: CardCell) {
-        guard let card = card else { return }
-        cardCell.titleLabel.text = card.title
-        cardCell.contentLabel.text = card.content
+
+    var cardID: Int? {
+        return card?.id
     }
-    
-    func updateNotify(changed handler: @escaping (Card?) -> ()) {
-        self.changedHandler = handler
-    }
+
 }

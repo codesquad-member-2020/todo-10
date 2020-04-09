@@ -3,12 +3,12 @@ import { getEl } from './util/commonUtil.js';
 class TodoView {
     constructor() {
         this.todoApp = getEl('#todo-app');
+        this.todoModal = getEl('#modal');
     }
 
     render(data) {
         this.todoApp.innerHTML = data.content.sections.reduce((acc, column) => {
-            acc +=
-                `<div class="todo-columns content-wrap" data-type="column" id="column-${column.id}" data-column-id=${column.id} tabindex="0">
+            acc += `<div class="todo-columns content-wrap" data-type="column" id="column-${column.id}" data-column-id=${column.id} tabindex="0">
                     <div class="todo-title">
                     <h2><span class="todo-count">${column.cards.length}</span> ${column.title}</h2>
                     <div class="btn-wrap">
@@ -36,8 +36,7 @@ class TodoView {
 
     makeCard(cards) {
         return cards.reduce((acc, card) => {
-            acc +=
-                `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${card.id}" data-card-id="${card.id}" tabindex="0">
+            acc += `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${card.id}" data-card-id="${card.id}" tabindex="0">
                     <div class="card-contents">${card.content}</div>
                     <p class="card-writer">added by <span>홍길동</span></p>
                     <button class="btn btn-close">
@@ -48,8 +47,21 @@ class TodoView {
         }, '');
     }
 
-    update() {
-
+    update(evt, data) {
+        evt.target
+            .closest('.todo-columns')
+            .querySelector(
+                '.card-wrap'
+            ).innerHTML += `<div class="card-item content-wrap" data-type="card" id="card-${data.content.id}" data-card-id="${data.content.id}" tabindex="0">
+            <div class="card-contents">${data.content.content}</div>
+            <p class="card-writer">added by <span>홍길동</span></p>
+            <button class="btn btn-close">
+            <span class="material-icons">close</span>
+            </button>
+        </div>`;
+        evt.target.closest('.todo-columns').querySelector('.todo-count').innerHTML++;
+        evt.target.reset();
+        evt.target.closest('.todo-form').classList.toggle('active');
     }
 }
 

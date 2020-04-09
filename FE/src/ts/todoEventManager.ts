@@ -1,6 +1,8 @@
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from './eventHandles/card.js';
+import { isEmpty } from './util/commonUtil';
 import { showColumnForm } from './eventHandles/column.js';
-import { closeForm, submitForm, isDisabledBtn } from './eventHandles/form.js';
+import { closeForm, submitForm } from './eventHandles/form.js';
+import { closeModal, submitModal } from './eventHandles/modal';
 
 class TodoEventManager {
     constructor(module) {
@@ -17,12 +19,26 @@ class TodoEventManager {
         this.todoView.todoApp.addEventListener('dragenter', dragenterCard);
         this.todoView.todoApp.addEventListener('dragend', dragendCard);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
+        this.todoView.todoModal.addEventListener('input', this.checkDisabled.bind(this));
+        this.todoView.todoModal.addEventListener('submit', this.modalHandler.bind(this));
+        this.todoView.todoModal.addEventListener('click', this.clickModal.bind(this));
+    }
+    modalHandler(evt) {
+        submitModal(evt, function ({ evt, data, columnId, cardId }) {
+            console.log(evt, data, columnId, cardId);
+            document.querySelector(`#column-${columnId} #card-${cardId} .card-contents`)?.innerHTML = data.content.content;
+            document.querySelector('#modal')?.classList.remove('active');
+            document.querySelector('#modal textarea').value = '';
+        });
     }
 
+    clickModal({ target }) {
+        closeModal(target);
+    }
     checkDisabled({ target }) {
         const contentWrap = target.closest('.content-wrap');
         const btn = contentWrap.querySelector('.btn-add');
-        isDisabledBtn(target) ? (btn.disabled = true) : (btn.disabled = false);
+        return isEmpty(target.value) ? (btn.disabled = true) : (btn.disabled = false);
     }
 
     clickEventDelegation({ target }) {
@@ -48,7 +64,7 @@ class TodoEventManager {
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'form':
-                submitForm(evt);
+                submitForm(evt, this.todoView.update);
                 break;
             default:
                 break;

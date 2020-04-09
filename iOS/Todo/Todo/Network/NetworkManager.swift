@@ -20,6 +20,8 @@ enum HTTPHeader {
 enum HTTPMethod: String, CustomStringConvertible {
     case get = "GET"
     case post = "POST"
+    case patch = "PATCH"
+    case delete = "DELETE"
     var description: String {
         return self.rawValue
     }
@@ -38,6 +40,7 @@ protocol NetworkManagable {
 struct NetworkManager: NetworkManagable {
     enum EndPoints {
         static let cardLists = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
+        static let selectedCardList = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
     }
     
     func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
@@ -65,6 +68,6 @@ struct NetworkManager: NetworkManagable {
 struct MockNetworkSuccessStub: NetworkManagable {
     func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, Error?) -> ()) throws {
-        resultHandler(JsonData.successResponseStub, nil)
+        resultHandler(StubJsonData.successResponseStub, nil)
     }
 }
