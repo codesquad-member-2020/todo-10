@@ -2,10 +2,12 @@ import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js
 
 const option = {
     dragTarget: null,
-    dummyTarget: null,
+    targetHeight: null,
     toTarget: null,
+    toTargetWrap: null,
     prevColumn: null,
     currColumn: null,
+    order: null,
 }
 
 async function deleteCard(target, deleteCardRequest) {
@@ -31,11 +33,11 @@ function showEditModal({ target }) {
     addClass(modal, 'active');
 }
 
-function dragStartCard(evt) {
+function dragStartCard({ target }) {
     resetOption();
-    if (evt.target.dataset.type !== 'card') return;
-    option.dragTarget = evt.target;
-    option.dummyTarget = option.dragTarget;
+    if (target.dataset.type !== 'card') return;
+    option.dragTarget = target;
+    option.targetHeight = target.offsetHeight;
     option.prevColumn = getParentEl(option.dragTarget, '.todo-columns');
     addClass(option.dragTarget, 'draging');
 }
@@ -46,19 +48,19 @@ function dragoverCard(evt) {
 
 function dragenterCard(evt) {
     option.toTarget = getParentEl(evt.toElement, '.card-item');
+    option.toTargetWrap = getParentEl(evt.toElement, '.card-wrap');
     option.currColumn = getParentEl(evt.toElement, '.todo-columns');
-    console.log(option.toTarget);
-    if (option.toTarget) option.toTarget.after(option.dummyTarget);
-    else if (option.currColumn) option.currColumn.querySelector('.card-wrap').appendChild(option.dummyTarget);
+    const cardHeightHalf = option.targetHeight / 2;
+    if (option.toTarget && evt.offsetY > cardHeightHalf) option.toTarget.after(option.dragTarget);
+    else if (option.toTarget && evt.offsetY <= cardHeightHalf) option.toTarget.before(option.dragTarget);
+    else if (option.toTargetWrap) return;
+    else if (option.currColumn) option.currColumn.querySelector('.card-wrap').appendChild(option.dragTarget);
 }
 
-function dropCard(evt) {
+function dragendCard({ target }) {
     removeClass(option.dragTarget, 'draging');
     if (!option.dragTarget || !option.currColumn) return;
-    let cardWrap = evt.target;
-    if (!cardWrap.classList.contains('card-wrap')) cardWrap = option.currColumn.querySelector('.card-wrap');
-    if (!option.toTarget) cardWrap.appendChild(option.dragTarget);
-    else option.toTarget.after(option.dragTarget);
+    if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
     option.prevColumn.querySelector('.todo-count').innerHTML--;
     option.currColumn.querySelector('.todo-count').innerHTML++;
 }
@@ -75,5 +77,5 @@ export {
     dragStartCard,
     dragoverCard,
     dragenterCard,
-    dropCard,
+    dragendCard,
 }

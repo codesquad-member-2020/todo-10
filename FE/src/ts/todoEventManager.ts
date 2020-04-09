@@ -1,4 +1,4 @@
-import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dropCard } from './eventHandles/card.js';
+import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from './eventHandles/card.js';
 import { showColumnForm } from './eventHandles/column.js';
 import { closeForm, submitForm, isDisabledBtn } from './eventHandles/form.js';
 
@@ -15,7 +15,7 @@ class TodoEventManager {
         this.todoView.todoApp.addEventListener('dragstart', dragStartCard);
         this.todoView.todoApp.addEventListener('dragover', dragoverCard);
         this.todoView.todoApp.addEventListener('dragenter', dragenterCard);
-        this.todoView.todoApp.addEventListener('drop', dropCard);
+        this.todoView.todoApp.addEventListener('dragend', dragendCard);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
     }
 
