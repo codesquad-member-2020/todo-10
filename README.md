@@ -259,7 +259,13 @@ PATCH /mock/section/{sectionId}/card/{id}
 ```
 {
     "status": "SUCCESS",
-    "content": "Card Updated"
+    "content": {
+        "id": 1,
+        "title": "늦잠 자",
+        "content": "14",
+        "createdDateTime": "2020-04-09 12:48:04",
+        "updatedDateTime": "2020-04-09 17:54:10"
+    }
 }
 ```
 
@@ -287,14 +293,7 @@ DELETE /mock/section/{sectionId}/card/{id}
 ```
 {
     "status": "SUCCESS",
-    "content": [
-        {
-            "id": "1"
-        },
-        {
-            "id": "2"
-        }
-    ]
+    "content": "Card is Successfully Deleted"
 }
 ```
 
