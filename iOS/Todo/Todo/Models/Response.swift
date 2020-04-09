@@ -9,7 +9,7 @@
 import Foundation
 
 struct Response: Codable {
-    var status: String?
+    var status: String
     var content: Content
 }
 
@@ -27,7 +27,15 @@ struct Log: Codable {
 }
 
 struct CardList: Codable {
-    var id: String?
+    var id: Int
     var title: String
     var cards: [Card]
+}
+
+struct Card: Codable {
+    var id: Int
+    var title: String?
+    var content: String
+    var createdDateTime: String
+    var updatedDateTime: String
 }
