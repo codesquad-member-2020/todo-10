@@ -7,7 +7,6 @@ const option = {
     toTargetWrap: null,
     prevColumn: null,
     currColumn: null,
-    order: null,
 }
 
 async function deleteCard(target, deleteCardRequest) {
@@ -27,10 +26,12 @@ async function deleteCard(target, deleteCardRequest) {
 function showEditModal({ target }) {
     const card = getParentEl(target, '.card-item');
     if (!card) return;
-    const modal = getEl('#modal');
     const content = card.querySelector('.card-contents').innerText;
-    modal.querySelector('.todo-textarea').innerText = content;
-    addClass(modal, 'active');
+    const modalContents = getEl('.modal-contents');
+    modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId);
+    modalContents.setAttribute('data-card-id', card.dataset.cardId);
+    modalContents.querySelector('.todo-textarea').innerText = content;
+    addClass(getEl('#modal'), 'active');
 }
 
 function dragStartCard({ target }) {
@@ -63,6 +64,14 @@ function dragendCard({ target }) {
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
     option.prevColumn.querySelector('.todo-count').innerHTML--;
     option.currColumn.querySelector('.todo-count').innerHTML++;
+
+    let order = 0;
+    const currColumnId = option.currColumn.dataset.columnId;
+    const cardId = option.dragTarget.dataset.cardId;
+    [...getParentEl(option.dragTarget, '.card-wrap').children].some(v => {
+        order++;
+        return option.dragTarget === v;
+    });
 }
 
 function resetOption() {
