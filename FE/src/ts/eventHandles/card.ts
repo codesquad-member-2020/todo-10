@@ -30,7 +30,7 @@ function showEditModal({ target }) {
     const modalContents = getEl('.modal-contents');
     modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId);
     modalContents.setAttribute('data-card-id', card.dataset.cardId);
-    modalContents.querySelector('.todo-textarea').innerText = content;
+    modalContents.querySelector('.todo-textarea').value = content;
     addClass(getEl('#modal'), 'active');
 }
 
