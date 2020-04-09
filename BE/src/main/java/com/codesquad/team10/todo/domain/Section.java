@@ -1,7 +1,9 @@
 package com.codesquad.team10.todo.domain;
 
+import com.codesquad.team10.todo.exception.ResourceNotFoundException;
 import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -12,14 +14,15 @@ public class Section {
     private int id;
     private String title;
     private List<Card> cards = new LinkedList<>();
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+    private LocalDateTime createDateTime;
+    private LocalDateTime updateDateTime;
 
-    public Section(int id, String title) {
+    public Section(int id, String title, List<Card> cards, LocalDateTime createDateTime, LocalDateTime updateDateTime) {
         this.id = id;
         this.title = title;
-        this.createdDateTime = LocalDateTime.now();
-        this.updatedDateTime = LocalDateTime.now();
+        this.cards = cards;
+        this.createDateTime = createDateTime;
+        this.updateDateTime = updateDateTime;
     }
 
     public int getId() {
@@ -35,23 +38,23 @@ public class Section {
     }
 
     public String getCreatedDateTime() {
-        return DateTimeFormatUtils.localDateTimeToString(this.createdDateTime);
+        return DateTimeFormatUtils.localDateTimeToString(this.createDateTime);
     }
 
     public String getUpdatedDateTime() {
-        return DateTimeFormatUtils.localDateTimeToString(this.updatedDateTime);
+        return DateTimeFormatUtils.localDateTimeToString(this.updateDateTime);
     }
 
     public void addCard(Card newCard) {
         cards.add(newCard);
-        this.updatedDateTime = LocalDateTime.now();
+        this.updateDateTime = LocalDateTime.now();
     }
 
     public Card updateCard(Card updatedCard) {
         for (Card card : cards) {
             if (card.equals(updatedCard)) {
                 card.update(updatedCard);
-                this.updatedDateTime = LocalDateTime.now();
+                this.updateDateTime = LocalDateTime.now();
                 return card;
             }
         }
@@ -66,5 +69,16 @@ public class Section {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", cards=" + cards +
+                ", createDateTime=" + createDateTime +
+                ", updateDateTime=" + updateDateTime +
+                '}';
     }
 }

@@ -1,9 +1,6 @@
 package com.codesquad.team10.todo.domain;
 
 import com.codesquad.team10.todo.util.DateTimeFormatUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -15,8 +12,16 @@ public class Card {
     private int id;
     private String title;
     private String content;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+    private LocalDateTime createDateTime;
+    private LocalDateTime updateDateTime;
+
+    public Card(int id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createDateTime = createDateTime;
+        this.updateDateTime = updateDateTime;
+    }
 
     public int getId() {
         return id;
@@ -43,25 +48,25 @@ public class Card {
     }
 
     public String getCreatedDateTime() {
-        return DateTimeFormatUtils.localDateTimeToString(this.createdDateTime);
+        return DateTimeFormatUtils.localDateTimeToString(this.createDateTime);
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
+    public void setCreatedDateTime(LocalDateTime createDateTime) {
+        this.createDateTime = createDateTime;
     }
 
     public String getUpdatedDateTime() {
-        return DateTimeFormatUtils.localDateTimeToString(this.updatedDateTime);
+        return DateTimeFormatUtils.localDateTimeToString(this.updateDateTime);
     }
 
     public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
+        this.updateDateTime = updatedDateTime;
     }
 
     public void update(Card updatedCard) {
         this.title = updatedCard.title;
         this.content = updatedCard.content;
-        this.updatedDateTime = LocalDateTime.now();
+        this.updateDateTime = LocalDateTime.now();
     }
 
     @Override
@@ -70,8 +75,8 @@ public class Card {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", createdDateTime=" + createdDateTime +
-                ", updatedDateTime=" + updatedDateTime +
+                ", createdDateTime=" + createDateTime +
+                ", updatedDateTime=" + updateDateTime +
                 '}';
     }
 

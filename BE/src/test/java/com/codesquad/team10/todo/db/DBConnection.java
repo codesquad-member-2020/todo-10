@@ -1,10 +1,12 @@
 package com.codesquad.team10.todo.db;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+@SpringBootTest
 public class DBConnection {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://15.164.63.83:3306/TEST_KANBANBOARD";

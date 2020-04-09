@@ -2,6 +2,7 @@ package com.codesquad.team10.todo.domain;
 
 import com.codesquad.team10.todo.exception.ResourceNotFoundException;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,10 +18,12 @@ public class User {
     private List<Section> sections = new LinkedList<>();
     private List<Log> logs = new ArrayList<>();
 
-    public User(int id, String email, String password) {
+    public User(int id, String email, String password, List<Section> sections, List<Log> logs) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.sections = sections;
+        this.logs = logs;
     }
 
     public int getId() {

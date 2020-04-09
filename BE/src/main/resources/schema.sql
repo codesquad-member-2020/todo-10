@@ -35,5 +35,6 @@ CREATE TABLE IF NOT EXISTS log (
   type enum('section', 'card') not null ,
   source varchar(500) not null ,
   destination varchar(500) ,
+  create_date_time timestamp not null default current_timestamp ,
   user_key bigint
 );
