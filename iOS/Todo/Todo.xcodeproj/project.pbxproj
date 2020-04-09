@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* CardLists.swift */; };
+		5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F3243EEFFE00D59611 /* ButtonData.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* Response.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		5A7937F0243ED9FC00D59611 /* CardLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLists.swift; sourceTree = "<group>"; };
+		5A7937F3243EEFFE00D59611 /* ButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonData.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -114,6 +116,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A7937F2243EEFDF00D59611 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5A838E58243DC8AF0081A42F /* StubJsonData.swift */,
+				5A7937F3243EEFFE00D59611 /* ButtonData.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		5A838E4C243D66460081A42F /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,14 +139,6 @@
 				5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */,
 			);
 			path = Coder;
-			sourceTree = "<group>";
-		};
-		5A838E55243DC85D0081A42F /* JsonData */ = {
-			isa = PBXGroup;
-			children = (
-				5A838E58243DC8AF0081A42F /* StubJsonData.swift */,
-			);
-			path = JsonData;
 			sourceTree = "<group>";
 		};
 		5A838E5A243DEB950081A42F /* ViewModels */ = {
@@ -191,7 +194,7 @@
 		5AB8D550243B40FF00387EAE /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				5A838E55243DC85D0081A42F /* JsonData */,
+				5A7937F2243EEFDF00D59611 /* Utils */,
 				5A838E4F243D9CE80081A42F /* Coder */,
 				5A838E4C243D66460081A42F /* Network */,
 				5A874644243C4C3900FD1751 /* Delegates */,
@@ -380,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
 				5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,

@@ -8,5 +8,12 @@
 
 import UIKit
 
-final class CardListTableDelegate: NSObject,UITableViewDelegate {
+final class CardListTableDelegate: NSObject, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: ButtonData.deleteString) { uiContextualAction, uiview, resultHandler in
+                                                
+        }
+        return .init(actions: [deleteAction])
+    }
 }
