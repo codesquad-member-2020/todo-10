@@ -23,7 +23,11 @@ async function deleteCard(target, deleteCardRequest) {
 function showEditModal({ target }) {
     const card = getParentEl(target, '.card-item');
     if (!card) return;
-
+    const content = card.querySelector('.card-contents').innerText;
+    const modalContents = getEl('.modal-contents');
+    modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId);
+    modalContents.setAttribute('data-card-id', card.dataset.cardId);
+    modalContents.querySelector('.todo-textarea').value = content;
     addClass(getEl('#modal'), 'active');
 }
 
