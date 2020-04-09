@@ -1,6 +1,6 @@
 import { cardClickHandle } from './eventHandles/card.js';
 import { columnClickHandle } from './eventHandles/column.js';
-import { formClickHandle, formSubmitHandle } from './eventHandles/form.js';
+import { formClickHandle, formSubmitHandle, isDisabledBtn } from './eventHandles/form.js';
 class TodoEventManager {
     constructor(module) {
         this.todoView = module.todoView;
@@ -9,6 +9,12 @@ class TodoEventManager {
     init() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
+        this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
+    }
+    checkDisabled({ target }) {
+        const contentWrap = target.closest('.content-wrap');
+        const btn = contentWrap.querySelector('.btn-add');
+        isDisabledBtn(target) ? (btn.disabled = true) : (btn.disabled = false);
     }
     clickEventDelegation({ target }) {
         const contentWrap = target.closest('.content-wrap');
@@ -24,7 +30,8 @@ class TodoEventManager {
             case 'form':
                 formClickHandle(target);
                 break;
-            default: break;
+            default:
+                break;
         }
     }
     submitEventDelegation(evt) {
@@ -32,7 +39,8 @@ class TodoEventManager {
             case 'form':
                 formSubmitHandle(evt);
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 }
