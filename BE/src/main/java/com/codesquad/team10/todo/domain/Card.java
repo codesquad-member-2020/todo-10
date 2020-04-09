@@ -4,11 +4,14 @@ import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Card {
+
+    @Id
     private int id;
     private String title;
     private String content;
