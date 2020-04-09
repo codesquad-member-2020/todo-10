@@ -9,104 +9,80 @@
 enum StubJsonData {
     static let successResponseStub = """
     {
-        "status": "SUCCESS",
-        "content": {
-            "sections": [
-                {
-                    "id": "1",
-                    "title": "해야 할 일",
-                    "cards": [
-                        {
-                            "id": "3",
-                            "title": "제목3",
-                            "content": "내용1 출력됩니다."
-                        },
-                        {
-                            "id": "4",
-                            "title": "제목22",
-                            "content": "내용2 출력됩니다."
-                        }
-                    ]
-                },
-                {
-                    "id": "2",
-                    "title": "하고 있는 일",
-                    "cards": [
-                        {
-                            "id": "3",
-                            "title": "제목1",
-                            "content": "내용3 출력됩니다."
-                        },
-                        {
-                            "id": "4",
-                            "title": null,
-                            "content": "내용5 출력됩니다."
-                        },
-                        {
-                            "id": "3",
-                            "title": "제목3",
-                            "content": "내용6 출력됩니다."
-                        },
-                        {
-                            "id": "4",
-                            "title": null,
-                            "content": "내용4 출력됩니다."
-                        },
-                        {
-                            "id": "3",
-                            "title": null,
-                            "content": "내용3 출력됩니다."
-                        }
-                    ]
-                },
-                {
-                    "id": "3",
-                    "title": "완료 된 일",
-                    "cards": [
-                        {
-                            "id": "5",
-                            "title": "제목9",
-                            "content": "내용5 출력됩니다."
-                        },
-                        {
-                            "id": "6",
-                            "title": null,
-                            "content": "내용1 출력됩니다."
-                        }
-                    ]
-                }
+      "status" : "SUCCESS",
+      "content" : {
+        "logs" : [
+
+        ],
+        "sections" : [
+          {
+            "id" : 0,
+            "title" : "해야 할 일",
+            "cards" : [
+              {
+                "id" : 2,
+                "title" : "",
+                "content" : "Taek : add card test #0, section #0",
+                "createdDateTime" : "2020-04-09 07:33:44",
+                "updatedDateTime" : "2020-04-09 07:33:44"
+              },
+              {
+                "id" : 8,
+                "title" : null,
+                "content" : "테스트",
+                "createdDateTime" : "2020-04-09 07:54:30",
+                "updatedDateTime" : "2020-04-09 07:54:30"
+              }
             ],
-            "logs": [
-                {
-                    "action": "moved",
-                    "card": "github 공부하기",
-                    "source": "해야 할 일",
-                    "destination": "완료 된 일",
-                    "createdDateTime": "2020-03-02"
-                },
-                {
-                    "action": "updated",
-                    "card": "스켈레톤 작성",
-                    "source": null,
-                    "destination": null,
-                    "createdDateTime": "2020-03-05"
-                },
-                {
-                    "action": "added",
-                    "card": "데모 환경 구성",
-                    "source": null,
-                    "destination": "하고 있는 일",
-                    "createdDateTime": "2020-04-11"
-                },
-                {
-                    "action": "removed",
-                    "card": "README.md 수정",
-                    "source": "해야 할 일",
-                    "destination": null,
-                    "createdDateTime": "2020-03-24"
-                }
-            ]
-        }
+            "createdDateTime" : "2020-04-09 07:32:52",
+            "updatedDateTime" : "2020-04-09 07:54:30"
+          },
+          {
+            "id" : 1,
+            "title" : "하고 있는 일",
+            "cards" : [
+              {
+                "id" : 3,
+                "title" : "",
+                "content" : "Taek : add card test #0, section #1",
+                "createdDateTime" : "2020-04-09 07:33:44",
+                "updatedDateTime" : "2020-04-09 07:33:44"
+              },
+              {
+                "id" : 6,
+                "title" : "",
+                "content" : "Taek : add card test #1, section #1",
+                "createdDateTime" : "2020-04-09 07:33:44",
+                "updatedDateTime" : "2020-04-09 07:33:44"
+              }
+            ],
+            "createdDateTime" : "2020-04-09 07:32:52",
+            "updatedDateTime" : "2020-04-09 07:33:44"
+          },
+          {
+            "id" : 2,
+            "title" : "완료한 일",
+            "cards" : [
+              {
+                "id" : 4,
+                "title" : "",
+                "content" : "Taek : add card test #0, section #2",
+                "createdDateTime" : "2020-04-09 07:33:44",
+                "updatedDateTime" : "2020-04-09 07:33:44"
+              },
+              {
+                "id" : 5,
+                "title" : "",
+                "content" : "Taek : add card test #1, section #2",
+                "createdDateTime" : "2020-04-09 07:33:44",
+                "updatedDateTime" : "2020-04-09 07:33:44"
+              }
+            ],
+            "createdDateTime" : "2020-04-09 07:32:52",
+            "updatedDateTime" : "2020-04-09 07:33:44"
+          }
+        ]
+      }
     }
     """.data(using: .utf8)
 }
