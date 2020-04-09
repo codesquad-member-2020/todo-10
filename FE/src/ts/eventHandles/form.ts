@@ -1,35 +1,21 @@
-import { isEmpty } from '../util/commonUtil'
+import API_URL from '../contants/url'
+import { getParentEl } from '../util/commonUtil';
+import { httpRequest } from '../http/request';
 
 function closeForm(target) {
     if (!target.classList.contains('btn-close')) return;
     target.closest('.todo-form').classList.toggle('active');
 }
 
-function submitForm(evt, fetchCallBack) {
+function submitForm(evt, callback) {
     evt.preventDefault();
-    // 서버 통신
-    // fetchCallBack();
-    addCardTempFunc(evt);
+    const column = getParentEl(evt.target, '.todo-columns');
+    const columnId = column.dataset.columnId;
+    const data = evt.target.querySelector('textarea').value;
+    const url = `${API_URL}/mock/section/${columnId}/card`;
+    httpRequest
+        .post(url, { content: data })
+        .then((data) => callback(evt, data));
 }
 
-function addCardTempFunc(evt) {
-    const content = evt.target.querySelector('textarea').value;
-    evt.target
-        .closest('.todo-columns')
-        .querySelector('.card-wrap').innerHTML += `<div class="card-item content-wrap" data-type="card" data-card-id="" tabindex="0">
-            <div class="card-contents">${content}</div>
-            <p class="card-writer">added by <span>홍길동</span></p>
-            <button class="btn btn-close">
-            <span class="material-icons">close</span>
-            </button>
-        </div>`;
-    evt.target.closest('.todo-columns').querySelector('.todo-count').innerHTML++;
-    evt.target.reset();
-    evt.target.closest('.todo-form').classList.toggle('active');
-}
-
-function isDisabledBtn(target) {
-    return isEmpty(target.value);
-}
-
-export { closeForm, submitForm, isDisabledBtn };
+export { closeForm, submitForm };

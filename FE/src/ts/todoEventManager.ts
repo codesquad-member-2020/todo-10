@@ -1,6 +1,7 @@
+import { isEmpty } from './util/commonUtil'
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dropCard } from './eventHandles/card.js';
 import { showColumnForm } from './eventHandles/column.js';
-import { closeForm, submitForm, isDisabledBtn } from './eventHandles/form.js';
+import { closeForm, submitForm } from './eventHandles/form.js';
 
 class TodoEventManager {
     constructor(module) {
@@ -16,12 +17,13 @@ class TodoEventManager {
         this.todoView.todoApp.addEventListener('dragover', dragoverCard);
         this.todoView.todoApp.addEventListener('drop', dropCard);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
+        this.todoView.todoModal.addEventListener('input', this.checkDisabled.bind(this));
     }
 
     checkDisabled({ target }) {
         const contentWrap = target.closest('.content-wrap');
         const btn = contentWrap.querySelector('.btn-add');
-        isDisabledBtn(target) ? (btn.disabled = true) : (btn.disabled = false);
+        return isEmpty(target.value) ? (btn.disabled = true) : (btn.disabled = false);
     }
 
     clickEventDelegation({ target }) {
@@ -47,7 +49,7 @@ class TodoEventManager {
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'form':
-                submitForm(evt);
+                submitForm(evt, this.todoView.update);
                 break;
             default:
                 break;
