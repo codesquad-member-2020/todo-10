@@ -18,6 +18,7 @@ final class MainViewController: UIViewController {
     
     private func configureScrollView() {
         view.addSubview(scrollView)
+        
         scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
         scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -27,8 +28,8 @@ final class MainViewController: UIViewController {
     private func configureCardListsCase() {
         CardListsUseCase.makeCardLists(with: MockNetworkSuccessStub()) { cardListsDataSource in
             cardListsDataSource?.iterateCardList(with: { cardList in
-                let cardListViewController: CardListController = {
-                    let controller = CardListController()
+                let cardListViewController: CardListViewController = {
+                    let controller = CardListViewController()
                     controller.cardList = cardList
                     return controller
                 }()
@@ -38,7 +39,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func addCardListViewController(cardListViewController: CardListController) {
+    private func addCardListViewController(cardListViewController: CardListViewController) {
         addChild(cardListViewController)
         scrollView.stackView.addArrangedSubview(cardListViewController.view)
         

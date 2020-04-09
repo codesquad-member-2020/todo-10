@@ -7,7 +7,7 @@
 //
 
 import UIKit
-final class CardListController: UIViewController {
+final class CardListViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
