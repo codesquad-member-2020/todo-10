@@ -69,18 +69,13 @@ public class MockCardApiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseData> delete(@PathVariable int sectionId, @PathVariable int id) throws JsonProcessingException {
         User dbUser = mockUserRepository.findByEmail().orElseThrow(UserNotFoundException::new);
-        List<JsonNode> orders = null;
         try {
             if(!dbUser.deleteCard(sectionId, id))
                 throw new ResourceNotFoundException();
-            orders = cardService.getCardOder(dbUser, sectionId, id);
         } catch (IndexOutOfBoundsException e) {
             throw new ResourceNotFoundException();
         }
-
-        log.debug("orders: {}", orders);
-
-        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, orders), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, "Card is Successfully Deleted"), HttpStatus.OK);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
