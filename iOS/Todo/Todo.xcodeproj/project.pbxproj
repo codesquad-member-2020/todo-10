@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* CardLists.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* Response.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A7937F0243ED9FC00D59611 /* CardLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLists.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				5A838E53243DB4110081A42F /* Response.swift */,
 				5A838E5D243DF0470081A42F /* TitleModel.swift */,
 				5A838E67243DFDCA0081A42F /* Card.swift */,
+				5A7937F0243ED9FC00D59611 /* CardLists.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */,
 				5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */,
+				5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
 				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,

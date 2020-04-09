@@ -10,11 +10,11 @@ import Foundation
 
 struct Response: Codable {
     var status: String?
-    var content: Content?
+    var content: Content
 }
 
 struct Content: Codable {
-    var sections: [Section]?
+    var sections: [CardList]
     var logs: [Log]?
 }
 
@@ -26,11 +26,8 @@ struct Log: Codable {
     var createdDateTime: String?
 }
 
-struct Section: Codable {
+struct CardList: Codable {
     var id: String?
     var title: String
     var cards: [Card]
 }
-
-
-

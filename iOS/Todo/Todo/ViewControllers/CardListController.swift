@@ -47,7 +47,7 @@ final class CardListController: UIViewController {
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
-    var cardList: Section? {
+    var cardList: CardList? {
         didSet {
             configureTitleViewModel()
             configureDataSource()
