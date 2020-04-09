@@ -48,6 +48,7 @@ function dragoverCard(evt) {
 }
 
 function dragenterCard(evt) {
+    if (!option.dragTarget) return;
     option.toTarget = getParentEl(evt.toElement, '.card-item');
     option.toTargetWrap = getParentEl(evt.toElement, '.card-wrap');
     option.currColumn = getParentEl(evt.toElement, '.todo-columns');
@@ -59,6 +60,7 @@ function dragenterCard(evt) {
 }
 
 function dragendCard({ target }) {
+    if (!option.dragTarget) return;
     removeClass(option.dragTarget, 'draging');
     if (!option.dragTarget || !option.currColumn) return;
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
