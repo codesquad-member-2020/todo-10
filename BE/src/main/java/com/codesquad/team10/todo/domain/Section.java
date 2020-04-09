@@ -1,17 +1,14 @@
 package com.codesquad.team10.todo.domain;
 
-import com.codesquad.team10.todo.exception.ResourceNotFoundException;
 import com.codesquad.team10.todo.util.DateTimeFormatUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import springfox.documentation.spring.web.json.Json;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class Section {
 
+    @Id
     private int id;
     private String title;
     private List<Card> cards = new LinkedList<>();

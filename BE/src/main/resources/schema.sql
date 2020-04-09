@@ -11,19 +11,21 @@ CREATE TABLE IF NOT EXISTS user (
 
 CREATE TABLE IF NOT EXISTS section (
     id bigint auto_increment primary key ,
+    user bigint references user(id) ,
     title varchar(100) not null ,
     create_date_time timestamp not null default current_timestamp ,
-    update_date_time timestamp not null default current_timestamp on update current_timestamp
+    update_date_time timestamp not null default current_timestamp on update current_timestamp ,
+    user_key bigint
 );
 
 CREATE TABLE IF NOT EXISTS card (
   id bigint auto_increment primary key ,
-  user bigint references user(id) ,
   section bigint references section(id) ,
   title varchar(100) ,
   content varchar(500) not null ,
   create_date_time timestamp not null default current_timestamp ,
-  update_date_time timestamp not null default current_timestamp on update current_timestamp
+  update_date_time timestamp not null default current_timestamp on update current_timestamp ,
+  section_key bigint
 );
 
 CREATE TABLE IF NOT EXISTS log (
@@ -32,5 +34,6 @@ CREATE TABLE IF NOT EXISTS log (
   action enum('added', 'updated', 'moved', 'removed') not null ,
   type enum('section', 'card') not null ,
   source varchar(500) not null ,
-  destination varchar(500)
+  destination varchar(500) ,
+  user_key bigint
 );

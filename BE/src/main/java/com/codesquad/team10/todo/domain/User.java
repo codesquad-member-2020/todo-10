@@ -1,7 +1,7 @@
 package com.codesquad.team10.todo.domain;
 
 import com.codesquad.team10.todo.exception.ResourceNotFoundException;
-import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class User {
 
+    @Id
     private int id;
     private String email;
     private String password;

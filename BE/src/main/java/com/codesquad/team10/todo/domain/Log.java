@@ -1,9 +1,12 @@
 package com.codesquad.team10.todo.domain;
 
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDateTime;
 
 public class Log {
 
+    @Id
     private Long id;
     private User user;
     private Action action;
