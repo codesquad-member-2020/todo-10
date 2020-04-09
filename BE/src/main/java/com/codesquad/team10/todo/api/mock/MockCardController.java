@@ -8,7 +8,6 @@ import com.codesquad.team10.todo.exception.UserNotFoundException;
 import com.codesquad.team10.todo.repository.MockUserRepository;
 import com.codesquad.team10.todo.service.CardService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/mock/section/{sectionId}/card")
-public class MockCardApiController {
+public class MockCardController {
 
-    private static final Logger log = LoggerFactory.getLogger(MockCardApiController.class);
+    private static final Logger log = LoggerFactory.getLogger(MockCardController.class);
 
     @Autowired
     private MockUserRepository mockUserRepository;

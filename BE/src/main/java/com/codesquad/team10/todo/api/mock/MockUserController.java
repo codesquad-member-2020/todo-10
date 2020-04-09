@@ -17,9 +17,9 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/mock")
-public class MockUserApiController {
+public class MockUserController {
 
-    private static final Logger log = LoggerFactory.getLogger(MockUserApiController.class);
+    private static final Logger log = LoggerFactory.getLogger(MockUserController.class);
 
     @Autowired
     private MockUserRepository mockUserRepository;
