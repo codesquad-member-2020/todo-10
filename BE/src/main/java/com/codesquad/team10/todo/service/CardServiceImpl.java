@@ -18,7 +18,7 @@ public class CardServiceImpl implements CardService {
         List<JsonNode> orders = new ArrayList<>();
         List<Card> cards = user.getSection(sectionId).getCards();
         for (Card card : cards) {
-            orders.add(mapper.readTree("{ \"id\": \"" + card.getId() + "\" }"));
+            orders.add(mapper.readTree("{\"id\": " + card.getId() + "}"));
         }
         return orders;
     }

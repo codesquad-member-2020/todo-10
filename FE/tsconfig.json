@@ -10,7 +10,7 @@
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "src/js"
+    "outDir": "src/js",
   },
   "include": [
     "src/**/*"

@@ -6,9 +6,9 @@ class TodoView {
     }
 
     render(data) {
-        this.todoApp.innerHTML = data.columns.reduce((acc, column) => {
+        this.todoApp.innerHTML = data.content.sections.reduce((acc, column) => {
             acc +=
-                `<div class="todo-columns content-wrap" data-type="column" data-column-id="${column.id}" tabindex="0">
+                `<div class="todo-columns content-wrap" data-type="column" id="column-${column.id}" data-column-id=${column.id} tabindex="0">
                     <div class="todo-title">
                     <h2><span class="todo-count">${column.cards.length}</span> ${column.title}</h2>
                     <div class="btn-wrap">
@@ -16,8 +16,8 @@ class TodoView {
                         <button class="btn"><span class="material-icons">more_vert</span></button>
                     </div>
                     </div>
-                    <div class="todo-form">
-                        <form action="" class="content-wrap" data-type="form">
+                    <div class="todo-form content-wrap" data-type="form">
+                        <form action="">
                             <input type="text" class="todo-input" placeholder="enter a note">
                             <textarea name="" id="" class="todo-textarea" cols="30" rows="10" maxlength="500" placeholder="enter a note"></textarea>
                             <div class="btn-wrap">
@@ -37,7 +37,7 @@ class TodoView {
     makeCard(cards) {
         return cards.reduce((acc, card) => {
             acc +=
-                `<div class="card-item content-wrap" data-type="card" data-card-id="${card.id}" tabindex="0">
+                `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${card.id}" data-card-id="${card.id}" tabindex="0">
                     <div class="card-contents">${card.content}</div>
                     <p class="card-writer">added by <span>홍길동</span></p>
                     <button class="btn btn-close">

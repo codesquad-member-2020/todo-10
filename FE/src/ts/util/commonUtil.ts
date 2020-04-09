@@ -10,16 +10,20 @@ function getParentEl(el: HTMLElement, target: string) {
     return el.closest(target);
 }
 
-function addClass(target: HTMLElement, className: string) {
-    target.classList.add(className);
+function getClosestEl(el: HTMLElement, closestTarget: string, target: string) {
+    return el.closest(closestTarget)?.querySelector(target);
 }
 
-function removeClass(target: HTMLElement, className: string) {
-    target.classList.remove(className);
+function addClass(el: HTMLElement, className: string) {
+    el.classList.add(className);
+}
+
+function removeClass(el: HTMLElement, className: string) {
+    el.classList.remove(className);
 }
 
 function isEmpty(property: string) {
     return (property === null || property === "" || typeof property === "undefined");
- }
+}
 
-export { getEl, getEls, getParentEl, addClass, removeClass, isEmpty };
+export { getEl, getEls, getParentEl, getClosestEl, addClass, removeClass, isEmpty };

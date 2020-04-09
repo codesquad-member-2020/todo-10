@@ -1,6 +1,6 @@
-import { cardClickHandle } from './eventHandles/card.js';
-import { columnClickHandle } from './eventHandles/column.js';
-import { formClickHandle, formSubmitHandle, isDisabledBtn } from './eventHandles/form.js';
+import { deleteCard, showEditModal, dragStartCard, dragoverCard, dropCard } from './eventHandles/card.js';
+import { showColumnForm } from './eventHandles/column.js';
+import { closeForm, submitForm, isDisabledBtn } from './eventHandles/form.js';
 
 class TodoEventManager {
     constructor(module) {
@@ -11,10 +11,14 @@ class TodoEventManager {
     init() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
+        this.todoView.todoApp.addEventListener('dblclick', showEditModal);
+        this.todoView.todoApp.addEventListener('dragstart', dragStartCard);
+        this.todoView.todoApp.addEventListener('dragover', dragoverCard);
+        this.todoView.todoApp.addEventListener('drop', dropCard);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
     }
 
-    checkDisabled({target}) {
+    checkDisabled({ target }) {
         const contentWrap = target.closest('.content-wrap');
         const btn = contentWrap.querySelector('.btn-add');
         isDisabledBtn(target) ? (btn.disabled = true) : (btn.disabled = false);
@@ -25,13 +29,13 @@ class TodoEventManager {
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'column':
-                columnClickHandle(target);
+                showColumnForm(target);
                 break;
             case 'card':
-                cardClickHandle(target);
+                deleteCard(target, this.todoModel.deleteCardRequest);
                 break;
             case 'form':
-                formClickHandle(target);
+                closeForm(target);
                 break;
             default:
                 break;
@@ -39,9 +43,11 @@ class TodoEventManager {
     }
 
     submitEventDelegation(evt) {
-        switch (evt.target.dataset.type) {
+        const contentWrap = evt.target.closest('.content-wrap');
+        if (!contentWrap) return;
+        switch (contentWrap.dataset.type) {
             case 'form':
-                formSubmitHandle(evt);
+                submitForm(evt);
                 break;
             default:
                 break;
