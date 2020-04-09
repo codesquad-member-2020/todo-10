@@ -50,15 +50,15 @@ public class Section {
         this.updatedDateTime = LocalDateTime.now();
     }
 
-    public boolean updateCard(int cardId, String title, String content) {
+    public Card updateCard(Card updatedCard) {
         for (Card card : cards) {
-            if (card.getId() == cardId) {
-                card.update(title, content);
+            if (card.equals(updatedCard)) {
+                card.update(updatedCard);
                 this.updatedDateTime = LocalDateTime.now();
-                return true;
+                return card;
             }
         }
-        return false;
+        throw new ResourceNotFoundException();
     }
 
     public boolean deleteCard(int cardId) {
