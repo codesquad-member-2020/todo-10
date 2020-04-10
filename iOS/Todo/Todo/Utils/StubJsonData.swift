@@ -7,7 +7,7 @@
 //
 
 enum StubJsonData {
-    static let successResponseStub = """
+    static let successCardListsResponseStub = """
     {
       "status" : "SUCCESS",
       "content" : {
@@ -83,6 +83,13 @@ enum StubJsonData {
           }
         ]
       }
+    }
+    """.data(using: .utf8)
+    
+    static let successDeleteResponseStub = """
+    {
+        "status" : "SUCCESS",
+        "content" : "Card is Successfully Deleted"
     }
     """.data(using: .utf8)
 }
