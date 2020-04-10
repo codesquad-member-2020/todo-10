@@ -32,7 +32,6 @@ final class MainViewController: UIViewController {
                     let cardListViewController: CardListViewController = {
                         let controller = CardListViewController()
                         controller.cardList = cardList
-                        controller.setPlusButton(delegate: self)
                         return controller
                     }()
                     self.addCardListViewController(cardListViewController: cardListViewController)
@@ -48,11 +47,5 @@ final class MainViewController: UIViewController {
         cardListViewController.view.translatesAutoresizingMaskIntoConstraints = false
         cardListViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
         cardListViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
-    }
-}
-
-extension MainViewController: PlusButtonDelegate {
-    func showPlusCardViewController() {
-        
     }
 }

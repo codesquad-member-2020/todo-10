@@ -22,12 +22,17 @@ final class CardListViewController: UIViewController {
     }
     
     private func configureTitleView() {
+        configurePlusButtonDelegate()
         view.addSubview(titleView)
         
         let safeArea = view.safeAreaLayoutGuide
         titleView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         titleView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         titleView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
+    }
+    
+    private func configurePlusButtonDelegate() {
+        titleView.plusButton.delegate = self
     }
     
     private func configureTableView() {
@@ -71,9 +76,11 @@ final class CardListViewController: UIViewController {
         cardListTableDataSource = CardListTableDataSource(cardListID: cardListID, cardViewModels: cardViewModels)
         cardListTable.dataSource = cardListTableDataSource
     }
-    
-    func setPlusButton(delegate: PlusButtonDelegate) {
-        titleView.plusButton.delegate = delegate
+}
+
+extension CardListViewController: PlusButtonDelegate {
+    func showPlusCardViewController() {
+        
     }
 }
 
