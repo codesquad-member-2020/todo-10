@@ -9,6 +9,10 @@
 import UIKit
 
 final class CardListTableDelegate: NSObject, UITableViewDelegate {
+    override init() {
+        super.init()
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UISwipeActionsConfiguration(actions:
             [UIContextualAction(style: .destructive,

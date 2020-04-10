@@ -15,6 +15,7 @@ final class CardListTableDataSource: NSObject {
     init(cardListID: Int, cardViewModels: [CardViewModel]) {
         self.cardListID = cardListID
         self.cardViewModels = cardViewModels
+        super.init()
     }
     
     func removeCardListModel(at index: Int){
