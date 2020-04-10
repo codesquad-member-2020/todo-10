@@ -25,13 +25,13 @@ final class CardListTableDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in 
-            return self.contextMenu()
+            return self.contextMenu(tableView, for: indexPath)
         }
     }
 }
 
 extension CardListTableDelegate {
-    private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> ()) {
+    private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> () = { _ in }) {
         guard let dataSource = tableView.dataSource as? CardListTableDataSource else { return }
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
         DeleteUseCase.makeDeleteResponse(cardListID: dataSource.cardListID,
@@ -48,8 +48,8 @@ extension CardListTableDelegate {
         }
     }
     
-    private func contextMenu() -> UIMenu {
-        return UIMenu(title: "", children: [move(), edit(), delete()])
+    private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
+        return UIMenu(title: "", children: [move(), edit(), delete(tableView, for: indexPath)])
     }
     
     private func move() -> UIAction {
@@ -64,9 +64,9 @@ extension CardListTableDelegate {
         }
     }
     
-    private func delete() -> UIAction {
+    private func delete(_ tableView: UITableView,for indexPath: IndexPath) -> UIAction {
         return UIAction(title: ButtonData.deleteString, attributes: .destructive) { action in
-            
+            self.deleteRow(tableView, indexPath: indexPath)
         }
     }
 }
