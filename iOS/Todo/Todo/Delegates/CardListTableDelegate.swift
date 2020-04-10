@@ -13,13 +13,8 @@ final class CardListTableDelegate: NSObject, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions:
             [UIContextualAction(style: .destructive,
                                 title: ButtonData.deleteString,
-                                handler: { contextualAction, view, success in
-                                    self.deleteRow(tableView, indexPath: indexPath) { result in
-                                        guard let result = result else { return }
-                                        if result {
-                                            success(true)
-                                        }
-                                    }
+                                handler: { contextualAction, view, _ in
+                                    self.deleteRow(tableView, indexPath: indexPath)
             })])
     }
     
