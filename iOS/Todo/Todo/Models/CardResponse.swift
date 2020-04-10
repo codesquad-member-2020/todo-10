@@ -12,4 +12,3 @@ struct CardResponse: Codable {
     var status: Status
     var content: String
 }
-

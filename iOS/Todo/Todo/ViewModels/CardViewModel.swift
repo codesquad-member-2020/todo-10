@@ -27,5 +27,4 @@ final class CardViewModel: ViewModelBinding {
     var cardID: Int? {
         return card?.id
     }
-
 }
