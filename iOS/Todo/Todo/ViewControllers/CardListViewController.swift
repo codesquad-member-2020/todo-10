@@ -80,7 +80,8 @@ final class CardListViewController: UIViewController {
 
 extension CardListViewController: PlusButtonDelegate {
     func showPlusCardViewController() {
-        
+        let plusCardViewController = PlusCardViewController()
+        present(plusCardViewController, animated: true)
     }
 }
 

@@ -9,8 +9,8 @@
 import UIKit
 
 final class PlusCardViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
     }
 }
