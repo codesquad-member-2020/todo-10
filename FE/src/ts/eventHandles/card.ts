@@ -1,4 +1,5 @@
 import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js';
+import { ALERT_MESSAGE, COMMON_RULES } from '../contants/constant.js';
 
 const option = {
     dragTarget: null,
@@ -11,7 +12,7 @@ const option = {
 
 async function deleteCard(target, deleteCardRequest) {
     if (!target.classList.contains('btn-close')) return;
-    if (!confirm('선택하신 카드를 삭제 하시겠습니까?')) return;
+    if (!confirm(ALERT_MESSAGE.CARD_DELETE)) return;
     const column = getParentEl(target, '.todo-columns');
     const card = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
@@ -31,7 +32,7 @@ function showEditModal({ target }) {
     modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId);
     modalContents.setAttribute('data-card-id', card.dataset.cardId);
     modalContents.querySelector('.todo-textarea').value = content;
-    addClass(getEl('#modal'), 'active');
+    addClass(getEl('#modal'), COMMON_RULES.ACTIVE_KEY);
 }
 
 function dragStartCard({ target }) {
@@ -40,7 +41,7 @@ function dragStartCard({ target }) {
     option.dragTarget = target;
     option.targetHeight = target.offsetHeight;
     option.prevColumn = getParentEl(option.dragTarget, '.todo-columns');
-    addClass(option.dragTarget, 'draging');
+    addClass(option.dragTarget, COMMON_RULES.DRAG_KEY);
 }
 
 function dragoverCard(evt) {
@@ -61,7 +62,7 @@ function dragenterCard(evt) {
 
 function dragendCard({ target }) {
     if (!option.dragTarget) return;
-    removeClass(option.dragTarget, 'draging');
+    removeClass(option.dragTarget, COMMON_RULES.DRAG_KEY);
     if (!option.dragTarget || !option.currColumn) return;
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
     option.prevColumn.querySelector('.todo-count').innerHTML--;

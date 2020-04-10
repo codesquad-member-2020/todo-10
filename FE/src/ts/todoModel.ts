@@ -1,13 +1,12 @@
-import data from './_data/mockdata.js';
+import { URL } from './contants/url.js';
 
 class TodoModel {
     constructor() {
         this.todoData = null;
-        // this.todoData = data;
     }
 
     getTodoData() {
-        return fetch('http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login',
+        return fetch(`${URL.DEV.HOST}/mock/login`,
             {
                 method: 'POST',
                 mode: 'cors',
@@ -22,7 +21,7 @@ class TodoModel {
     }
 
     deleteCardRequest(columnId, cardId) {
-        return fetch(`http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/section/${columnId}/card/${cardId}`,
+        return fetch(`${URL.DEV.HOST}/mock/section/${columnId}/card/${cardId}`,
             {
                 mode: 'cors',
                 method: 'DELETE'

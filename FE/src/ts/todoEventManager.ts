@@ -11,6 +11,11 @@ class TodoEventManager {
     }
 
     init() {
+        this.todoAppEventInit();
+        this.todoModalEventInit();
+    }
+
+    todoAppEventInit() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('dblclick', showEditModal);
@@ -19,6 +24,9 @@ class TodoEventManager {
         this.todoView.todoApp.addEventListener('dragenter', dragenterCard);
         this.todoView.todoApp.addEventListener('dragend', dragendCard);
         this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
+    }
+
+    todoModalEventInit() {
         this.todoView.todoModal.addEventListener('input', this.checkDisabled.bind(this));
         this.todoView.todoModal.addEventListener('submit', this.modalHandler.bind(this));
         this.todoView.todoModal.addEventListener('click', this.clickModal.bind(this));

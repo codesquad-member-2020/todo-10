@@ -18,7 +18,7 @@ function removeClass(target: HTMLElement, className: string) {
     target.classList.remove(className);
 }
 
-function toggleClass({target, closestClass, containsClassName, toggleClassName}){
+function toggleClass({ target, closestClass, containsClassName, toggleClassName }) {
     if (!target.classList.contains(containsClassName)) return;
     target.closest(closestClass).classList.toggle(toggleClassName);
 }
