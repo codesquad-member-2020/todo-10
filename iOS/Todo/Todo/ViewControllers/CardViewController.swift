@@ -35,10 +35,16 @@ final class CardViewController: UIViewController {
     }
     
     private func configureCancelButton() {
+        cancelButton.addTarget(self, action: #selector(cancelCardViewController), for: .touchUpInside)
+        
         view.addSubview(cancelButton)
         let constant: CGFloat = 27
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
         cancelButton.trailingAnchor.constraint(equalTo: createButton.leadingAnchor, constant: -constant).isActive = true
+    }
+    
+    @objc private func cancelCardViewController() {
+        dismiss(animated: true, completion: nil)
     }
     
     private func configureTitleField() {
