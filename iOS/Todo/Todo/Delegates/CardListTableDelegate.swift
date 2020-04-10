@@ -36,7 +36,7 @@ extension CardListTableDelegate {
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
         DeleteUseCase.makeDeleteResponse(cardListID: dataSource.cardListID,
                                          cardID: cardID,
-                                         with: MockCardDeleteSuccessStub()) { result in
+                                         with: NetworkManager()) { result in
                                             guard let result = result else { return }
                                             if result {
                                                 dataSource.removeCardListModel(at: indexPath.row)
