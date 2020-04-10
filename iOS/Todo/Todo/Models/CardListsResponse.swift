@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Response: Codable {
+struct CardListsResponse: Codable {
     var status: Status
     var content: Content
 }
