@@ -30,7 +30,6 @@ final class CardListViewController: UIViewController {
         titleView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
     }
     
-    
     private func configureTableView() {
         cardListTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
         cardListTable.delegate = cardListTableDelegate
@@ -71,6 +70,10 @@ final class CardListViewController: UIViewController {
         let cardViewModels = cardList.cards.map { CardViewModel(card: $0)}
         cardListTableDataSource = CardListTableDataSource(cardListID: cardListID, cardViewModels: cardViewModels)
         cardListTable.dataSource = cardListTableDataSource
+    }
+    
+    func setPlusButton(delegate: PlusButtonDelegate) {
+        titleView.plusButton.delegate = delegate
     }
 }
 
