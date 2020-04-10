@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PlusCardViewController: UIViewController {
+final class CardViewController: UIViewController {
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     private let titleField = TitleField()

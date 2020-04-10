@@ -78,4 +78,3 @@ struct MockCardDeleteSuccessStub: NetworkManagable {
         resultHandler(StubJsonData.successDeleteResponseStub, nil)
     }
 }
-

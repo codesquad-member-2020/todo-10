@@ -94,7 +94,7 @@ final class CardListViewController: UIViewController {
 
 extension CardListViewController: PlusButtonDelegate {
     func showPlusCardViewController() {
-        let plusCardViewController = PlusCardViewController()
+        let plusCardViewController = CardViewController()
         present(plusCardViewController, animated: true)
     }
 }
