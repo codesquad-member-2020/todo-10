@@ -10,16 +10,17 @@ import UIKit
 
 final class CardListTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: ButtonData.deleteString) {
-            contextualAction, view, success in
-            self.deleteRow(tableView, indexPath: indexPath) { result in
-                guard let result = result else { return }
-                if result {
-                    success(true)
-                }
-            }
-        }
-        return .init(actions: [deleteAction])
+        return UISwipeActionsConfiguration(actions:
+            [UIContextualAction(style: .destructive,
+                                title: ButtonData.deleteString,
+                                handler: { contextualAction, view, success in
+                                    self.deleteRow(tableView, indexPath: indexPath) { result in
+                                        guard let result = result else { return }
+                                        if result {
+                                            success(true)
+                                        }
+                                    }
+            })])
     }
     
     private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> ()) {
