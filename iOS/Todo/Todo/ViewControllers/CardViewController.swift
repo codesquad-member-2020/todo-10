@@ -12,7 +12,7 @@ final class CardViewController: UIViewController {
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     private let titleField = TitleField()
-    private let contentTextView = ContentTextView()
+    private let contentsView = ContentsView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +49,12 @@ final class CardViewController: UIViewController {
     }
     
     private func configureContentTextView() {
-        view.addSubview(contentTextView)
+        view.addSubview(contentsView)
         let constant: CGFloat = 27
-        contentTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
-        contentTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
-        contentTextView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
-        contentTextView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        contentsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
+        contentsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
+        contentsView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
+        contentsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
 }
 
@@ -119,7 +119,7 @@ final class TitleField: UITextField {
     }
 }
 
-final class ContentTextView: UITextView {
+final class ContentsView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         configure()
