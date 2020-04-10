@@ -22,7 +22,7 @@ final class CardListTableDelegate: NSObject, UITableViewDelegate {
         return .init(actions: [deleteAction])
     }
     
-    func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> ()) {
+    private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> ()) {
         guard let dataSource = tableView.dataSource as? CardListTableDataSource else { return }
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
         DeleteUseCase.makeDeleteResponse(cardListID: dataSource.cardListID, cardID: cardID, with: NetworkManager()) { result in
