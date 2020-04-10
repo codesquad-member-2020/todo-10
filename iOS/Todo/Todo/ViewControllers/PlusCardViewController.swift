@@ -12,6 +12,7 @@ final class PlusCardViewController: UIViewController {
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     private let titleField = TitleField()
+    private let contentTextView = ContentTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ final class PlusCardViewController: UIViewController {
         configureCreateButton()
         configureCancelButton()
         configureTitleField()
+        configureContentTextView()
     }
     
     private func configureView() {
@@ -42,8 +44,17 @@ final class PlusCardViewController: UIViewController {
     private func configureTitleField() {
         view.addSubview(titleField)
         let constant: CGFloat = 27
-        titleField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: constant).isActive = true
+        titleField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
         titleField.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: constant).isActive = true
+    }
+    
+    private func configureContentTextView() {
+        view.addSubview(contentTextView)
+        let constant: CGFloat = 27
+        contentTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
+        contentTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
+        contentTextView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
+        contentTextView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
 }
 
@@ -106,18 +117,24 @@ final class TitleField: UITextField {
         font = UIFont.boldSystemFont(ofSize: 30)
         placeholder = "Title"
     }
- 
-    private static let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-    
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: TitleField.padding)
+}
+
+final class ContentTextView: UITextView {
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        configure()
     }
     
-    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: TitleField.padding)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
     }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: TitleField.padding)
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        font = UIFont.boldSystemFont(ofSize: 20)
+        text = "contents"
+        textColor = .lightGray
+        flashScrollIndicators()
     }
 }
