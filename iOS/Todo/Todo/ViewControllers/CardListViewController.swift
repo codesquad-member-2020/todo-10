@@ -19,6 +19,7 @@ final class CardListViewController: UIViewController {
         super.viewDidLoad()
         configureTitleView()
         configureTableView()
+        configureObserver()
     }
     
     private func configureTitleView() {
@@ -51,6 +52,19 @@ final class CardListViewController: UIViewController {
         cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateBadge),
+                                               name: CardListTableDataSource.Notification.cardViewModelsDidChange,
+                                               object: cardListTableDataSource)
+    }
+    
+    @objc private func updateBadge() {
+        DispatchQueue.main.async {
+            self.titleView.badge.text = String(self.cardListTableDataSource.cardViewModelsCount)
+        }
+    }
+    
     var cardList: CardList? {
         didSet {
             configureTitleViewModel()
@@ -64,8 +78,8 @@ final class CardListViewController: UIViewController {
                                                                cardsCount: cardList.cards.count),
                                         changed: { titleModel in
                                             guard let titleModel = titleModel else { return }
-                                                self.titleView.badge.text = String(titleModel.cardsCount)
-                                                self.titleView.titleLabel.text = titleModel.title
+                                            self.titleView.badge.text = String(titleModel.cardsCount)
+                                            self.titleView.titleLabel.text = titleModel.title
         })
     }
     

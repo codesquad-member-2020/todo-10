@@ -5,12 +5,24 @@
 //  Created by kimdo2297 on 2020/04/07.
 //  Copyright © 2020 Jason. All rights reserved.
 //
-
+import Foundation
 import UIKit
 
 final class CardListTableDataSource: NSObject {
     let cardListID: Int
-    private var cardViewModels: [CardViewModel]
+    enum Notification {
+        static let cardViewModelsDidChange = Foundation.Notification.Name("cardViewModelsDidChange")
+    }
+    private var cardViewModels: [CardViewModel] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.cardViewModelsDidChange,
+                                            object: self, userInfo: ["count" : cardViewModels.count])
+        }
+    }
+    
+    var cardViewModelsCount: Int {
+        return cardViewModels.count
+    }
     
     init(cardListID: Int, cardViewModels: [CardViewModel]) {
         self.cardListID = cardListID
