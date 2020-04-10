@@ -46,6 +46,7 @@ final class CardViewController: UIViewController {
         let constant: CGFloat = 27
         titleField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
         titleField.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: constant).isActive = true
+        titleField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
     }
     
     private func configureContentTextView() {
@@ -117,9 +118,24 @@ final class TitleField: UITextField {
         font = UIFont.boldSystemFont(ofSize: 30)
         placeholder = "Title"
     }
+
+    private static let padding = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 0)
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: TitleField.padding)
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: TitleField.padding)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: TitleField.padding)
+    }
 }
 
 final class ContentsView: UITextView {
+    static let placeHolderString = "Add a message what to do"
+    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         configure()
@@ -132,9 +148,25 @@ final class ContentsView: UITextView {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
+        configureText()
+        configureBorder()
+        configureInsets()
+    }
+    
+    private func configureText() {
         font = UIFont.boldSystemFont(ofSize: 20)
-        text = "contents"
-        textColor = .lightGray
-        flashScrollIndicators()
+        text = ContentsView.placeHolderString
+        textColor = .placeholderText
+    }
+    
+    private func configureBorder() {
+        layer.borderWidth = 0.9
+        layer.borderColor = UIColor.placeholderText.cgColor
+        layer.cornerRadius = 13
+    }
+    
+    private static let padding = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 0)
+    private func configureInsets() {
+        textContainerInset = ContentsView.padding
     }
 }
