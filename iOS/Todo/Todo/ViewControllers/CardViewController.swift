@@ -17,6 +17,7 @@ final class CardViewController: UIViewController {
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     private let titleField = TitleField()
+    private let titleFieldDelegate = TitleFieldDelegate()
     private let contentView = ContentView()
     private let contentViewDelegate = ContentViewDelegate()
     
@@ -69,6 +70,8 @@ final class CardViewController: UIViewController {
     }
     
     private func configureTitleField() {
+        titleField.delegate = titleFieldDelegate
+        
         view.addSubview(titleField)
         let constant: CGFloat = 27
         titleField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
