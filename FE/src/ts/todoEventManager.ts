@@ -1,8 +1,9 @@
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from './eventHandles/card.js';
-import { isEmpty } from './util/commonUtil';
 import { showColumnForm } from './eventHandles/column.js';
 import { closeForm, submitForm } from './eventHandles/form.js';
-import { closeModal, submitModal } from './eventHandles/modal';
+import { closeModal, submitModal } from './eventHandles/modal.js';
+import { checkDisabled } from './util/todoUtil.js';
+import { getParentEl } from './util/commonUtil.js';
 
 class TodoEventManager {
     constructor(module) {
@@ -18,40 +19,22 @@ class TodoEventManager {
     todoAppEventInit() {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
-        this.todoView.todoApp.addEventListener('dblclick', showEditModal);
+        this.todoView.todoApp.addEventListener('dblclick', showEditModal.bind(this));
         this.todoView.todoApp.addEventListener('dragstart', dragStartCard);
         this.todoView.todoApp.addEventListener('dragover', dragoverCard);
         this.todoView.todoApp.addEventListener('dragenter', dragenterCard);
         this.todoView.todoApp.addEventListener('dragend', dragendCard);
-        this.todoView.todoApp.addEventListener('input', this.checkDisabled.bind(this));
+        this.todoView.todoApp.addEventListener('input', checkDisabled);
     }
 
     todoModalEventInit() {
-        this.todoView.todoModal.addEventListener('input', this.checkDisabled.bind(this));
-        this.todoView.todoModal.addEventListener('submit', this.modalHandler.bind(this));
-        this.todoView.todoModal.addEventListener('click', this.clickModal.bind(this));
-    }
-
-    modalHandler(evt) {
-        submitModal(evt, function ({ evt, data, columnId, cardId }) {
-            document.querySelector(`#column-${columnId} #card-${cardId} .card-contents`)?.innerHTML = data.content.content;
-            document.querySelector('#modal')?.classList.remove('active');
-            document.querySelector('#modal textarea').value = '';
-        });
-    }
-
-    clickModal({ target }) {
-        closeModal(target);
-    }
-
-    checkDisabled({ target }) {
-        const contentWrap = target.closest('.content-wrap');
-        const btn = contentWrap.querySelector('.btn-add');
-        return isEmpty(target.value) ? (btn.disabled = true) : (btn.disabled = false);
+        this.todoView.todoModal.addEventListener('click', this.clickEventDelegation.bind(this));
+        this.todoView.todoModal.addEventListener('submit', this.submitEventDelegation.bind(this));
+        this.todoView.todoModal.addEventListener('input', checkDisabled);
     }
 
     clickEventDelegation({ target }) {
-        const contentWrap = target.closest('.content-wrap');
+        const contentWrap = getParentEl(target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'column':
@@ -63,17 +46,23 @@ class TodoEventManager {
             case 'form':
                 closeForm(target);
                 break;
+            case 'modal-form':
+                closeModal(target);
+                break;
             default:
                 break;
         }
     }
 
     submitEventDelegation(evt) {
-        const contentWrap = evt.target.closest('.content-wrap');
+        const contentWrap = getParentEl(evt.target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'form':
-                submitForm(evt, this.todoView.update);
+                submitForm(evt, this.todoView.addCardUpdate);
+                break;
+            case 'modal-form':
+                submitModal(evt, this.todoView.modifyCardUpdate.bind(this.todoView));
                 break;
             default:
                 break;

@@ -1,5 +1,5 @@
 import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js';
-import { ALERT_MESSAGE, COMMON_RULES } from '../contants/constant.js';
+import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant.js';
 
 const option = {
     dragTarget: null,
@@ -12,14 +12,14 @@ const option = {
 
 async function deleteCard(target, deleteCardRequest) {
     if (!target.classList.contains('btn-close')) return;
-    if (!confirm(ALERT_MESSAGE.CARD_DELETE)) return;
+    if (!confirm(ALERT_MESSAGE.DELETE_CARD)) return;
     const column = getParentEl(target, '.todo-columns');
     const card = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
     const { status } = await deleteCardRequest(columnId, cardId);
 
-    if (status !== 'SUCCESS') return;
+    if (status !== STATUS_KEY.SUCCESS) return;
     column.querySelector('.todo-count').innerHTML--;
     card.remove();
 }
@@ -32,7 +32,7 @@ function showEditModal({ target }) {
     modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId);
     modalContents.setAttribute('data-card-id', card.dataset.cardId);
     modalContents.querySelector('.todo-textarea').value = content;
-    addClass(getEl('#modal'), COMMON_RULES.ACTIVE_KEY);
+    addClass(this.todoView.todoModal, COMMON_RULE.ACTIVE_KEY);
 }
 
 function dragStartCard({ target }) {
@@ -41,7 +41,7 @@ function dragStartCard({ target }) {
     option.dragTarget = target;
     option.targetHeight = target.offsetHeight;
     option.prevColumn = getParentEl(option.dragTarget, '.todo-columns');
-    addClass(option.dragTarget, COMMON_RULES.DRAG_KEY);
+    addClass(option.dragTarget, COMMON_RULE.DRAG_KEY);
 }
 
 function dragoverCard(evt) {
@@ -62,7 +62,7 @@ function dragenterCard(evt) {
 
 function dragendCard({ target }) {
     if (!option.dragTarget) return;
-    removeClass(option.dragTarget, COMMON_RULES.DRAG_KEY);
+    removeClass(option.dragTarget, COMMON_RULE.DRAG_KEY);
     if (!option.dragTarget || !option.currColumn) return;
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
     option.prevColumn.querySelector('.todo-count').innerHTML--;

@@ -10,6 +10,7 @@ const httpRequest = {
         const resPromise = await response.json();
         return resPromise;
     },
+
     async delete(url) {
         const option = {
             mode: 'cors',
@@ -19,6 +20,7 @@ const httpRequest = {
         const resPromise = await response.json();
         return resPromise;
     },
+
     async patch(url, data) {
         const option = {
             method: 'PATCH',

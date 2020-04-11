@@ -10,6 +10,10 @@ function getParentEl(el: HTMLElement, target: string) {
     return el.closest(target);
 }
 
+function getClosestEl(el: HTMLElement, closestTarget: string, target: string) {
+    return el.closest(closestTarget)?.querySelector(target);
+}
+
 function addClass(target: HTMLElement, className: string) {
     target.classList.add(className);
 }
@@ -23,12 +27,4 @@ function toggleClass({ target, closestClass, containsClassName, toggleClassName 
     target.closest(closestClass).classList.toggle(toggleClassName);
 }
 
-function isEmpty(property: string) {
-    return property === null || property === '' || typeof property === 'undefined';
-}
-
-function getClosestEl(el: HTMLElement, closestTarget: string, target: string) {
-    return el.closest(closestTarget)?.querySelector(target);
-}
-
-export { getEl, getEls, getParentEl, addClass, removeClass, toggleClass, isEmpty, getClosestEl };
+export { getEl, getEls, getParentEl, getClosestEl, addClass, removeClass, toggleClass };
