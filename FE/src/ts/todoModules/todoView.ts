@@ -8,11 +8,11 @@ class TodoView {
         this.todoModal = getEl('#modal');
     }
 
-    todoAppRender({ content }) {
+    todoAppRender({ content }): void {
         this.todoApp.innerHTML = makeColumns(content);
     }
 
-    addCardUpdate({ target }, { content: card }) {
+    addCardUpdate({ target }, { content: card }): void {
         const currColumn = getParentEl(target, '.todo-columns');
         currColumn.querySelector('.card-wrap').innerHTML += addCard(card.id, card.content);
         currColumn.querySelector('.todo-count').innerHTML++;
@@ -20,7 +20,7 @@ class TodoView {
         target.reset();
     }
 
-    modifyCardUpdate(cardId, { content: card }) {
+    modifyCardUpdate(cardId, { content: card }): void {
         this.todoApp.querySelector(`#card-${cardId} .card-contents`).innerHTML = card.content;
         removeClass(this.todoModal, COMMON_RULE.ACTIVE_KEY);
         this.todoModal.querySelector('form').reset();

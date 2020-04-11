@@ -10,12 +10,12 @@ class TodoEventManager {
         this.todoView = module.todoView;
     }
 
-    init() {
+    init(): void {
         this.todoAppEventInit();
         this.todoModalEventInit();
     }
 
-    todoAppEventInit() {
+    todoAppEventInit(): void {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('dblclick', showEditModal.bind(this));
@@ -26,13 +26,13 @@ class TodoEventManager {
         this.todoView.todoApp.addEventListener('input', checkDisabled);
     }
 
-    todoModalEventInit() {
+    todoModalEventInit(): void {
         this.todoView.todoModal.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoModal.addEventListener('submit', this.submitEventDelegation.bind(this));
         this.todoView.todoModal.addEventListener('input', checkDisabled);
     }
 
-    clickEventDelegation({ target }) {
+    clickEventDelegation({ target }): void {
         const contentWrap = getParentEl(target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
@@ -53,7 +53,7 @@ class TodoEventManager {
         }
     }
 
-    submitEventDelegation(evt) {
+    submitEventDelegation(evt): void {
         const contentWrap = getParentEl(evt.target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {

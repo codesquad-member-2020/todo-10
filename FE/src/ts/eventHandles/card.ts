@@ -2,8 +2,9 @@ import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil';
 import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant';
 import { URL } from '../contants/url';
 import { httpRequest } from '../http/request';
+import { ICardOption } from '../interface/todoInterface';
 
-const option = {
+const option: ICardOption = {
     dragTarget: null,
     targetHeight: null,
     toTarget: null,
@@ -12,11 +13,11 @@ const option = {
     currColumn: null,
 }
 
-async function deleteCard(target) {
+async function deleteCard(target: HTMLElement) {
     if (!target.classList.contains('btn-close')) return;
     if (!confirm(ALERT_MESSAGE.DELETE_CARD)) return;
-    const column = getParentEl(target, '.todo-columns');
-    const card = getParentEl(target, '.card-item');
+    const column: HTMLElement = getParentEl(target, '.todo-columns');
+    const card: HTMLElement = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
     const url = `${URL.DEV.HOST}/mock/section/${columnId}/card/${cardId}`
@@ -28,7 +29,7 @@ async function deleteCard(target) {
 }
 
 function showEditModal({ target }) {
-    const card = getParentEl(target, '.card-item');
+    const card: HTMLElement = getParentEl(target, '.card-item');
     if (!card) return;
     const content = card.querySelector('.card-contents').innerText;
     const modalContents = getEl('.modal-contents');

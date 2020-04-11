@@ -3,7 +3,7 @@ import { COMMON_RULE } from '../contants/constant';
 import { getParentEl, toggleClass } from '../util/commonUtil';
 import { httpRequest } from '../http/request';
 
-function closeForm(target) {
+function closeForm(target: HTMLElement) {
     return toggleClass({
         target: target,
         containsClassName: 'btn-close',
@@ -12,9 +12,9 @@ function closeForm(target) {
     });
 }
 
-function submitForm(evt, addCardUpdate) {
+function submitForm(evt: Event, addCardUpdate: Function) {
     evt.preventDefault();
-    const column = getParentEl(evt.target, '.todo-columns');
+    const column: HTMLElement = getParentEl(evt.target, '.todo-columns');
     const columnId = column.dataset.columnId;
     const data = evt.target.querySelector('textarea').value;
     const url = `${URL.DEV.HOST}/mock/section/${columnId}/card`;

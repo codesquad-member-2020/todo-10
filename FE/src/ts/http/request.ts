@@ -1,5 +1,5 @@
 const httpRequest = {
-    async login(url) {
+    async login(url: string) {
         const option = {
             method: 'POST',
             mode: 'cors',
@@ -14,7 +14,7 @@ const httpRequest = {
         return resPromise;
     },
 
-    async post(url, data) {
+    async post(url: string, data: object) {
         const option = {
             method: 'POST',
             mode: 'cors',
@@ -26,7 +26,7 @@ const httpRequest = {
         return resPromise;
     },
 
-    async delete(url) {
+    async delete(url: string) {
         const option = {
             mode: 'cors',
             method: 'DELETE',
@@ -36,7 +36,7 @@ const httpRequest = {
         return resPromise;
     },
 
-    async patch(url, data) {
+    async patch(url: string, data: object) {
         const option = {
             method: 'PATCH',
             mode: 'cors',

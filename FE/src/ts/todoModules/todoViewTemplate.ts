@@ -1,5 +1,7 @@
-function makeColumns({ sections }) {
-    return sections.reduce((acc, column) => {
+import { ITodoViewTemplate } from '../interface/todoInterface';
+
+function makeColumns({ sections }: ITodoViewTemplate): string {
+    return sections.reduce((acc: string, column: ITodoViewTemplate) => {
         acc +=
             `<div class="todo-columns content-wrap" data-type="column" id="column-${column.id}" data-column-id=${column.id} tabindex="0">
             <div class="todo-title">
@@ -27,14 +29,14 @@ function makeColumns({ sections }) {
     }, '');
 }
 
-function makeCards(cards) {
-    return cards.reduce((acc, card) => {
+function makeCards(cards: []): string {
+    return cards.reduce((acc: string, card: ITodoViewTemplate) => {
         acc += addCard(card.id, card.content);
         return acc;
     }, '');
 }
 
-function addCard(id, content) {
+function addCard(id: string, content: string): string {
     return `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${id}" data-card-id="${id}" tabindex="0">
                 <div class="card-contents">${content}</div>
                 <p class="card-writer">added by <span>홍길동</span></p>
