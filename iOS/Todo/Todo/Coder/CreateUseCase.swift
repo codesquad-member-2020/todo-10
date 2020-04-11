@@ -18,7 +18,7 @@ struct CreateUseCase {
                                    cardData: Data,
                                    with manager: NetworkManagable,
                                    result: @escaping (Card?) -> ()) {
-        try? manager.getResource(from: "\(NetworkManager.EndPoints.cardList)/\(cardListID)/card",
+        try? manager.requestResource(from: "\(NetworkManager.EndPoints.cardList)/\(cardListID)/card",
             method: .post,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in

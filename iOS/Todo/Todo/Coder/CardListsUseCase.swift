@@ -19,7 +19,7 @@ enum LoginInfo {
 
 struct CardListsUseCase {
     static func makeCardLists(with manager: NetworkManagable, completed: @escaping (CardListsDataSource?) -> ()) {
-        try? manager.getResource(from: NetworkManager.EndPoints.cardLists, method: .post,
+        try? manager.requestResource(from: NetworkManager.EndPoints.cardLists, method: .post,
                                  body: LoginInfo.cardLists, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                     guard error == nil else { return }
