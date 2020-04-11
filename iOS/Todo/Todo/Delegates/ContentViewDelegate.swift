@@ -29,14 +29,17 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if validIsCorrect(text: textView.text) {
+        if textView.text != ContentViewModel.placeHolderText,
+            textView.text.contains(ContentViewModel.placeHolderText) {
+            guard let contentView = textView as? ContentView else { return }
+            contentView.configureTextWriting()
+        } else if textView.text != ContentViewModel.placeHolderText,
+            validIsCorrect(text: textView.text) {
             if !isCorrectText {
                 isCorrectText = true
             }
-        } else {
-            if isCorrectText {
-                isCorrectText = false
-            }
+        } else if isCorrectText {
+            isCorrectText = false
         }
     }
     
