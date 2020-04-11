@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CardListTableDelegate: NSObject, UITableViewDelegate {
+final class ColumnTableDelegate: NSObject, UITableViewDelegate {
     override init() {
         super.init()
     }
@@ -29,7 +29,7 @@ final class CardListTableDelegate: NSObject, UITableViewDelegate {
     }
 }
 
-extension CardListTableDelegate {
+extension ColumnTableDelegate {
     private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> () = { _ in }) {
         guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }

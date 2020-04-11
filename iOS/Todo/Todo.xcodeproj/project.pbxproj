@@ -26,7 +26,7 @@
 		5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463B243C1F2900FD1751 /* CardCell.swift */; };
 		5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463E243C2C8C00FD1751 /* ColumnTableDataSource.swift */; };
 		5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874640243C2D3300FD1751 /* ReusableView.swift */; };
-		5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874645243C4C7B00FD1751 /* CardListTableDelegate.swift */; };
+		5A874646243C4C7B00FD1751 /* ColumnTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874645243C4C7B00FD1751 /* ColumnTableDelegate.swift */; };
 		5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874647243CAB5500FD1751 /* CardListScrollView.swift */; };
 		5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D551243B40FF00387EAE /* AppDelegate.swift */; };
 		5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D553243B40FF00387EAE /* SceneDelegate.swift */; };
@@ -78,7 +78,7 @@
 		5A87463B243C1F2900FD1751 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		5A87463E243C2C8C00FD1751 /* ColumnTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnTableDataSource.swift; sourceTree = "<group>"; };
 		5A874640243C2D3300FD1751 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
-		5A874645243C4C7B00FD1751 /* CardListTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableDelegate.swift; sourceTree = "<group>"; };
+		5A874645243C4C7B00FD1751 /* ColumnTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnTableDelegate.swift; sourceTree = "<group>"; };
 		5A874647243CAB5500FD1751 /* CardListScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListScrollView.swift; sourceTree = "<group>"; };
 		5AB8D54E243B40FF00387EAE /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB8D551243B40FF00387EAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		5A874644243C4C3900FD1751 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				5A874645243C4C7B00FD1751 /* CardListTableDelegate.swift */,
+				5A874645243C4C7B00FD1751 /* ColumnTableDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -411,7 +411,7 @@
 				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */,
-				5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */,
+				5A874646243C4C7B00FD1751 /* ColumnTableDelegate.swift in Sources */,
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
 				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
 				5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */,

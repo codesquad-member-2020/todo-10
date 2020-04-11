@@ -13,7 +13,7 @@ final class ColumnViewController: UIViewController {
     private var titleViewModel: TitleViewModel!
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
-    private var columnTableDelegate = CardListTableDelegate()
+    private var columnTableDelegate = ColumnTableDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
