@@ -41,9 +41,9 @@ final class CardViewController: UIViewController {
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
     }
     
-    var cardListID: Int?
+    var columnID: Int?
     @objc private func createCard() {
-        guard let cardListID = cardListID else { return }
+        guard let cardListID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
         CreateUseCase.makeCreateResponse(cardListID: cardListID,

@@ -31,7 +31,7 @@ final class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     let cardListViewController: CardListViewController = {
                         let controller = CardListViewController()
-                        controller.cardList = cardList
+                        controller.column = cardList
                         return controller
                     }()
                     self.addCardListViewController(cardListViewController: cardListViewController)

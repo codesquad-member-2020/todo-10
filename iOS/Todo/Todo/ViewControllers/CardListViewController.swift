@@ -11,9 +11,9 @@ final class CardListViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
-    private var cardListTable = CardListTable()
-    private var cardListTableDataSource: ColumnTableDataSource!
-    private var cardListTableDelegate = CardListTableDelegate()
+    private var columnTable = CardListTable()
+    private var columnTableDataSource: ColumnTableDataSource!
+    private var columnTableDelegate = CardListTableDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,35 +37,35 @@ final class CardListViewController: UIViewController {
     }
     
     private func configureTableView() {
-        cardListTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
-        cardListTable.delegate = cardListTableDelegate
+        columnTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
+        columnTable.delegate = columnTableDelegate
         configureTableConstraints()
     }
     
     private func configureTableConstraints() {
-        view.addSubview(cardListTable)
+        view.addSubview(columnTable)
         
         let safeArea = view.safeAreaLayoutGuide
-        cardListTable.topAnchor.constraint(equalTo: titleView.bottomAnchor).isActive = true
-        cardListTable.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
-        cardListTable.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
-        cardListTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+        columnTable.topAnchor.constraint(equalTo: titleView.bottomAnchor).isActive = true
+        columnTable.widthAnchor.constraint(equalTo: safeArea.widthAnchor).isActive = true
+        columnTable.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
+        columnTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
     private func configureObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateBadge),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
-                                               object: cardListTableDataSource)
+                                               object: columnTableDataSource)
     }
     
     @objc private func updateBadge() {
         DispatchQueue.main.async {
-            self.titleView.badge.text = String(self.cardListTableDataSource.cardViewModelsCount)
+            self.titleView.badge.text = String(self.columnTableDataSource.cardViewModelsCount)
         }
     }
     
-    var cardList: Column? {
+    var column: Column? {
         didSet {
             configureTitleViewModel()
             configureDataSource()
@@ -73,9 +73,9 @@ final class CardListViewController: UIViewController {
     }
     
     private func configureTitleViewModel() {
-        guard let cardList = cardList else { return }
-        titleViewModel = TitleViewModel(titleModel: TitleModel(title: cardList.title,
-                                                               cardsCount: cardList.cards.count),
+        guard let column = column else { return }
+        titleViewModel = TitleViewModel(titleModel: TitleModel(title: column.title,
+                                                               cardsCount: column.cards.count),
                                         changed: { titleModel in
                                             guard let titleModel = titleModel else { return }
                                             self.titleView.badge.text = String(titleModel.cardsCount)
@@ -84,26 +84,26 @@ final class CardListViewController: UIViewController {
     }
     
     private func configureDataSource() {
-        guard let cardList = cardList else { return }
-        let cardListID = cardList.id
-        let cardViewModels = cardList.cards.map { CardViewModel(card: $0)}
-        cardListTableDataSource = ColumnTableDataSource(columnID: cardListID, cardViewModels: cardViewModels)
-        cardListTable.dataSource = cardListTableDataSource
+        guard let column = column else { return }
+        let columnID = column.id
+        let cardViewModels = column.cards.map { CardViewModel(card: $0)}
+        columnTableDataSource = ColumnTableDataSource(columnID: columnID, cardViewModels: cardViewModels)
+        columnTable.dataSource = columnTableDataSource
     }
 }
 
 extension CardListViewController: PlusButtonDelegate, CardCreatable {
     func showPlusCardViewController() {
         let plusCardViewController = CardViewController()
-        plusCardViewController.cardListID = cardList?.id
+        plusCardViewController.columnID = column?.id
         plusCardViewController.delegate = self
         present(plusCardViewController, animated: true)
     }
     
     func cardDidCreate(_ card: Card) {
-        cardListTableDataSource.appendColumnModel(card: card)
+        columnTableDataSource.appendColumnModel(card: card)
         DispatchQueue.main.async {
-            self.cardListTable.reloadData()
+            self.columnTable.reloadData()
         }
     }
 }
