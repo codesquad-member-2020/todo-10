@@ -10,11 +10,6 @@ class TodoEventManager {
         this.todoView = module.todoView;
     }
 
-    init(): void {
-        this.todoAppEventInit();
-        this.todoModalEventInit();
-    }
-
     todoAppEventInit(): void {
         this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
         this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));

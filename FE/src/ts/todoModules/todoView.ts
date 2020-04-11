@@ -1,15 +1,24 @@
 import { getEl, getParentEl, removeClass } from '../util/commonUtil';
 import { COMMON_RULE } from '../contants/constant';
-import { makeColumns, addCard } from './todoViewTemplate';
+import { makeColumns, addCard, makeModal, makeMenu } from './todoViewTemplate';
 
 class TodoView {
     constructor() {
         this.todoApp = getEl('#todo-app');
+        this.todoMenu = getEl('#menu');
         this.todoModal = getEl('#modal');
     }
 
     todoAppRender({ content }): void {
         this.todoApp.innerHTML = makeColumns(content);
+    }
+
+    todoModalRender(): void {
+        this.todoModal.innerHTML = makeModal();
+    }
+
+    todoMenuRender(): void {
+        this.todoMenu.innerHTML = makeMenu();
     }
 
     addCardUpdate({ target }, { content: card }): void {

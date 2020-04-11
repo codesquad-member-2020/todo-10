@@ -7,11 +7,13 @@ class TodoController {
         this.todoEventManager = module.todoEventManager;
     }
 
-    async runTodoApp(): void {
+    runTodoApp(): void {
         const url = `${URL.DEV.HOST}/mock/login`;
         httpRequest.login(url).then(todoData => {
             this.todoView.todoAppRender(todoData);
-            this.todoEventManager.init();
+            this.todoView.todoModalRender();
+            this.todoEventManager.todoAppEventInit();
+            this.todoEventManager.todoModalEventInit();
         });
     }
 }
