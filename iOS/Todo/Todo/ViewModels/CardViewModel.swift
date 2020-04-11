@@ -19,7 +19,7 @@ final class CardViewModel: ViewModelBinding {
         changedHandler(self.card)
     }
     
-    func bind(changed handler: @escaping (Card?) -> ()) {
+    func performBind(changed handler: @escaping (Card?) -> ()) {
         self.changedHandler = handler
         changedHandler(card)
     }

@@ -57,7 +57,7 @@ extension CardListTableDataSource: UITableViewDataSource {
         }
         
         let index = indexPath.row
-        cardViewModels[index].bind { card in
+        cardViewModels[index].performBind { card in
             cardCell.titleLabel.text = card?.title
             cardCell.contentLabel.text = card?.content
         }
