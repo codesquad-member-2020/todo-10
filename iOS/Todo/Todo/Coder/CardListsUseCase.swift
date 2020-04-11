@@ -24,7 +24,7 @@ struct CardListsUseCase {
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                     guard error == nil else { return }
                                     guard let data = data else { return }
-                                    guard let response = try? JSONDecoder().decode(CardListsResponse.self, from: data) else { return }
+                                    guard let response = try? JSONDecoder().decode(ColumnsResponse.self, from: data) else { return }
                                     guard response.status == .success else { return }
                                     let cardList = Columns(cardLists: response.content.sections)
                                     completed(cardList)
