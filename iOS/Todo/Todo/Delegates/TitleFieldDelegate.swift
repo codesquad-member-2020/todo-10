@@ -9,6 +9,7 @@
 import UIKit
 
 final class TitleFieldDelegate: NSObject, UITextFieldDelegate {
+    static let placeHolderText = "Title"
     private var isCorrectText = false
     
     var textLimit: Int {

@@ -20,8 +20,6 @@
 		5A79380D2441A05100D59611 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380C2441A05100D59611 /* ContentView.swift */; };
 		5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380E2441A08E00D59611 /* ColumnStackView.swift */; };
 		5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7938122441ADBA00D59611 /* CreateButton.swift */; };
-		5A79381A2441B1E700D59611 /* TitleFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7938192441B1E700D59611 /* TitleFieldViewModel.swift */; };
-		5A79381C2441B27A00D59611 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79381B2441B27A00D59611 /* ContentViewModel.swift */; };
 		5A7938202441B60D00D59611 /* ContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79381F2441B60D00D59611 /* ContentViewDelegate.swift */; };
 		5A7938222441B84200D59611 /* TitleFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7938212441B84200D59611 /* TitleFieldDelegate.swift */; };
 		5A7938252441BBAA00D59611 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7938242441BBAA00D59611 /* Controller.swift */; };
@@ -83,8 +81,6 @@
 		5A79380C2441A05100D59611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5A79380E2441A08E00D59611 /* ColumnStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnStackView.swift; sourceTree = "<group>"; };
 		5A7938122441ADBA00D59611 /* CreateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateButton.swift; sourceTree = "<group>"; };
-		5A7938192441B1E700D59611 /* TitleFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFieldViewModel.swift; sourceTree = "<group>"; };
-		5A79381B2441B27A00D59611 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		5A79381F2441B60D00D59611 /* ContentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewDelegate.swift; sourceTree = "<group>"; };
 		5A7938212441B84200D59611 /* TitleFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFieldDelegate.swift; sourceTree = "<group>"; };
 		5A7938242441BBAA00D59611 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
@@ -195,15 +191,6 @@
 			path = "ColumnViewController's";
 			sourceTree = "<group>";
 		};
-		5A7938182441B1A800D59611 /* CardViewController's */ = {
-			isa = PBXGroup;
-			children = (
-				5A7938192441B1E700D59611 /* TitleFieldViewModel.swift */,
-				5A79381B2441B27A00D59611 /* ContentViewModel.swift */,
-			);
-			path = "CardViewController's";
-			sourceTree = "<group>";
-		};
 		5A7938232441BB9900D59611 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				5A7938172441B18A00D59611 /* ColumnViewController's */,
-				5A7938182441B1A800D59611 /* CardViewController's */,
 				5A838E63243DFD530081A42F /* ViewModelBinding.swift */,
 			);
 			path = ViewModels;
@@ -259,8 +245,8 @@
 				5AB8D551243B40FF00387EAE /* AppDelegate.swift */,
 				5AB8D553243B40FF00387EAE /* SceneDelegate.swift */,
 				5A874645243C4C7B00FD1751 /* ColumnTableDelegate.swift */,
-				5A79381F2441B60D00D59611 /* ContentViewDelegate.swift */,
 				5A7938212441B84200D59611 /* TitleFieldDelegate.swift */,
+				5A79381F2441B60D00D59611 /* ContentViewDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -498,11 +484,9 @@
 				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */,
-				5A79381A2441B1E700D59611 /* TitleFieldViewModel.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* ColumnTableDelegate.swift in Sources */,
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
 				5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */,
-				5A79381C2441B27A00D59611 /* ContentViewModel.swift in Sources */,
 				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
 				5A874648243CAB5500FD1751 /* ColumnScrollView.swift in Sources */,
 				5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */,

@@ -42,7 +42,7 @@ final class ContentView: UITextView {
     }
     
     func configurePlaceHolder() {
-        text = ContentViewModel.placeHolderText
+        text = ContentViewDelegate.placeHolderText
         textColor = .placeholderText
     }
     

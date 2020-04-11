@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 final class ContentViewDelegate: NSObject, UITextViewDelegate {
+    static let placeHolderText = "Add a message what to do"
     enum Notification {
         static let isCorrectDidChange = Foundation.Notification.Name("isCorrectDidChange")
     }
@@ -59,14 +60,14 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
     
     private func isContainsPlaceHolderButNotSame(text: String?) -> Bool {
         guard let text = text else { return false }
-        guard text != ContentViewModel.placeHolderText,
-            text.contains(ContentViewModel.placeHolderText) else { return false }
+        guard text != Self.placeHolderText,
+            text.contains(Self.placeHolderText) else { return false }
         return true
     }
     
     private func isValid(text: String?) -> Bool {
         guard let text = text else { return false }
-        guard text != ContentViewModel.placeHolderText,
+        guard text != Self.placeHolderText,
             Controller.isLengthNotZero(count: text.count) else { return false }
         return true
     }
