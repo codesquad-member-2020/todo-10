@@ -39,4 +39,11 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
             contentView.configureTextWriting()
         }
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if Controller.isLengthZero(count: textView.text.count) {
+            guard let contentView = textView as? ContentView else { return }
+            contentView.configurePlaceHolder()
+        }
+    }
 }

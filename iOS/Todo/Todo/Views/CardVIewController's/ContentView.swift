@@ -23,12 +23,11 @@ final class ContentView: UITextView {
         configureText()
         configureBorder()
         configureInsets()
+        configurePlaceHolder()
     }
     
     private func configureText() {
         font = UIFont.boldSystemFont(ofSize: 20)
-        text = ContentViewModel.placeHolderText
-        textColor = .placeholderText
     }
     
     private func configureBorder() {
@@ -40,6 +39,11 @@ final class ContentView: UITextView {
     private static let padding = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 0)
     private func configureInsets() {
         textContainerInset = ContentView.padding
+    }
+    
+    func configurePlaceHolder() {
+        text = ContentViewModel.placeHolderText
+        textColor = .placeholderText
     }
     
     func configureTextWriting() {
