@@ -19,6 +19,7 @@
 		5A79380B2441A02600D59611 /* TitleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380A2441A02600D59611 /* TitleField.swift */; };
 		5A79380D2441A05100D59611 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380C2441A05100D59611 /* ContentView.swift */; };
 		5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380E2441A08E00D59611 /* ColumnStackView.swift */; };
+		5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7938122441ADBA00D59611 /* CreateButton.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* ColumnsResponse.swift */; };
@@ -76,6 +77,7 @@
 		5A79380A2441A02600D59611 /* TitleField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleField.swift; sourceTree = "<group>"; };
 		5A79380C2441A05100D59611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5A79380E2441A08E00D59611 /* ColumnStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnStackView.swift; sourceTree = "<group>"; };
+		5A7938122441ADBA00D59611 /* CreateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateButton.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* ColumnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsResponse.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				5A79380824419F9400D59611 /* CancelButton.swift */,
 				5A79380A2441A02600D59611 /* TitleField.swift */,
 				5A79380C2441A05100D59611 /* ContentView.swift */,
+				5A7938122441ADBA00D59611 /* CreateButton.swift */,
 			);
 			path = "CardVIewController's";
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* ColumnTableDelegate.swift in Sources */,
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
+				5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */,
 				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
 				5A874648243CAB5500FD1751 /* ColumnScrollView.swift in Sources */,
 				5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */,

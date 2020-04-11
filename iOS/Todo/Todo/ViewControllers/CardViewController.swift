@@ -84,24 +84,3 @@ final class CardViewController: UIViewController {
         contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
 }
-
-final class CreateButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
-    }
-    
-    private func configure() {
-        let createImage = UIImage(systemName: "arrow.up.circle.fill")
-        setImage(createImage, for: .normal)
-        imageView?.contentMode = .scaleAspectFill
-        imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        tintColor = .systemBlue
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-}
