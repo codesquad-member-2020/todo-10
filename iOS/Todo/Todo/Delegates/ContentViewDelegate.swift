@@ -21,29 +21,26 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
         return totalLength <= textLimit
     }
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        judgeCorrectText(textView.text)
-    }
-    
-    private func judgeCorrectText(_ text: String?) {
-        if Controller.isLengthZero(count: text?.count), isCorrectText {
-            isCorrectText = false
-        } else if !isCorrectText {
-            isCorrectText = true
-        }
-    }
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == ContentViewModel.placeHolderText {
-            guard let contentView = textView as? ContentView else { return }
-            contentView.configureTextWriting()
+        DispatchQueue.main.async {
+            let firstPosition = textView.beginningOfDocument
+            textView.selectedTextRange = textView.textRange(from: firstPosition, to: firstPosition)
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if Controller.isLengthZero(count: textView.text.count) {
-            guard let contentView = textView as? ContentView else { return }
-            contentView.configurePlaceHolder()
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if validIsCorrect(text: textView.text) {
+            if !isCorrectText {
+                isCorrectText = true
+            }
+        } else {
+            if isCorrectText {
+                isCorrectText = false
+            }
         }
+    }
+    
+    private func validIsCorrect(text: String?) -> Bool {
+        return Controller.isLengthNotZero(count: text?.count)
     }
 }
