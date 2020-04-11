@@ -8,6 +8,12 @@
 
 import Foundation
 
-final class TitleFieldViewModel {
+final class TitleFieldViewModel: ViewModelBinding {
+    typealias Key = String
+    
     static let placeHolderText = "Title"
+    
+    func performBind(changed handler: @escaping (String) -> ()) {
+        
+    }
 }
