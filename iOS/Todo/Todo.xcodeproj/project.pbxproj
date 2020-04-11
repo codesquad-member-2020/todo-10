@@ -13,6 +13,7 @@
 		5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F7243F1AFA00D59611 /* CardResponse.swift */; };
 		5A7937FA243F1B1200D59611 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F9243F1B1200D59611 /* Status.swift */; };
 		5A7937FE2440150700D59611 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937FD2440150700D59611 /* CardViewController.swift */; };
+		5A7938002441319F00D59611 /* CreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937FF2441319F00D59611 /* CreateUseCase.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* CardListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* CardListsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* CardListsResponse.swift */; };
@@ -64,6 +65,7 @@
 		5A7937F7243F1AFA00D59611 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
 		5A7937F9243F1B1200D59611 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		5A7937FD2440150700D59611 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		5A7937FF2441319F00D59611 /* CreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUseCase.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* CardListsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListsResponse.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				5A838E50243D9D0A0081A42F /* CardListsUseCase.swift */,
 				5A7937F5243F194A00D59611 /* DeleteUseCase.swift */,
+				5A7937FF2441319F00D59611 /* CreateUseCase.swift */,
 			);
 			path = Coder;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
 				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
 				5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */,
+				5A7938002441319F00D59611 /* CreateUseCase.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
 				5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */,

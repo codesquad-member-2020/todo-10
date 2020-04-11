@@ -30,9 +30,13 @@ final class CardListTableDataSource: NSObject {
         super.init()
     }
     
-    func removeCardListModel(at index: Int){
+    func removeCardListModel(at index: Int) {
         guard index < cardViewModels.count else { return }
         cardViewModels.remove(at: index)
+    }
+    
+    func appendCardListModel(card: Card) {
+        cardViewModels.append(CardViewModel(card: card))
     }
     
     func cardID(at index: Int) -> Int? {

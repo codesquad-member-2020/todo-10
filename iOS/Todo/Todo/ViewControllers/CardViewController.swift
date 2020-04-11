@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol CardCreatable {
+    func cardDidCreate(_ card: Card)
+}
+
 final class CardViewController: UIViewController {
+    var delegate: CardCreatable?
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     private let titleField = TitleField()
-    private let contentsView = ContentsView()
+    private let contentView = ContentView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +33,25 @@ final class CardViewController: UIViewController {
     }
     
     private func configureCreateButton() {
+        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
+        
         view.addSubview(createButton)
         let constant: CGFloat = 27
         createButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
+    }
+    
+    var cardListID: Int?
+    @objc private func createCard() {
+        guard let cardListID = cardListID else { return }
+        guard let content = contentView.text else { return }
+        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
+        CreateUseCase.makeCreateResponse(cardListID: cardListID,
+                                         cardData: cardData, with: NetworkManager()) { card in
+                                            guard let card = card else { return }
+                                            self.delegate?.cardDidCreate(card)
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     private func configureCancelButton() {
@@ -56,12 +76,12 @@ final class CardViewController: UIViewController {
     }
     
     private func configureContentTextView() {
-        view.addSubview(contentsView)
+        view.addSubview(contentView)
         let constant: CGFloat = 27
-        contentsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
-        contentsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
-        contentsView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
-        contentsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
+        contentView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
+        contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
 }
 
@@ -85,7 +105,6 @@ final class CancelButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
     }
 }
-
 
 final class CreateButton: UIButton {
     override init(frame: CGRect) {
@@ -124,7 +143,7 @@ final class TitleField: UITextField {
         font = UIFont.boldSystemFont(ofSize: 30)
         placeholder = "Title"
     }
-
+    
     private static let padding = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 0)
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: TitleField.padding)
@@ -139,7 +158,7 @@ final class TitleField: UITextField {
     }
 }
 
-final class ContentsView: UITextView {
+final class ContentView: UITextView {
     static let placeHolderString = "Add a message what to do"
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -161,7 +180,7 @@ final class ContentsView: UITextView {
     
     private func configureText() {
         font = UIFont.boldSystemFont(ofSize: 20)
-        text = ContentsView.placeHolderString
+        text = ContentView.placeHolderString
         textColor = .placeholderText
     }
     
@@ -173,6 +192,6 @@ final class ContentsView: UITextView {
     
     private static let padding = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 0)
     private func configureInsets() {
-        textContainerInset = ContentsView.padding
+        textContainerInset = ContentView.padding
     }
 }

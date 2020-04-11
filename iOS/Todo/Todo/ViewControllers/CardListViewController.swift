@@ -92,9 +92,18 @@ final class CardListViewController: UIViewController {
     }
 }
 
-extension CardListViewController: PlusButtonDelegate {
+extension CardListViewController: PlusButtonDelegate, CardCreatable {
     func showPlusCardViewController() {
         let plusCardViewController = CardViewController()
+        plusCardViewController.cardListID = cardList?.id
+        plusCardViewController.delegate = self
         present(plusCardViewController, animated: true)
+    }
+    
+    func cardDidCreate(_ card: Card) {
+        cardListTableDataSource.appendCardListModel(card: card)
+        DispatchQueue.main.async {
+            self.cardListTable.reloadData()
+        }
     }
 }
