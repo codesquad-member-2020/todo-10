@@ -18,7 +18,7 @@ function submitModal(evt: Event, modifyCardUpdate: Function) {
     const columnId = column.dataset.columnId;
     const cardId = column.dataset.cardId;
     const data = evt.target.querySelector('textarea').value;
-    const url = `${URL.DEV.HOST}/mock/section/${columnId}/card/${cardId}`;
+    const url = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`;
     httpRequest.patch(url, { content: data }).then((data) => modifyCardUpdate(cardId, data));
 }
 

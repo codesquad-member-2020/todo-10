@@ -8,7 +8,7 @@ class TodoController {
     }
 
     runTodoApp(): void {
-        const url = `${URL.DEV.HOST}/mock/login`;
+        const url = `${URL.MOCKUP.BASE}/mock/login`;
         httpRequest.login(url).then(todoData => {
             this.todoView.todoAppRender(todoData);
             this.todoView.todoModalRender();

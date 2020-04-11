@@ -17,7 +17,7 @@ function submitForm(evt: Event, addCardUpdate: Function) {
     const column: HTMLElement = getParentEl(evt.target, '.todo-columns');
     const columnId = column.dataset.columnId;
     const data = evt.target.querySelector('textarea').value;
-    const url = `${URL.DEV.HOST}/mock/section/${columnId}/card`;
+    const url = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card`;
     httpRequest.post(url, { content: data }).then((data) => addCardUpdate(evt, data));
 }
 
