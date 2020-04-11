@@ -39,9 +39,13 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
                 isCorrectText = true
             }
         } else if isCorrectText {
+            guard let contentView = textView as? ContentView else { return }
+            contentView.configurePlaceHolder()
             isCorrectText = false
         }
     }
+    
+    
     
     private func validIsCorrect(text: String?) -> Bool {
         return Controller.isLengthNotZero(count: text?.count)
