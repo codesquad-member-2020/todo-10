@@ -42,7 +42,7 @@ final class MainViewController: UIViewController {
     
     private func addColumnViewController(columnViewController: ColumnViewController) {
         addChild(columnViewController)
-        columScrollView.stackView.addArrangedSubview(columnViewController.view)
+        columScrollView.columnStackView.addArrangedSubview(columnViewController.view)
         
         columnViewController.view.translatesAutoresizingMaskIntoConstraints = false
         columnViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
