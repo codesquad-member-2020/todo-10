@@ -48,8 +48,7 @@ final class ContentView: UITextView {
     
     func configureTextWriting() {
         guard let first = text.first else { return }
-        text.removeAll()
-        text.append(first)
+        text = String(first)
         textColor = .black
     }
 }
