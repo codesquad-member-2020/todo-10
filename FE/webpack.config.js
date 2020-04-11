@@ -1,4 +1,5 @@
 const path = require('path');
+
 module.exports = {
     mode: 'development',
     entry: ['./src/js/main.js', './src/style/common.scss', './src/style/todo.scss', './src/style/card.scss', './src/style/menu.scss'],
