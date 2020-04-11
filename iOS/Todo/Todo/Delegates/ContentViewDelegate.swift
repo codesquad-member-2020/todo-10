@@ -9,7 +9,7 @@
 import UIKit
 
 final class ContentViewDelegate: NSObject, UITextViewDelegate {
-    private var isCorrectText = false
+    private var isCorrect = false
     
     var textLimit: Int {
         return 500
@@ -29,25 +29,33 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if textView.text != ContentViewModel.placeHolderText,
-            textView.text.contains(ContentViewModel.placeHolderText) {
+        if isContainsPlaceHolderButNotSame(text: textView.text) {
             guard let contentView = textView as? ContentView else { return }
             contentView.configureTextWriting()
-        } else if textView.text != ContentViewModel.placeHolderText,
-            validIsCorrect(text: textView.text) {
-            if !isCorrectText {
-                isCorrectText = true
+        } else if isValid(text: textView.text) {
+            if !isCorrect {
+                isCorrect = true
             }
-        } else if isCorrectText {
-            guard let contentView = textView as? ContentView else { return }
-            contentView.configurePlaceHolder()
-            isCorrectText = false
+        } else {
+            if isCorrect {
+                guard let contentView = textView as? ContentView else { return }
+                contentView.configurePlaceHolder()
+                isCorrect = false
+            }
         }
     }
     
+    private func isContainsPlaceHolderButNotSame(text: String?) -> Bool {
+        guard let text = text else { return false }
+        guard text != ContentViewModel.placeHolderText,
+            text.contains(ContentViewModel.placeHolderText) else { return false }
+        return true
+    }
     
-    
-    private func validIsCorrect(text: String?) -> Bool {
-        return Controller.isLengthNotZero(count: text?.count)
+    private func isValid(text: String?) -> Bool {
+        guard let text = text else { return false }
+        guard text != ContentViewModel.placeHolderText,
+            Controller.isLengthNotZero(count: text.count) else { return false }
+        return true
     }
 }
