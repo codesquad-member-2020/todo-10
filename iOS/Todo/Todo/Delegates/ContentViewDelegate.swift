@@ -43,15 +43,11 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
             guard let contentView = textView as? ContentView else { return }
             contentView.configureTextWriting()
         } else if isValid(text: textView.text) {
-            if !isCorrect {
-                isCorrect = true
-            }
+            isCorrect = true
         } else {
-            if isCorrect {
-                guard let contentView = textView as? ContentView else { return }
-                contentView.configurePlaceHolder()
-                isCorrect = false
-            }
+            guard let contentView = textView as? ContentView else { return }
+            contentView.configurePlaceHolder()
+            isCorrect = false
         }
     }
     
