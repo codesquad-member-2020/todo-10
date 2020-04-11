@@ -23,11 +23,27 @@ final class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureObserver()
         configureView()
         configureCreateButton()
         configureCancelButton()
         configureTitleField()
         configureContentTextView()
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateCreateButton),
+                                               name: ContentViewDelegate.Notification.isCorrectDidChange,
+                                               object: contentViewDelegate)
+    }
+    
+    @objc private func updateCreateButton() {
+        if contentViewDelegate.isCorrect {
+            createButton.configureEnable()
+        } else {
+            createButton.configureDisable()
+        }
     }
     
     private func configureView() {

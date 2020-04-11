@@ -25,15 +25,20 @@ final class CreateButton: UIButton {
         configureDisable()
     }
     
-    private func configureDisable() {
-        tintColor = .darkGray
-        isEnabled = false
-    }
-    
     private func configureImage() {
         let createImage = UIImage(systemName: "arrow.up.circle.fill")
         setImage(createImage, for: .normal)
         imageView?.contentMode = .scaleAspectFill
         imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+    }
+    
+    func configureDisable() {
+        tintColor = .darkGray
+        isEnabled = false
+    }
+    
+    func configureEnable() {
+        tintColor = .systemBlue
+        isEnabled = true
     }
 }

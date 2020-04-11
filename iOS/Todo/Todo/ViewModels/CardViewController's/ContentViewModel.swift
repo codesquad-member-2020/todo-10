@@ -10,7 +10,7 @@ import Foundation
 
 final class ContentViewModel: ViewModelBinding {
     typealias Key = String
-    
+
     static let placeHolderText = "Add a message what to do"
     
     func performBind(changed handler: @escaping (String) -> ()) {

@@ -5,11 +5,21 @@
 //  Created by kimdo2297 on 2020/04/11.
 //  Copyright © 2020 Jason. All rights reserved.
 //
-
+import Foundation
 import UIKit
 
 final class ContentViewDelegate: NSObject, UITextViewDelegate {
-    private var isCorrect = false
+    enum Notification {
+        static let isCorrectDidChange = Foundation.Notification.Name("isCorrectDidChange")
+    }
+    private(set) var isCorrect = false {
+        didSet {
+            if isCorrect != oldValue {
+                NotificationCenter.default.post(name: Notification.isCorrectDidChange,
+                                                object: self)
+            }
+        }
+    }
     
     var textLimit: Int {
         return 500
