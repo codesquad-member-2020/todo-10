@@ -22,14 +22,18 @@ final class TitleFieldDelegate: NSObject, UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        judgeCorrectText(textField.text)
+        if validIsCorrect(text: textField.text) {
+            if !isCorrectText {
+                isCorrectText = true
+            }
+        } else {
+            if isCorrectText {
+                isCorrectText = false
+            }
+        }
     }
     
-    private func judgeCorrectText(_ text: String?) {
-        if Controller.isLengthZero(count: text?.count), isCorrectText {
-            isCorrectText = false
-        } else if !isCorrectText {
-            isCorrectText = true
-        }
+    private func validIsCorrect(text: String?) -> Bool {
+        return Controller.isLengthNotZero(count: text?.count)
     }
 }
