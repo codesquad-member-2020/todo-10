@@ -29,8 +29,8 @@ final class MainViewController: UIViewController {
         ColumnsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
             cardListsDataSource?.iterateColumns(with: { cardList in
                 DispatchQueue.main.async {
-                    let cardListViewController: CardListViewController = {
-                        let controller = CardListViewController()
+                    let cardListViewController: ColumnViewController = {
+                        let controller = ColumnViewController()
                         controller.column = cardList
                         return controller
                     }()
@@ -40,7 +40,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func addCardListViewController(cardListViewController: CardListViewController) {
+    private func addCardListViewController(cardListViewController: ColumnViewController) {
         addChild(cardListViewController)
         scrollView.stackView.addArrangedSubview(cardListViewController.view)
         

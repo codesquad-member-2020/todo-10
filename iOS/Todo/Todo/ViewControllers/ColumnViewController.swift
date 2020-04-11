@@ -7,7 +7,7 @@
 //
 
 import UIKit
-final class CardListViewController: UIViewController {
+final class ColumnViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
@@ -92,7 +92,7 @@ final class CardListViewController: UIViewController {
     }
 }
 
-extension CardListViewController: PlusButtonDelegate, CardCreatable {
+extension ColumnViewController: PlusButtonDelegate, CardCreatable {
     func showPlusCardViewController() {
         let plusCardViewController = CardViewController()
         plusCardViewController.columnID = column?.id
