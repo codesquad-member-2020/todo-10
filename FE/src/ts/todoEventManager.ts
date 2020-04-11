@@ -8,7 +8,6 @@ import { getParentEl } from './util/commonUtil.js';
 class TodoEventManager {
     constructor(module) {
         this.todoView = module.todoView;
-        this.todoModel = module.todoModel;
     }
 
     init() {
@@ -41,7 +40,7 @@ class TodoEventManager {
                 showColumnForm(target);
                 break;
             case 'card':
-                deleteCard(target, this.todoModel.deleteCardRequest);
+                deleteCard(target);
                 break;
             case 'form':
                 closeForm(target);

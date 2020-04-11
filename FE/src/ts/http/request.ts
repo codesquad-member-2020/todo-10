@@ -1,4 +1,19 @@
 const httpRequest = {
+    async login(url) {
+        const option = {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: "nigayo@ggmail.com",
+                password: "1234"
+            })
+        };
+        const response = await fetch(url, option);
+        const resPromise = await response.json();
+        return resPromise;
+    },
+
     async post(url, data) {
         const option = {
             method: 'POST',

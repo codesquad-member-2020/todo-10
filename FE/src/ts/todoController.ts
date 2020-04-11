@@ -1,3 +1,6 @@
+import { httpRequest } from './http/request.js';
+import { URL } from './contants/url.js';
+
 class TodoController {
     constructor(module) {
         this.todoView = module.todoView;
@@ -6,9 +9,11 @@ class TodoController {
     }
 
     async runTodoApp() {
-        await this.todoModel.getTodoData();
-        this.todoView.render(this.todoModel.todoData);
-        this.todoEventManager.init();
+        const url = `${URL.DEV.HOST}/mock/login`;
+        httpRequest.login(url).then(todoData => {
+            this.todoView.render(todoData);
+            this.todoEventManager.init();
+        });
     }
 }
 

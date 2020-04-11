@@ -1,5 +1,7 @@
 import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js';
 import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant.js';
+import { URL } from '../contants/url.js';
+import { httpRequest } from '../http/request.js';
 
 const option = {
     dragTarget: null,
@@ -10,14 +12,15 @@ const option = {
     currColumn: null,
 }
 
-async function deleteCard(target, deleteCardRequest) {
+async function deleteCard(target) {
     if (!target.classList.contains('btn-close')) return;
     if (!confirm(ALERT_MESSAGE.DELETE_CARD)) return;
     const column = getParentEl(target, '.todo-columns');
     const card = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
-    const { status } = await deleteCardRequest(columnId, cardId);
+    const url = `${URL.DEV.HOST}/mock/section/${columnId}/card/${cardId}`
+    const { status } = await httpRequest.delete(url)
 
     if (status !== STATUS_KEY.SUCCESS) return;
     column.querySelector('.todo-count').innerHTML--;
@@ -67,7 +70,9 @@ function dragendCard({ target }) {
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
     option.prevColumn.querySelector('.todo-count').innerHTML--;
     option.currColumn.querySelector('.todo-count').innerHTML++;
+}
 
+function getDragedCardInfo() {
     let order = 0;
     const currColumnId = option.currColumn.dataset.columnId;
     const cardId = option.dragTarget.dataset.cardId;
@@ -75,6 +80,7 @@ function dragendCard({ target }) {
         order++;
         return option.dragTarget === v;
     });
+    return { cardId, order, currColumnId };
 }
 
 function resetOption() {
