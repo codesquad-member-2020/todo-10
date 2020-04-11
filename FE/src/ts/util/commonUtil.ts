@@ -1,34 +1,37 @@
-function getEl(target: string) {
-    return document.querySelector(target);
+interface IToggleClass {
+    target: HTMLElement | any;
+    closestClass: string;
+    containsClassName: string;
+    toggleClassName: string;
+}
+
+function getEl(target: string): HTMLElement {
+    return <HTMLElement>document.querySelector(target);
 }
 
 function getEls(target: string) {
     return document.querySelectorAll(target);
 }
 
-function getParentEl(el: HTMLElement, target: string) {
-    return el.closest(target);
+function getParentEl(el: HTMLElement, target: string): HTMLElement {
+    return <HTMLElement>el.closest(target);
 }
 
-function addClass(target: HTMLElement, className: string) {
+function getClosestEl(el: HTMLElement, closestTarget: string, target: string): HTMLElement {
+    return <HTMLElement>el.closest(closestTarget)?.querySelector(target);
+}
+
+function addClass(target: HTMLElement, className: string): void {
     target.classList.add(className);
 }
 
-function removeClass(target: HTMLElement, className: string) {
+function removeClass(target: HTMLElement, className: string): void {
     target.classList.remove(className);
 }
 
-function toggleClass({target, closestClass, containsClassName, toggleClassName}){
+function toggleClass({ target, closestClass, containsClassName, toggleClassName }: IToggleClass): void {
     if (!target.classList.contains(containsClassName)) return;
     target.closest(closestClass).classList.toggle(toggleClassName);
 }
 
-function isEmpty(property: string) {
-    return property === null || property === '' || typeof property === 'undefined';
-}
-
-function getClosestEl(el: HTMLElement, closestTarget: string, target: string) {
-    return el.closest(closestTarget)?.querySelector(target);
-}
-
-export { getEl, getEls, getParentEl, addClass, removeClass, toggleClass, isEmpty, getClosestEl };
+export { getEl, getEls, getParentEl, getClosestEl, addClass, removeClass, toggleClass };

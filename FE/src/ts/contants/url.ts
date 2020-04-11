@@ -1,3 +1,11 @@
-const API_URL = 'http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080';
+const URL = {
+    DEV: {
+        BASE: '',
+    },
 
-export { API_URL };
+    MOCKUP: {
+        BASE: 'http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080'
+    }
+}
+
+export { URL };

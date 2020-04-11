@@ -1,6 +1,10 @@
-import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js';
+import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil';
+import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant';
+import { URL } from '../contants/url';
+import { httpRequest } from '../http/request';
+import { ICardOption } from '../interface/todoInterface';
 
-const option = {
+const option: ICardOption = {
     dragTarget: null,
     targetHeight: null,
     toTarget: null,
@@ -9,29 +13,30 @@ const option = {
     currColumn: null,
 }
 
-async function deleteCard(target, deleteCardRequest) {
+async function deleteCard(target: HTMLElement) {
     if (!target.classList.contains('btn-close')) return;
-    if (!confirm('선택하신 카드를 삭제 하시겠습니까?')) return;
-    const column = getParentEl(target, '.todo-columns');
-    const card = getParentEl(target, '.card-item');
+    if (!confirm(ALERT_MESSAGE.DELETE_CARD)) return;
+    const column: HTMLElement = getParentEl(target, '.todo-columns');
+    const card: HTMLElement = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
-    const { status } = await deleteCardRequest(columnId, cardId);
+    const url = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`
+    const { status } = await httpRequest.delete(url)
 
-    if (status !== 'SUCCESS') return;
+    if (status !== STATUS_KEY.SUCCESS) return;
     column.querySelector('.todo-count').innerHTML--;
     card.remove();
 }
 
 function showEditModal({ target }) {
-    const card = getParentEl(target, '.card-item');
+    const card: HTMLElement = getParentEl(target, '.card-item');
     if (!card) return;
     const content = card.querySelector('.card-contents').innerText;
     const modalContents = getEl('.modal-contents');
     modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId);
     modalContents.setAttribute('data-card-id', card.dataset.cardId);
     modalContents.querySelector('.todo-textarea').value = content;
-    addClass(getEl('#modal'), 'active');
+    addClass(this.todoView.todoModal, COMMON_RULE.ACTIVE_KEY);
 }
 
 function dragStartCard({ target }) {
@@ -40,7 +45,7 @@ function dragStartCard({ target }) {
     option.dragTarget = target;
     option.targetHeight = target.offsetHeight;
     option.prevColumn = getParentEl(option.dragTarget, '.todo-columns');
-    addClass(option.dragTarget, 'draging');
+    addClass(option.dragTarget, COMMON_RULE.DRAG_KEY);
 }
 
 function dragoverCard(evt) {
@@ -61,12 +66,14 @@ function dragenterCard(evt) {
 
 function dragendCard({ target }) {
     if (!option.dragTarget) return;
-    removeClass(option.dragTarget, 'draging');
+    removeClass(option.dragTarget, COMMON_RULE.DRAG_KEY);
     if (!option.dragTarget || !option.currColumn) return;
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
     option.prevColumn.querySelector('.todo-count').innerHTML--;
     option.currColumn.querySelector('.todo-count').innerHTML++;
+}
 
+function getDragedCardInfo() {
     let order = 0;
     const currColumnId = option.currColumn.dataset.columnId;
     const cardId = option.dragTarget.dataset.cardId;
@@ -74,6 +81,7 @@ function dragendCard({ target }) {
         order++;
         return option.dragTarget === v;
     });
+    return { cardId, order, currColumnId };
 }
 
 function resetOption() {
