@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* CardLists.swift */; };
+		5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* Columns.swift */; };
 		5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F3243EEFFE00D59611 /* ButtonData.swift */; };
 		5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F5243F194A00D59611 /* DeleteUseCase.swift */; };
 		5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F7243F1AFA00D59611 /* CardResponse.swift */; };
@@ -59,7 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A7937F0243ED9FC00D59611 /* CardLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLists.swift; sourceTree = "<group>"; };
+		5A7937F0243ED9FC00D59611 /* Columns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Columns.swift; sourceTree = "<group>"; };
 		5A7937F3243EEFFE00D59611 /* ButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonData.swift; sourceTree = "<group>"; };
 		5A7937F5243F194A00D59611 /* DeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCase.swift; sourceTree = "<group>"; };
 		5A7937F7243F1AFA00D59611 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				5A87463E243C2C8C00FD1751 /* ColumnTableDataSource.swift */,
-				5A7937F0243ED9FC00D59611 /* CardLists.swift */,
+				5A7937F0243ED9FC00D59611 /* Columns.swift */,
 				5A7937F9243F1B1200D59611 /* Status.swift */,
 				5A838E53243DB4110081A42F /* CardListsResponse.swift */,
 				5A7937F7243F1AFA00D59611 /* CardResponse.swift */,
@@ -415,7 +415,7 @@
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
 				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
 				5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */,
-				5A7937F1243ED9FC00D59611 /* CardLists.swift in Sources */,
+				5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
 				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,

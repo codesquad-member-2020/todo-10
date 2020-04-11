@@ -18,7 +18,7 @@ enum LoginInfo {
 }
 
 struct CardListsUseCase {
-    static func makeCardLists(with manager: NetworkManagable, completed: @escaping (CardListsDataSource?) -> ()) {
+    static func makeCardLists(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {
         try? manager.requestResource(from: NetworkManager.EndPoints.cardLists, method: .post,
                                  body: LoginInfo.cardLists, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
@@ -26,7 +26,7 @@ struct CardListsUseCase {
                                     guard let data = data else { return }
                                     guard let response = try? JSONDecoder().decode(CardListsResponse.self, from: data) else { return }
                                     guard response.status == .success else { return }
-                                    let cardList = CardLists(cardLists: response.content.sections)
+                                    let cardList = Columns(cardLists: response.content.sections)
                                     completed(cardList)
         }
     }
