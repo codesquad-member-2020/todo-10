@@ -32,6 +32,10 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        setPositionBeginningOfDocument(textView)
+    }
+
+    private func setPositionBeginningOfDocument(_ textView: UITextView) {
         DispatchQueue.main.async {
             let firstPosition = textView.beginningOfDocument
             textView.selectedTextRange = textView.textRange(from: firstPosition, to: firstPosition)
@@ -47,6 +51,7 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
         } else {
             guard let contentView = textView as? ContentView else { return }
             contentView.configurePlaceHolder()
+            setPositionBeginningOfDocument(textView)
             isCorrect = false
         }
     }
