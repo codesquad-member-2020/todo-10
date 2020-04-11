@@ -33,7 +33,7 @@ extension ColumnTableDelegate {
     private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> () = { _ in }) {
         guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
-        DeleteUseCase.makeDeleteResponse(cardListID: dataSource.columnID,
+        DeleteUseCase.makeDeleteResponse(columnID: dataSource.columnID,
                                          cardID: cardID,
                                          with: NetworkManager()) { result in
                                             guard let result = result else { return }

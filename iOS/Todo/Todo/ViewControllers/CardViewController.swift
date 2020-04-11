@@ -43,10 +43,10 @@ final class CardViewController: UIViewController {
     
     var columnID: Int?
     @objc private func createCard() {
-        guard let cardListID = columnID else { return }
+        guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        CreateUseCase.makeCreateResponse(cardListID: cardListID,
+        CreateUseCase.makeCreateResponse(columnID: columnID,
                                          cardData: cardData, with: NetworkManager()) { card in
                                             guard let card = card else { return }
                                             self.delegate?.cardDidCreate(card)

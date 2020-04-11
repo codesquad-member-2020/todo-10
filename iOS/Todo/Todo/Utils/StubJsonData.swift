@@ -7,7 +7,7 @@
 //
 
 enum StubJsonData {
-    static let successCardListsResponseStub = """
+    static let successColumnsResponseStub = """
     {
       "status" : "SUCCESS",
       "content" : {

@@ -14,11 +14,11 @@ struct NewCard: Codable {
 }
 
 struct CreateUseCase {
-    static func makeCreateResponse(cardListID: Int,
+    static func makeCreateResponse(columnID: Int,
                                    cardData: Data,
                                    with manager: NetworkManagable,
                                    result: @escaping (Card?) -> ()) {
-        try? manager.requestResource(from: "\(NetworkManager.EndPoints.cardList)/\(cardListID)/card",
+        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card",
             method: .post,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in

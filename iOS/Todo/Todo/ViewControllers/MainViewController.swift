@@ -9,11 +9,11 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    private let scrollView = CardListScrollView()
+    private let scrollView = ColumnScrollView()
     
     override func viewDidLoad() {
         configureScrollView()
-        configureCardListsCase()
+        configureColumnsCase()
     }
     
     private func configureScrollView() {
@@ -25,27 +25,27 @@ final class MainViewController: UIViewController {
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
     
-    private func configureCardListsCase() {
-        ColumnsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
-            cardListsDataSource?.iterateColumns(with: { cardList in
+    private func configureColumnsCase() {
+        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
+            columnsDataSource?.iterateColumns(with: { column in
                 DispatchQueue.main.async {
-                    let cardListViewController: ColumnViewController = {
+                    let columnViewController: ColumnViewController = {
                         let controller = ColumnViewController()
-                        controller.column = cardList
+                        controller.column = column
                         return controller
                     }()
-                    self.addCardListViewController(cardListViewController: cardListViewController)
+                    self.addColumnViewController(columnViewController: columnViewController)
                 }
             })
         }
     }
     
-    private func addCardListViewController(cardListViewController: ColumnViewController) {
-        addChild(cardListViewController)
-        scrollView.stackView.addArrangedSubview(cardListViewController.view)
+    private func addColumnViewController(columnViewController: ColumnViewController) {
+        addChild(columnViewController)
+        scrollView.stackView.addArrangedSubview(columnViewController.view)
         
-        cardListViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        cardListViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
-        cardListViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
+        columnViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        columnViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
+        columnViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
     }
 }

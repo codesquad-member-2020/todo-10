@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CardListScrollView: UIScrollView {
+final class ColumnScrollView: UIScrollView {
     let stackView = CardListStackView()
     
     override init(frame: CGRect) {
