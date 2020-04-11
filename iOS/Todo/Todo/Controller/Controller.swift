@@ -9,8 +9,8 @@
 import Foundation
 
 final class Controller {
-    static func isLengthZero(count: Int?) -> Bool {
+    static func isLengthNotZero(count: Int?) -> Bool {
         guard let count = count else { return  false }
-        return count == 0
+        return count != 0
     }
 }
