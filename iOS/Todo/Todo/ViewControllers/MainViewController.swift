@@ -27,7 +27,7 @@ final class MainViewController: UIViewController {
     
     private func configureCardListsCase() {
         ColumnsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
-            cardListsDataSource?.iterateColumn(with: { cardList in
+            cardListsDataSource?.iterateColumns(with: { cardList in
                 DispatchQueue.main.async {
                     let cardListViewController: CardListViewController = {
                         let controller = CardListViewController()
