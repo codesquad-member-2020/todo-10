@@ -46,6 +46,7 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
         if isContainsPlaceHolderButNotSame(text: textView.text) {
             guard let contentView = textView as? ContentView else { return }
             contentView.configureTextWriting()
+            textViewDidChangeSelection(textView)
         } else if isValid(text: textView.text) {
             isCorrect = true
         } else {
