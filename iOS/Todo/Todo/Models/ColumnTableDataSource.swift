@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-final class CardListTableDataSource: NSObject {
-    let cardListID: Int
+final class ColumnTableDataSource: NSObject {
+    let columnID: Int
     enum Notification {
         static let cardViewModelsDidChange = Foundation.Notification.Name("cardViewModelsDidChange")
     }
@@ -24,18 +24,18 @@ final class CardListTableDataSource: NSObject {
         return cardViewModels.count
     }
     
-    init(cardListID: Int, cardViewModels: [CardViewModel]) {
-        self.cardListID = cardListID
+    init(columnID: Int, cardViewModels: [CardViewModel]) {
+        self.columnID = columnID
         self.cardViewModels = cardViewModels
         super.init()
     }
     
-    func removeCardListModel(at index: Int) {
+    func removeColumnModel(at index: Int) {
         guard index < cardViewModels.count else { return }
         cardViewModels.remove(at: index)
     }
     
-    func appendCardListModel(card: Card) {
+    func appendColumnModel(card: Card) {
         cardViewModels.append(CardViewModel(card: card))
     }
     
@@ -46,7 +46,7 @@ final class CardListTableDataSource: NSObject {
     }
 }
 
-extension CardListTableDataSource: UITableViewDataSource {
+extension ColumnTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cardViewModels.count
     }

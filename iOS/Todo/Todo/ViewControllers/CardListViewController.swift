@@ -12,7 +12,7 @@ final class CardListViewController: UIViewController {
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
     private var cardListTable = CardListTable()
-    private var cardListTableDataSource: CardListTableDataSource!
+    private var cardListTableDataSource: ColumnTableDataSource!
     private var cardListTableDelegate = CardListTableDelegate()
     
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ final class CardListViewController: UIViewController {
     private func configureObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateBadge),
-                                               name: CardListTableDataSource.Notification.cardViewModelsDidChange,
+                                               name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: cardListTableDataSource)
     }
     
@@ -87,7 +87,7 @@ final class CardListViewController: UIViewController {
         guard let cardList = cardList else { return }
         let cardListID = cardList.id
         let cardViewModels = cardList.cards.map { CardViewModel(card: $0)}
-        cardListTableDataSource = CardListTableDataSource(cardListID: cardListID, cardViewModels: cardViewModels)
+        cardListTableDataSource = ColumnTableDataSource(cardListID: cardListID, cardViewModels: cardViewModels)
         cardListTable.dataSource = cardListTableDataSource
     }
 }
@@ -101,7 +101,7 @@ extension CardListViewController: PlusButtonDelegate, CardCreatable {
     }
     
     func cardDidCreate(_ card: Card) {
-        cardListTableDataSource.appendCardListModel(card: card)
+        cardListTableDataSource.appendColumnModel(card: card)
         DispatchQueue.main.async {
             self.cardListTable.reloadData()
         }

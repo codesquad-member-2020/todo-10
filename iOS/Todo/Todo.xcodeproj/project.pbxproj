@@ -24,7 +24,7 @@
 		5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E63243DFD530081A42F /* ViewModelBinding.swift */; };
 		5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874633243C1D4E00FD1751 /* CardListTable.swift */; };
 		5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463B243C1F2900FD1751 /* CardCell.swift */; };
-		5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */; };
+		5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A87463E243C2C8C00FD1751 /* ColumnTableDataSource.swift */; };
 		5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874640243C2D3300FD1751 /* ReusableView.swift */; };
 		5A874646243C4C7B00FD1751 /* CardListTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874645243C4C7B00FD1751 /* CardListTableDelegate.swift */; };
 		5A874648243CAB5500FD1751 /* CardListScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A874647243CAB5500FD1751 /* CardListScrollView.swift */; };
@@ -76,7 +76,7 @@
 		5A838E63243DFD530081A42F /* ViewModelBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBinding.swift; sourceTree = "<group>"; };
 		5A874633243C1D4E00FD1751 /* CardListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTable.swift; sourceTree = "<group>"; };
 		5A87463B243C1F2900FD1751 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
-		5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableDataSource.swift; sourceTree = "<group>"; };
+		5A87463E243C2C8C00FD1751 /* ColumnTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnTableDataSource.swift; sourceTree = "<group>"; };
 		5A874640243C2D3300FD1751 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		5A874645243C4C7B00FD1751 /* CardListTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableDelegate.swift; sourceTree = "<group>"; };
 		5A874647243CAB5500FD1751 /* CardListScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListScrollView.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		5A87463D243C2C6600FD1751 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5A87463E243C2C8C00FD1751 /* CardListTableDataSource.swift */,
+				5A87463E243C2C8C00FD1751 /* ColumnTableDataSource.swift */,
 				5A7937F0243ED9FC00D59611 /* CardLists.swift */,
 				5A7937F9243F1B1200D59611 /* Status.swift */,
 				5A838E53243DB4110081A42F /* CardListsResponse.swift */,
@@ -397,7 +397,7 @@
 			files = (
 				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
 				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
-				5A87463F243C2C8C00FD1751 /* CardListTableDataSource.swift in Sources */,
+				5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */,
 				5A7938002441319F00D59611 /* CreateUseCase.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* CardListTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
