@@ -1,6 +1,6 @@
-import { getEl, getParentEl, removeClass } from '../util/commonUtil.js';
-import { COMMON_RULE } from '../contants/constant.js';
-import { makeColumns, addCard } from './todoViewTemplate.js';
+import { getEl, getParentEl, removeClass } from '../util/commonUtil';
+import { COMMON_RULE } from '../contants/constant';
+import { makeColumns, addCard } from './todoViewTemplate';
 
 class TodoView {
     constructor() {

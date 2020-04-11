@@ -1,7 +1,7 @@
-import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil.js';
-import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant.js';
-import { URL } from '../contants/url.js';
-import { httpRequest } from '../http/request.js';
+import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil';
+import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant';
+import { URL } from '../contants/url';
+import { httpRequest } from '../http/request';
 
 const option = {
     dragTarget: null,

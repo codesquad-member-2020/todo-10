@@ -1,5 +1,5 @@
-import { httpRequest } from '../http/request.js';
-import { URL } from '../contants/url.js';
+import { httpRequest } from '../http/request';
+import { URL } from '../contants/url';
 
 class TodoController {
     constructor(module) {

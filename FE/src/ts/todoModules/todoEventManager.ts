@@ -1,9 +1,9 @@
-import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from '../eventHandles/card.js';
-import { showColumnForm } from '../eventHandles/column.js';
-import { closeForm, submitForm } from '../eventHandles/form.js';
-import { closeModal, submitModal } from '../eventHandles/modal.js';
-import { checkDisabled } from '../util/todoUtil.js';
-import { getParentEl } from '../util/commonUtil.js';
+import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from '../eventHandles/card';
+import { showColumnForm } from '../eventHandles/column';
+import { closeForm, submitForm } from '../eventHandles/form';
+import { closeModal, submitModal } from '../eventHandles/modal';
+import { checkDisabled } from '../util/todoUtil';
+import { getParentEl } from '../util/commonUtil';
 
 class TodoEventManager {
     constructor(module) {

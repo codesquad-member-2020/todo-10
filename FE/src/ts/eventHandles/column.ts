@@ -1,5 +1,5 @@
-import { getClosestEl } from '../util/commonUtil.js';
-import { COMMON_RULE } from '../contants/constant.js';
+import { getClosestEl } from '../util/commonUtil';
+import { COMMON_RULE } from '../contants/constant';
 
 function showColumnForm(target) {
     if (!target.classList.contains('toggle-form')) return;

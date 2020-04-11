@@ -1,7 +1,7 @@
-import { URL } from '../contants/url.js';
-import { COMMON_RULE } from '../contants/constant.js';
-import { getParentEl, toggleClass } from '../util/commonUtil.js';
-import { httpRequest } from '../http/request.js';
+import { URL } from '../contants/url';
+import { COMMON_RULE } from '../contants/constant';
+import { getParentEl, toggleClass } from '../util/commonUtil';
+import { httpRequest } from '../http/request';
 
 function closeModal(target) {
     return toggleClass({
