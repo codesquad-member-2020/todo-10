@@ -32,4 +32,11 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
             isCorrectText = true
         }
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == ContentViewModel.placeHolderText {
+            guard let contentView = textView as? ContentView else { return }
+            contentView.configureTextWriting()
+        }
+    }
 }

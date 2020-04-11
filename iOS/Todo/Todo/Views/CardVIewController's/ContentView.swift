@@ -41,4 +41,9 @@ final class ContentView: UITextView {
     private func configureInsets() {
         textContainerInset = ContentView.padding
     }
+    
+    func configureTextWriting() {
+        text = ContentViewModel.emptyText
+        textColor = .black
+    }
 }
