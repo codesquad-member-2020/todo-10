@@ -9,7 +9,7 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    private let scrollView = ColumnScrollView()
+    private let columScrollView = ColumnScrollView()
     
     override func viewDidLoad() {
         configureScrollView()
@@ -17,12 +17,12 @@ final class MainViewController: UIViewController {
     }
     
     private func configureScrollView() {
-        view.addSubview(scrollView)
+        view.addSubview(columScrollView)
         
-        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
-        scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        columScrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+        columScrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
+        columScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        columScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
     
     private func configureColumnsCase() {
@@ -42,7 +42,7 @@ final class MainViewController: UIViewController {
     
     private func addColumnViewController(columnViewController: ColumnViewController) {
         addChild(columnViewController)
-        scrollView.stackView.addArrangedSubview(columnViewController.view)
+        columScrollView.stackView.addArrangedSubview(columnViewController.view)
         
         columnViewController.view.translatesAutoresizingMaskIntoConstraints = false
         columnViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
