@@ -36,22 +36,3 @@ final class ColumnScrollView: UIScrollView {
         contentLayoutGuide.widthAnchor.constraint(equalTo: columnStackView.widthAnchor, multiplier: 1).isActive = true
     }
 }
-
-final class ColumnStackView: UIStackView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
-    }
-    
-    private func configure() {
-        axis = .horizontal
-        distribution = .fillEqually
-        spacing = 8
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-}
