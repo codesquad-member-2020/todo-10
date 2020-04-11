@@ -11,7 +11,7 @@ final class ColumnViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
-    private var columnTable = CardListTable()
+    private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
     private var columnTableDelegate = CardListTableDelegate()
     
