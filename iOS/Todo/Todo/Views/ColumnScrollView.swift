@@ -9,7 +9,7 @@
 import UIKit
 
 final class ColumnScrollView: UIScrollView {
-    let stackView = CardListStackView()
+    let stackView = ColumnStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +37,7 @@ final class ColumnScrollView: UIScrollView {
     }
 }
 
-final class CardListStackView: UIStackView {
+final class ColumnStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
