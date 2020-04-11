@@ -9,17 +9,17 @@
 import Foundation
 
 protocol ColumnsDataSource {
-    func iterateColumns(with handler: (CardList) -> ())
+    func iterateColumns(with handler: (Column) -> ())
 }
 
 final class Columns: ColumnsDataSource {
-    private let columns: [CardList]
+    private let columns: [Column]
     
-    init(columns: [CardList]) {
+    init(columns: [Column]) {
         self.columns = columns
     }
     
-    func iterateColumns(with handler: (CardList) -> ()) {
+    func iterateColumns(with handler: (Column) -> ()) {
         columns.forEach { handler($0) }
     }
 }

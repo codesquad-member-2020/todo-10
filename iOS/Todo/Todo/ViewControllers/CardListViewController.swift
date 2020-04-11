@@ -65,7 +65,7 @@ final class CardListViewController: UIViewController {
         }
     }
     
-    var cardList: CardList? {
+    var cardList: Column? {
         didSet {
             configureTitleViewModel()
             configureDataSource()
