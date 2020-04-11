@@ -22,7 +22,7 @@ final class TitleField: UITextField {
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         font = UIFont.boldSystemFont(ofSize: 30)
-        placeholder = "Title"
+        placeholder = TitleFieldViewModel.placeHolderText
     }
     
     private static let padding = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 0)

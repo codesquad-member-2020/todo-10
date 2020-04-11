@@ -8,8 +8,6 @@
 import UIKit
 
 final class ContentView: UITextView {
-    static let placeHolderString = "Add a message what to do"
-    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         configure()
@@ -29,7 +27,7 @@ final class ContentView: UITextView {
     
     private func configureText() {
         font = UIFont.boldSystemFont(ofSize: 20)
-        text = ContentView.placeHolderString
+        text = ContentViewModel.placeHolderText
         textColor = .placeholderText
     }
     
