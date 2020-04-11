@@ -20,11 +20,20 @@ final class CreateButton: UIButton {
     }
     
     private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        configureImage()
+        configureDisable()
+    }
+    
+    private func configureDisable() {
+        tintColor = .darkGray
+        isEnabled = false
+    }
+    
+    private func configureImage() {
         let createImage = UIImage(systemName: "arrow.up.circle.fill")
         setImage(createImage, for: .normal)
         imageView?.contentMode = .scaleAspectFill
         imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        tintColor = .systemBlue
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }
