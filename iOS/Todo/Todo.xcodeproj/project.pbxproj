@@ -220,6 +220,8 @@
 		5A874644243C4C3900FD1751 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				5AB8D551243B40FF00387EAE /* AppDelegate.swift */,
+				5AB8D553243B40FF00387EAE /* SceneDelegate.swift */,
 				5A874645243C4C7B00FD1751 /* ColumnTableDelegate.swift */,
 			);
 			path = Delegates;
@@ -256,8 +258,6 @@
 				5A838E5A243DEB950081A42F /* ViewModels */,
 				5AB8D58B243B5CBF00387EAE /* Views */,
 				5AB8D581243B4A5200387EAE /* ViewControllers */,
-				5AB8D551243B40FF00387EAE /* AppDelegate.swift */,
-				5AB8D553243B40FF00387EAE /* SceneDelegate.swift */,
 				5AB8D557243B40FF00387EAE /* Main.storyboard */,
 				5AB8D55A243B410200387EAE /* Assets.xcassets */,
 				5AB8D55C243B410200387EAE /* LaunchScreen.storyboard */,
