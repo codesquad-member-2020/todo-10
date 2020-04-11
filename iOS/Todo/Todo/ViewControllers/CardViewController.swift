@@ -65,7 +65,7 @@ final class CardViewController: UIViewController {
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
         CreateUseCase.makeCreateResponse(columnID: columnID,
-                                         cardData: cardData, with: NetworkManager()) { card in
+                                         cardData: cardData, with: MockCardCreateSuccessStub()) { card in
                                             guard let card = card else { return }
                                             self.delegate?.cardDidCreate(card)
         }

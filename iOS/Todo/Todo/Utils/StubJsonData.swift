@@ -92,4 +92,17 @@ enum StubJsonData {
         "content" : "Card is Successfully Deleted"
     }
     """.data(using: .utf8)
+    
+    static let successCreateResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": {
+        "id": \(Int.max),
+            "title": "성공 생성 응답 스텁",
+            "content": "성공 생성 응답 스텁",
+            "createdDateTime": "2020-04-07 15:25:23",
+            "updatedDateTime": "2020-04-07 15:25:23"
+        }
+    }
+    """.data(using: .utf8)
 }

@@ -35,7 +35,7 @@ extension ColumnTableDelegate {
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
         DeleteUseCase.makeDeleteResponse(columnID: dataSource.columnID,
                                          cardID: cardID,
-                                         with: NetworkManager()) { result in
+                                         with: MockCardDeleteSuccessStub()) { result in
                                             guard let result = result else { return }
                                             if result {
                                                 dataSource.removeColumnModel(at: indexPath.row)

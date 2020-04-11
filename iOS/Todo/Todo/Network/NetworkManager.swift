@@ -78,3 +78,9 @@ struct MockCardDeleteSuccessStub: NetworkManagable {
         resultHandler(StubJsonData.successDeleteResponseStub, nil)
     }
 }
+
+struct MockCardCreateSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successCreateResponseStub, nil)
+    }
+}
