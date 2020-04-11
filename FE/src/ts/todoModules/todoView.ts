@@ -1,5 +1,5 @@
-import { getEl, getParentEl, removeClass } from './util/commonUtil.js';
-import { COMMON_RULE } from './contants/constant.js';
+import { getEl, getParentEl, removeClass } from '../util/commonUtil.js';
+import { COMMON_RULE } from '../contants/constant.js';
 
 class TodoView {
     constructor() {
