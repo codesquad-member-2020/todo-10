@@ -17,7 +17,7 @@ enum LoginInfo {
     """.data(using: .utf8)
 }
 
-struct CardListsUseCase {
+struct ColumnsUseCase {
     static func makeCardLists(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {
         try? manager.requestResource(from: NetworkManager.EndPoints.cardLists, method: .post,
                                  body: LoginInfo.cardLists, format: Format.jsonType,
