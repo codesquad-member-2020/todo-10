@@ -6,25 +6,35 @@ import { checkDisabled } from '../util/todoUtil';
 import { getParentEl } from '../util/commonUtil';
 
 class TodoEventManager {
-    constructor(module) {
-        this.todoView = module.todoView;
+    constructor({ todoView }) {
+        this.todoView = todoView;
+        this.todoAppEventList = {
+            'click': this.clickEventDelegation.bind(this),
+            'submit': this.submitEventDelegation.bind(this),
+            'dblclick': showEditModal.bind(this),
+            'dragstart': dragStartCard,
+            'dragover': dragoverCard,
+            'dragenter': dragenterCard,
+            'dragend': dragendCard,
+            'input': checkDisabled,
+        };
+        this.todoModalEventList = {
+            'click': this.clickEventDelegation.bind(this),
+            'submit': this.submitEventDelegation.bind(this),
+            'input': checkDisabled,
+        };
     }
 
     todoAppEventInit(): void {
-        this.todoView.todoApp.addEventListener('click', this.clickEventDelegation.bind(this));
-        this.todoView.todoApp.addEventListener('submit', this.submitEventDelegation.bind(this));
-        this.todoView.todoApp.addEventListener('dblclick', showEditModal.bind(this));
-        this.todoView.todoApp.addEventListener('dragstart', dragStartCard);
-        this.todoView.todoApp.addEventListener('dragover', dragoverCard);
-        this.todoView.todoApp.addEventListener('dragenter', dragenterCard);
-        this.todoView.todoApp.addEventListener('dragend', dragendCard);
-        this.todoView.todoApp.addEventListener('input', checkDisabled);
+        for (let [event, callback] of Object.entries(this.todoAppEventList)) {
+            this.todoView.todoApp.addEventListener(event, callback);
+        }
     }
 
     todoModalEventInit(): void {
-        this.todoView.todoModal.addEventListener('click', this.clickEventDelegation.bind(this));
-        this.todoView.todoModal.addEventListener('submit', this.submitEventDelegation.bind(this));
-        this.todoView.todoModal.addEventListener('input', checkDisabled);
+        for (let [event, callback] of Object.entries(this.todoModalEventList)) {
+            this.todoView.todoModal.addEventListener(event, callback);
+        }
     }
 
     clickEventDelegation({ target }): void {

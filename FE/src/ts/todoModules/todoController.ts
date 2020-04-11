@@ -2,9 +2,9 @@ import { httpRequest } from '../http/request';
 import { URL } from '../contants/url';
 
 class TodoController {
-    constructor(module) {
-        this.todoView = module.todoView;
-        this.todoEventManager = module.todoEventManager;
+    constructor({ todoView, todoEventManager }) {
+        this.todoView = todoView;
+        this.todoEventManager = todoEventManager;
     }
 
     runTodoApp(): void {
