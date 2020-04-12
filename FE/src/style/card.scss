@@ -1,39 +1,44 @@
 .card-wrap {
-  overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .card-item {
-  position: relative;
-  padding: 5% 8%;
-  margin: 10px 0;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
-  box-shadow: 0 1px 1px rgba(27, 31, 35, 0.1);
-  background: #fff;
-  .card-contents {
-    margin-bottom: 8px;
-  }
-  .card-writer {
-    color: #999;
-    span {
-      color: #333;
+    position: relative;
+    padding: 5% 8%;
+    margin: 10px 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(27, 31, 35, 0.1);
+    background: #fff;
+    .card-contents {
+        margin-bottom: 8px;
+        line-height: 1.3;
     }
-  }
-  .btn-close {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 0;
-    border: 0;
-  }
-  &:focus {
-    border-color:#1a72e5;
-    box-shadow: 0 0 0 .2em rgba(26,114,229,.3);
-  }
-  &::before {
-    content:"☰";
-    position: absolute;
-    left:10px;
-    top:17px;
-  }
+    .card-writer {
+        color: #999;
+        span {
+            color: #333;
+        }
+    }
+    .btn-close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 18px;
+        height: 18px;
+        font-size: 0;
+        border: 0;
+        background: #fff;
+    }
+    &:focus {
+        border-color: #1a72e5;
+        box-shadow: 0 0 0 0.2em rgba(26, 114, 229, 0.3);
+    }
+    &::before {
+        content: '☰';
+        position: absolute;
+        left: 10px;
+        top: 17px;
+    }
 }
