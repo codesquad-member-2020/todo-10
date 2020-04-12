@@ -126,7 +126,7 @@ final class TitleLabel: UILabel {
 }
 
 protocol PlusButtonDelegate {
-    func showPlusCardViewController()
+    func showNewCardViewController()
 }
 
 final class PlusButton: UIButton {
@@ -158,6 +158,6 @@ final class PlusButton: UIButton {
     }
     
     @objc private func plusButtonTouched() {
-        delegate?.showPlusCardViewController()
+        delegate?.showNewCardViewController()
     }
 }
