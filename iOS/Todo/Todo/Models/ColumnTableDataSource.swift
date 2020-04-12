@@ -15,8 +15,7 @@ final class ColumnTableDataSource: NSObject {
     }
     private var cardViewModels: [CardViewModel] {
         didSet {
-            NotificationCenter.default.post(name: Notification.cardViewModelsDidChange,
-                                            object: self, userInfo: ["count" : cardViewModels.count])
+            NotificationCenter.default.post(name: Notification.cardViewModelsDidChange, object: self)
         }
     }
     
