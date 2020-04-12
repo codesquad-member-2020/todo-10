@@ -28,7 +28,7 @@ class TodoView {
         removeClass(getParentEl(target, '.todo-form'), COMMON_RULE.ACTIVE_KEY);
         target.reset();
     }
-
+    
     modifyCardUpdate(cardId, { content: card }): void {
         this.todoApp.querySelector(`#card-${cardId} .card-contents`).innerHTML = card.content;
         removeClass(this.todoModal, COMMON_RULE.ACTIVE_KEY);

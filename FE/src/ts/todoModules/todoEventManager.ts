@@ -1,27 +1,28 @@
+import { COMMON_RULE } from '../contants/constant';
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from '../eventHandles/card';
 import { showColumnForm } from '../eventHandles/column';
-import { closeForm, submitForm } from '../eventHandles/form';
-import { closeModal, submitModal } from '../eventHandles/modal';
+import { onClickSubmit } from '../eventHandles/form';
+import { submitModal } from '../eventHandles/modal';
 import { checkDisabled } from '../util/todoUtil';
-import { getParentEl } from '../util/commonUtil';
+import { getParentEl, toggleClass } from '../util/commonUtil';
 
 class TodoEventManager {
     constructor({ todoView }) {
         this.todoView = todoView;
         this.todoAppEventList = {
-            'click': this.clickEventDelegation.bind(this),
-            'submit': this.submitEventDelegation.bind(this),
-            'dblclick': showEditModal.bind(this),
-            'dragstart': dragStartCard,
-            'dragover': dragoverCard,
-            'dragenter': dragenterCard,
-            'dragend': dragendCard,
-            'input': checkDisabled,
+            click: this.clickEventDelegation.bind(this),
+            submit: this.submitEventDelegation.bind(this),
+            dblclick: showEditModal.bind(this),
+            dragstart: dragStartCard,
+            dragover: dragoverCard,
+            dragenter: dragenterCard,
+            dragend: dragendCard,
+            input: checkDisabled,
         };
         this.todoModalEventList = {
-            'click': this.clickEventDelegation.bind(this),
-            'submit': this.submitEventDelegation.bind(this),
-            'input': checkDisabled,
+            click: this.clickEventDelegation.bind(this),
+            submit: this.submitEventDelegation.bind(this),
+            input: checkDisabled,
         };
     }
 
@@ -48,10 +49,20 @@ class TodoEventManager {
                 deleteCard(target);
                 break;
             case 'form':
-                closeForm(target);
+                toggleClass({
+                    target: target,
+                    containsClassName: 'btn-close',
+                    closestClass: '.todo-form',
+                    toggleClassName: COMMON_RULE.ACTIVE_KEY,
+                });
                 break;
             case 'modal-form':
-                closeModal(target);
+                toggleClass({
+                    target: target,
+                    containsClassName: 'btn-close',
+                    closestClass: '#modal',
+                    toggleClassName: COMMON_RULE.ACTIVE_KEY,
+                });
                 break;
             default:
                 break;
@@ -63,10 +74,20 @@ class TodoEventManager {
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'form':
-                submitForm(evt, this.todoView.addCardUpdate);
+                onClickSubmit({
+                    event: evt,
+                    parentClassName: '.todo-columns',
+                    type: 'post',
+                    callback: this.todoView.addCardUpdate,
+                });
                 break;
             case 'modal-form':
-                submitModal(evt, this.todoView.modifyCardUpdate.bind(this.todoView));
+                onClickSubmit({
+                    event: evt,
+                    parentClassName: '.modal-contents',
+                    type: 'patch',
+                    callback: this.todoView.modifyCardUpdate.bind(this.todoView),
+                });
                 break;
             default:
                 break;

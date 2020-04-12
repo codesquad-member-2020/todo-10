@@ -1,24 +1,26 @@
 import { URL } from '../contants/url';
-import { COMMON_RULE } from '../contants/constant';
-import { getParentEl, toggleClass } from '../util/commonUtil';
+import { getParentEl } from '../util/commonUtil';
 import { httpRequest } from '../http/request';
 
-function closeForm(target: HTMLElement) {
-    return toggleClass({
-        target: target,
-        containsClassName: 'btn-close',
-        closestClass: '.todo-form',
-        toggleClassName: COMMON_RULE.ACTIVE_KEY,
-    });
+function onClickSubmit({ event, parentClassName, type, callback }) {
+    event.preventDefault();
+    const parentEl = getParentEl(event.target, parentClassName);
+    const columnId = parentEl.dataset.columnId || null;
+    const cardId = parentEl.dataset.cardId || null; //
+    const textareaValue = event.target.querySelector('textarea').value;
+    let apiURL = null;
+
+    switch (type) {
+        case 'post':
+            apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card`;
+            debugger;
+            httpRequest.post(apiURL, { content: textareaValue }).then((data) => callback(event, data));
+            break;
+        case 'patch':
+            apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`;
+            httpRequest.patch(apiURL, { content: textareaValue }).then((data) => callback(cardId, data));
+            break;
+    }
 }
 
-function submitForm(evt: Event, addCardUpdate: Function) {
-    evt.preventDefault();
-    const column: HTMLElement = getParentEl(evt.target, '.todo-columns');
-    const columnId = column.dataset.columnId;
-    const data = evt.target.querySelector('textarea').value;
-    const url = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card`;
-    httpRequest.post(url, { content: data }).then((data) => addCardUpdate(evt, data));
-}
-
-export { closeForm, submitForm };
+export { onClickSubmit };
