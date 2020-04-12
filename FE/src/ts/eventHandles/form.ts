@@ -6,7 +6,7 @@ function onClickSubmit({ event, parentClassName, type, callback }) {
     event.preventDefault();
     const parentEl = getParentEl(event.target, parentClassName);
     const columnId = parentEl.dataset.columnId || null;
-    const cardId = parentEl.dataset.cardId || null; //
+    const cardId = parentEl.dataset.cardId || null; 
     const textareaValue = event.target.querySelector('textarea').value;
     let apiURL = null;
 
