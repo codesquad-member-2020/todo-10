@@ -13,7 +13,6 @@ function onClickSubmit({ event, parentClassName, type, callback }) {
     switch (type) {
         case 'post':
             apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card`;
-            debugger;
             httpRequest.post(apiURL, { content: textareaValue }).then((data) => callback(event, data));
             break;
         case 'patch':

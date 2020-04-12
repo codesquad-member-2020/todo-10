@@ -2,7 +2,6 @@ import { COMMON_RULE } from '../contants/constant';
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from '../eventHandles/card';
 import { showColumnForm } from '../eventHandles/column';
 import { onClickSubmit } from '../eventHandles/form';
-import { submitModal } from '../eventHandles/modal';
 import { checkDisabled } from '../util/todoUtil';
 import { getParentEl, toggleClass } from '../util/commonUtil';
 
