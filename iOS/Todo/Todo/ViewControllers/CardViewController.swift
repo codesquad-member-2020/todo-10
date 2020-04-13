@@ -124,7 +124,7 @@ final class EditingCardViewController: CardViewController, CardCreatable {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        EditingUseCase.makeEditingResponse(columnID: columnID,
+        EditedCardViewModelUseCase.makeEditedCardViewModel(columnID: columnID,
                                          cardData: cardData, with: MockCardEditSuccessStub()) { card in
                                             guard let card = card else { return }
                                             self.delegate?.CardViewControllerDidCardCreate(card)

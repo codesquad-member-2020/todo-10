@@ -13,7 +13,7 @@
 		5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F7243F1AFA00D59611 /* CardResponse.swift */; };
 		5A7937FA243F1B1200D59611 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F9243F1B1200D59611 /* Status.swift */; };
 		5A7937FE2440150700D59611 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937FD2440150700D59611 /* CardViewController.swift */; };
-		5A7938002441319F00D59611 /* CreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937FF2441319F00D59611 /* CreateUseCase.swift */; };
+		5A7938002441319F00D59611 /* NewCardViewModelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937FF2441319F00D59611 /* NewCardViewModelUseCase.swift */; };
 		5A79380724419F5600D59611 /* FormatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380624419F5600D59611 /* FormatImageView.swift */; };
 		5A79380924419F9400D59611 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380824419F9400D59611 /* CancelButton.swift */; };
 		5A79380B2441A02600D59611 /* TitleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79380A2441A02600D59611 /* TitleField.swift */; };
@@ -48,7 +48,7 @@
 		5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* ColumnViewController.swift */; };
 		5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */; };
 		5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D58C243B5CDC00387EAE /* TitleView.swift */; };
-		5ACD2EC524441BB6002DD295 /* EditingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD2EC424441BB6002DD295 /* EditingUseCase.swift */; };
+		5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,7 @@
 		5A7937F7243F1AFA00D59611 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
 		5A7937F9243F1B1200D59611 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		5A7937FD2440150700D59611 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
-		5A7937FF2441319F00D59611 /* CreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUseCase.swift; sourceTree = "<group>"; };
+		5A7937FF2441319F00D59611 /* NewCardViewModelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewModelUseCase.swift; sourceTree = "<group>"; };
 		5A79380624419F5600D59611 /* FormatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatImageView.swift; sourceTree = "<group>"; };
 		5A79380824419F9400D59611 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		5A79380A2441A02600D59611 /* TitleField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleField.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		5AB8D584243B4FC700387EAE /* ColumnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewController.swift; sourceTree = "<group>"; };
 		5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogController.swift; sourceTree = "<group>"; };
 		5AB8D58C243B5CDC00387EAE /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		5ACD2EC424441BB6002DD295 /* EditingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUseCase.swift; sourceTree = "<group>"; };
+		5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedCardViewModelUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,8 +214,8 @@
 			children = (
 				5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */,
 				5A7937F5243F194A00D59611 /* DeleteUseCase.swift */,
-				5A7937FF2441319F00D59611 /* CreateUseCase.swift */,
-				5ACD2EC424441BB6002DD295 /* EditingUseCase.swift */,
+				5A7937FF2441319F00D59611 /* NewCardViewModelUseCase.swift */,
+				5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */,
 			);
 			path = Coder;
 			sourceTree = "<group>";
@@ -470,7 +470,7 @@
 				5A7938202441B60D00D59611 /* ContentViewDelegate.swift in Sources */,
 				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
 				5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */,
-				5A7938002441319F00D59611 /* CreateUseCase.swift in Sources */,
+				5A7938002441319F00D59611 /* NewCardViewModelUseCase.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* ColumnTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
 				5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */,
@@ -487,7 +487,7 @@
 				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */,
-				5ACD2EC524441BB6002DD295 /* EditingUseCase.swift in Sources */,
+				5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */,
 				5A874646243C4C7B00FD1751 /* ColumnTableDelegate.swift in Sources */,
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
 				5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */,

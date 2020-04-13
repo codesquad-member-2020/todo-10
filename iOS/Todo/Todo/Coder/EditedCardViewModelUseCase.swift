@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct EditingUseCase {
-    static func makeEditingResponse(columnID: Int,
+struct EditedCardViewModelUseCase {
+    static func makeEditedCardViewModel(columnID: Int,
                                     cardData: Data,
                                     with manager: NetworkManagable,
                                     result: @escaping (CardViewModel?) -> () ) {
         try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card",
-            method: .post,
+            method: .patch,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                 guard error == nil, let data = data else { return }
