@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol CardCreatable {
-    func cardDidCreate(_ card: Card)
+protocol CardViewControllerDelegate {
+    func CardViewControllerDidCardCreate(_ card: Card)
 }
 
 final class CardViewController: UIViewController {
-    var delegate: CardCreatable?
+    var delegate: CardViewControllerDelegate?
     private let cancelButton = CancelButton()
     fileprivate let createButton = CreateButton()
     private let titleField = TitleField()
@@ -67,7 +67,7 @@ final class CardViewController: UIViewController {
         CreateUseCase.makeCreateResponse(columnID: columnID,
                                          cardData: cardData, with: MockCardCreateSuccessStub()) { card in
                                             guard let card = card else { return }
-                                            self.delegate?.cardDidCreate(card)
+                                            self.delegate?.CardViewControllerDidCardCreate(card)
         }
         dismiss(animated: true, completion: nil)
     }

@@ -92,7 +92,7 @@ final class ColumnViewController: UIViewController {
     }
 }
 
-extension ColumnViewController: PlusButtonDelegate, CardCreatable {
+extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     func showNewCardViewController() {
         let newCardViewController = CardViewController()
         newCardViewController.columnID = column?.id
@@ -100,7 +100,7 @@ extension ColumnViewController: PlusButtonDelegate, CardCreatable {
         present(newCardViewController, animated: true)
     }
     
-    func cardDidCreate(_ card: Card) {
+    func CardViewControllerDidCardCreate(_ card: Card) {
         columnTableDataSource.appendColumnModel(card: card)
         DispatchQueue.main.async {
             self.columnTable.reloadData()
