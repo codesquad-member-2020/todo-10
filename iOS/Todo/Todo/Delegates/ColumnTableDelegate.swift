@@ -32,7 +32,8 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
 extension ColumnTableDelegate {
     private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, delay: Double = 0.0, resultHandler: @escaping (Bool?) -> () = { _ in }) {
         guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
-        guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
+        guard let cardViewModel = dataSource.cardViewModel(at: indexPath.row) else { return }
+        guard let cardID = cardViewModel.cardID else { return }
         DeleteUseCase.makeDeleteResponse(columnID: dataSource.columnID,
                                          cardID: cardID,
                                          with: MockCardDeleteSuccessStub()) { result in

@@ -38,10 +38,9 @@ final class ColumnTableDataSource: NSObject {
         cardViewModels.append(CardViewModel(card: card))
     }
     
-    func cardID(at index: Int) -> Int? {
+    func cardViewModel(at index: Int) -> CardViewModel? {
         guard index < cardViewModels.count else { return nil }
-        guard let cardID = cardViewModels[index].cardID else { return nil }
-        return cardID
+        return cardViewModels[index]
     }
 }
 
