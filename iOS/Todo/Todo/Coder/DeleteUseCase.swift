@@ -9,7 +9,7 @@
 import Foundation
 
 struct DeleteUseCase {
-    static func makeDeleteResponse(columnID: Int,
+    static func makeDeleteResult(columnID: Int,
                                    cardID: Int,
                                    with manager: NetworkManagable,
                                    result: @escaping (Bool?) -> ()) {

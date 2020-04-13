@@ -34,7 +34,7 @@ extension ColumnTableDelegate {
         guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
         guard let cardViewModel = dataSource.cardViewModel(at: indexPath.row) else { return }
         guard let cardID = cardViewModel.cardID else { return }
-        DeleteUseCase.makeDeleteResponse(columnID: dataSource.columnID,
+        DeleteUseCase.makeDeleteResult(columnID: dataSource.columnID,
                                          cardID: cardID,
                                          with: MockCardDeleteSuccessStub()) { result in
                                             guard let result = result else { return }
