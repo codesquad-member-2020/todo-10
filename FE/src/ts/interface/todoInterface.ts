@@ -15,7 +15,11 @@ interface ICardOption {
     currColumn: HTMLElement | null;
 }
 
-export {
-    ITodoViewTemplate,
-    ICardOption,
+interface IOnClickSubmit {
+    event: Event;
+    parentClassName: string;
+    type: string;
+    callback: Function;
 }
+
+export { ITodoViewTemplate, ICardOption, IOnClickSubmit };
