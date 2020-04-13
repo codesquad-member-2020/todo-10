@@ -19,12 +19,14 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
             [UIContextualAction(style: .destructive,
                                 title: ButtonData.deleteString,
                                 handler: { contextualAction, view, _ in
-                                    self.notifySwipeDeleteEventOccured(indexPath: indexPath)
+                                    self.notifySwipeDeleteEventOccured(tableView: tableView, indexPath: indexPath)
             })])
     }
     
-    private func notifySwipeDeleteEventOccured(indexPath: IndexPath) {
-        NotificationCenter.default.post(name: Notification.swipeDeleteEventOccured, object: self, userInfo: ["indexPath" : indexPath])
+    private func notifySwipeDeleteEventOccured(tableView: UITableView, indexPath: IndexPath) {
+        NotificationCenter.default.post(name: Notification.swipeDeleteEventOccured,
+                                        object: self,
+                                        userInfo: ["tableView": tableView, "indexPath" : indexPath])
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -32,9 +34,7 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
             return self.contextMenu(tableView, for: indexPath)
         }
     }
-}
-
-extension ColumnTableDelegate {
+    
     private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
         return UIMenu(title: "", children: [move(), edit(), delete(tableView, for: indexPath)])
     }
@@ -51,9 +51,15 @@ extension ColumnTableDelegate {
         }
     }
     
-    private func delete(_ tableView: UITableView,for indexPath: IndexPath) -> UIAction {
+    private func delete(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
         return UIAction(title: ButtonData.deleteString, attributes: .destructive) { action in
-            let delayForNotOverlapAnimation = 0.7
+            self.notifyMenuDeleteEventOccured(tableView: tableView, indexPath: indexPath)
         }
+    }
+    
+    private func notifyMenuDeleteEventOccured(tableView: UITableView, indexPath: IndexPath) {
+        NotificationCenter.default.post(name: Notification.menuDeleteEventOccured,
+                                        object: self,
+                                        userInfo: ["tableView": tableView, "indexPath" : indexPath])
     }
 }

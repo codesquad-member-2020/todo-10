@@ -57,10 +57,16 @@ final class ColumnViewController: UIViewController {
                                                selector: #selector(updateBadge),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(deleteRow),
-                                               name: ColumnTableDelegate.Notification.swipeDeleteEventOccured,
-                                               object: columnTableDelegate)
+        NotificationCenter.default.addObserver(forName: ColumnTableDelegate.Notification.swipeDeleteEventOccured,
+                                               object: columnTableDelegate,
+                                               queue: nil) { notification in
+                                                self.deleteRow(notification: notification)
+        }
+        NotificationCenter.default.addObserver(forName: ColumnTableDelegate.Notification.menuDeleteEventOccured,
+                                               object: columnTableDelegate,
+                                               queue: nil) { notification in
+                                                self.deleteRow(notification: notification, delay: 0.7)
+        }
     }
     
     @objc private func updateBadge() {
@@ -69,9 +75,9 @@ final class ColumnViewController: UIViewController {
         }
     }
     
-    @objc private func deleteRow(notification: Notification, delay: Double = 0.0) {
+    private func deleteRow(notification: Notification, delay: Double = 0.0) {
         guard let userInfo = notification.userInfo,
-            let indexPath = userInfo["indexPath"] as? IndexPath,
+            let tableView = userInfo["tableView"] as? UITableView , let indexPath = userInfo["indexPath"] as? IndexPath,
             let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
             let column = column, let cardID = cardViewModel.cardID else { return }
         DeleteUseCase.makeDeleteResult(columnID: column.id, cardID: cardID, with: MockCardDeleteSuccessStub()) { result in
@@ -79,7 +85,7 @@ final class ColumnViewController: UIViewController {
             if result {
                 self.columnTableDataSource.removeColumnModel(at: indexPath.row)
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.columnTable.deleteRows(at: [indexPath], with: .fade)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
                 }
             }
         }
