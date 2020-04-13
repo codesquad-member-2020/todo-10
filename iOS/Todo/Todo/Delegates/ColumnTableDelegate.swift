@@ -5,12 +5,13 @@
 //  Created by kimdo2297 on 2020/04/07.
 //  Copyright © 2020 Jason. All rights reserved.
 //
-
+import Foundation
 import UIKit
 
 final class ColumnTableDelegate: NSObject, UITableViewDelegate {
-    override init() {
-        super.init()
+    enum Notification {
+        static let menuDeleteEventOccured = Foundation.Notification.Name("contextMenuDeleteEventOccured")
+        static let swipeDeleteEventOccured = Foundation.Notification.Name("swipeDeleteEventOccured")
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -18,8 +19,12 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
             [UIContextualAction(style: .destructive,
                                 title: ButtonData.deleteString,
                                 handler: { contextualAction, view, _ in
-                                    self.deleteRow(tableView, indexPath: indexPath)
+                                    self.notifySwipeDeleteEventOccured(indexPath: indexPath)
             })])
+    }
+    
+    private func notifySwipeDeleteEventOccured(indexPath: IndexPath) {
+        NotificationCenter.default.post(name: Notification.swipeDeleteEventOccured, object: self, userInfo: ["indexPath" : indexPath])
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -30,24 +35,6 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
 }
 
 extension ColumnTableDelegate {
-    private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, delay: Double = 0.0, resultHandler: @escaping (Bool?) -> () = { _ in }) {
-        guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
-        guard let cardViewModel = dataSource.cardViewModel(at: indexPath.row) else { return }
-        guard let cardID = cardViewModel.cardID else { return }
-        DeleteUseCase.makeDeleteResult(columnID: dataSource.columnID,
-                                         cardID: cardID,
-                                         with: MockCardDeleteSuccessStub()) { result in
-                                            guard let result = result else { return }
-                                            if result {
-                                                dataSource.removeColumnModel(at: indexPath.row)
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                                    tableView.deleteRows(at: [indexPath], with: .fade)
-                                                }
-                                                resultHandler(true)
-                                            }
-        }
-    }
-    
     private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
         return UIMenu(title: "", children: [move(), edit(), delete(tableView, for: indexPath)])
     }
@@ -67,7 +54,6 @@ extension ColumnTableDelegate {
     private func delete(_ tableView: UITableView,for indexPath: IndexPath) -> UIAction {
         return UIAction(title: ButtonData.deleteString, attributes: .destructive) { action in
             let delayForNotOverlapAnimation = 0.7
-            self.deleteRow(tableView, indexPath: indexPath, delay: delayForNotOverlapAnimation)
         }
     }
 }

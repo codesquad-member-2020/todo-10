@@ -19,7 +19,7 @@ final class ColumnViewController: UIViewController {
         super.viewDidLoad()
         configureTitleView()
         configureTableView()
-        configureObserver()
+        configureObservers()
     }
     
     private func configureTitleView() {
@@ -52,16 +52,36 @@ final class ColumnViewController: UIViewController {
         columnTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateBadge),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deleteRow),
+                                               name: ColumnTableDelegate.Notification.swipeDeleteEventOccured,
+                                               object: columnTableDelegate)
     }
     
     @objc private func updateBadge() {
         DispatchQueue.main.async {
             self.titleView.badge.text = String(self.columnTableDataSource.cardViewModelsCount)
+        }
+    }
+    
+    @objc private func deleteRow(notification: Notification, delay: Double = 0.0) {
+        guard let userInfo = notification.userInfo,
+            let indexPath = userInfo["indexPath"] as? IndexPath,
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+            let column = column, let cardID = cardViewModel.cardID else { return }
+        DeleteUseCase.makeDeleteResult(columnID: column.id, cardID: cardID, with: MockCardDeleteSuccessStub()) { result in
+            guard let result = result else { return }
+            if result {
+                self.columnTableDataSource.removeColumnModel(at: indexPath.row)
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    self.columnTable.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
         }
     }
     
