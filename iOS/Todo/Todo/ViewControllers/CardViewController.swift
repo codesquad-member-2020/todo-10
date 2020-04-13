@@ -15,7 +15,7 @@ protocol CardCreatable {
 final class CardViewController: UIViewController {
     var delegate: CardCreatable?
     private let cancelButton = CancelButton()
-    private let createButton = CreateButton()
+    fileprivate let createButton = CreateButton()
     private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
     private let contentView = ContentView()
