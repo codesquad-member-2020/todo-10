@@ -39,7 +39,8 @@ extension ColumnTableDelegate {
                                             guard let result = result else { return }
                                             if result {
                                                 dataSource.removeColumnModel(at: indexPath.row)
-                                                DispatchQueue.main.async {
+                                                let delay = 0.7
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                                                     tableView.deleteRows(at: [indexPath], with: .fade)
                                                 }
                                                 resultHandler(true)
