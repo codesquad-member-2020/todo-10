@@ -1,4 +1,4 @@
-package com.codesquad.team10.todo.bean;
+package com.codesquad.team10.todo.response;
 
 public class ResponseData {
 
