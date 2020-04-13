@@ -12,15 +12,16 @@ protocol CardViewControllerDelegate {
     func CardViewControllerDidCardCreate(_ card: Card)
 }
 
-final class CardViewController: UIViewController {
+class CardViewController: UIViewController {
+    var columnID: Int?
     var delegate: CardViewControllerDelegate?
     private let cancelButton = CancelButton()
-    fileprivate let createButton = CreateButton()
-    private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
-    private let contentView = ContentView()
     private let contentViewDelegate = ContentViewDelegate()
-    
+    fileprivate let createButton = CreateButton()
+    fileprivate let titleField = TitleField()
+    fileprivate let contentView = ContentView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureObserver()
@@ -51,30 +52,13 @@ final class CardViewController: UIViewController {
     }
     
     private func configureCreateButton() {
-        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
-        
         view.addSubview(createButton)
         let constant: CGFloat = 27
         createButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
     }
-    
-    var columnID: Int?
-    @objc private func createCard() {
-        guard let columnID = columnID else { return }
-        guard let content = contentView.text else { return }
-        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        CreateUseCase.makeCreateResponse(columnID: columnID,
-                                         cardData: cardData, with: MockCardCreateSuccessStub()) { card in
-                                            guard let card = card else { return }
-                                            self.delegate?.CardViewControllerDidCardCreate(card)
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
+
     private func configureCancelButton() {
-        cancelButton.addTarget(self, action: #selector(cancelCardViewController), for: .touchUpInside)
-        
         view.addSubview(cancelButton)
         let constant: CGFloat = 27
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
@@ -104,5 +88,28 @@ final class CardViewController: UIViewController {
         contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
         contentView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
         contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+    }
+}
+
+@objc protocol CardCreatable where Self: CardViewController {
+     func createCard()
+}
+
+final class NewCardViewController: CardViewController, CardCreatable {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
+    }
+    
+    @objc func createCard() {
+        guard let columnID = columnID else { return }
+        guard let content = contentView.text else { return }
+        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
+        CreateUseCase.makeCreateResponse(columnID: columnID,
+                                         cardData: cardData, with: MockCardCreateSuccessStub()) { card in
+                                            guard let card = card else { return }
+                                            self.delegate?.CardViewControllerDidCardCreate(card)
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
