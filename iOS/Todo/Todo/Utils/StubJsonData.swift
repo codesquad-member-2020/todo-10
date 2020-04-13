@@ -105,4 +105,11 @@ enum StubJsonData {
         }
     }
     """.data(using: .utf8)
+    
+    static let successEditingResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": "Card Updated"
+    }
+    """.data(using: .utf8)
 }

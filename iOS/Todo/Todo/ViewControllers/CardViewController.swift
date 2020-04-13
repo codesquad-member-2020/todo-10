@@ -92,7 +92,7 @@ class CardViewController: UIViewController {
 }
 
 @objc protocol CardCreatable where Self: CardViewController {
-     func createCard()
+    func createCard()
 }
 
 final class NewCardViewController: CardViewController, CardCreatable {
@@ -107,6 +107,25 @@ final class NewCardViewController: CardViewController, CardCreatable {
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
         CreateUseCase.makeCreateResponse(columnID: columnID,
                                          cardData: cardData, with: MockCardCreateSuccessStub()) { card in
+                                            guard let card = card else { return }
+                                            self.delegate?.CardViewControllerDidCardCreate(card)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+final class EditingCardViewController: CardViewController, CardCreatable {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
+    }
+    
+    @objc func createCard() {
+        guard let columnID = columnID else { return }
+        guard let content = contentView.text else { return }
+        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
+        EditingUseCase.makeEditingResponse(columnID: columnID,
+                                         cardData: cardData, with: MockCardEditSuccessStub()) { card in
                                             guard let card = card else { return }
                                             self.delegate?.CardViewControllerDidCardCreate(card)
         }
