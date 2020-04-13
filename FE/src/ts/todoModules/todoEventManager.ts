@@ -4,9 +4,14 @@ import { showColumnForm } from '../eventHandles/column';
 import { onClickSubmit } from '../eventHandles/form';
 import { checkDisabled } from '../util/todoUtil';
 import { getParentEl, toggleClass } from '../util/commonUtil';
+import TodoView from './todoView';
+import { ITodoEventList, ITodoAppEventList } from '../interface/todoInterface';
 
 class TodoEventManager {
-    constructor({ todoView }) {
+    todoView: TodoView;
+    todoAppEventList: ITodoAppEventList;
+    todoModalEventList: ITodoEventList;
+    constructor(todoView: TodoView) {
         this.todoView = todoView;
         this.todoAppEventList = {
             click: this.clickEventDelegation.bind(this),
@@ -37,15 +42,15 @@ class TodoEventManager {
         }
     }
 
-    clickEventDelegation({ target }): void {
-        const contentWrap = getParentEl(target, '.content-wrap');
+    clickEventDelegation({ target }:Event): void {
+        const contentWrap = getParentEl(<HTMLElement>target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'column':
-                showColumnForm(target);
+                showColumnForm(<HTMLElement>target);
                 break;
             case 'card':
-                deleteCard(target);
+                deleteCard(<HTMLElement>target);
                 break;
             case 'form':
                 toggleClass({
@@ -68,8 +73,8 @@ class TodoEventManager {
         }
     }
 
-    submitEventDelegation(evt): void {
-        const contentWrap = getParentEl(evt.target, '.content-wrap');
+    submitEventDelegation(evt:Event): void {
+        const contentWrap = getParentEl(<HTMLElement>evt.target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
             case 'form':
