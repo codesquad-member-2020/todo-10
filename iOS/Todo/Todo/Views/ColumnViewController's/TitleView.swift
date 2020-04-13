@@ -125,19 +125,39 @@ final class TitleLabel: UILabel {
     }
 }
 
+protocol PlusButtonDelegate {
+    func showNewCardViewController()
+}
+
 final class PlusButton: UIButton {
+    var delegate: PlusButtonDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        configureDelegete()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure()
+        configureDelegete()
+    }
+    
+    deinit {
+        removeTarget(self, action: #selector(plusButtonTouched), for: .touchUpInside)
     }
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         setImage(UIImage(systemName: "plus"), for: .normal)
+    }
+    
+    private func configureDelegete() {
+        addTarget(self, action: #selector(plusButtonTouched), for: .touchUpInside)
+    }
+    
+    @objc private func plusButtonTouched() {
+        delegate?.showNewCardViewController()
     }
 }

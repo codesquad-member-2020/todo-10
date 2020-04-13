@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct CardListsResponse: Codable {
+struct ColumnsResponse: Codable {
     var status: Status
     var content: Content
 }
 
 struct Content: Codable {
-    var sections: [CardList]
+    var sections: [Column]
     var logs: [Log]
 }
 
@@ -26,7 +26,7 @@ struct Log: Codable {
     var createdDateTime: String?
 }
 
-struct CardList: Codable {
+struct Column: Codable {
     let id: Int
     var title: String
     var cards: [Card]

@@ -9,7 +9,7 @@
 import Foundation
 
 enum LoginInfo {
-    static let cardLists = """
+    static let columns = """
     {
         "email": "nigayo@ggmail.com",
         "password": "1234"
@@ -17,17 +17,17 @@ enum LoginInfo {
     """.data(using: .utf8)
 }
 
-struct CardListsUseCase {
-    static func makeCardLists(with manager: NetworkManagable, completed: @escaping (CardListsDataSource?) -> ()) {
-        try? manager.getResource(from: NetworkManager.EndPoints.cardLists, method: .post,
-                                 body: LoginInfo.cardLists, format: Format.jsonType,
+struct ColumnsUseCase {
+    static func makeColumns(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {
+        try? manager.requestResource(from: NetworkManager.EndPoints.columns, method: .post,
+                                 body: LoginInfo.columns, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                     guard error == nil else { return }
                                     guard let data = data else { return }
-                                    guard let response = try? JSONDecoder().decode(CardListsResponse.self, from: data) else { return }
+                                    guard let response = try? JSONDecoder().decode(ColumnsResponse.self, from: data) else { return }
                                     guard response.status == .success else { return }
-                                    let cardList = CardLists(cardLists: response.content.sections)
-                                    completed(cardList)
+                                    let column = Columns(columns: response.content.sections)
+                                    completed(column)
         }
     }
 }

@@ -9,43 +9,43 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    private let scrollView = CardListScrollView()
+    private let columScrollView = ColumnScrollView()
     
     override func viewDidLoad() {
         configureScrollView()
-        configureCardListsCase()
+        configureColumnsCase()
     }
     
     private func configureScrollView() {
-        view.addSubview(scrollView)
+        view.addSubview(columScrollView)
         
-        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
-        scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        columScrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+        columScrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
+        columScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        columScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
     
-    private func configureCardListsCase() {
-        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
-            cardListsDataSource?.iterateCardList(with: { cardList in
+    private func configureColumnsCase() {
+        ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
+            columnsDataSource?.iterateColumns(with: { column in
                 DispatchQueue.main.async {
-                    let cardListViewController: CardListViewController = {
-                        let controller = CardListViewController()
-                        controller.cardList = cardList
+                    let columnViewController: ColumnViewController = {
+                        let controller = ColumnViewController()
+                        controller.column = column
                         return controller
                     }()
-                    self.addCardListViewController(cardListViewController: cardListViewController)
+                    self.addColumnViewController(columnViewController: columnViewController)
                 }
             })
         }
     }
     
-    private func addCardListViewController(cardListViewController: CardListViewController) {
-        addChild(cardListViewController)
-        scrollView.stackView.addArrangedSubview(cardListViewController.view)
+    private func addColumnViewController(columnViewController: ColumnViewController) {
+        addChild(columnViewController)
+        columScrollView.columnStackView.addArrangedSubview(columnViewController.view)
         
-        cardListViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        cardListViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
-        cardListViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
+        columnViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        columnViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.32).isActive = true
+        columnViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
     }
 }

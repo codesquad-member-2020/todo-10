@@ -19,7 +19,7 @@ final class TitleViewModel: ViewModelBinding {
         changedHandler(self.titleModel)
     }
     
-    func bind(changed handler: @escaping (TitleModel?) -> ()) {
+    func performBind(changed handler: @escaping (Key) -> ()) {
         self.changedHandler = handler
         changedHandler(titleModel)
     }

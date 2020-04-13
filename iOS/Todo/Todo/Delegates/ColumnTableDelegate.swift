@@ -8,18 +8,17 @@
 
 import UIKit
 
-final class CardListTableDelegate: NSObject, UITableViewDelegate {
+final class ColumnTableDelegate: NSObject, UITableViewDelegate {
+    override init() {
+        super.init()
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UISwipeActionsConfiguration(actions:
             [UIContextualAction(style: .destructive,
                                 title: ButtonData.deleteString,
-                                handler: { contextualAction, view, success in
-                                    self.deleteRow(tableView, indexPath: indexPath) { result in
-                                        guard let result = result else { return }
-                                        if result {
-                                            success(true)
-                                        }
-                                    }
+                                handler: { contextualAction, view, _ in
+                                    self.deleteRow(tableView, indexPath: indexPath)
             })])
     }
     
@@ -30,17 +29,18 @@ final class CardListTableDelegate: NSObject, UITableViewDelegate {
     }
 }
 
-extension CardListTableDelegate {
+extension ColumnTableDelegate {
     private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> () = { _ in }) {
-        guard let dataSource = tableView.dataSource as? CardListTableDataSource else { return }
+        guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
-        DeleteUseCase.makeDeleteResponse(cardListID: dataSource.cardListID,
+        DeleteUseCase.makeDeleteResponse(columnID: dataSource.columnID,
                                          cardID: cardID,
-                                         with: NetworkManager()) { result in
+                                         with: MockCardDeleteSuccessStub()) { result in
                                             guard let result = result else { return }
                                             if result {
-                                                dataSource.removeCardListModel(at: indexPath.row)
-                                                DispatchQueue.main.async {
+                                                dataSource.removeColumnModel(at: indexPath.row)
+                                                let delay = 0.7
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                                                     tableView.deleteRows(at: [indexPath], with: .fade)
                                                 }
                                                 resultHandler(true)

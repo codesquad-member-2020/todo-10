@@ -33,17 +33,17 @@ enum NetworkErrorCase: Error {
 }
 
 protocol NetworkManagable {
-    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, Error?) -> ()) throws
 }
 
 struct NetworkManager: NetworkManagable {
     enum EndPoints {
-        static let cardLists = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
-        static let cardList = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
+        static let columns = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
+        static let column = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
     }
     
-    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, Error?) -> ()) throws {
         guard let url = URL(string: urlString) else {
             throw NetworkErrorCase.invalidURL
@@ -65,17 +65,22 @@ struct NetworkManager: NetworkManagable {
     }
 }
 
-struct MockCardListsSuccessStub: NetworkManagable {
-    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+struct MockColumnsSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successCardListsResponseStub, nil)
+        resultHandler(StubJsonData.successColumnsResponseStub, nil)
     }
 }
 
 struct MockCardDeleteSuccessStub: NetworkManagable {
-    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, Error?) -> ()) throws {
         resultHandler(StubJsonData.successDeleteResponseStub, nil)
     }
 }
 
+struct MockCardCreateSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successCreateResponseStub, nil)
+    }
+}

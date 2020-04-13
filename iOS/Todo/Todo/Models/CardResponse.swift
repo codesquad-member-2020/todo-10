@@ -12,3 +12,8 @@ struct CardResponse: Codable {
     var status: Status
     var content: String
 }
+
+struct NewCardResponse: Codable {
+    var status: Status
+    var content: Card
+}
