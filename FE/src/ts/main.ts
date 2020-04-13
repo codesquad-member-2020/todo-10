@@ -4,6 +4,6 @@ import TodoEventManager from './todoModules/todoEventManager';
 
 const todoView = new TodoView();
 const todoEventManager = new TodoEventManager({ todoView });
-const todoController = new TodoController({ todoView, todoEventManager });
+const todoController = new TodoController(todoView, todoEventManager);
 
 todoController.runTodoApp();
