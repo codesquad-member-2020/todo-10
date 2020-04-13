@@ -30,7 +30,7 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
 }
 
 extension ColumnTableDelegate {
-    private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, resultHandler: @escaping (Bool?) -> () = { _ in }) {
+    private func deleteRow(_ tableView: UITableView, indexPath: IndexPath, delay: Double = 0.0, resultHandler: @escaping (Bool?) -> () = { _ in }) {
         guard let dataSource = tableView.dataSource as? ColumnTableDataSource else { return }
         guard let cardID = dataSource.cardID(at: indexPath.row) else { return }
         DeleteUseCase.makeDeleteResponse(columnID: dataSource.columnID,
@@ -39,7 +39,6 @@ extension ColumnTableDelegate {
                                             guard let result = result else { return }
                                             if result {
                                                 dataSource.removeColumnModel(at: indexPath.row)
-                                                let delay = 0.7
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                                                     tableView.deleteRows(at: [indexPath], with: .fade)
                                                 }
@@ -66,7 +65,8 @@ extension ColumnTableDelegate {
     
     private func delete(_ tableView: UITableView,for indexPath: IndexPath) -> UIAction {
         return UIAction(title: ButtonData.deleteString, attributes: .destructive) { action in
-            self.deleteRow(tableView, indexPath: indexPath)
+            let delayForNotOverlapAnimation = 0.7
+            self.deleteRow(tableView, indexPath: indexPath, delay: delayForNotOverlapAnimation)
         }
     }
 }
