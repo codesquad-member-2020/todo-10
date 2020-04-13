@@ -1,8 +1,16 @@
-import { getEl, getParentEl, addClass, removeClass } from '../util/commonUtil';
-import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../contants/constant';
-import { URL } from '../contants/url';
-import { httpRequest } from '../http/request';
-import { ICardOption } from '../interface/todoInterface';
+import { getEl, getParentEl, addClass, removeClass } from '../../utils/commonUtil';
+import { ALERT_MESSAGE, COMMON_RULE, STATUS_KEY } from '../../contants/constant';
+import { URL } from '../../contants/url';
+import { httpRequest } from '../../utils/httpRequestUtil';
+
+interface ICardOption {
+    dragTarget: Node | HTMLElement | null;
+    targetHeight: number | null;
+    toTarget: Node | HTMLElement | null;
+    toTargetWrap: Node | HTMLElement | null;
+    prevColumn: Node | HTMLElement | null;
+    currColumn: Node | HTMLElement | null;
+}
 
 const option: ICardOption = {
     dragTarget: null,

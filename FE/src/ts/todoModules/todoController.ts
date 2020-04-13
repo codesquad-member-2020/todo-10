@@ -1,4 +1,4 @@
-import { httpRequest } from '../http/request';
+import { httpRequest } from '../utils/httpRequestUtil';
 import { URL } from '../contants/url';
 import TodoView from './todoView';
 import TodoEventManager from './todoEventManager';

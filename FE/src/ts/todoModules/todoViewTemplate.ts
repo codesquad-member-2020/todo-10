@@ -1,4 +1,10 @@
-import { ITodoViewTemplate } from '../interface/todoInterface';
+interface ITodoViewTemplate {
+    id: string;
+    title: string;
+    content: string;
+    cards: [];
+    sections: [];
+}
 
 function makeColumns({ sections }: ITodoViewTemplate): string {
     return sections.reduce((acc: string, column: ITodoViewTemplate) => {

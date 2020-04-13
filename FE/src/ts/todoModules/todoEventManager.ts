@@ -1,11 +1,24 @@
 import { COMMON_RULE } from '../contants/constant';
-import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from '../eventHandles/card';
-import { showColumnForm } from '../eventHandles/column';
-import { onClickSubmit } from '../eventHandles/form';
-import { checkDisabled } from '../util/todoUtil';
-import { getParentEl, toggleClass } from '../util/commonUtil';
+import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from './eventHandles/card';
+import { showColumnForm } from './eventHandles/column';
+import { onClickSubmit } from './eventHandles/form';
+import { checkDisabled } from '../utils/todoUtil';
+import { getParentEl, toggleClass } from '../utils/commonUtil';
 import TodoView from './todoView';
-import { ITodoEventList, ITodoAppEventList } from '../interface/todoInterface';
+
+interface ITodoEventList {
+    click: Function;
+    submit: Function;
+    input: Function;
+}
+
+interface ITodoAppEventList extends ITodoEventList {
+    dblclick: Function;
+    dragstart: Function;
+    dragover: Function;
+    dragenter: Function;
+    dragend: Function;
+}
 
 class TodoEventManager {
     todoView: TodoView;
