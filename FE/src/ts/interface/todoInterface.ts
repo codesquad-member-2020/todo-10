@@ -12,12 +12,12 @@ interface ITodoViewTemplate {
 }
 
 interface ICardOption {
-    dragTarget: HTMLElement | null;
+    dragTarget: Node | HTMLElement | null;
     targetHeight: number | null;
-    toTarget: HTMLElement | null;
-    toTargetWrap: HTMLElement | null;
-    prevColumn: HTMLElement | null;
-    currColumn: HTMLElement | null;
+    toTarget: Node | HTMLElement | null;
+    toTargetWrap: Node | HTMLElement | null;
+    prevColumn: Node | HTMLElement | null;
+    currColumn: Node | HTMLElement | null;
 }
 
 interface IOnClickSubmit {
