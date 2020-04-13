@@ -7,7 +7,7 @@
       "dom"
     ],
     "removeComments": true,
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "src/js",
