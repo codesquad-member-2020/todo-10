@@ -1,7 +1,6 @@
-import { getEl, getParentEl, removeClass } from '../util/commonUtil';
+import { getEl, getParentEl, removeClass } from '../utils/commonUtil';
 import { COMMON_RULE } from '../contants/constant';
 import { makeColumns, addCard, makeModal, makeMenu } from './todoViewTemplate';
-import { ITodoViewTemplate } from '../interface/todoInterface';
 
 class TodoView {
     public todoApp: HTMLElement;
@@ -14,7 +13,7 @@ class TodoView {
         this.todoModal = getEl('#modal');
     }
 
-    todoAppRender({content}: ITodoViewTemplate): void {
+    todoAppRender({content}): void {
         this.todoApp.innerHTML = makeColumns(content);
     }
 

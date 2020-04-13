@@ -1,7 +1,13 @@
-import { URL } from '../contants/url';
-import { getParentEl } from '../util/commonUtil';
-import { httpRequest } from '../http/request';
-import { IOnClickSubmit } from '../interface/todoInterface';
+import { URL } from '../../contants/url';
+import { getParentEl } from '../../utils/commonUtil';
+import { httpRequest } from '../../utils/httpRequestUtil';
+
+interface IOnClickSubmit {
+    event: Event;
+    parentClassName: string;
+    type: string;
+    callback: Function;
+}
 
 function onClickSubmit({ event, parentClassName, type, callback }: IOnClickSubmit) {
     event.preventDefault();
