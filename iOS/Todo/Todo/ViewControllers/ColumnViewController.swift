@@ -100,8 +100,8 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         present(newCardViewController, animated: true)
     }
     
-    func CardViewControllerDidCardCreate(_ card: Card) {
-        columnTableDataSource.appendColumnModel(card: card)
+    func CardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
+        columnTableDataSource.appendColumnModel(cardViewModel: cardViewModel)
         DispatchQueue.main.async {
             self.columnTable.reloadData()
         }

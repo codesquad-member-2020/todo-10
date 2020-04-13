@@ -12,7 +12,7 @@ struct EditingUseCase {
     static func makeEditingResponse(columnID: Int,
                                     cardData: Data,
                                     with manager: NetworkManagable,
-                                    result: @escaping (Card?) -> () ) {
+                                    result: @escaping (CardViewModel?) -> () ) {
         try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card",
             method: .post,
             body: cardData, format: Format.jsonType,
@@ -20,7 +20,7 @@ struct EditingUseCase {
                 guard error == nil, let data = data else { return }
                 guard let cardResponse = try? JSONDecoder().decode(NewCardResponse.self, from: data) else { return }
                 guard cardResponse.status == .success else { return }
-                result(cardResponse.content)
+                result(CardViewModel(card: cardResponse.content))
         }
     }
 }

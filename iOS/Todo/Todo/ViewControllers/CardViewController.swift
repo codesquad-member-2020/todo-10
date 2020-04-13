@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CardViewControllerDelegate {
-    func CardViewControllerDidCardCreate(_ card: Card)
+    func CardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
 }
 
 class CardViewController: UIViewController {
@@ -105,10 +105,10 @@ final class NewCardViewController: CardViewController, CardCreatable {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        CreateUseCase.makeCreateResponse(columnID: columnID,
-                                         cardData: cardData, with: MockCardCreateSuccessStub()) { card in
-                                            guard let card = card else { return }
-                                            self.delegate?.CardViewControllerDidCardCreate(card)
+        NewCardViewModelUseCase.makeNewCardViewModel(columnID: columnID,
+                                         cardData: cardData, with: MockCardCreateSuccessStub()) { cardViewModel in
+                                            guard let cardViewModel = cardViewModel else { return }
+                                            self.delegate?.CardViewControllerDidCardCreate(cardViewModel)
         }
         dismiss(animated: true, completion: nil)
     }

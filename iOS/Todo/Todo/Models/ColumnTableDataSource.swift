@@ -34,8 +34,8 @@ final class ColumnTableDataSource: NSObject {
         cardViewModels.remove(at: index)
     }
     
-    func appendColumnModel(card: Card) {
-        cardViewModels.append(CardViewModel(card: card))
+    func appendColumnModel(cardViewModel: CardViewModel) {
+        cardViewModels.append(cardViewModel)
     }
     
     func cardViewModel(at index: Int) -> CardViewModel? {
