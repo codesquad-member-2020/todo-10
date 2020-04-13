@@ -93,7 +93,7 @@ final class ColumnViewController: UIViewController {
 }
 
 extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
-    func showNewCardViewController() {
+    func plusCardDidTouch() {
         let newCardViewController = CardViewController()
         newCardViewController.columnID = column?.id
         newCardViewController.delegate = self
