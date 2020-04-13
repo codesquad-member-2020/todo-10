@@ -1,8 +1,13 @@
 import { httpRequest } from '../http/request';
 import { URL } from '../contants/url';
+import TodoView from './todoView';
+import TodoEventManager from './todoEventManager';
 
 class TodoController {
-    constructor({ todoView, todoEventManager }) {
+    private todoView: TodoView;
+    private todoEventManager: TodoEventManager;
+    
+    constructor( todoView:TodoView, todoEventManager:TodoEventManager ) {
         this.todoView = todoView;
         this.todoEventManager = todoEventManager;
     }

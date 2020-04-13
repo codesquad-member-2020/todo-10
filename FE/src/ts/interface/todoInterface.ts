@@ -1,3 +1,8 @@
+interface IContent {
+    id: string;
+    title: string;
+    content: string;
+}
 interface ITodoViewTemplate {
     id: string;
     title: string;
@@ -15,7 +20,25 @@ interface ICardOption {
     currColumn: HTMLElement | null;
 }
 
-export {
-    ITodoViewTemplate,
-    ICardOption,
+interface IOnClickSubmit {
+    event: Event;
+    parentClassName: string;
+    type: string;
+    callback: Function;
 }
+
+interface ITodoEventList {
+    click: Function;
+    submit: Function;
+    input: Function;
+}
+
+interface ITodoAppEventList extends ITodoEventList {
+    dblclick: Function;
+    dragstart: Function;
+    dragover: Function;
+    dragenter: Function;
+    dragend: Function;
+}
+
+export { ITodoViewTemplate, ICardOption, IOnClickSubmit, ITodoEventList, ITodoAppEventList };
