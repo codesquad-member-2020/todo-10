@@ -190,6 +190,44 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 }
 ```
 
+## 전체 로그 요청
+
+### GET /board/logs
+
+### 요청 데이터
+- 현재는 전달해야할 데이터가 존재하지 않습니다.
+
+### JSON 응답
+
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": [
+        {
+            "id": 1,
+            "user": "nigayo",
+            "action": "ADDED",
+            "target": "CARD",
+            "content": "과자 사기",
+            "source": null,
+            "destination": "해야할 일",
+            "minutesUntilNow": 2
+        },
+        {
+            "id": 2,
+            "user": "nigayo",
+            "action": "UPDATED",
+            "target": "CARD",
+            "content": "음료 사기",
+            "source": null,
+            "destination": null,
+            "minutesUntilNow": 0
+        }
+    ]
+}
+```
 ---
 
 # BE 요구사항 분석
