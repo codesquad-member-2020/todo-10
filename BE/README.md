@@ -6,7 +6,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 로그인 요청
 
-### POST /board/login
+### POST `/board/login`
 
 ### 요청 데이터
 ```
@@ -15,7 +15,6 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     "password": "1234"
 }
 ```
-
 - 현재는 name password에 어떤 값을 넣어도 응답을 성공적으로 반환합니다.
 - 추후에는 인증된 사용자인 경우 헤더에 JWT를 담아서 보내줄 예정입니다.
 
@@ -28,6 +27,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     "content": "로그인 성공"
 }
 ```
+
 - 로그인 실패
    - 상태 코드 : UNAUTHORIZED (401)
 ```
@@ -39,7 +39,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 보드 내용 요청
 
-### GET /board
+### GET `/board`
 
 ### 요청 데이터
 - 현재는 전달해야할 데이터가 존재하지 않습니다.
@@ -94,9 +94,10 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     "content": "접근 금지"
 }
 ```
+
 ## 카드 추가 요청
 
-### POST /board/section/{sectionId}/card
+### POST `/board/section/{sectionId}/card`
 
 ### 요청 데이터
 ```
@@ -109,7 +110,6 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 - 프론트에서는 content에 카드 내용을 담아주세요.
 
 ### JSON 응답
-
 - 성공적으로 반환하는 경우
    - 상태 코드 : OK (200)
 ```
@@ -130,9 +130,10 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     }
 }
 ```
+
 ## 카드 수정 요청
 
-### PATCH /board/section/{sectionId}/card/{cardId}
+### PATCH `/board/section/{sectionId}/card/{cardId}`
 
 ### 요청 데이터
 ```
@@ -187,6 +188,47 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 {
     "status": "ERROR",
     "content": "요청 데이터가 충족하지 않습니다."
+}
+```
+
+## 카드 삭제 요청
+
+### DELETE `/board/section/{sectionId}/card/{cardId}`
+
+### 요청 데이터
+- 현재는 전달해야할 데이터가 존재하지 않습니다.
+
+### JSON 응답
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "log_id": 4,
+        "card_count": 1
+    }
+}
+```
+
+- 실패한 경우 1
+   - 상태 코드 : Not Found (404)
+   - 존재하지 않는 sectionId나 cardId를 전달하는 경우
+```
+{
+    "status": "ERROR",
+    "content": "리소스를 찾을 수 없습니다."
+}
+```
+
+- 실패한 경우 2
+   - 상태 코드 : Bad Request (400)
+   - 전달한 sectionId에 포함된 cardId가 아닌 경우 (즉, 다른 섹션에 존재하는 cardId인 경우)
+   - 전달한 sectionId에 카드가 존재하지 않는 경우
+```
+{
+    "status": "ERROR",
+    "content": "요청 데이터가 서버와 일치하지 않습니다."
 }
 ```
 
