@@ -2,6 +2,7 @@ package com.codesquad.team10.todo.api;
 
 import com.codesquad.team10.todo.entity.Card;
 import com.codesquad.team10.todo.entity.Section;
+import com.codesquad.team10.todo.exception.custom.UserNotFoundException;
 import com.codesquad.team10.todo.repository.SectionRepository;
 import com.codesquad.team10.todo.response.ResponseData;
 import com.codesquad.team10.todo.entity.User;
@@ -48,7 +49,7 @@ public class BoardController {
         if (count > 0)
             return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, ResponseMessage.LOGIN_SUCCESS.getMessage()), HttpStatus.OK);
 
-        return new ResponseEntity<>(new ResponseData(ResponseData.Status.ERROR, ResponseMessage.LOGIN_FAILED.getMessage()), HttpStatus.UNAUTHORIZED);
+        throw new UserNotFoundException();
     }
 
     @GetMapping("")
