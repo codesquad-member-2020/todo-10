@@ -85,8 +85,10 @@ final class ColumnViewController: UIViewController {
         guard let userInfo = notification.userInfo,
             let tableView = userInfo["tableView"] as? UITableView , let indexPath = userInfo["indexPath"] as? IndexPath,
             let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
-            let column = column, let cardID = cardViewModel.cardID else { return }
-        DeleteUseCase.makeDeleteResult(columnID: column.id, cardID: cardID, with: MockCardDeleteSuccessStub()) { result in
+            let cardID = cardViewModel.cardID else { return }
+        DeleteUseCase.makeDeleteResult(columnID: columnTableDataSource.columnID,
+                                       cardID: cardID,
+                                       with: MockCardDeleteSuccessStub()) { result in
             guard let result = result else { return }
             if result {
                 self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
@@ -97,15 +99,7 @@ final class ColumnViewController: UIViewController {
         }
     }
     
-    var column: Column? {
-        didSet {
-            configureTitleViewModel()
-            configureDataSource()
-        }
-    }
-    
-    private func configureTitleViewModel() {
-        guard let column = column else { return }
+    func configureTitleViewModel(column: Column) {
         titleViewModel = TitleViewModel(titleModel: TitleModel(title: column.title,
                                                                cardsCount: column.cards.count),
                                         changed: { titleModel in
@@ -115,8 +109,7 @@ final class ColumnViewController: UIViewController {
         })
     }
     
-    private func configureDataSource() {
-        guard let column = column else { return }
+    func configureDataSource(column: Column) {
         let columnID = column.id
         let cardViewModels = column.cards.map { CardViewModel(card: $0)}
         columnTableDataSource = ColumnTableDataSource(columnID: columnID, cardViewModels: cardViewModels)
@@ -127,7 +120,7 @@ final class ColumnViewController: UIViewController {
 extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     func plusButtonDidTouch() {
         let newCardViewController = NewCardViewController()
-        newCardViewController.columnID = column?.id
+        newCardViewController.columnID = columnTableDataSource.columnID
         newCardViewController.delegate = self
         present(newCardViewController, animated: true)
     }
@@ -137,7 +130,7 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
             let indexPath = userInfo["indexPath"] as? IndexPath,
             let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
         let editingCardViewController = EditingCardViewController()
-        editingCardViewController.columnID = column?.id
+        editingCardViewController.columnID = columnTableDataSource.columnID
         editingCardViewController.delegate = self
         editingCardViewController.willEditCardViewModel = WillEditCardViewModel(row: indexPath.row,
                                                                                 cardViewModel: cardViewModel)
