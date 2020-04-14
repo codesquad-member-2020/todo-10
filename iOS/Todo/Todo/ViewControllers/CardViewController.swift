@@ -151,8 +151,3 @@ final class EditingCardViewController: CardViewController, CardCreatable {
         }
     }
 }
-
-struct WillEditCardViewModel {
-    let row: Int
-    var cardViewModel: CardViewModel
-}
