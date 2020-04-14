@@ -51,6 +51,8 @@
 		5ADF26B7244597BD008C15CA /* WillEditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */; };
 		5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B824459E7B008C15CA /* NewCard.swift */; };
 		5ADF26BB2445DF5B008C15CA /* EndPointFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26BA2445DF5B008C15CA /* EndPointFactory.swift */; };
+		5ADF26BD2445ED02008C15CA /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26BC2445ED02008C15CA /* NewCardViewController.swift */; };
+		5ADF26BF2445ED11008C15CA /* EditingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26BE2445ED11008C15CA /* EditingCardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,8 @@
 		5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillEditCardViewModel.swift; sourceTree = "<group>"; };
 		5ADF26B824459E7B008C15CA /* NewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCard.swift; sourceTree = "<group>"; };
 		5ADF26BA2445DF5B008C15CA /* EndPointFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointFactory.swift; sourceTree = "<group>"; };
+		5ADF26BC2445ED02008C15CA /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
+		5ADF26BE2445ED11008C15CA /* EditingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingCardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +329,8 @@
 				5AB8D584243B4FC700387EAE /* ColumnViewController.swift */,
 				5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */,
 				5A7937FD2440150700D59611 /* CardViewController.swift */,
+				5ADF26BC2445ED02008C15CA /* NewCardViewController.swift */,
+				5ADF26BE2445ED11008C15CA /* EditingCardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -472,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7938222441B84200D59611 /* TitleFieldDelegate.swift in Sources */,
+				5ADF26BD2445ED02008C15CA /* NewCardViewController.swift in Sources */,
 				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
 				5A7938202441B60D00D59611 /* ContentViewDelegate.swift in Sources */,
 				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
@@ -484,6 +491,7 @@
 				5A838E62243DFD0E0081A42F /* CardViewModel.swift in Sources */,
 				5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */,
 				5AB8D556243B40FF00387EAE /* MainViewController.swift in Sources */,
+				5ADF26BF2445ED11008C15CA /* EditingCardViewController.swift in Sources */,
 				5ADF26B7244597BD008C15CA /* WillEditCardViewModel.swift in Sources */,
 				5A79380D2441A05100D59611 /* ContentView.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,

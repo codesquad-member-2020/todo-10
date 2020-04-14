@@ -1,0 +1,44 @@
+//
+//  EditingCardViewController.swift
+//  Todo
+//
+//  Created by kimdo2297 on 2020/04/14.
+//  Copyright © 2020 Jason. All rights reserved.
+//
+
+import UIKit
+
+final class EditingCardViewController: CardViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureTextColorWritingVersion()
+        configureCreateButtonDelegate(self, action: #selector(createCard), for: .touchUpInside)
+    }
+    
+    @objc func createCard() {
+        guard let columnID = columnID else { return }
+        guard let content = contentView.text else { return }
+        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
+        guard let cardID = willEditCardViewModel?.cardViewModel.cardID else { return }
+        let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
+        EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
+                                                           with: MockCardEditSuccessStub()) { cardViewModel in
+                                                            guard let cardViewModel = cardViewModel else { return }
+                                                            self.willEditCardViewModel?.cardViewModel = cardViewModel
+                                                            guard let willEditCardViewModel = self.willEditCardViewModel else { return }
+                                                            self.delegate?.cardViewControllerDidCardEdit(willEditCardViewModel)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    var willEditCardViewModel: WillEditCardViewModel? {
+        didSet {
+            willEditCardViewModel?.cardViewModel.performBind(changed: { card in
+                DispatchQueue.main.async {
+                    self.titleField.text = card?.title
+                    self.contentView.text = card?.content
+                }
+            })
+        }
+    }
+}

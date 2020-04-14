@@ -19,9 +19,9 @@ class CardViewController: UIViewController {
     private let cancelButton = CancelButton()
     private let titleFieldDelegate = TitleFieldDelegate()
     private let contentViewDelegate = ContentViewDelegate()
-    fileprivate let createButton = CreateButton()
-    fileprivate let titleField = TitleField()
-    fileprivate let contentView = ContentView()
+    private let createButton = CreateButton()
+    let titleField = TitleField()
+    let contentView = ContentView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,63 +92,21 @@ class CardViewController: UIViewController {
         contentView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
         contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
+    
+    func configureCreateButtonDelegate(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
+        createButton.addTarget(target, action: action, for: controlEvents)
+    }
+    
+    func configurePlaceHolderVersion() {
+        contentView.configurePlaceHolderVersion()
+    }
+    
+    func configureTextColorWritingVersion() {
+        contentView.configureTextWriting()
+    }
 }
 
 @objc protocol CardCreatable where Self: CardViewController {
     func createCard()
 }
 
-final class NewCardViewController: CardViewController, CardCreatable {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        contentView.configurePlaceHolderVersion()
-        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
-    }
-    
-    @objc func createCard() {
-        guard let columnID = columnID else { return }
-        guard let content = contentView.text else { return }
-        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        NewCardViewModelUseCase.makeNewCardViewModel(from: EndPointFactory.createNewCardURLString(columnID: columnID),
-                                                     cardData: cardData, with: MockCardCreateSuccessStub()) { cardViewModel in
-                                                        guard let cardViewModel = cardViewModel else { return }
-                                                        self.delegate?.cardViewControllerDidCardCreate(cardViewModel)
-        }
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-final class EditingCardViewController: CardViewController, CardCreatable {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        contentView.configureTextColorWritingVersion()
-        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
-    }
-    
-    @objc func createCard() {
-        guard let columnID = columnID else { return }
-        guard let content = contentView.text else { return }
-        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        guard let cardID = willEditCardViewModel?.cardViewModel.cardID else { return }
-        let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
-        EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
-                                                           with: MockCardEditSuccessStub()) { cardViewModel in
-                                                            guard let cardViewModel = cardViewModel else { return }
-                                                            self.willEditCardViewModel?.cardViewModel = cardViewModel
-                                                            guard let willEditCardViewModel = self.willEditCardViewModel else { return }
-                                                            self.delegate?.cardViewControllerDidCardEdit(willEditCardViewModel)
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    var willEditCardViewModel: WillEditCardViewModel? {
-        didSet {
-            willEditCardViewModel?.cardViewModel.performBind(changed: { card in
-                DispatchQueue.main.async {
-                    self.titleField.text = card?.title
-                    self.contentView.text = card?.content
-                }
-            })
-        }
-    }
-}
