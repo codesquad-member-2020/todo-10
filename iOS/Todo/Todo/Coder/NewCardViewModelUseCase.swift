@@ -18,7 +18,7 @@ struct NewCardViewModelUseCase {
                                    cardData: Data,
                                    with manager: NetworkManagable,
                                    result: @escaping (CardViewModel?) -> ()) {
-        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card",
+        try? manager.requestResource(from: "\(EndPoints.column)/\(columnID)/card",
             method: .post,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in

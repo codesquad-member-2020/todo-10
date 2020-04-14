@@ -13,7 +13,7 @@ struct EditedCardViewModelUseCase {
                                     cardData: Data,
                                     with manager: NetworkManagable,
                                     result: @escaping (CardViewModel?) -> () ) {
-        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card/\(cardID)",
+        try? manager.requestResource(from: "\(EndPoints.column)/\(columnID)/card/\(cardID)",
             method: .patch,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in

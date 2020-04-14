@@ -13,7 +13,7 @@ struct DeleteUseCase {
                                    cardID: Int,
                                    with manager: NetworkManagable,
                                    result: @escaping (Bool?) -> ()) {
-        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card/\(cardID)",
+        try? manager.requestResource(from: "\(EndPoints.column)/\(columnID)/card/\(cardID)",
             method: .delete,
             body: nil, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
