@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface CardRepository extends CrudRepository<Card, Integer> {
     @Query("SELECT *" +
             " FROM card c" +
-            " LEFT OUTER JOIN section s ON s.id = c.section" +
+            " LEFT OUTER JOIN section s ON c.section = s.id" +
             " WHERE c.id = :id")
     Optional<Card> findById(Integer id);
 }
