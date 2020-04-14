@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 final class ColumnViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
