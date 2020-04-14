@@ -10,7 +10,7 @@ import UIKit
 
 protocol CardViewControllerDelegate {
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
-    func cardViewControllerDidCardEdit(_ willCardViewModel: WillEditCardViewModel)
+    func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int)
 }
 
 class CardViewController: UIViewController {

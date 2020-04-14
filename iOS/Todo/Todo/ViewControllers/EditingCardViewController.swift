@@ -18,21 +18,21 @@ final class EditingCardViewController: CardViewController {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        guard let cardID = willEditCardViewModel?.cardViewModel.cardID else { return }
+        guard let cardID = cardViewModel?.cardID, let row = row else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
         EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
                                                            with: MockCardEditSuccessStub()) { cardViewModel in
                                                             guard let cardViewModel = cardViewModel else { return }
-                                                            self.willEditCardViewModel?.cardViewModel = cardViewModel
-                                                            guard let willEditCardViewModel = self.willEditCardViewModel else { return }
-                                                            self.delegate?.cardViewControllerDidCardEdit(willEditCardViewModel)
+                                                            self.delegate?.cardViewControllerDidCardEdit(cardViewModel,
+                                                                                                         row: row)
         }
         dismiss(animated: true, completion: nil)
     }
     
-    var willEditCardViewModel: WillEditCardViewModel? {
+    var row: Int?
+    var cardViewModel: CardViewModel? {
         didSet {
-            willEditCardViewModel?.cardViewModel.performBind(changed: { card in
+            cardViewModel?.performBind(changed: { card in
                 DispatchQueue.main.async {
                     self.titleField.text = card?.title
                     self.contentView.text = card?.content

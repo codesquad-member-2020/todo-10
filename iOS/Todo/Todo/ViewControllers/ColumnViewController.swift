@@ -112,8 +112,8 @@ extension ColumnViewController: UITableViewDelegate {
         let editingCardViewController = EditingCardViewController()
         editingCardViewController.columnID = columnID
         editingCardViewController.delegate = self
-        editingCardViewController.willEditCardViewModel = WillEditCardViewModel(row: indexPath.row,
-                                                                                cardViewModel: cardViewModel)
+        editingCardViewController.row = indexPath.row
+        editingCardViewController.cardViewModel = cardViewModel
         present(editingCardViewController, animated: true)
     }
     
@@ -166,9 +166,8 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         }
     }
     
-    func cardViewControllerDidCardEdit(_ willEditCardViewModel: WillEditCardViewModel) {
-        columnTableDataSource.update(cardViewModel: willEditCardViewModel.cardViewModel,
-                                     at: willEditCardViewModel.row)
+    func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int) {
+        columnTableDataSource.update(cardViewModel: cardViewModel, at: row)
         DispatchQueue.main.async {
             self.columnTable.reloadData()
         }
