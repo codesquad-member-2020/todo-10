@@ -1,5 +1,5 @@
 import { COMMON_RULE } from '../contants/constant';
-import { deleteCard, showEditModal, dragStartCard, dragenterCard, dragendCard } from './eventHandles/card';
+import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from './eventHandles/card';
 import { showColumnForm } from './eventHandles/column';
 import { onClickSubmit } from './eventHandles/form';
 import { showMenu, closeMenu } from './eventHandles/menu';
@@ -38,6 +38,7 @@ class TodoEventManager {
             submit: this.submitEventDelegation.bind(this),
             dblclick: showEditModal.bind(this),
             dragstart: dragStartCard,
+            dragover: dragoverCard,
             dragenter: dragenterCard,
             dragend: dragendCard,
             input: checkDisabled,
