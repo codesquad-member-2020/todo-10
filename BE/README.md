@@ -6,7 +6,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 로그인 요청
 
-### **POST** /board/login
+### POST /board/login
 
 ### 요청 데이터
 ```
@@ -39,7 +39,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 보드 내용 요청
 
-### **GET** /board
+### GET /board
 
 ### 요청 데이터
 - 현재는 전달해야할 데이터가 존재하지 않습니다.
@@ -115,7 +115,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ```
 ## 카드 추가 요청
 
-### **POST** /board/section/{sectionId}/card
+### POST /board/section/{sectionId}/card
 
 ### 요청 데이터
 ```
@@ -135,11 +135,16 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 {
     "status": "SUCCESS",
     "content": {
-        "id": 2,
-        "title": "README.md 추가",
-        "content": "구현 API 내용 작성",
-        "createdDateTime": "2020-04-07 15:25:23",
-        "updatedDateTime": "2020-04-07 15:25:23"
+        "log_id": 3,
+        "card": {
+            "id": 3,
+            "title": "발리",
+            "content": "ㅇㅇㅇ2",
+            "createDateTime": "2020-04-14T14:37:46",
+            "updateDateTime": "2020-04-14T14:37:46",
+            "author": "nigayo",
+            "sectionKey": 1
+        }
     }
 }
 ```

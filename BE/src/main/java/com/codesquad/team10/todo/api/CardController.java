@@ -58,6 +58,7 @@ public class CardController {
         Map<String, Object> responsedata = new HashMap<>();
         responsedata.put("card", cardDTO);
         responsedata.put("log_id", log.getId());
+        responsedata.put("card_count", section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responsedata), HttpStatus.OK);
     }
 }
