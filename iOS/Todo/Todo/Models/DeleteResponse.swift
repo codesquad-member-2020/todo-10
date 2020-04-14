@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CardResponse: Codable {
+struct DeleteResponse: Codable {
     var status: Status
     var content: String
 }
 
-struct NewCardResponse: Codable {
+struct CardResponse: Codable {
     var status: Status
     var content: Card
 }
