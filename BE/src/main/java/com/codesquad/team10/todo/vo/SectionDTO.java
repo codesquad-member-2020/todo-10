@@ -1,7 +1,5 @@
 package com.codesquad.team10.todo.vo;
 
-import com.codesquad.team10.todo.entity.Card;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
