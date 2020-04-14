@@ -54,7 +54,8 @@ extension ColumnTableDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell else {
+        guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier,
+                                                           for: indexPath) as? CardCell else {
             return CardCell()
         }
         
