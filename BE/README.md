@@ -21,7 +21,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ### JSON 응답
 - 로그인 성공
-- 상태 코드 : OK (200)
+   - 상태 코드 : OK (200)
 ```
 {
     "status": "SUCCESS",
@@ -29,7 +29,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 }
 ```
 - 로그인 실패
-- 상태 코드 : UNAUTHORIZED (401)
+   - 상태 코드 : UNAUTHORIZED (401)
 ```
 {
     "status": "ERROR",
@@ -47,7 +47,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ### JSON 응답
 - 성공적으로 반환하는 경우
-- 상태 코드 : OK (200)
+   - 상태 코드 : OK (200)
 ```
 {
     "status": "SUCCESS",
@@ -55,58 +55,39 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
         {
             "id": 1,
             "title": "해야할 일",
-            "createDateTime": "2020-04-14T14:33:45",
-            "updateDateTime": "2020-04-14T14:33:45",
+            "createDateTime": "2020-04-15 03:12:00",
+            "updateDateTime": "2020-04-15 03:12:00",
             "cards": [
                 {
                     "id": 1,
-                    "title": null,
-                    "content": "ㅇㅇㅇ2",
-                    "createDateTime": "2020-04-14T14:33:57",
-                    "updateDateTime": "2020-04-14T14:33:57",
+                    "title": "README.md 추가",
+                    "content": "구현 API 내용 작성",
+                    "createDateTime": "2020-04-15 03:12:32",
+                    "updateDateTime": "2020-04-15 03:13:00",
                     "author": "nigayo",
-                    "sectionKey": 0
-                },
-                {
-                    "id": 3,
-                    "title": "발리",
-                    "content": "ㅇㅇㅇ2",
-                    "createDateTime": "2020-04-14T14:37:46",
-                    "updateDateTime": "2020-04-14T14:37:46",
-                    "author": "nigayo",
-                    "sectionKey": 1
+                    "cardIndex": 0
                 }
             ]
         },
         {
             "id": 2,
             "title": "하고 있는 일",
-            "createDateTime": "2020-04-14T14:33:45",
-            "updateDateTime": "2020-04-14T14:33:45",
-            "cards": [
-                {
-                    "id": 2,
-                    "title": "발리",
-                    "content": "ㅇㅇㅇ2",
-                    "createDateTime": "2020-04-14T14:34:16",
-                    "updateDateTime": "2020-04-14T14:34:16",
-                    "author": "nigayo",
-                    "sectionKey": 0
-                }
-            ]
+            "createDateTime": "2020-04-15 03:12:00",
+            "updateDateTime": "2020-04-15 03:12:00",
+            "cards": []
         },
         {
             "id": 3,
             "title": "완료된 일",
-            "createDateTime": "2020-04-14T14:33:45",
-            "updateDateTime": "2020-04-14T14:33:45",
+            "createDateTime": "2020-04-15 03:12:00",
+            "updateDateTime": "2020-04-15 03:12:00",
             "cards": []
         }
     ]
 }
 ```
 - 실패한 경우
-- 상태 코드 : FORBIDDEN (300)
+   - 상태 코드 : FORBIDDEN (400)
 ```
 {
     "status": "ERROR",
@@ -130,7 +111,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ### JSON 응답
 
 - 성공적으로 반환하는 경우
-- 상태 코드 : OK (200)
+   - 상태 코드 : OK (200)
 ```
 {
     "status": "SUCCESS",
@@ -162,13 +143,13 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 }
 ```
 - 카드 수정 요청 시, URL에 sectionId와 cardId를 전달해야 합니다.
-- Body에는 카드 객체 생성 시 반환 받은 cardIndex와 변경하고자 하는 데이터(title, content)를 함께 보냅니다.
+- Body에는 카드 객체 생성 시 반환받은 cardIndex와 변경하고자 하는 데이터(title, content)를 함께 보냅니다.
 - 프론트에서는 content에 변경될 카드 내용을 담아주세요.
 
 ### JSON 응답
 
 - 성공적으로 반환하는 경우
-- 상태 코드 : OK (200)
+   - 상태 코드 : OK (200)
 ```
 {
     "status": "SUCCESS",
@@ -189,9 +170,9 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ```
 
 - 실패한 경우 1
+   - 상태 코드 : Not Found (404)
    - 존재하지 않는 sectionId나 cardId를 전달하는 경우
    - 섹션에 존재하지 않는 cardIndex를 전달하는 경우
-- 상태 코드 : Not Found (404)
 ```
 {
     "status": "ERROR",
@@ -200,8 +181,8 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ```
 
 - 실패한 경우 2
+   - 상태 코드 : Bad Request (400)
    - Body에 필요한 데이터를 포함하지 않은 경우
-- 상태 코드 : Bad Request (400)
 ```
 {
     "status": "ERROR",
