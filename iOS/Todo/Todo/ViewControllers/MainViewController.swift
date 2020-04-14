@@ -40,6 +40,7 @@ final class MainViewController: UIViewController {
             let controller = ColumnViewController()
             controller.configureTitleViewModel(column: column)
             controller.configureDataSource(column: column)
+            controller.columnID = column.id
             return controller
         }()
         return columnViewController

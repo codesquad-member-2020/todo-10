@@ -15,6 +15,7 @@ final class ColumnViewController: UIViewController {
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
     private var columnTableDelegate = ColumnTableDelegate()
+    var columnID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,8 +86,9 @@ final class ColumnViewController: UIViewController {
         guard let userInfo = notification.userInfo,
             let tableView = userInfo["tableView"] as? UITableView , let indexPath = userInfo["indexPath"] as? IndexPath,
             let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+            let columnID = columnID,
             let cardID = cardViewModel.cardID else { return }
-        DeleteUseCase.makeDeleteResult(from: EndPointFactory.createExistedCardURLString(columnID: columnTableDataSource.columnID,
+        DeleteUseCase.makeDeleteResult(from: EndPointFactory.createExistedCardURLString(columnID: columnID,
                                                                                         cardID: cardID),
                                        with: MockCardDeleteSuccessStub()) { result in
                                         guard let result = result else { return }
@@ -110,17 +112,17 @@ final class ColumnViewController: UIViewController {
     }
     
     func configureDataSource(column: Column) {
-        let columnID = column.id
         let cardViewModels = column.cards.map { CardViewModel(card: $0)}
-        columnTableDataSource = ColumnTableDataSource(columnID: columnID, cardViewModels: cardViewModels)
+        columnTableDataSource = ColumnTableDataSource(cardViewModels: cardViewModels)
         columnTable.dataSource = columnTableDataSource
     }
 }
 
 extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     func plusButtonDidTouch() {
+        guard let columnID = columnID else { return }
         let newCardViewController = NewCardViewController()
-        newCardViewController.columnID = columnTableDataSource.columnID
+        newCardViewController.columnID = columnID
         newCardViewController.delegate = self
         present(newCardViewController, animated: true)
     }
@@ -128,9 +130,10 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     private func showEditingViewController(notification: Notification) {
         guard let userInfo = notification.userInfo,
             let indexPath = userInfo["indexPath"] as? IndexPath,
-            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+            let columnID = columnID else { return }
         let editingCardViewController = EditingCardViewController()
-        editingCardViewController.columnID = columnTableDataSource.columnID
+        editingCardViewController.columnID = columnID
         editingCardViewController.delegate = self
         editingCardViewController.willEditCardViewModel = WillEditCardViewModel(row: indexPath.row,
                                                                                 cardViewModel: cardViewModel)

@@ -12,14 +12,12 @@ final class ColumnTableDataSource: NSObject {
         static let cardViewModelsDidChange = Foundation.Notification.Name("cardViewModelsDidChange")
     }
     
-    let columnID: Int
     private var cardViewModels: [CardViewModel] {
         didSet { NotificationCenter.default.post(name: Notification.cardViewModelsDidChange,
                                                  object: self) }
     }
     
-    init(columnID: Int, cardViewModels: [CardViewModel]) {
-        self.columnID = columnID
+    init(cardViewModels: [CardViewModel]) {
         self.cardViewModels = cardViewModels
         super.init()
     }
