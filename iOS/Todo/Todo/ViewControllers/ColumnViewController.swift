@@ -55,15 +55,20 @@ final class ColumnViewController: UIViewController {
     
     private func configureObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateBadge),
+                                               selector: #selector(updateView),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
     }
     
-    @objc private func updateBadge() {
+    @objc private func updateView() {
         DispatchQueue.main.async {
-            self.titleView.configureBadge(text: String(self.columnTableDataSource.cardViewModelsCount))
+            self.updateBadge()
+            self.columnTable.reloadData()
         }
+    }
+    
+    private func updateBadge() {
+        self.titleView.configureBadge(text: String(self.columnTableDataSource.cardViewModelsCount))
     }
     
     func configureTitleViewModel(column: Column) {
@@ -161,15 +166,9 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
         columnTableDataSource.append(cardViewModel: cardViewModel)
-        DispatchQueue.main.async {
-            self.columnTable.reloadData()
-        }
     }
     
     func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int) {
         columnTableDataSource.update(cardViewModel: cardViewModel, at: row)
-        DispatchQueue.main.async {
-            self.columnTable.reloadData()
-        }
     }
 }
