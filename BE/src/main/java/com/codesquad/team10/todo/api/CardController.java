@@ -3,6 +3,7 @@ package com.codesquad.team10.todo.api;
 import com.codesquad.team10.todo.entity.*;
 import com.codesquad.team10.todo.exception.custom.InvalidRequestException;
 import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
+import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
 import com.codesquad.team10.todo.repository.CardRepository;
 import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.repository.SectionRepository;
@@ -86,20 +87,43 @@ public class CardController {
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{cardId}")
+    public ResponseEntity<ResponseData> delete(@PathVariable int sectionId, @PathVariable int cardId) {
+        Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
+        Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+        if (section.getCards().size() == 0)
+            throw new UnmatchedRequestDataException();
+
+        section.deleteCard(targetCard);
+        sectionRepository.save(section);
+        Log log = new Log(TEST_USER_NAME, Action.REMOVED, Target.CARD, substractTarget(targetCard.getTitle(), targetCard.getContent()), section.getTitle(), null, TEST_BOARD_ID);
+        logRepository.save(log);
+        logger.debug("log: {}", log);
+        Map<String, Object> responseData = constructResonseData(log, section.getCards().size());
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
+    }
+
     private String substractTarget(String title, String content) {
         if (title != null)
             return title;
 
         final String delimiter = "\r\n";
-        if (content.contains(delimiter)) {
+        if (content.contains(delimiter))
             return content.substring(0, content.indexOf(delimiter));
-        }
+
         return content;
     }
 
     private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, int cardCount) {
         Map<String, Object> map = new HashMap<>();
         map.put("card", cardDTO);
+        map.put("log_id", log.getId());
+        map.put("card_count", cardCount);
+        return map;
+    }
+
+    private Map<String, Object> constructResonseData(Log log, int cardCount) {
+        Map<String, Object> map = new HashMap<>();
         map.put("log_id", log.getId());
         map.put("card_count", cardCount);
         return map;
