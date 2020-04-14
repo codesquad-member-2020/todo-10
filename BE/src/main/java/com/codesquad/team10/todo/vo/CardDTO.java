@@ -18,7 +18,7 @@ public class CardDTO {
 
     private boolean deleted;
 
-    private Integer sectionKey;
+    private Integer cardIndex;
 
     public CardDTO(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer sectionKey) {
         this.id = id;
@@ -28,7 +28,7 @@ public class CardDTO {
         this.updateDateTime = updateDateTime;
         this.author = author;
         this.deleted = deleted;
-        this.sectionKey = sectionKey;
+        this.cardIndex = sectionKey;
     }
 
     public Integer getId() {
@@ -55,7 +55,7 @@ public class CardDTO {
         return author;
     }
 
-    public Integer getSectionKey() {
-        return sectionKey;
+    public Integer getCardIndex() {
+        return cardIndex;
     }
 }
