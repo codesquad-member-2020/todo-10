@@ -33,6 +33,7 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView.text.contains(Self.placeHolderText) else { return }
         setPositionBeginningOfDocument(textView)
     }
 

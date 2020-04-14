@@ -120,6 +120,7 @@ final class NewCardViewController: CardViewController, CardCreatable {
 final class EditingCardViewController: CardViewController, CardCreatable {
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.configureTextColorWritingVersion()
         createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
     }
     

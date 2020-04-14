@@ -51,4 +51,8 @@ final class ContentView: UITextView {
         text = String(first)
         textColor = .black
     }
+    
+    func configureTextColorWritingVersion() {
+        textColor = .black
+    }
 }
