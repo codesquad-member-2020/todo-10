@@ -9,11 +9,11 @@
 import Foundation
 
 struct EditedCardViewModelUseCase {
-    static func makeEditedCardViewModel(columnID: Int,
+    static func makeEditedCardViewModel(columnID: Int, cardID: Int,
                                     cardData: Data,
                                     with manager: NetworkManagable,
                                     result: @escaping (CardViewModel?) -> () ) {
-        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card",
+        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card/\(cardID)",
             method: .patch,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in

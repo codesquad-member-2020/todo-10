@@ -10,8 +10,9 @@ import UIKit
 
 final class ColumnTableDelegate: NSObject, UITableViewDelegate {
     enum Notification {
-        static let menuDeleteEventOccured = Foundation.Notification.Name("contextMenuDeleteEventOccured")
         static let swipeDeleteEventOccured = Foundation.Notification.Name("swipeDeleteEventOccured")
+        static let menuDeleteEventOccured = Foundation.Notification.Name("contextMenuDeleteEventOccured")
+        static let menuEditEventOccured = Foundation.Notification.Name("menuEditEventOccured")
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -36,7 +37,7 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
     }
     
     private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
-        return UIMenu(title: "", children: [move(), edit(), delete(tableView, for: indexPath)])
+        return UIMenu(title: "", children: [move(), edit(tableView, for: indexPath), delete(tableView, for: indexPath)])
     }
     
     private func move() -> UIAction {
@@ -45,10 +46,16 @@ final class ColumnTableDelegate: NSObject, UITableViewDelegate {
         }
     }
     
-    private func edit() -> UIAction {
+    private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
         return UIAction(title: ButtonData.edit) { action in
-            
+            self.notifyMenuEditEventOccured(tableView: tableView, indexPath: indexPath)
         }
+    }
+    
+    private func notifyMenuEditEventOccured(tableView: UITableView, indexPath: IndexPath) {
+        NotificationCenter.default.post(name: Notification.menuEditEventOccured,
+                                        object: self,
+                                        userInfo: ["tableView": tableView, "indexPath" : indexPath])
     }
     
     private func delete(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {

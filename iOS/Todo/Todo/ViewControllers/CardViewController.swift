@@ -9,7 +9,8 @@
 import UIKit
 
 protocol CardViewControllerDelegate {
-    func CardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
+    func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
+    func cardViewControllerDidCardEdit(_ willCardViewModel: WillEditCardViewModel)
 }
 
 class CardViewController: UIViewController {
@@ -21,7 +22,7 @@ class CardViewController: UIViewController {
     fileprivate let createButton = CreateButton()
     fileprivate let titleField = TitleField()
     fileprivate let contentView = ContentView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureObserver()
@@ -57,8 +58,10 @@ class CardViewController: UIViewController {
         createButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
     }
-
+    
     private func configureCancelButton() {
+        cancelButton.addTarget(self, action: #selector(cancelCardViewController), for: .touchUpInside)
+        
         view.addSubview(cancelButton)
         let constant: CGFloat = 27
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
@@ -106,9 +109,9 @@ final class NewCardViewController: CardViewController, CardCreatable {
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
         NewCardViewModelUseCase.makeNewCardViewModel(columnID: columnID,
-                                         cardData: cardData, with: MockCardCreateSuccessStub()) { cardViewModel in
-                                            guard let cardViewModel = cardViewModel else { return }
-                                            self.delegate?.CardViewControllerDidCardCreate(cardViewModel)
+                                                     cardData: cardData, with: NetworkManager()) { cardViewModel in
+                                                        guard let cardViewModel = cardViewModel else { return }
+                                                        self.delegate?.cardViewControllerDidCardCreate(cardViewModel)
         }
         dismiss(animated: true, completion: nil)
     }
@@ -124,11 +127,30 @@ final class EditingCardViewController: CardViewController, CardCreatable {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        EditedCardViewModelUseCase.makeEditedCardViewModel(columnID: columnID,
-                                         cardData: cardData, with: MockCardEditSuccessStub()) { card in
-                                            guard let card = card else { return }
-                                            self.delegate?.CardViewControllerDidCardCreate(card)
+        guard let cardID = willEditCardViewModel?.cardViewModel.cardID else { return }
+        EditedCardViewModelUseCase.makeEditedCardViewModel(columnID: columnID, cardID: cardID,
+                                                           cardData: cardData, with: NetworkManager()) { cardViewModel in
+                                                            guard let cardViewModel = cardViewModel else { return }
+                                                            self.willEditCardViewModel?.cardViewModel = cardViewModel
+                                                            guard let willEditCardViewModel = self.willEditCardViewModel else { return }
+                                                            self.delegate?.cardViewControllerDidCardEdit(willEditCardViewModel)
         }
         dismiss(animated: true, completion: nil)
     }
+    
+    var willEditCardViewModel: WillEditCardViewModel? {
+        didSet {
+            willEditCardViewModel?.cardViewModel.performBind(changed: { card in
+                DispatchQueue.main.async {
+                    self.titleField.text = card?.title
+                    self.contentView.text = card?.content
+                }
+            })
+        }
+    }
+}
+
+struct WillEditCardViewModel {
+    let row: Int
+    var cardViewModel: CardViewModel
 }

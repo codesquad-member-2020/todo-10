@@ -29,18 +29,23 @@ final class ColumnTableDataSource: NSObject {
         super.init()
     }
     
-    func removeColumnModel(at index: Int) {
+    func removeCardViewModel(at index: Int) {
         guard index < cardViewModels.count else { return }
         cardViewModels.remove(at: index)
     }
     
-    func appendColumnModel(cardViewModel: CardViewModel) {
+    func append(cardViewModel: CardViewModel) {
         cardViewModels.append(cardViewModel)
     }
     
     func cardViewModel(at index: Int) -> CardViewModel? {
         guard index < cardViewModels.count else { return nil }
         return cardViewModels[index]
+    }
+    
+    func update(cardViewModel: CardViewModel, at index: Int) {
+        guard index < cardViewModels.count else { return }
+        cardViewModels[index] = cardViewModel
     }
 }
 

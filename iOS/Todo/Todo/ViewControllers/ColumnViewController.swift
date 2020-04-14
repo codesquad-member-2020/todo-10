@@ -67,6 +67,11 @@ final class ColumnViewController: UIViewController {
                                                queue: nil) { notification in
                                                 self.deleteRow(notification: notification, delay: 0.7)
         }
+        NotificationCenter.default.addObserver(forName: ColumnTableDelegate.Notification.menuEditEventOccured,
+                                               object: columnTableDelegate,
+                                               queue: nil) { notification in
+                                                self.showEditingViewController(notification: notification)
+        }
     }
     
     @objc private func updateBadge() {
@@ -83,7 +88,7 @@ final class ColumnViewController: UIViewController {
         DeleteUseCase.makeDeleteResult(columnID: column.id, cardID: cardID, with: MockCardDeleteSuccessStub()) { result in
             guard let result = result else { return }
             if result {
-                self.columnTableDataSource.removeColumnModel(at: indexPath.row)
+                self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }
@@ -119,15 +124,35 @@ final class ColumnViewController: UIViewController {
 }
 
 extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
-    func plusCardDidTouch() {
+    func plusButtonDidTouch() {
         let newCardViewController = NewCardViewController()
         newCardViewController.columnID = column?.id
         newCardViewController.delegate = self
         present(newCardViewController, animated: true)
     }
     
-    func CardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
-        columnTableDataSource.appendColumnModel(cardViewModel: cardViewModel)
+    private func showEditingViewController(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let indexPath = userInfo["indexPath"] as? IndexPath,
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
+        let editingCardViewController = EditingCardViewController()
+        editingCardViewController.columnID = column?.id
+        editingCardViewController.delegate = self
+        editingCardViewController.willEditCardViewModel = WillEditCardViewModel(row: indexPath.row,
+                                                                                cardViewModel: cardViewModel)
+        present(editingCardViewController, animated: true)
+    }
+    
+    func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
+        columnTableDataSource.append(cardViewModel: cardViewModel)
+        DispatchQueue.main.async {
+            self.columnTable.reloadData()
+        }
+    }
+    
+    func cardViewControllerDidCardEdit(_ willEditCardViewModel: WillEditCardViewModel) {
+        columnTableDataSource.update(cardViewModel: willEditCardViewModel.cardViewModel,
+                                     at: willEditCardViewModel.row)
         DispatchQueue.main.async {
             self.columnTable.reloadData()
         }
