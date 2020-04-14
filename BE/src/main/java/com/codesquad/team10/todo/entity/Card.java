@@ -22,9 +22,11 @@ public class Card {
 
     private boolean deleted;
 
+    private Integer user;
+
     private Integer sectionKey;
 
-    public Card(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer sectionKey) {
+    public Card(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer user, Integer sectionKey) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -32,6 +34,7 @@ public class Card {
         this.updateDateTime = updateDateTime;
         this.author = author;
         this.deleted = deleted;
+        this.user = user;
         this.sectionKey = sectionKey;
     }
 
@@ -65,6 +68,14 @@ public class Card {
 
     public boolean isDeleted() {
         return deleted;
+    }
+
+    public Integer getUser() {
+        return user;
+    }
+
+    public void setUser(Integer user) {
+        this.user = user;
     }
 
     public Integer getSectionKey() {
