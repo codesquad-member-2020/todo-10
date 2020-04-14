@@ -135,16 +135,16 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 {
     "status": "SUCCESS",
     "content": {
-        "log_id": 3,
-        "card_count": 3,
+        "log_id": 2,
+        "card_count": 2,
         "card": {
-            "id": 3,
+            "id": 2,
             "title": "회고",
             "content": "회고하자",
-            "createDateTime": "2020-04-14T15:26:30",
-            "updateDateTime": "2020-04-14T15:26:30",
+            "createDateTime": "2020-04-14T15:44:19",
+            "updateDateTime": "2020-04-14T15:44:19",
             "author": "nigayo",
-            "sectionKey": 2
+            "cardIndex": 1
         }
     }
 }
