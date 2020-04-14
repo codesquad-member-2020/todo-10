@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS card (
   title varchar(100) ,
   content varchar(500) not null ,
   create_date_time timestamp not null default current_timestamp ,
-  update_date_time timestamp not null default current_timestamp on update current_timestamp ,
+  update_date_time timestamp not null default current_timestamp ,
   author varchar(64) ,
   deleted boolean ,
   user INTEGER references user(id) ,
