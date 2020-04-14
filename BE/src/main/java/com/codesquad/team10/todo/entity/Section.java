@@ -1,6 +1,5 @@
 package com.codesquad.team10.todo.entity;
 
-import com.codesquad.team10.todo.vo.SectionDTO;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -67,6 +66,10 @@ public class Section {
 
     public void addCard(Card newCard) {
         cards.add(newCard);
+    }
+
+    public void updateCard(Card updatedCard) {
+        cards.get(updatedCard.getSectionKey()).update(updatedCard);
     }
 
     @Override
