@@ -90,6 +90,7 @@ function getDragedCardInfo() {
         order++;
         return option.dragTarget === v;
     });
+    order--;
     return { cardId, order, currColumnId };
 }
 

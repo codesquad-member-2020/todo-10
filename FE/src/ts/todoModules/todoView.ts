@@ -3,25 +3,27 @@ import { COMMON_RULE } from '../contants/constant';
 import { makeColumns, addCard, makeModal, makeMenu } from './todoViewTemplate';
 
 class TodoView {
+    public todoHeader: HTMLElement;
     public todoApp: HTMLElement;
     public todoMenu: HTMLElement;
     public todoModal: HTMLElement;
 
     constructor() {
+        this.todoHeader = getEl('#todo-header');
         this.todoApp = getEl('#todo-app');
         this.todoMenu = getEl('#menu');
         this.todoModal = getEl('#modal');
     }
 
-    todoAppRender({content}): void {
+    renderTodoApp({ content }): void {
         this.todoApp.innerHTML = makeColumns(content);
     }
 
-    todoModalRender(): void {
+    renderTodoModal(): void {
         this.todoModal.innerHTML = makeModal();
     }
 
-    todoMenuRender(): void {
+    renderTodoMenu(): void {
         this.todoMenu.innerHTML = makeMenu();
     }
 

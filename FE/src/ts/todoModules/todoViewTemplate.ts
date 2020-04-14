@@ -74,7 +74,7 @@ function makeModal(): string {
 }
 
 function makeMenu(): string {
-    return `<div class="menu-header">
+    return `<div class="menu-header content-wrap" data-type="menu">
                 <h2>☰ menu</h2>
                 <div class="btn-wrap">
                     <button class="btn btn-close"><span class="material-icons">close</span></button>

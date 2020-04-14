@@ -2,6 +2,7 @@ import { COMMON_RULE } from '../contants/constant';
 import { deleteCard, showEditModal, dragStartCard, dragoverCard, dragenterCard, dragendCard } from './eventHandles/card';
 import { showColumnForm } from './eventHandles/column';
 import { onClickSubmit } from './eventHandles/form';
+import { showMenu, closeMenu } from './eventHandles/menu';
 import { checkDisabled } from '../utils/todoUtil';
 import { getParentEl, toggleClass } from '../utils/commonUtil';
 import TodoView from './todoView';
@@ -26,6 +27,12 @@ class TodoEventManager {
     todoModalEventList: ITodoEventList;
     constructor(todoView: TodoView) {
         this.todoView = todoView;
+        this.todoHeaderEventList = {
+            click: showMenu.bind(this),
+        };
+        this.todoMenuEventList = {
+            click: closeMenu.bind(this),
+        }
         this.todoAppEventList = {
             click: this.clickEventDelegation.bind(this),
             submit: this.submitEventDelegation.bind(this),
@@ -43,19 +50,29 @@ class TodoEventManager {
         };
     }
 
-    todoAppEventInit(): void {
-        for (let [event, callback] of Object.entries(this.todoAppEventList)) {
-            this.todoView.todoApp.addEventListener(event, callback);
+    initTodoHeaderEvent(): void {
+        this.registerEvent(this.todoView.todoHeader, this.todoHeaderEventList);
+    }
+
+    initTodoMenuEvent(): void {
+        this.registerEvent(this.todoView.todoMenu, this.todoMenuEventList);
+    }
+
+    initTodoAppEvent(): void {
+        this.registerEvent(this.todoView.todoApp, this.todoAppEventList);
+    }
+
+    initTodoModalEvent(): void {
+        this.registerEvent(this.todoView.todoModal, this.todoModalEventList);
+    }
+
+    registerEvent(target, eventList) {
+        for (let [event, callback] of Object.entries(eventList)) {
+            target.addEventListener(event, callback);
         }
     }
 
-    todoModalEventInit(): void {
-        for (let [event, callback] of Object.entries(this.todoModalEventList)) {
-            this.todoView.todoModal.addEventListener(event, callback);
-        }
-    }
-
-    clickEventDelegation({ target }:Event): void {
+    clickEventDelegation({ target }: Event): void {
         const contentWrap = getParentEl(<HTMLElement>target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
@@ -86,7 +103,7 @@ class TodoEventManager {
         }
     }
 
-    submitEventDelegation(evt:Event): void {
+    submitEventDelegation(evt: Event): void {
         const contentWrap = getParentEl(<HTMLElement>evt.target, '.content-wrap');
         if (!contentWrap) return;
         switch (contentWrap.dataset.type) {
