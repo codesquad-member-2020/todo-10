@@ -57,10 +57,6 @@ function dragStartCard({ target }: Event) {
     addClass(<HTMLElement>option.dragTarget, COMMON_RULE.DRAG_KEY);
 }
 
-function dragoverCard(evt: Event) {
-    evt.preventDefault();
-}
-
 function dragenterCard(evt: Event) {
     if (!option.dragTarget) return;
     option.toTarget = getParentEl(evt.toElement, '.card-item');
@@ -104,7 +100,6 @@ export {
     deleteCard,
     showEditModal,
     dragStartCard,
-    dragoverCard,
     dragenterCard,
     dragendCard,
 }
