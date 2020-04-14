@@ -12,10 +12,9 @@ final class NewCardViewController: CardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePlaceHolderVersion()
-        configureCreateButtonDelegate(self, action: #selector(createCard), for: .touchUpOutside)
     }
     
-    @objc func createCard() {
+    @objc override func createCard() {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }

@@ -12,10 +12,9 @@ final class EditingCardViewController: CardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextColorWritingVersion()
-        configureCreateButtonDelegate(self, action: #selector(createCard), for: .touchUpInside)
     }
     
-    @objc func createCard() {
+    @objc override func createCard() {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }

@@ -53,10 +53,16 @@ class CardViewController: UIViewController {
     }
     
     private func configureCreateButton() {
+        createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
+        
         view.addSubview(createButton)
         let constant: CGFloat = 27
         createButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
+    }
+    
+    @objc func createCard() {
+        
     }
     
     private func configureCancelButton() {
@@ -93,10 +99,6 @@ class CardViewController: UIViewController {
         contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
     
-    func configureCreateButtonDelegate(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
-        createButton.addTarget(target, action: action, for: controlEvents)
-    }
-    
     func configurePlaceHolderVersion() {
         contentView.configurePlaceHolderVersion()
     }
@@ -105,8 +107,3 @@ class CardViewController: UIViewController {
         contentView.configureTextWriting()
     }
 }
-
-@objc protocol CardCreatable where Self: CardViewController {
-    func createCard()
-}
-
