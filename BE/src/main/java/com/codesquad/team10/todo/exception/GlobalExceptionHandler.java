@@ -2,6 +2,7 @@ package com.codesquad.team10.todo.exception;
 
 import com.codesquad.team10.todo.exception.custom.InvalidRequestException;
 import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
+import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
 import com.codesquad.team10.todo.exception.custom.UserNotFoundException;
 import com.codesquad.team10.todo.response.ResponseData;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseData handleInvalidRequestException(InvalidRequestException e) {
+        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
+    }
+
+    @ExceptionHandler(UnmatchedRequestDataException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseData handleUnmatchedRequestDataException(UnmatchedRequestDataException e) {
         return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
     }
 }
