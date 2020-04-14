@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct NewCard: Codable {
-    let title: String?
-    let content: String
-}
-
 struct NewCardViewModelUseCase {
     static func makeNewCardViewModel(columnID: Int,
                                    cardData: Data,

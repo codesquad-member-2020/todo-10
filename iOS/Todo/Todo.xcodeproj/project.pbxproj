@@ -51,6 +51,7 @@
 		5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */; };
 		5ADF26B524459684008C15CA /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B424459684008C15CA /* EndPoints.swift */; };
 		5ADF26B7244597BD008C15CA /* WillEditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */; };
+		5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B824459E7B008C15CA /* NewCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedCardViewModelUseCase.swift; sourceTree = "<group>"; };
 		5ADF26B424459684008C15CA /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillEditCardViewModel.swift; sourceTree = "<group>"; };
+		5ADF26B824459E7B008C15CA /* NewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +246,7 @@
 				5A838E53243DB4110081A42F /* ColumnsResponse.swift */,
 				5A7937F7243F1AFA00D59611 /* DeleteResponse.swift */,
 				5A838E5D243DF0470081A42F /* TitleModel.swift */,
+				5ADF26B824459E7B008C15CA /* NewCard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				5A79380724419F5600D59611 /* FormatImageView.swift in Sources */,
 				5A7937FE2440150700D59611 /* CardViewController.swift in Sources */,
 				5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */,
+				5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */,
 				5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */,
 				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
