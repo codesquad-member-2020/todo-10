@@ -9,15 +9,11 @@
 import Foundation
 
 struct NewCardViewModelUseCase {
-    enum EndPoints {
-        static let column = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
-    }
-    static func makeNewCardViewModel(columnID: Int,
-                                   cardData: Data,
-                                   with manager: NetworkManagable,
-                                   result: @escaping (CardViewModel?) -> ()) {
-        try? manager.requestResource(from: "\(EndPoints.column)/\(columnID)/card",
-            method: .post,
+    static func makeNewCardViewModel(from string: String,
+                                     cardData: Data,
+                                     with manager: NetworkManagable,
+                                     result: @escaping (CardViewModel?) -> ()) {
+        try? manager.requestResource(from: string, method: .post,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                 guard error == nil, let data = data else { return }

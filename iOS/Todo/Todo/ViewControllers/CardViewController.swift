@@ -109,7 +109,7 @@ final class NewCardViewController: CardViewController, CardCreatable {
         guard let columnID = columnID else { return }
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        NewCardViewModelUseCase.makeNewCardViewModel(columnID: columnID,
+        NewCardViewModelUseCase.makeNewCardViewModel(from: EndPointFactory.createNewCardURLString(columnID: columnID),
                                                      cardData: cardData, with: MockCardCreateSuccessStub()) { cardViewModel in
                                                         guard let cardViewModel = cardViewModel else { return }
                                                         self.delegate?.cardViewControllerDidCardCreate(cardViewModel)
@@ -130,8 +130,9 @@ final class EditingCardViewController: CardViewController, CardCreatable {
         guard let content = contentView.text else { return }
         guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
         guard let cardID = willEditCardViewModel?.cardViewModel.cardID else { return }
-        EditedCardViewModelUseCase.makeEditedCardViewModel(columnID: columnID, cardID: cardID,
-                                                           cardData: cardData, with: MockCardEditSuccessStub()) { cardViewModel in
+        let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
+        EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
+                                                           with: MockCardEditSuccessStub()) { cardViewModel in
                                                             guard let cardViewModel = cardViewModel else { return }
                                                             self.willEditCardViewModel?.cardViewModel = cardViewModel
                                                             guard let willEditCardViewModel = self.willEditCardViewModel else { return }

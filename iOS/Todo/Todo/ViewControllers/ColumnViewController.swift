@@ -86,16 +86,16 @@ final class ColumnViewController: UIViewController {
             let tableView = userInfo["tableView"] as? UITableView , let indexPath = userInfo["indexPath"] as? IndexPath,
             let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
             let cardID = cardViewModel.cardID else { return }
-        DeleteUseCase.makeDeleteResult(columnID: columnTableDataSource.columnID,
-                                       cardID: cardID,
+        DeleteUseCase.makeDeleteResult(from: EndPointFactory.createExistedCardURLString(columnID: columnTableDataSource.columnID,
+                                                                                        cardID: cardID),
                                        with: MockCardDeleteSuccessStub()) { result in
-            guard let result = result else { return }
-            if result {
-                self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-            }
+                                        guard let result = result else { return }
+                                        if result {
+                                            self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                                                tableView.deleteRows(at: [indexPath], with: .fade)
+                                            }
+                                        }
         }
     }
     

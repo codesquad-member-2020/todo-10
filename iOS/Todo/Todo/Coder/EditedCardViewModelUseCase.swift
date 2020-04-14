@@ -9,16 +9,11 @@
 import Foundation
 
 struct EditedCardViewModelUseCase {
-    enum EndPoints {
-        static let column = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
-    }
-    static func makeEditedCardViewModel(columnID: Int, cardID: Int,
-                                    cardData: Data,
-                                    with manager: NetworkManagable,
-                                    result: @escaping (CardViewModel?) -> () ) {
-        try? manager.requestResource(from: "\(EndPoints.column)/\(columnID)/card/\(cardID)",
-            method: .patch,
-            body: cardData, format: Format.jsonType,
+    static func makeEditedCardViewModel(from string: String,
+                                        cardData: Data,
+                                        with manager: NetworkManagable,
+                                        result: @escaping (CardViewModel?) -> () ) {
+        try? manager.requestResource(from: string, method: .patch, body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                 guard error == nil, let data = data else { return }
                 guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }

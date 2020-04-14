@@ -51,6 +51,7 @@
 		5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */; };
 		5ADF26B7244597BD008C15CA /* WillEditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */; };
 		5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B824459E7B008C15CA /* NewCard.swift */; };
+		5ADF26BB2445DF5B008C15CA /* EndPointFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26BA2445DF5B008C15CA /* EndPointFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedCardViewModelUseCase.swift; sourceTree = "<group>"; };
 		5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillEditCardViewModel.swift; sourceTree = "<group>"; };
 		5ADF26B824459E7B008C15CA /* NewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCard.swift; sourceTree = "<group>"; };
+		5ADF26BA2445DF5B008C15CA /* EndPointFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 				5A7937F5243F194A00D59611 /* DeleteUseCase.swift */,
 				5A7937FF2441319F00D59611 /* NewCardViewModelUseCase.swift */,
 				5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */,
+				5ADF26BA2445DF5B008C15CA /* EndPointFactory.swift */,
 			);
 			path = Coder;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				5A79380D2441A05100D59611 /* ContentView.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
 				5A79380724419F5600D59611 /* FormatImageView.swift in Sources */,
+				5ADF26BB2445DF5B008C15CA /* EndPointFactory.swift in Sources */,
 				5A7937FE2440150700D59611 /* CardViewController.swift in Sources */,
 				5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */,
 				5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */,
