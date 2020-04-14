@@ -14,14 +14,13 @@ final class ColumnViewController: UIViewController {
     private var titleViewModel: TitleViewModel!
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
-    private var columnTableDelegate = ColumnTableDelegate()
     var columnID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTitleView()
         configureTableView()
-        configureObservers()
+        configureObserver()
     }
     
     private func configureTitleView() {
@@ -40,7 +39,7 @@ final class ColumnViewController: UIViewController {
     
     private func configureTableView() {
         columnTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
-        columnTable.delegate = columnTableDelegate
+        columnTable.delegate = self
         configureTableConstraints()
     }
     
@@ -54,50 +53,16 @@ final class ColumnViewController: UIViewController {
         columnTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
-    private func configureObservers() {
+    private func configureObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateBadge),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
-        NotificationCenter.default.addObserver(forName: ColumnTableDelegate.Notification.swipeDeleteEventOccured,
-                                               object: columnTableDelegate,
-                                               queue: nil) { notification in
-                                                self.deleteRow(notification: notification)
-        }
-        NotificationCenter.default.addObserver(forName: ColumnTableDelegate.Notification.menuDeleteEventOccured,
-                                               object: columnTableDelegate,
-                                               queue: nil) { notification in
-                                                self.deleteRow(notification: notification, delay: 0.7)
-        }
-        NotificationCenter.default.addObserver(forName: ColumnTableDelegate.Notification.menuEditEventOccured,
-                                               object: columnTableDelegate,
-                                               queue: nil) { notification in
-                                                self.showEditingViewController(notification: notification)
-        }
     }
     
     @objc private func updateBadge() {
         DispatchQueue.main.async {
             self.titleView.configureBadge(text: String(self.columnTableDataSource.cardViewModelsCount))
-        }
-    }
-    
-    private func deleteRow(notification: Notification, delay: Double = 0.0) {
-        guard let userInfo = notification.userInfo,
-            let tableView = userInfo["tableView"] as? UITableView , let indexPath = userInfo["indexPath"] as? IndexPath,
-            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
-            let columnID = columnID,
-            let cardID = cardViewModel.cardID else { return }
-        DeleteUseCase.makeDeleteResult(from: EndPointFactory.createExistedCardURLString(columnID: columnID,
-                                                                                        cardID: cardID),
-                                       with: MockCardDeleteSuccessStub()) { result in
-                                        guard let result = result else { return }
-                                        if result {
-                                            self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                                tableView.deleteRows(at: [indexPath], with: .fade)
-                                            }
-                                        }
         }
     }
     
@@ -118,6 +83,73 @@ final class ColumnViewController: UIViewController {
     }
 }
 
+extension ColumnViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            return self.contextMenu(tableView, for: indexPath)
+        }
+    }
+    
+    private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
+        return UIMenu(title: "", children: [move(), edit(tableView, for: indexPath), delete(tableView, for: indexPath)])
+    }
+    
+    private func move() -> UIAction {
+        return UIAction(title: ButtonData.moveToDone) { action in
+            
+        }
+    }
+    
+    private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
+        return UIAction(title: ButtonData.edit) { action in
+            self.showEditingViewController(tableView, indexPath: indexPath)
+        }
+    }
+    
+    private func showEditingViewController(_ tableView: UITableView, indexPath: IndexPath) {
+        guard let columnID = columnID ,
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
+        let editingCardViewController = EditingCardViewController()
+        editingCardViewController.columnID = columnID
+        editingCardViewController.delegate = self
+        editingCardViewController.willEditCardViewModel = WillEditCardViewModel(row: indexPath.row,
+                                                                                cardViewModel: cardViewModel)
+        present(editingCardViewController, animated: true)
+    }
+    
+    private func delete(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
+        return UIAction(title: ButtonData.deleteString, attributes: .destructive) { action in
+            let delayForNotOverlapped = 0.7
+            self.deleteRow(tableView, for: indexPath, delay: delayForNotOverlapped)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return UISwipeActionsConfiguration(actions:
+            [UIContextualAction(style: .destructive,
+                                title: ButtonData.deleteString,
+                                handler: { contextualAction, view, _ in
+                                    self.deleteRow(tableView, for: indexPath)
+            })])
+    }
+    
+    private func deleteRow(_ tableView: UITableView, for indexPath: IndexPath,delay: Double = 0.0) {
+        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+            let columnID = columnID,
+            let cardID = cardViewModel.cardID else { return }
+        let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
+        DeleteUseCase.makeDeleteResult(from: urlString, with: MockCardDeleteSuccessStub()) { result in
+            guard let result = result else { return }
+            if result {
+                self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+        }
+    }
+}
+
 extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     func plusButtonDidTouch() {
         guard let columnID = columnID else { return }
@@ -125,19 +157,6 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         newCardViewController.columnID = columnID
         newCardViewController.delegate = self
         present(newCardViewController, animated: true)
-    }
-    
-    private func showEditingViewController(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let indexPath = userInfo["indexPath"] as? IndexPath,
-            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
-            let columnID = columnID else { return }
-        let editingCardViewController = EditingCardViewController()
-        editingCardViewController.columnID = columnID
-        editingCardViewController.delegate = self
-        editingCardViewController.willEditCardViewModel = WillEditCardViewModel(row: indexPath.row,
-                                                                                cardViewModel: cardViewModel)
-        present(editingCardViewController, animated: true)
     }
     
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
