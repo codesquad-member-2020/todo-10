@@ -53,7 +53,7 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
             isCorrect = true
         } else {
             guard let contentView = textView as? ContentView else { return }
-            contentView.configurePlaceHolder()
+            contentView.configurePlaceHolderVersion()
             setPositionBeginningOfDocument(textView)
             isCorrect = false
         }

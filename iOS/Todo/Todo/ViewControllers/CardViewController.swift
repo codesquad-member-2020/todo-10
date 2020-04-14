@@ -101,6 +101,7 @@ class CardViewController: UIViewController {
 final class NewCardViewController: CardViewController, CardCreatable {
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.configurePlaceHolderVersion()
         createButton.addTarget(self, action: #selector(createCard), for: .touchUpInside)
     }
     
