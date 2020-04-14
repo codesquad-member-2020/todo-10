@@ -1,5 +1,7 @@
 package com.codesquad.team10.todo.vo;
 
+import com.codesquad.team10.todo.util.DateTimeFormatUtils;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,12 +38,12 @@ public class SectionDTO {
         return title;
     }
 
-    public LocalDateTime getCreateDateTime() {
-        return createDateTime;
+    public String getCreateDateTime() {
+        return DateTimeFormatUtils.localDateTimeToString(createDateTime);
     }
 
-    public LocalDateTime getUpdateDateTime() {
-        return updateDateTime;
+    public String getUpdateDateTime() {
+        return DateTimeFormatUtils.localDateTimeToString(updateDateTime);
     }
 
     public List<CardDTO> getCards() {

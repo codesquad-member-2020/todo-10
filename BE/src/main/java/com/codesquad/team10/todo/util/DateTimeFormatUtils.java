@@ -10,4 +10,8 @@ public class DateTimeFormatUtils {
     public static String localDateTimeToString(LocalDateTime localDateTime) {
         return dateTimeFormatter.format(localDateTime);
     }
+
+    public static LocalDateTime stringToLocalDateTime(String localDateTime) {
+        return LocalDateTime.parse(localDateTime);
+    }
 }
