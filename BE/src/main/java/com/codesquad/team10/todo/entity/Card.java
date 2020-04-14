@@ -1,6 +1,5 @@
-package com.codesquad.team10.todo.domain;
+package com.codesquad.team10.todo.entity;
 
-import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -9,58 +8,67 @@ import java.util.Objects;
 public class Card {
 
     @Id
-    private int id;
+    private Integer id;
+
     private String title;
+
     private String content;
+
     private LocalDateTime createDateTime;
+
     private LocalDateTime updateDateTime;
 
-    public Card(int id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime) {
+    private String author;
+
+    private boolean deleted;
+
+    private Integer sectionKey;
+
+    public Card(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer sectionKey) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createDateTime = createDateTime;
         this.updateDateTime = updateDateTime;
+        this.author = author;
+        this.deleted = deleted;
+        this.sectionKey = sectionKey;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public LocalDateTime getCreateDateTime() {
+        return createDateTime;
     }
 
-    public String getCreatedDateTime() {
-        return DateTimeFormatUtils.localDateTimeToString(this.createDateTime);
+    public LocalDateTime getUpdateDateTime() {
+        return updateDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createDateTime) {
-        this.createDateTime = createDateTime;
+    public String getAuthor() {
+        return author;
     }
 
-    public String getUpdatedDateTime() {
-        return DateTimeFormatUtils.localDateTimeToString(this.updateDateTime);
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updateDateTime = updatedDateTime;
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public Integer getSectionKey() {
+        return sectionKey;
     }
 
     public void update(Card updatedCard) {
@@ -75,8 +83,9 @@ public class Card {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", createdDateTime=" + createDateTime +
-                ", updatedDateTime=" + updateDateTime +
+                ", createDateTime=" + createDateTime +
+                ", updateDateTime=" + updateDateTime +
+                ", author='" + author + '\'' +
                 '}';
     }
 
@@ -85,7 +94,7 @@ public class Card {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
-        return id == card.id;
+        return id.equals(card.id);
     }
 
     @Override
