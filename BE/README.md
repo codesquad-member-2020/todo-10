@@ -149,6 +149,67 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     }
 }
 ```
+## 카드 수정 요청
+
+### PATCH /board/section/{sectionId}/card/{cardId}
+
+### 요청 데이터
+```
+{
+    "cardIndex": 1,
+    "title": "README.md 추가 안함",
+    "content": "구현 API 내용 작성 안함",
+}
+```
+- 카드 수정 요청 시, URL에 sectionId와 cardId를 전달해야 합니다.
+- Body에는 카드 객체 생성 시 반환 받은 cardIndex와 변경하고자 하는 데이터(title, content)를 함께 보냅니다.
+- 프론트에서는 content에 변경될 카드 내용을 담아주세요.
+
+### JSON 응답
+
+- 성공적으로 반환하는 경우
+- 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "log_id": 2,
+        "card_count": 1,
+        "card": {
+            "id": 1,
+            "title": "README.md 추가 안함",
+            "content": "구현 API 내용 작성 안함",
+            "createDateTime": "2020-04-15 03:12:32",
+            "updateDateTime": "2020-04-15 03:13:00",
+            "author": "nigayo",
+            "cardIndex": 1
+        }
+    }
+}
+```
+
+- 실패한 경우 1
+   - 존재하지 않는 sectionId나 cardId를 전달하는 경우
+   - 섹션에 존재하지 않는 cardIndex를 전달하는 경우
+- 상태 코드 : Not Found (404)
+```
+{
+    "status": "ERROR",
+    "content": "리소스를 찾을 수 없습니다."
+}
+```
+
+- 실패한 경우 2
+   - Body에 필요한 데이터를 포함하지 않은 경우
+- 상태 코드 : Bad Request (400)
+```
+{
+    "status": "ERROR",
+    "content": "요청 데이터가 충족하지 않습니다."
+}
+```
+
+---
 
 # BE 요구사항 분석
 
