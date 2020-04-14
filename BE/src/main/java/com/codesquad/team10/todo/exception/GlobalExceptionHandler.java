@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidRequestException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseData handleInvalidRequestException(InvalidRequestException e) {
         return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
     }
