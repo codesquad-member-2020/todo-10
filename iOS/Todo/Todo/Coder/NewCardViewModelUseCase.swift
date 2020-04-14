@@ -9,6 +9,9 @@
 import Foundation
 
 struct NewCardViewModelUseCase {
+    enum EndPoints {
+        static let column = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
+    }
     static func makeNewCardViewModel(columnID: Int,
                                    cardData: Data,
                                    with manager: NetworkManagable,

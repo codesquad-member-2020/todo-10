@@ -49,7 +49,6 @@
 		5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */; };
 		5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D58C243B5CDC00387EAE /* TitleView.swift */; };
 		5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */; };
-		5ADF26B524459684008C15CA /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B424459684008C15CA /* EndPoints.swift */; };
 		5ADF26B7244597BD008C15CA /* WillEditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */; };
 		5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B824459E7B008C15CA /* NewCard.swift */; };
 /* End PBXBuildFile section */
@@ -120,7 +119,6 @@
 		5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogController.swift; sourceTree = "<group>"; };
 		5AB8D58C243B5CDC00387EAE /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedCardViewModelUseCase.swift; sourceTree = "<group>"; };
-		5ADF26B424459684008C15CA /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		5ADF26B6244597BD008C15CA /* WillEditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillEditCardViewModel.swift; sourceTree = "<group>"; };
 		5ADF26B824459E7B008C15CA /* NewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				5A838E4D243D66620081A42F /* NetworkManager.swift */,
-				5ADF26B424459684008C15CA /* EndPoints.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -482,7 +479,6 @@
 				5A7938002441319F00D59611 /* NewCardViewModelUseCase.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* ColumnTable.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
-				5ADF26B524459684008C15CA /* EndPoints.swift in Sources */,
 				5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */,
 				5A79380B2441A02600D59611 /* TitleField.swift in Sources */,
 				5A838E62243DFD0E0081A42F /* CardViewModel.swift in Sources */,
