@@ -136,14 +136,15 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     "status": "SUCCESS",
     "content": {
         "log_id": 3,
+        "card_count": 3,
         "card": {
             "id": 3,
-            "title": "발리",
-            "content": "ㅇㅇㅇ2",
-            "createDateTime": "2020-04-14T14:37:46",
-            "updateDateTime": "2020-04-14T14:37:46",
+            "title": "회고",
+            "content": "회고하자",
+            "createDateTime": "2020-04-14T15:26:30",
+            "updateDateTime": "2020-04-14T15:26:30",
             "author": "nigayo",
-            "sectionKey": 1
+            "sectionKey": 2
         }
     }
 }
