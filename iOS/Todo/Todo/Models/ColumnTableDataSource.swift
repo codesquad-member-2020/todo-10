@@ -8,24 +8,24 @@
 import UIKit
 
 final class ColumnTableDataSource: NSObject {
-    let columnID: Int
     enum Notification {
         static let cardViewModelsDidChange = Foundation.Notification.Name("cardViewModelsDidChange")
     }
-    private var cardViewModels: [CardViewModel] {
-        didSet {
-            NotificationCenter.default.post(name: Notification.cardViewModelsDidChange, object: self)
-        }
-    }
     
-    var cardViewModelsCount: Int {
-        return cardViewModels.count
+    let columnID: Int
+    private var cardViewModels: [CardViewModel] {
+        didSet { NotificationCenter.default.post(name: Notification.cardViewModelsDidChange,
+                                                 object: self) }
     }
     
     init(columnID: Int, cardViewModels: [CardViewModel]) {
         self.columnID = columnID
         self.cardViewModels = cardViewModels
         super.init()
+    }
+    
+    var cardViewModelsCount: Int {
+        return cardViewModels.count
     }
     
     func removeCardViewModel(at index: Int) {
