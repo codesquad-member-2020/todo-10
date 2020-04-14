@@ -25,6 +25,9 @@ public class Log {
 
     private Integer board;
 
+    public Log() {
+    }
+
     public Log(String user, Action action, Target target, String content, String source, String destination, Integer board) {
         this.user = user;
         this.action = action;
@@ -61,6 +64,10 @@ public class Log {
 
     public Target getTarget() {
         return target;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public String getSource() {
