@@ -47,7 +47,11 @@ TODO 웹앱 프로젝트 - 10팀
 
 [백로그 스프레드시트 바로가기](https://docs.google.com/spreadsheets/d/1Sl-0e0Yn5wYYx2IcyoMGC_MMitMFhuW9W1sN1DHI19Q/edit#gid=722419157)
 
+## TODO API 문서
+[Production API 바로가기](https://github.com/codesquad-member-2020/todo-10/tree/dev/BE)
+
 ## Mockup API 문서
+- 아래 내용은 지워질 예정입니다.
 
 ### 서버 요청 주소 (변경될 수 있음)
 
