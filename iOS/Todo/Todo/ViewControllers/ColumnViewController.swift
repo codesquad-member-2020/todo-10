@@ -34,7 +34,7 @@ final class ColumnViewController: UIViewController {
     }
     
     private func configurePlusButtonDelegate() {
-        titleView.plusButton.delegate = self
+        titleView.configurePlusButton(delegate: self)
     }
     
     private func configureTableView() {
@@ -77,7 +77,7 @@ final class ColumnViewController: UIViewController {
     
     @objc private func updateBadge() {
         DispatchQueue.main.async {
-            self.titleView.badge.text = String(self.columnTableDataSource.cardViewModelsCount)
+            self.titleView.configureBadge(text: String(self.columnTableDataSource.cardViewModelsCount))
         }
     }
     
@@ -104,8 +104,8 @@ final class ColumnViewController: UIViewController {
                                                                cardsCount: column.cards.count),
                                         changed: { titleModel in
                                             guard let titleModel = titleModel else { return }
-                                            self.titleView.badge.text = String(titleModel.cardsCount)
-                                            self.titleView.titleLabel.text = titleModel.title
+                                            self.titleView.configureBadge(text: String(titleModel.cardsCount))
+                                            self.titleView.configureTitleLabel(text: titleModel.title)
         })
     }
     
