@@ -30,6 +30,7 @@ struct ColumnsUseCase {
                                     guard let data = data else { return }
                                     guard let response = try? JSONDecoder().decode(ColumnsResponse.self, from: data) else { return }
                                     guard response.status == .success else { return }
+                                    
                                     let column = Columns(columns: response.content.sections)
                                     completed(column)
         }

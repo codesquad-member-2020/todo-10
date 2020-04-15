@@ -83,7 +83,7 @@ public class Section {
         if (!target.equals(deleteCard))
             throw new UnmatchedRequestDataException();
 
-        cards.remove(target);
+        target.setDeleted(true);
     }
 
     @Override

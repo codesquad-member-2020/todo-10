@@ -88,6 +88,10 @@ public class Card {
         return deleted;
     }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     public Integer getUser() {
         return user;
     }

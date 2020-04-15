@@ -39,7 +39,7 @@ final class MainViewController: UIViewController {
                 }
 =======
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
             columnsDataSource?.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
 >>>>>>> dev
@@ -63,9 +63,27 @@ final class MainViewController: UIViewController {
             let controller = ColumnViewController()
             controller.configureTitleViewModel(column: column)
             controller.configureDataSource(column: column)
+            controller.delegate = self
             controller.columnID = column.id
             return controller
         }()
         return columnViewController
+    }
+}
+
+extension MainViewController: ColumnViewControllerDelegate {
+    func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
+        let doneIndex = 2
+        guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }
+        doneViewController.addToLast(cardViewModel: cardViewModel)
+    }
+    
+    func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int) {
+        children.forEach { viewController in
+            guard let columnViewController = viewController as? ColumnViewController,
+                let columnID = columnViewController.columnID,
+                columnID == sourceColumnID else { return }
+            columnViewController.removeCardViewModel(row: sourceRow)
+        }
     }
 }
