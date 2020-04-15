@@ -1,6 +1,5 @@
 package com.codesquad.team10.todo.entity;
 
-import com.codesquad.team10.todo.exception.custom.InvalidRequestException;
 import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
 import org.springframework.data.annotation.Id;
 
@@ -70,13 +69,13 @@ public class Section {
         cards.add(newCard);
     }
 
-    public void updateCard(Card updatedCard) {
-        cards.get(updatedCard.getSectionKey()).update(updatedCard);
+    public void updateCard(Card updateCard) {
+        cards.get(updateCard.getSectionKey()).update(updateCard);
     }
 
-    public void deleteCard(Card deletedCard) {
-        Card target = cards.get(deletedCard.getSectionKey());
-        if (!target.equals(deletedCard))
+    public void deleteCard(Card deleteCard) {
+        Card target = cards.get(deleteCard.getSectionKey());
+        if (!target.equals(deleteCard))
             throw new UnmatchedRequestDataException();
         cards.remove(target);
     }
