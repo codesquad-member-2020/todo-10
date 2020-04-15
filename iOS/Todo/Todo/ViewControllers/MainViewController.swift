@@ -24,25 +24,11 @@ final class MainViewController: UIViewController {
         columScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         columScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
-    
-<<<<<<< HEAD
-    private func configureCardListsCase() {
-        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
-            cardListsDataSource?.iterateCardList(with: { cardList in
-                DispatchQueue.main.async {
-                    let cardListViewController: CardListViewController = {
-                        let controller = CardListViewController()
-                        controller.cardList = cardList
-                        return controller
-                    }()
-                    self.addCardListViewController(cardListViewController: cardListViewController)
-                }
-=======
+
     private func configureColumnsCase() {
         ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
             columnsDataSource?.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
->>>>>>> dev
             })
         }
     }

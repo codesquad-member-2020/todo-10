@@ -8,21 +8,13 @@
 
 import Foundation
 
-<<<<<<< HEAD:iOS/Todo/Todo/Models/Response.swift
-struct Response: Codable {
-=======
 struct ColumnsResponse: Codable {
->>>>>>> dev:iOS/Todo/Todo/Models/ColumnsResponse.swift
     var status: Status
     var content: Content
 }
 
 struct Content: Codable {
-<<<<<<< HEAD:iOS/Todo/Todo/Models/Response.swift
-    var sections: [CardList]
-=======
     var sections: [Column]
->>>>>>> dev:iOS/Todo/Todo/Models/ColumnsResponse.swift
     var logs: [Log]
 }
 
@@ -34,11 +26,8 @@ struct Log: Codable {
     var createdDateTime: String?
 }
 
-<<<<<<< HEAD:iOS/Todo/Todo/Models/Response.swift
-struct CardList: Codable {
-=======
+
 struct Column: Codable {
->>>>>>> dev:iOS/Todo/Todo/Models/ColumnsResponse.swift
     let id: Int
     var title: String
     var cards: [Card]
