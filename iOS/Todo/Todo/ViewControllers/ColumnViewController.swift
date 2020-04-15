@@ -23,9 +23,15 @@ final class ColumnViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureDragAndDrop()
         configureTitleView()
         configureTableView()
         configureObserver()
+    }
+    
+    private func configureDragAndDrop() {
+        columnTable.dragInteractionEnabled = true
+        columnTable.dragDelegate = self
     }
     
     private func configureTitleView() {
@@ -167,6 +173,15 @@ extension ColumnViewController: UITableViewDelegate {
     }
 }
 
+
+extension ColumnViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let itemProvider = NSItemProvider()
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        return [dragItem]
+    }
+}
+
 extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
     func plusButtonDidTouch() {
         guard let columnID = columnID else { return }
@@ -184,3 +199,5 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         columnTableDataSource.update(cardViewModel: cardViewModel, at: row)
     }
 }
+
+

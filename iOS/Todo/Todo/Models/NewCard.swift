@@ -12,7 +12,7 @@ struct NewCard: Codable {
     let content: String
     
     func encodeToJSONData() -> Data? {
-        guard let cardData = try? JSONEncoder().encode(self) else { return nil }
-        return cardData
+        guard let newCardData = try? JSONEncoder().encode(self) else { return nil }
+        return newCardData
     }
 }
