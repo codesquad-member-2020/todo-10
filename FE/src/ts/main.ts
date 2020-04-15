@@ -18,24 +18,19 @@ const drawLoading = () => {
                 <div></div>
             </div>`;
 };
-const checkUser = (data) => {
-    const checkEmail = USER.find((user) => user.email === data.email);
-    if (!checkEmail) return alert('회원이 아닙니다.');
-    if (checkEmail.password !== data.password) return alert('비밀번호를 확인해주세요.');
-    return data;
-};
 
 dimmedEl.querySelector('.btn').addEventListener('click', (e) => {
     e.preventDefault();
     const loginIdEl = <HTMLInputElement>getEl('#userID');
     const loginPwEl = <HTMLInputElement>getEl('#password');
     const data = {
-        email: loginIdEl.value,
+        name: loginIdEl.value,
         password: loginPwEl.value,
     };
-    const checkEmail = USER.find((user) => user.email === data.email);
-    if (!checkEmail) return alert('회원이 아닙니다.');
-    if (checkEmail.password !== data.password) return alert('비밀번호를 확인해주세요.');
+    const checkName = USER.find((user) => user.name === data.name);
+    if (!checkName) return alert('회원이 아닙니다.');
+    if (checkName.password !== data.password) return alert('비밀번호를 확인해주세요.');
     dimmedEl.innerHTML = drawLoading();
+
     todoController.runTodoApp(data);
 });

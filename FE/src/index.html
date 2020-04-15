@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Todo - 10</title>
-        <script defer src="dist/bundle.js"></script>
-    </head>
 
-    <body>
-        <div id="wrap">
-            <header>
-                <div class="inner">
-                    <h1>TODO 서비스</h1>
-                    <a class="toggle-menu" href="#">MENU</a>
-                </div>
-            </header>
-            <div id="menu"></div>
-            <div id="container">
-                <div id="todo-app"></div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo - 10</title>
+    <script defer src="dist/bundle.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="todo-header">
+            <div class="inner">
+                <h1>TODO 서비스</h1>
+                <a class="toggle-menu" href="#">MENU</a>
             </div>
-            <div id="modal"></div>
-            <div id="dimmed">
-              <div class="login-box">
+        </header>
+        <div id="menu"></div>
+        <div id="container">
+            <div id="todo-app"></div>
+        </div>
+        <div id="modal"></div>
+        <div id="dimmed">
+            <div class="login-box">
                 <div class="login-title">TODO 서비스</div>
                 <p>#TEAM10 - TODO LOGIN <span>현재는 임시 회원만 사용 가능합니다.</span></p>
                 <div class="row">
                     <span class="input-box"><input type="text" id="userID" name="userID" placeholder="이메일 입력" /></span>
                 </div>
                 <div class="row">
-                    <span class="input-box"><input type="password" id="password" name="password" placeholder="비밀번호" /></span>
+                    <span class="input-box"><input type="password" id="password" name="password"
+                            placeholder="비밀번호" /></span>
                 </div>
                 <button class="btn btn-submit">LOGIN</button>
             </div>
-            </div>
-            <footer>
-                <p>TODOLIST TeamProject</p>
-            </footer>
         </div>
-    </body>
-</html>
+        <footer>
+            <p>TODOLIST TeamProject</p>
+        </footer>
+    </div>
+</body>
 
+</html>
