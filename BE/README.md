@@ -268,6 +268,44 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     ]
 }
 ```
+
+## 개별 로그 요청
+
+### GET /board/log/{id}
+
+### 요청 데이터
+- 현재는 전달해야할 데이터가 존재하지 않습니다.
+
+### JSON 응답
+
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "id": 1,
+        "user": "nigayo",
+        "action": "ADDED",
+        "target": "CARD",
+        "title": null,
+        "content": "자바 공부",
+        "source": null,
+        "destination": "하고 있는 일",
+        "createDateTime": "2020-04-15 20:35:13"
+    }
+}
+```
+
+- 실패한 경우
+   - 상태 코드 : Not Found (404)
+   - 존재하지 않는 id를 전달한 경우
+```
+{
+    "status": "ERROR",
+    "content": "리소스를 찾을 수 없습니다."
+}
+```
 ---
 
 # BE 요구사항 분석
