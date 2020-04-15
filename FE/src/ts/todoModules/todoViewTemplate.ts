@@ -70,10 +70,10 @@ function makeModal(): string {
                         </div>
                     </form>
                 </div>
-            </div>`
+            </div>`;
 }
 
-function makeMenu(): string {
+function makeMenu({ logs }): string {
     return `<div class="menu-header content-wrap" data-type="menu">
                 <h2>☰ menu</h2>
                 <div class="btn-wrap">
@@ -83,28 +83,62 @@ function makeMenu(): string {
             <div class="menu-container">
                 <div class="menu-title"><span class="material-icons">notifications_active</span>Activity</div>
                 <div class="activity-log">
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User생략가능</span>액션상태<strong>할일제목</strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>add<strong>할일제목</strong>to<strong>특정액션</strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>moved<strong>할일제목</strong>from<strong>특정액션</strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>remove<strong>할일제목</strong></strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>update<strong>할일제목</strong></strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
+                    ${makeLogs(logs)}
                 </div>
-            </div>`
+            </div>`;
+}
+
+function makeLogs(logs: []): string {
+    return logs.reduce((acc: string, log: ITodoViewTemplate) => {
+        acc += switchLog(log);
+        return acc;
+    }, '');
+}
+
+function switchLog(log): string {
+    const action = log.action;
+    switch (action) {
+        case 'add':
+            return makeAddActionLog(action, log);
+            break;
+        case 'update':
+            return makeUpdateActionLog(action, log);
+            break;
+        case 'delete':
+            return makeDeleteActionLog(action, log);
+            break;
+        case 'move':
+            return makeMoveActionLog(action, log);
+            break;
+    }
+}
+
+function makeAddActionLog(action, log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
+                <p class="log-time">${'time data'} ago</p>
+            </div>`;
+}
+
+function makeUpdateActionLog(action, log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
+                <p class="log-time">${'time data'} ago</p>
+            </div>`;
+}
+
+function makeDeleteActionLog(action, log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
+                <p class="log-time">${'time data'} ago</p>
+            </div>`;
+}
+
+function makeMoveActionLog(action, log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
+                <p class="log-time">${'time data'} ago</p>
+            </div>`;
 }
 
 export {

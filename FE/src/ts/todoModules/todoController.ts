@@ -3,6 +3,8 @@ import { URL } from '../contants/url';
 import TodoView from './todoView';
 import TodoEventManager from './todoEventManager';
 
+import { logData } from '../../_data/logDummyData';
+
 class TodoController {
     private todoView: TodoView;
     private todoEventManager: TodoEventManager;
@@ -23,7 +25,7 @@ class TodoController {
             this.todoEventManager.initTodoModalEvent();
         });
 
-        this.todoView.renderTodoMenu();
+        this.todoView.renderTodoMenu(logData);
         this.todoEventManager.initTodoMenuEvent();
     }
 }

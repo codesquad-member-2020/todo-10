@@ -23,8 +23,8 @@ class TodoView {
         this.todoModal.innerHTML = makeModal();
     }
 
-    renderTodoMenu(): void {
-        this.todoMenu.innerHTML = makeMenu();
+    renderTodoMenu(logData): void {
+        this.todoMenu.innerHTML = makeMenu(logData);
     }
 
     addCardUpdate({ target }, { content: card }): void {
