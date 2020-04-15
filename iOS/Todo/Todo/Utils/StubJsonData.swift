@@ -120,4 +120,21 @@ enum StubJsonData {
         ]
     }
     """.data(using: .utf8)
+    
+    static let successLogResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": {
+            "id": 1,
+            "user": "nigayo",
+            "action": "ADDED",
+            "target": "CARD",
+            "title": null,
+            "content": "자바 공부",
+            "source": null,
+            "destination": "하고 있는 일",
+            "createDateTime": "2020-04-15 20:35:13"
+        }
+    }
+    """.data(using: .utf8)
 }
