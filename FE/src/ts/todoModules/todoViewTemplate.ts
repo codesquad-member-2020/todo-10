@@ -98,46 +98,46 @@ function makeLogs(logs: []): string {
 function switchLog(log): string {
     const action = log.action;
     switch (action) {
-        case 'add':
-            return makeAddActionLog(action, log);
+        case 'ADDED':
+            return makeAddActionLog(log);
             break;
-        case 'update':
-            return makeUpdateActionLog(action, log);
+        case 'UPDATED':
+            return makeUpdateActionLog(log);
             break;
-        case 'delete':
-            return makeDeleteActionLog(action, log);
+        case 'REMOVED':
+            return makeDeleteActionLog(log);
             break;
-        case 'move':
-            return makeMoveActionLog(action, log);
+        case 'MOVED':
+            return makeMoveActionLog(log);
             break;
     }
 }
 
-function makeAddActionLog(action, log) {
+function makeAddActionLog(log) {
     return `<div class="log">
-                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
-                <p class="log-time">${'time data'} ago</p>
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>added<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time">${log.createDateTime}</p>
             </div>`;
 }
 
-function makeUpdateActionLog(action, log) {
+function makeUpdateActionLog(log) {
     return `<div class="log">
-                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
-                <p class="log-time">${'time data'} ago</p>
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time">${log.createDateTime}</p>
             </div>`;
 }
 
-function makeDeleteActionLog(action, log) {
+function makeDeleteActionLog(log) {
     return `<div class="log">
-                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
-                <p class="log-time">${'time data'} ago</p>
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time">${log.createDateTime}</p>
             </div>`;
 }
 
-function makeMoveActionLog(action, log) {
+function makeMoveActionLog(log) {
     return `<div class="log">
-                <p class="log-msg"><span class="user">${'userId'}</span>${action}<strong>할일제목</strong></p>
-                <p class="log-time">${'time data'} ago</p>
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>moved<strong>${log.content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time">${log.createDateTime}</p>
             </div>`;
 }
 
