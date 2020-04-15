@@ -1,5 +1,6 @@
 package com.codesquad.team10.todo.entity;
 
+import com.codesquad.team10.todo.vo.CardDTO;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,15 @@ public class Card {
     private Integer user;
 
     private Integer sectionKey;
+
+    public Card() {}
+
+    public Card(String title, String content, String author, Integer user) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.user = user;
+    }
 
     public Card(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer user, Integer sectionKey) {
         this.id = id;
@@ -90,10 +100,11 @@ public class Card {
         return sectionKey;
     }
 
-    public void update(Card updatedCard) {
-        this.title = updatedCard.title;
-        this.content = updatedCard.content;
+    public Card update(String title, String content) {
+        this.title = title;
+        this.content = content;
         this.updateDateTime = LocalDateTime.now();
+        return this;
     }
 
     @Override
