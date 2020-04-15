@@ -21,20 +21,19 @@ const option: ICardOption = {
     currColumn: null,
 }
 
-async function deleteCard(target: HTMLElement) {
+async function deleteCard({ target, logCallBack }) {
     if (!target.classList.contains('btn-close')) return;
     if (!confirm(ALERT_MESSAGE.DELETE_CARD)) return;
     const column: HTMLElement = getParentEl(target, '.todo-columns');
     const card: HTMLElement = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
-    const url = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`;
-    const { status } = await httpRequest.delete(url);
+    const { status, content } = await httpRequest.delete(URL.DEV.UPDATE_CARD_API(columnId, cardId));
 
     if (status !== STATUS_KEY.SUCCESS) return;
-    let count = column.querySelector('.todo-count');
-    count.innerHTML = (parseInt(count.innerHTML) - 1).toString();
+    column.querySelector('.todo-count').innerHTML = content.card_count;
     card.remove();
+    httpRequest.get(URL.DEV.LOG_API(content.log_id)).then((data) => logCallBack(data));
 }
 
 function showEditModal({ target }: Event) {
@@ -42,6 +41,7 @@ function showEditModal({ target }: Event) {
     if (!card) return;
     const content = card.querySelector('.card-contents')!.innerHTML;
     const modalContents = getEl('.modal-contents');
+
     modalContents.setAttribute('data-column-id', getParentEl(card, '.todo-columns').dataset.columnId!);
     modalContents.setAttribute('data-card-id', card.dataset.cardId!);
     modalContents.querySelector<HTMLTextAreaElement>('.todo-textarea')!.value = content;
@@ -57,7 +57,7 @@ function dragStartCard({ target }: Event) {
     addClass(<HTMLElement>option.dragTarget, COMMON_RULE.DRAG_KEY);
 }
 
-function dragoverCard(evt: Event) {
+function dragoverCard(evt) {
     evt.preventDefault();
 }
 
@@ -67,6 +67,7 @@ function dragenterCard(evt: Event) {
     option.toTargetWrap = getParentEl(evt.toElement, '.card-wrap');
     option.currColumn = getParentEl(evt.toElement, '.todo-columns');
     const cardHeightHalf = option.targetHeight / 2;
+
     if (option.toTarget && evt.offsetY > cardHeightHalf) option.toTarget.after(option.dragTarget);
     else if (option.toTarget && evt.offsetY <= cardHeightHalf) option.toTarget.before(option.dragTarget);
     else if (option.toTargetWrap) return;
@@ -86,10 +87,11 @@ function getDragedCardInfo() {
     let order = 0;
     const currColumnId = option.currColumn.dataset.columnId;
     const cardId = option.dragTarget.dataset.cardId;
-    [...getParentEl(option.dragTarget, '.card-wrap').children].some(v => {
+    [...getParentEl(option.dragTarget, '.card-wrap').children].some(card => {
         order++;
-        return option.dragTarget === v;
+        return option.dragTarget === card;
     });
+    order--;
     return { cardId, order, currColumnId };
 }
 

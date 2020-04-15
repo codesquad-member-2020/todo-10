@@ -1,4 +1,6 @@
 import { httpRequest } from '../utils/httpRequestUtil';
+import { COMMON_RULE, STATUS_KEY } from '../contants/constant';
+import { getEl, removeClass } from '../utils/commonUtil';
 import { URL } from '../contants/url';
 import TodoView from './todoView';
 import TodoEventManager from './todoEventManager';
@@ -6,20 +8,26 @@ import TodoEventManager from './todoEventManager';
 class TodoController {
     private todoView: TodoView;
     private todoEventManager: TodoEventManager;
-    
-    constructor( todoView:TodoView, todoEventManager:TodoEventManager ) {
+
+    constructor(todoView: TodoView, todoEventManager: TodoEventManager) {
         this.todoView = todoView;
         this.todoEventManager = todoEventManager;
     }
 
-    runTodoApp(): void {
-        const url = `${URL.MOCKUP.BASE}/mock/login`;
-        httpRequest.login(url).then(todoData => {
-            this.todoView.todoAppRender(todoData);
-            this.todoView.todoModalRender();
-            this.todoEventManager.todoAppEventInit();
-            this.todoEventManager.todoModalEventInit();
+    async runTodoApp(): void {
+        const { status } = await httpRequest.login(URL.DEV.LOGIN_API());
+        if (status !== STATUS_KEY.SUCCESS) return;
+
+        httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
+            removeClass(getEl('.loading-wrap'), COMMON_RULE.ACTIVE_KEY);
+            this.todoView.renderTodoApp(todoData);
+            this.todoView.renderTodoModal();
         });
+
+        httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
+            this.todoView.renderTodoMenu(logsData);
+        });
+        this.todoEventManager.initTodoEvent();
     }
 }
 

@@ -1,3 +1,5 @@
+import { timeSince } from '../utils/todoUtil';
+
 interface ITodoViewTemplate {
     id: string;
     title: string;
@@ -6,8 +8,8 @@ interface ITodoViewTemplate {
     sections: [];
 }
 
-function makeColumns({ sections }: ITodoViewTemplate): string {
-    return sections.reduce((acc: string, column: ITodoViewTemplate) => {
+function makeColumns(columns: ITodoViewTemplate): string {
+    return columns.reduce((acc: string, column: ITodoViewTemplate) => {
         acc +=
             `<div class="todo-columns content-wrap" data-type="column" id="column-${column.id}" data-column-id=${column.id} tabindex="0">
             <div class="todo-title">
@@ -37,15 +39,15 @@ function makeColumns({ sections }: ITodoViewTemplate): string {
 
 function makeCards(cards: []): string {
     return cards.reduce((acc: string, card: ITodoViewTemplate) => {
-        acc += addCard(card.id, card.content);
+        acc += addCard(card);
         return acc;
     }, '');
 }
 
-function addCard(id: string, content: string): string {
-    return `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${id}" data-card-id="${id}" tabindex="0">
-                <div class="card-contents">${content}</div>
-                <p class="card-writer">added by <span>홍길동</span></p>
+function addCard(card): string {
+    return `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${card.id}" data-card-id="${card.id}" tabindex="0">
+                <div class="card-contents">${card.content}</div>
+                <p class="card-writer">added by <span>${card.author}</span></p>
                 <button class="btn btn-close">
                     <span class="material-icons">close</span>
                 </button>
@@ -70,11 +72,11 @@ function makeModal(): string {
                         </div>
                     </form>
                 </div>
-            </div>`
+            </div>`;
 }
 
-function makeMenu(): string {
-    return `<div class="menu-header">
+function makeMenu(logs): string {
+    return `<div class="menu-header content-wrap" data-type="menu">
                 <h2>☰ menu</h2>
                 <div class="btn-wrap">
                     <button class="btn btn-close"><span class="material-icons">close</span></button>
@@ -83,28 +85,67 @@ function makeMenu(): string {
             <div class="menu-container">
                 <div class="menu-title"><span class="material-icons">notifications_active</span>Activity</div>
                 <div class="activity-log">
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User생략가능</span>액션상태<strong>할일제목</strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>add<strong>할일제목</strong>to<strong>특정액션</strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>moved<strong>할일제목</strong>from<strong>특정액션</strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>remove<strong>할일제목</strong></strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
-                    <div class="log">
-                        <p class="log-msg"><span class="user">@User</span>update<strong>할일제목</strong></strong></p>
-                        <p class="log-time">3 hours ago</p>
-                    </div>
+                    ${makeLogs(logs)}
                 </div>
-            </div>`
+            </div>`;
+}
+
+function makeLogs(logs: []): string {
+    return logs.reverse().reduce((acc: string, log: ITodoViewTemplate) => {
+        acc += switchLog(log);
+        return acc;
+    }, '');
+}
+
+function switchLog(log): string {
+    const action = log.action;
+    switch (action) {
+        case 'ADDED':
+            return makeAddActionLog(log);
+            break;
+        case 'UPDATED':
+            return makeUpdateActionLog(log);
+            break;
+        case 'REMOVED':
+            return makeDeleteActionLog(log);
+            break;
+        case 'MOVED':
+            return makeMoveActionLog(log);
+            break;
+    }
+}
+
+function makeAddActionLog(log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>added<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+            </div>`;
+}
+
+function makeUpdateActionLog(log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong>${log.content}</strong></p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+            </div>`;
+}
+
+function makeDeleteActionLog(log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong>${log.content}</strong>from<strong>${log.source}</strong></p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+            </div>`;
+}
+
+function makeMoveActionLog(log) {
+    return `<div class="log">
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>moved<strong>${log.content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+            </div>`;
+}
+
+function injectLog(wrap, log) {
+    const logTemp = switchLog(log);
+    wrap.insertAdjacentHTML('afterbegin', logTemp);
 }
 
 export {
@@ -112,4 +153,5 @@ export {
     addCard,
     makeModal,
     makeMenu,
+    injectLog,
 }
