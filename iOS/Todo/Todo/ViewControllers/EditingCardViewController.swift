@@ -20,7 +20,7 @@ final class EditingCardViewController: CardViewController {
         guard let cardID = cardViewModel?.cardID, let row = row else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
         EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
-                                                           with: MockCardEditSuccessStub()) { cardViewModel in
+                                                           with: NetworkManager()) { cardViewModel in
                                                             guard let cardViewModel = cardViewModel else { return }
                                                             self.delegate?.cardViewControllerDidCardEdit(cardViewModel,
                                                                                                          row: row)

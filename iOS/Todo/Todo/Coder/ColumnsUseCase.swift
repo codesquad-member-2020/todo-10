@@ -9,9 +9,9 @@
 import Foundation
 
 enum LoginInfo {
-    static let columns = """
+    static let user = """
     {
-        "email": "nigayo@ggmail.com",
+        "name": "nigayo",
         "password": "1234"
     }
     """.data(using: .utf8)
@@ -19,12 +19,12 @@ enum LoginInfo {
 
 struct ColumnsUseCase {
     enum EndPoints {
-        static let columns = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
+        static let columns = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board"
     }
     
     static func makeColumns(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {
-        try? manager.requestResource(from: EndPoints.columns, method: .post,
-                                 body: LoginInfo.columns, format: Format.jsonType,
+        try? manager.requestResource(from: EndPoints.columns, method: .get,
+                                 body: nil, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                     guard error == nil else { return }
                                     guard let data = data else { return }
