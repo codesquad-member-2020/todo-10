@@ -27,4 +27,8 @@ final class CardViewModel: ViewModelBinding {
     var cardID: Int? {
         return card?.id
     }
+<<<<<<< HEAD:iOS/Todo/Todo/ViewModels/CardViewModel.swift
+
+=======
+>>>>>>> dev:iOS/Todo/Todo/ViewModels/ColumnViewController's/CardViewModel.swift
 }

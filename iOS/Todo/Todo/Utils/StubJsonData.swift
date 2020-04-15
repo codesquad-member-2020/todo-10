@@ -7,7 +7,11 @@
 //
 
 enum StubJsonData {
+<<<<<<< HEAD
+    static let successResponseStub = """
+=======
     static let successColumnsResponseStub = """
+>>>>>>> dev
     {
       "status" : "SUCCESS",
       "content" : {
@@ -85,6 +89,8 @@ enum StubJsonData {
       }
     }
     """.data(using: .utf8)
+<<<<<<< HEAD
+=======
     
     static let successDeleteResponseStub = """
     {
@@ -118,4 +124,5 @@ enum StubJsonData {
         }
     }
     """.data(using: .utf8)
+>>>>>>> dev
 }
