@@ -17,9 +17,10 @@ struct EditedCardViewModelUseCase {
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                 guard error == nil, let data = data else { return }
                 guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
+                guard let card = cardResponse.content.card else { return }
                 guard cardResponse.status == .success else { return }
                 
-                result(CardViewModel(card: cardResponse.content))
+                result(CardViewModel(card: card))
         }
     }
 }

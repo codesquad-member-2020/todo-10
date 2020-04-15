@@ -13,7 +13,10 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         configureScrollView()
-        configureColumnsCase()
+        requestLogin { result in
+            guard let result = result, result else { return }
+            self.configureColumnsCase()
+        }
     }
     
     private func configureScrollView() {
@@ -24,9 +27,15 @@ final class MainViewController: UIViewController {
         columScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         columScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
-
+    
+    private func requestLogin(completed: @escaping (Bool?) -> ()) {
+        LoginUseCase.requestLogin(with: NetworkManager()) { result in
+            completed(result)
+        }
+    }
+   
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
             columnsDataSource?.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
             })
