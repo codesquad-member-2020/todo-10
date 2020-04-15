@@ -96,10 +96,10 @@ extension ColumnViewController: UITableViewDelegate {
     }
     
     private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
-        return UIMenu(title: "", children: [move(), edit(tableView, for: indexPath), delete(tableView, for: indexPath)])
+        return UIMenu(title: "", children: [moveToDone(), edit(tableView, for: indexPath), delete(tableView, for: indexPath)])
     }
     
-    private func move() -> UIAction {
+    private func moveToDone() -> UIAction {
         return UIAction(title: ButtonData.moveToDone) { action in
             
         }
