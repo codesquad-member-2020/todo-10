@@ -17,7 +17,7 @@ class TodoController {
     runTodoApp(): void {
         this.todoEventManager.initTodoHeaderEvent();
 
-        const url = `${URL.MOCKUP.BASE}/mock/login`;
+        const url = URL.DEV.LOGIN_API();
         httpRequest.login(url).then(todoData => {
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();

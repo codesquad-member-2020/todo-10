@@ -21,11 +21,11 @@ function onClickSubmit({ event, parentClassName, type, callback }: IOnClickSubmi
 
     switch (type) {
         case 'post':
-            apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card`;
+            apiURL = URL.DEV.ADD_CARD_API(columnId);
             httpRequest.post(apiURL, { content: textareaValue }).then((data) => callback(event, data));
             break;
         case 'patch':
-            apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`;
+            apiURL = URL.DEV.UPDATE_CARD_API(columnId, cardId);
             httpRequest.patch(apiURL, { content: textareaValue }).then((data) => callback(cardId, data));
             break;
     }

@@ -28,7 +28,7 @@ async function deleteCard(target: HTMLElement) {
     const card: HTMLElement = getParentEl(target, '.card-item');
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
-    const url = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`;
+    const url = URL.DEV.UPDATE_CARD_API(columnId, cardId);
     const { status } = await httpRequest.delete(url);
 
     if (status !== STATUS_KEY.SUCCESS) return;
