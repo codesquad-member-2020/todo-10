@@ -111,7 +111,7 @@ class CardViewController: UIViewController {
         titleField.text = text
     }
     
-    func configureContent(text: String?) {
+    func configureContent(text: String) {
         contentView.text = text
     }
     

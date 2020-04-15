@@ -32,11 +32,16 @@ final class EditingCardViewController: CardViewController {
     var cardViewModel: CardViewModel? {
         didSet {
             cardViewModel?.performBind(changed: { card in
-                DispatchQueue.main.async {
-                    self.configureTitle(text: card?.title)
-                    self.configureContent(text: card?.content)
-                }
+                guard let card = card else { return }
+                self.configureTexts(card: card)
             })
+        }
+    }
+    
+    private func configureTexts(card: Card) {
+        DispatchQueue.main.async {
+            self.configureTitle(text: card.title)
+            self.configureContent(text: card.content)
         }
     }
 }
