@@ -1,7 +1,6 @@
 package com.codesquad.team10.todo.entity;
 
 import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
-import com.codesquad.team10.todo.vo.CardDTO;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
