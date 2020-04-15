@@ -145,12 +145,7 @@ extension ColumnViewController: UITableViewDelegate {
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
         DeleteUseCase.requestDelete(from: urlString, with: NetworkManager()) { result in
             guard let result = result else { return }
-            if result {
-                self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-            }
+            if result { self.columnTableDataSource.removeCardViewModel(at: indexPath.row) }
         }
     }
 }
