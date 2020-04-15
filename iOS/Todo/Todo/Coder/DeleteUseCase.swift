@@ -9,6 +9,7 @@
 import Foundation
 
 struct DeleteUseCase {
+<<<<<<< HEAD
     static func makeDeleteResponse(cardListID: Int,
                                    cardID: Int,
                                    with manager: NetworkManagable,
@@ -21,6 +22,17 @@ struct DeleteUseCase {
                 guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
                 guard cardResponse.status == .success else { return }
                 result(true)
+=======
+    static func makeDeleteResult(from string: String,
+                                 with manager: NetworkManagable,
+                                 result: @escaping (Bool?) -> ()) {
+        try? manager.requestResource(from: string, method: .delete, body: nil, format: Format.jsonType,
+                                     headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
+                                        guard error == nil, let data = data else { return }
+                                        guard let cardResponse = try? JSONDecoder().decode(DeleteResponse.self, from: data) else { return }
+                                        guard cardResponse.status == .success else { return }
+                                        result(true)
+>>>>>>> dev
         }
     }
 }
