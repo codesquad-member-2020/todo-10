@@ -18,8 +18,12 @@ enum LoginInfo {
 }
 
 struct ColumnsUseCase {
+    enum EndPoints {
+        static let columns = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
+    }
+    
     static func makeColumns(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {
-        try? manager.requestResource(from: NetworkManager.EndPoints.columns, method: .post,
+        try? manager.requestResource(from: EndPoints.columns, method: .post,
                                  body: LoginInfo.columns, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                     guard error == nil else { return }

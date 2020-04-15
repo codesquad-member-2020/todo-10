@@ -9,9 +9,9 @@
 import UIKit
 
 final class TitleView: UIView {
-    let badge = Badge()
-    let titleLabel = TitleLabel()
-    let plusButton = PlusButton()
+    private let badge = Badge()
+    private let titleLabel = TitleLabel()
+    private let plusButton = PlusButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,6 +69,17 @@ final class TitleView: UIView {
                                            constant: -constant).isActive = true
     }
     
+    func configureBadge(text: String) {
+        badge.text = text
+    }
+    
+    func configureTitleLabel(text: String) {
+        titleLabel.text = text
+    }
+    
+    func configurePlusButton(delegate: PlusButtonDelegate) {
+        plusButton.delegate = delegate
+    }
 }
 
 final class Badge: UILabel {
@@ -126,7 +137,7 @@ final class TitleLabel: UILabel {
 }
 
 protocol PlusButtonDelegate {
-    func showNewCardViewController()
+    func plusButtonDidTouch()
 }
 
 final class PlusButton: UIButton {
@@ -158,6 +169,6 @@ final class PlusButton: UIButton {
     }
     
     @objc private func plusButtonTouched() {
-        delegate?.showNewCardViewController()
+        delegate?.plusButtonDidTouch()
     }
 }

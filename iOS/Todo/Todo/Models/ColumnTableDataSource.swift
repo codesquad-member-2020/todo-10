@@ -5,43 +5,44 @@
 //  Created by kimdo2297 on 2020/04/07.
 //  Copyright © 2020 Jason. All rights reserved.
 //
-import Foundation
 import UIKit
 
 final class ColumnTableDataSource: NSObject {
-    let columnID: Int
     enum Notification {
         static let cardViewModelsDidChange = Foundation.Notification.Name("cardViewModelsDidChange")
     }
+    
     private var cardViewModels: [CardViewModel] {
-        didSet {
-            NotificationCenter.default.post(name: Notification.cardViewModelsDidChange, object: self)
-        }
+        didSet { NotificationCenter.default.post(name: Notification.cardViewModelsDidChange,
+                                                 object: self) }
+    }
+    
+    init(cardViewModels: [CardViewModel]) {
+        self.cardViewModels = cardViewModels
+        super.init()
     }
     
     var cardViewModelsCount: Int {
         return cardViewModels.count
     }
     
-    init(columnID: Int, cardViewModels: [CardViewModel]) {
-        self.columnID = columnID
-        self.cardViewModels = cardViewModels
-        super.init()
-    }
-    
-    func removeColumnModel(at index: Int) {
+    func removeCardViewModel(at index: Int) {
         guard index < cardViewModels.count else { return }
         cardViewModels.remove(at: index)
     }
     
-    func appendColumnModel(card: Card) {
-        cardViewModels.append(CardViewModel(card: card))
+    func append(cardViewModel: CardViewModel) {
+        cardViewModels.append(cardViewModel)
     }
     
-    func cardID(at index: Int) -> Int? {
+    func cardViewModel(at index: Int) -> CardViewModel? {
         guard index < cardViewModels.count else { return nil }
-        guard let cardID = cardViewModels[index].cardID else { return nil }
-        return cardID
+        return cardViewModels[index]
+    }
+    
+    func update(cardViewModel: CardViewModel, at index: Int) {
+        guard index < cardViewModels.count else { return }
+        cardViewModels[index] = cardViewModel
     }
 }
 
@@ -51,8 +52,9 @@ extension ColumnTableDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell else {
-            fatalError("Unable to Dequeue \(CardCell.reuseIdentifier)")
+        guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier,
+                                                           for: indexPath) as? CardCell else {
+            return CardCell()
         }
         
         let index = indexPath.row

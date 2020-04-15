@@ -10,8 +10,8 @@ import Foundation
 
 final class TitleViewModel: ViewModelBinding {
     typealias Key = TitleModel?
-    private var titleModel : Key
-    private var changedHandler : (Key) -> ()
+    private var titleModel: Key
+    private var changedHandler: (Key) -> ()
     
     init(titleModel: TitleModel, changed handler: @escaping (Key) -> () = { _ in }) {
         self.changedHandler = handler
