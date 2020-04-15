@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS log (
   user varchar(64) ,
   action enum('ADDED', 'REMOVED', 'UPDATED', 'MOVED') ,
   target enum('SECTION', 'CARD') ,
-  content varchar(500) not null ,     /* source와 destination이 모두 null이면 target이 section이어야 한다. */
+  title varchar(100) ,
+  content varchar(500) ,     /* source와 destination이 모두 null이면 target이 section이어야 한다. */
   source varchar(100) ,    /* section */
   destination varchar(100) ,        /* section */
   create_date_time timestamp not null default current_timestamp ,
