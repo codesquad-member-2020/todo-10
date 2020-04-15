@@ -13,6 +13,7 @@ struct ColumnsResponse: Codable {
     let content: [Column]
 }
 
+
 struct Column: Codable {
     let id: Int
     let title: String

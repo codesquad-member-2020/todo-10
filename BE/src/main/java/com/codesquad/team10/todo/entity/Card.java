@@ -1,6 +1,5 @@
 package com.codesquad.team10.todo.entity;
 
-import com.codesquad.team10.todo.vo.CardDTO;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -86,6 +85,10 @@ public class Card {
 
     public boolean isDeleted() {
         return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Integer getUser() {

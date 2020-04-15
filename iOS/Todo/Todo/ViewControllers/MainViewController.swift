@@ -33,7 +33,7 @@ final class MainViewController: UIViewController {
             completed(result)
         }
     }
-    
+   
     private func configureColumnsCase() {
         ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
             columnsDataSource?.iterateColumns(with: { column in
