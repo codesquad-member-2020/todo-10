@@ -37,15 +37,15 @@ function makeColumns(columns: ITodoViewTemplate): string {
 
 function makeCards(cards: []): string {
     return cards.reduce((acc: string, card: ITodoViewTemplate) => {
-        acc += addCard(card.id, card.content);
+        acc += addCard(card);
         return acc;
     }, '');
 }
 
-function addCard(id: string, content: string): string {
-    return `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${id}" data-card-id="${id}" tabindex="0">
-                <div class="card-contents">${content}</div>
-                <p class="card-writer">added by <span>홍길동</span></p>
+function addCard(card): string {
+    return `<div class="card-item content-wrap" draggable="true" data-type="card" id="card-${card.id}" data-card-id="${card.id}" tabindex="0">
+                <div class="card-contents">${card.content}</div>
+                <p class="card-writer">added by <span>${card.author}</span></p>
                 <button class="btn btn-close">
                     <span class="material-icons">close</span>
                 </button>
