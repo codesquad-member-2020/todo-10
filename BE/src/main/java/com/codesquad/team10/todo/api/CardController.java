@@ -110,6 +110,9 @@ public class CardController {
             throw new InvalidTokenException();
         }
         Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
+        if (targetCard.isDeleted())
+            throw new ResourceNotFoundException();
+
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         if (section.getCards().size() == 0)
             throw new UnmatchedRequestDataException();
