@@ -9,18 +9,16 @@
 import Foundation
 
 struct DeleteUseCase {
-    static func makeDeleteResponse(columnID: Int,
-                                   cardID: Int,
-                                   with manager: NetworkManagable,
-                                   result: @escaping (Bool?) -> ()) {
-        try? manager.requestResource(from: "\(NetworkManager.EndPoints.column)/\(columnID)/card/\(cardID)",
-            method: .delete,
-            body: nil, format: Format.jsonType,
-            headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
-                guard error == nil, let data = data else { return }
-                guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
-                guard cardResponse.status == .success else { return }
-                result(true)
+    static func requestDelete(from string: String,
+                                 with manager: NetworkManagable,
+                                 completed: @escaping (Bool?) -> ()) {
+        try? manager.requestResource(from: string, method: .delete, body: nil, format: Format.jsonType,
+                                     headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
+                                        guard error == nil, let data = data else { return }
+                                        guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
+                                        guard cardResponse.status == .success else { return }
+                                        
+                                        completed(true)
         }
     }
 }

@@ -5,7 +5,6 @@
 //  Created by kimdo2297 on 2020/04/11.
 //  Copyright © 2020 Jason. All rights reserved.
 //
-import Foundation
 import UIKit
 
 final class ContentViewDelegate: NSObject, UITextViewDelegate {
@@ -33,6 +32,7 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView.text.contains(Self.placeHolderText) else { return }
         setPositionBeginningOfDocument(textView)
     }
 
@@ -52,7 +52,7 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
             isCorrect = true
         } else {
             guard let contentView = textView as? ContentView else { return }
-            contentView.configurePlaceHolder()
+            contentView.configurePlaceHolderVersion()
             setPositionBeginningOfDocument(textView)
             isCorrect = false
         }

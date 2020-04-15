@@ -7,19 +7,33 @@
 //
 
 import UIKit
+
+protocol ColumnViewControllerDelegate {
+    func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel)
+    func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int)
+}
+
 final class ColumnViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
-    private var columnTableDelegate = ColumnTableDelegate()
+    var delegate: ColumnViewControllerDelegate?
+    var columnID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureDragAndDrop()
         configureTitleView()
         configureTableView()
         configureObserver()
+    }
+    
+    private func configureDragAndDrop() {
+        columnTable.dragInteractionEnabled = true
+        columnTable.dragDelegate = self
+        columnTable.dropDelegate = self
     }
     
     private func configureTitleView() {
@@ -33,12 +47,12 @@ final class ColumnViewController: UIViewController {
     }
     
     private func configurePlusButtonDelegate() {
-        titleView.plusButton.delegate = self
+        titleView.configurePlusButton(delegate: self)
     }
     
     private func configureTableView() {
         columnTable.register(CardCell.self, forCellReuseIdentifier: CardCell.reuseIdentifier)
-        columnTable.delegate = columnTableDelegate
+        columnTable.delegate = self
         configureTableConstraints()
     }
     
@@ -54,56 +68,181 @@ final class ColumnViewController: UIViewController {
     
     private func configureObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateBadge),
+                                               selector: #selector(updateView),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
     }
     
-    @objc private func updateBadge() {
+    @objc private func updateView() {
         DispatchQueue.main.async {
-            self.titleView.badge.text = String(self.columnTableDataSource.cardViewModelsCount)
+            self.updateBadge()
+            self.columnTable.reloadData()
         }
     }
     
-    var column: Column? {
-        didSet {
-            configureTitleViewModel()
-            configureDataSource()
-        }
+    private func updateBadge() {
+        self.titleView.configureBadge(text: String(self.columnTableDataSource.cardViewModelsCount))
     }
     
-    private func configureTitleViewModel() {
-        guard let column = column else { return }
+    func configureTitleViewModel(column: Column) {
         titleViewModel = TitleViewModel(titleModel: TitleModel(title: column.title,
                                                                cardsCount: column.cards.count),
                                         changed: { titleModel in
                                             guard let titleModel = titleModel else { return }
-                                            self.titleView.badge.text = String(titleModel.cardsCount)
-                                            self.titleView.titleLabel.text = titleModel.title
+                                            self.titleView.configureBadge(text: String(titleModel.cardsCount))
+                                            self.titleView.configureTitleLabel(text: titleModel.title)
         })
     }
     
-    private func configureDataSource() {
-        guard let column = column else { return }
-        let columnID = column.id
+    func configureDataSource(column: Column) {
         let cardViewModels = column.cards.map { CardViewModel(card: $0)}
-        columnTableDataSource = ColumnTableDataSource(columnID: columnID, cardViewModels: cardViewModels)
+        columnTableDataSource = ColumnTableDataSource(cardViewModels: cardViewModels)
         columnTable.dataSource = columnTableDataSource
+    }
+    
+    func addToLast(cardViewModel: CardViewModel) {
+        columnTableDataSource.append(cardViewModel: cardViewModel)
+    }
+    
+    func removeCardViewModel(row: Int) {
+        columnTableDataSource.removeCardViewModel(at: row)
     }
 }
 
-extension ColumnViewController: PlusButtonDelegate, CardCreatable {
-    func showNewCardViewController() {
-        let newCardViewController = CardViewController()
-        newCardViewController.columnID = column?.id
+extension ColumnViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            return self.contextMenu(tableView, for: indexPath)
+        }
+    }
+    
+    private func contextMenu(_ tableView: UITableView, for indexPath: IndexPath) -> UIMenu {
+        return UIMenu(title: "", children: [moveToDone(tableView, for: indexPath),
+                                            edit(tableView, for: indexPath),
+                                            delete(tableView, for: indexPath)])
+    }
+    
+    private func moveToDone(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
+        return UIAction(title: ButtonData.moveToDone) { action in
+            self.moveRowToDone(tableView, for: indexPath)
+        }
+    }
+    
+    private func moveRowToDone(_ tableView: UITableView, for indexPath: IndexPath) {
+        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
+        delegate?.columnViewControllerDidMoveToDone(cardViewModel)
+        columnTableDataSource.removeCardViewModel(at: indexPath.row)
+    }
+    
+    private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
+        return UIAction(title: ButtonData.edit) { action in
+            self.showEditingViewController(tableView, indexPath: indexPath)
+        }
+    }
+    
+    private func showEditingViewController(_ tableView: UITableView, indexPath: IndexPath) {
+        guard let columnID = columnID ,
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
+        let editingCardViewController = EditingCardViewController()
+        editingCardViewController.columnID = columnID
+        editingCardViewController.delegate = self
+        editingCardViewController.row = indexPath.row
+        editingCardViewController.cardViewModel = cardViewModel
+        present(editingCardViewController, animated: true)
+    }
+    
+    private func delete(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
+        return UIAction(title: ButtonData.deleteString, attributes: .destructive) { action in
+            let delayForNotOverlapped = 0.7
+            self.deleteRow(tableView, for: indexPath, delay: delayForNotOverlapped)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return UISwipeActionsConfiguration(actions:
+            [UIContextualAction(style: .destructive,
+                                title: ButtonData.deleteString,
+                                handler: { contextualAction, view, _ in
+                                    self.deleteRow(tableView, for: indexPath)
+            })])
+    }
+    
+    private func deleteRow(_ tableView: UITableView, for indexPath: IndexPath,delay: Double = 0.0) {
+        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+            let columnID = columnID,
+            let cardID = cardViewModel.cardID else { return }
+        let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
+        DeleteUseCase.requestDelete(from: urlString, with: NetworkManager()) { result in
+            guard let result = result else { return }
+            if result { self.columnTableDataSource.removeCardViewModel(at: indexPath.row) }
+        }
+    }
+}
+
+
+extension ColumnViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        guard let columnID = columnID,
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return [] }
+        
+        let itemProvider = NSItemProvider()
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = DragObject(cardViewModel: cardViewModel, columnID: columnID, row: indexPath.row)
+        return [dragItem]
+    }
+}
+
+extension ColumnViewController: UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if tableView.hasActiveDrag {
+            if session.items.count > 1 {
+                return UITableViewDropProposal(operation: .cancel)
+            } else {
+                return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+        } else {
+            return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let destinationIndexPath: IndexPath
+        
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            // Get last index path of table view.
+            let section = tableView.numberOfSections - 1
+            let row = tableView.numberOfRows(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
+        
+        coordinator.items.forEach { item in
+            guard let dragObject = item.dragItem.localObject as? DragObject else { return }
+            delegate?.columnViewControllerDidMove(sourceColumnID: dragObject.columnID,
+                                                  sourceRow: dragObject.row)
+            columnTableDataSource.add(cardViewModel: dragObject.cardViewModel,
+                                      at: destinationIndexPath.row)
+        }
+    }
+}
+
+extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
+    func plusButtonDidTouch() {
+        guard let columnID = columnID else { return }
+        let newCardViewController = NewCardViewController()
+        newCardViewController.columnID = columnID
         newCardViewController.delegate = self
         present(newCardViewController, animated: true)
     }
     
-    func cardDidCreate(_ card: Card) {
-        columnTableDataSource.appendColumnModel(card: card)
-        DispatchQueue.main.async {
-            self.columnTable.reloadData()
-        }
+    func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
+        columnTableDataSource.append(cardViewModel: cardViewModel)
+    }
+    
+    func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int) {
+        columnTableDataSource.update(cardViewModel: cardViewModel, at: row)
     }
 }
+
+

@@ -8,18 +8,20 @@
 
 import UIKit
 
-protocol CardCreatable {
-    func cardDidCreate(_ card: Card)
+protocol CardViewControllerDelegate {
+    func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
+    func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int)
 }
 
-final class CardViewController: UIViewController {
-    var delegate: CardCreatable?
+class CardViewController: UIViewController {
+    var columnID: Int?
+    var delegate: CardViewControllerDelegate?
     private let cancelButton = CancelButton()
+    private let titleFieldDelegate = TitleFieldDelegate()
+    private let contentViewDelegate = ContentViewDelegate()
     private let createButton = CreateButton()
     private let titleField = TitleField()
-    private let titleFieldDelegate = TitleFieldDelegate()
     private let contentView = ContentView()
-    private let contentViewDelegate = ContentViewDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +61,8 @@ final class CardViewController: UIViewController {
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
     }
     
-    var columnID: Int?
-    @objc private func createCard() {
-        guard let columnID = columnID else { return }
-        guard let content = contentView.text else { return }
-        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
-        CreateUseCase.makeCreateResponse(columnID: columnID,
-                                         cardData: cardData, with: MockCardCreateSuccessStub()) { card in
-                                            guard let card = card else { return }
-                                            self.delegate?.cardDidCreate(card)
-        }
-        dismiss(animated: true, completion: nil)
+    @objc func createCard() {
+        
     }
     
     private func configureCancelButton() {
@@ -104,5 +97,25 @@ final class CardViewController: UIViewController {
         contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
         contentView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: constant).isActive = true
         contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+    }
+    
+    func configurePlaceHolderVersion() {
+        contentView.configurePlaceHolderVersion()
+    }
+    
+    func configureTextColorWritingVersion() {
+        contentView.configureTextWriting()
+    }
+    
+    func configureTitle(text: String?) {
+        titleField.text = text
+    }
+    
+    func configureContent(text: String) {
+        contentView.text = text
+    }
+    
+    func generateNewCard() -> NewCard {
+        return NewCard(title: titleField.text, content: contentView.text)
     }
 }

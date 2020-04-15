@@ -7,101 +7,140 @@
 //
 
 enum StubJsonData {
+    static let successLoginResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": "로그인 성공"
+    }
+    """
+    
     static let successColumnsResponseStub = """
     {
-      "status" : "SUCCESS",
-      "content" : {
-        "logs" : [
-
-        ],
-        "sections" : [
-          {
-            "id" : 0,
-            "title" : "해야 할 일",
-            "cards" : [
-              {
-                "id" : 2,
-                "title" : "",
-                "content" : "Taek : add card test #0, section #0",
-                "createdDateTime" : "2020-04-09 07:33:44",
-                "updatedDateTime" : "2020-04-09 07:33:44"
-              },
-              {
-                "id" : 8,
-                "title" : null,
-                "content" : "테스트",
-                "createdDateTime" : "2020-04-09 07:54:30",
-                "updatedDateTime" : "2020-04-09 07:54:30"
-              }
-            ],
-            "createdDateTime" : "2020-04-09 07:32:52",
-            "updatedDateTime" : "2020-04-09 07:54:30"
-          },
-          {
-            "id" : 1,
-            "title" : "하고 있는 일",
-            "cards" : [
-              {
-                "id" : 3,
-                "title" : "",
-                "content" : "Taek : add card test #0, section #1",
-                "createdDateTime" : "2020-04-09 07:33:44",
-                "updatedDateTime" : "2020-04-09 07:33:44"
-              },
-              {
-                "id" : 6,
-                "title" : "",
-                "content" : "Taek : add card test #1, section #1",
-                "createdDateTime" : "2020-04-09 07:33:44",
-                "updatedDateTime" : "2020-04-09 07:33:44"
-              }
-            ],
-            "createdDateTime" : "2020-04-09 07:32:52",
-            "updatedDateTime" : "2020-04-09 07:33:44"
-          },
-          {
-            "id" : 2,
-            "title" : "완료한 일",
-            "cards" : [
-              {
-                "id" : 4,
-                "title" : "",
-                "content" : "Taek : add card test #0, section #2",
-                "createdDateTime" : "2020-04-09 07:33:44",
-                "updatedDateTime" : "2020-04-09 07:33:44"
-              },
-              {
-                "id" : 5,
-                "title" : "",
-                "content" : "Taek : add card test #1, section #2",
-                "createdDateTime" : "2020-04-09 07:33:44",
-                "updatedDateTime" : "2020-04-09 07:33:44"
-              }
-            ],
-            "createdDateTime" : "2020-04-09 07:32:52",
-            "updatedDateTime" : "2020-04-09 07:33:44"
-          }
+        "status": "SUCCESS",
+        "content": [
+            {
+                "id": 1,
+                "title": "해야할 일",
+                "createDateTime": "2020-04-15 03:12:00",
+                "updateDateTime": "2020-04-15 03:12:00",
+                "cards": [
+                    {
+                        "id": 1,
+                        "title": "README.md 추가",
+                        "content": "구현 API 내용 작성",
+                        "createDateTime": "2020-04-15 03:12:32",
+                        "updateDateTime": "2020-04-15 03:13:00",
+                        "author": "nigayo"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "하고 있는 일",
+                "createDateTime": "2020-04-15 03:12:00",
+                "updateDateTime": "2020-04-15 03:12:00",
+                "cards": []
+            },
+            {
+                "id": 3,
+                "title": "완료된 일",
+                "createDateTime": "2020-04-15 03:12:00",
+                "updateDateTime": "2020-04-15 03:12:00",
+                "cards": []
+            }
         ]
-      }
+    }
+    """.data(using: .utf8)
+
+    static let successCreateResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": {
+            "log_id": 2,
+            "card_count": 2,
+            "card": {
+                "id": 2,
+                "title": "회고",
+                "content": "회고하자",
+                "createDateTime": "2020-04-15 03:12:32",
+                "updateDateTime": "2020-04-15 03:12:32",
+                "author": "nigayo"
+            }
+        }
+    }
+    """.data(using: .utf8)
+    
+    static let successEditingResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": {
+            "log_id": 2,
+            "card_count": 1,
+            "card": {
+                "id": 1,
+                "title": "README.md 추가 안함",
+                "content": "구현 API 내용 작성 안함",
+                "createDateTime": "2020-04-15 03:12:32",
+                "updateDateTime": "2020-04-15 03:13:00",
+                "author": "nigayo"
+            }
+        }
     }
     """.data(using: .utf8)
     
     static let successDeleteResponseStub = """
     {
-        "status" : "SUCCESS",
-        "content" : "Card is Successfully Deleted"
+        "status": "SUCCESS",
+        "content": {
+            "log_id": 4,
+            "card_count": 1
+        }
     }
     """.data(using: .utf8)
     
-    static let successCreateResponseStub = """
+    static let successLogsResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": [
+            {
+                "id": 1,
+                "user": "nigayo",
+                "action": "ADDED",
+                "target": "CARD",
+                "title": null,
+                "content": "과자 사기",
+                "source": null,
+                "destination": "해야할 일",
+                "createDateTime": "2020-04-15 16:15:11"
+            },
+            {
+                "id": 2,
+                "user": "nigayo",
+                "action": "UPDATED",
+                "target": "CARD",
+                "title": null,
+                "content": "음료 사기",
+                "source": null,
+                "destination": null,
+                "createDateTime": "2020-04-15 16:15:41"
+            }
+        ]
+    }
+    """.data(using: .utf8)
+    
+    static let successLogResponseStub = """
     {
         "status": "SUCCESS",
         "content": {
-        "id": \(Int.max),
-            "title": "성공 생성 응답 스텁",
-            "content": "성공 생성 응답 스텁",
-            "createdDateTime": "2020-04-07 15:25:23",
-            "updatedDateTime": "2020-04-07 15:25:23"
+            "id": 1,
+            "user": "nigayo",
+            "action": "ADDED",
+            "target": "CARD",
+            "title": null,
+            "content": "자바 공부",
+            "source": null,
+            "destination": "하고 있는 일",
+            "createDateTime": "2020-04-15 20:35:13"
         }
     }
     """.data(using: .utf8)

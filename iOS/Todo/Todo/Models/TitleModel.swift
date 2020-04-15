@@ -9,6 +9,6 @@
 import Foundation
 
 struct TitleModel {
-    var title: String
-    var cardsCount: Int
+    let title: String
+    let cardsCount: Int
 }

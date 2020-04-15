@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 enum ButtonData {
     static let deleteString = "Delete"
     static let moveToDone = "Move to done"

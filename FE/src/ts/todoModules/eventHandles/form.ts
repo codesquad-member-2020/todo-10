@@ -6,29 +6,46 @@ interface IOnClickSubmit {
     event: Event;
     parentClassName: string;
     type: string;
-    callback: Function;
+    cardCallback: Function;
+    logCallBack: Function;
 }
 
-function onClickSubmit({ event, parentClassName, type, callback }: IOnClickSubmit) {
+const option = {
+    columnId: null,
+    cardId: null,
+    textareaValue: null,
+    logId: null,
+}
+
+function onClickSubmit({ event, parentClassName, type, cardCallback, logCallBack }: IOnClickSubmit) {
     event.preventDefault();
     const target = <HTMLElement>event.target;
     const parentEl = getParentEl(target, parentClassName);
-    const columnId = parentEl.dataset.columnId || null;
-    const cardId = parentEl.dataset.cardId || null;
-    const textareaEl = target.querySelector('textarea');
-    const textareaValue = textareaEl?.value;
-    let apiURL = null;
+    option.columnId = parentEl.dataset.columnId || null;
+    option.cardId = parentEl.dataset.cardId || null;
+    option.textareaValue = target.querySelector('textarea').value;
+    switchSubmitType({ event, type, cardCallback, logCallBack });
+}
 
+async function switchSubmitType({ event, type, cardCallback, logCallBack }) {
+    const { columnId, cardId, textareaValue } = option
     switch (type) {
         case 'post':
-            apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card`;
-            httpRequest.post(apiURL, { content: textareaValue }).then((data) => callback(event, data));
+            await httpRequest.post(URL.DEV.ADD_CARD_API(columnId), { content: textareaValue })
+                .then((data) => {
+                    cardCallback(event, data);
+                    option.logId = data.content.log_id;
+                });
             break;
         case 'patch':
-            apiURL = `${URL.MOCKUP.BASE}/mock/section/${columnId}/card/${cardId}`;
-            httpRequest.patch(apiURL, { content: textareaValue }).then((data) => callback(cardId, data));
+            await httpRequest.patch(URL.DEV.UPDATE_CARD_API(columnId, cardId), { content: textareaValue })
+                .then((data) => {
+                    cardCallback(cardId, data);
+                    option.logId = data.content.log_id;
+                });
             break;
     }
+    httpRequest.get(URL.DEV.LOG_API(option.logId)).then((data) => logCallBack(data));
 }
 
 export { onClickSubmit };
