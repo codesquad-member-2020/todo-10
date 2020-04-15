@@ -16,12 +16,11 @@ final class EditingCardViewController: CardViewController {
     
     @objc override func createCard() {
         guard let columnID = columnID else { return }
-        guard let content = contentView.text else { return }
-        guard let cardData = try? JSONEncoder().encode(NewCard(title: titleField.text, content: content)) else { return }
+        guard let cardData = newCard().encodeToJSONData() else { return }
         guard let cardID = cardViewModel?.cardID, let row = row else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
         EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
-                                                           with: MockCardEditSuccessStub()) { cardViewModel in
+                                                           with: NetworkManager()) { cardViewModel in
                                                             guard let cardViewModel = cardViewModel else { return }
                                                             self.delegate?.cardViewControllerDidCardEdit(cardViewModel,
                                                                                                          row: row)
@@ -34,8 +33,8 @@ final class EditingCardViewController: CardViewController {
         didSet {
             cardViewModel?.performBind(changed: { card in
                 DispatchQueue.main.async {
-                    self.titleField.text = card?.title
-                    self.contentView.text = card?.content
+                    self.configureTitle(text: card?.title)
+                    self.configureContent(text: card?.content)
                 }
             })
         }

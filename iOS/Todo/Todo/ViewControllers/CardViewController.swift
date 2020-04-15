@@ -20,8 +20,8 @@ class CardViewController: UIViewController {
     private let titleFieldDelegate = TitleFieldDelegate()
     private let contentViewDelegate = ContentViewDelegate()
     private let createButton = CreateButton()
-    let titleField = TitleField()
-    let contentView = ContentView()
+    private let titleField = TitleField()
+    private let contentView = ContentView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,5 +105,17 @@ class CardViewController: UIViewController {
     
     func configureTextColorWritingVersion() {
         contentView.configureTextWriting()
+    }
+    
+    func configureTitle(text: String?) {
+        titleField.text = text
+    }
+    
+    func configureContent(text: String?) {
+        contentView.text = text
+    }
+    
+    func newCard() -> NewCard {
+        return NewCard(title: titleField.text, content: contentView.text)
     }
 }
