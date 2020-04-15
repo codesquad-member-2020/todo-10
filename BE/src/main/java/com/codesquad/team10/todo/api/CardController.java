@@ -9,7 +9,7 @@ import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.repository.SectionRepository;
 import com.codesquad.team10.todo.response.ResponseData;
 import com.codesquad.team10.todo.util.ModelMapper;
-import com.codesquad.team10.todo.vo.CardDTO;
+import com.codesquad.team10.todo.dto.CardDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

@@ -3,9 +3,9 @@ package com.codesquad.team10.todo.util;
 import com.codesquad.team10.todo.entity.Card;
 import com.codesquad.team10.todo.entity.Log;
 import com.codesquad.team10.todo.entity.Section;
-import com.codesquad.team10.todo.vo.CardDTO;
-import com.codesquad.team10.todo.vo.LogDTO;
-import com.codesquad.team10.todo.vo.SectionDTO;
+import com.codesquad.team10.todo.dto.CardDTO;
+import com.codesquad.team10.todo.dto.LogDTO;
+import com.codesquad.team10.todo.dto.SectionDTO;
 
 public class ModelMapper {
 
