@@ -9,11 +9,11 @@
 import Foundation
 
 struct DeleteResponse: Codable {
-    var status: Status
-    var content: String
+    let status: Status
+    let content: String
 }
 
 struct CardResponse: Codable {
-    var status: Status
-    var content: Card
+    let status: Status
+    let content: Card
 }

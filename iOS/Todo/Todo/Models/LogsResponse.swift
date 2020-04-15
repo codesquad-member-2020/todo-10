@@ -9,18 +9,18 @@
 import Foundation
 
 struct LogsResponse: Codable {
-    var status: Status
-    var content: [Log]
+    let status: Status
+    let content: [Log]
 }
 
 struct Log: Codable {
-    var id: Int
-    var user: String
-    var action: String
-    var target: String
-    var title: String
-    var content: String
+    let id: Int
+    let user: String
+    let action: String
+    let target: String
+    let title: String
+    let content: String
     var source: String?
     var destination: String?
-    var createDateTime: String
+    let createDateTime: String
 }

@@ -9,23 +9,23 @@
 import Foundation
 
 struct ColumnsResponse: Codable {
-    var status: Status
-    var content: [Column]
+    let status: Status
+    let content: [Column]
 }
 
 struct Column: Codable {
     let id: Int
-    var title: String
-    var createDateTime: String
-    var updateDateTime: String
-    var cards: [Card]
+    let title: String
+    let createDateTime: String
+    let updateDateTime: String
+    let cards: [Card]
 }
 
 struct Card: Codable {
     let id: Int
     var title: String?
-    var content: String
-    var createDateTime: String
-    var updateDateTime: String
-    var author: String
+    let content: String
+    let createDateTime: String
+    let updateDateTime: String
+    let author: String
 }
