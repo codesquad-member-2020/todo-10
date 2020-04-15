@@ -71,8 +71,10 @@ extension ColumnTableDataSource: UITableViewDataSource {
         
         let index = indexPath.row
         cardViewModels[index].performBind { card in
-            cardCell.titleLabel.text = card?.title
-            cardCell.contentLabel.text = card?.content
+            guard let card = card else { return }
+            cardCell.titleLabel.text = card.title
+            cardCell.contentLabel.text = card.content
+            cardCell.authorLabel.text = "Added by \(card.author)"
         }
         return cardCell
     }

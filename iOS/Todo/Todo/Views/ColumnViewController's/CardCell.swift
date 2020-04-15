@@ -124,7 +124,6 @@ final class AuthorLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        text = "author By iOS"
         font = UIFont.boldSystemFont(ofSize: 12)
     }
 }
