@@ -116,29 +116,44 @@ function switchLog(log): string {
 function makeAddActionLog(log) {
     return `<div class="log">
                 <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>added<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
-                <p class="log-time">${log.createDateTime}</p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeUpdateActionLog(log) {
     return `<div class="log">
                 <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
-                <p class="log-time">${log.createDateTime}</p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeDeleteActionLog(log) {
     return `<div class="log">
                 <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
-                <p class="log-time">${log.createDateTime}</p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeMoveActionLog(log) {
     return `<div class="log">
                 <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>moved<strong>${log.content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
-                <p class="log-time">${log.createDateTime}</p>
+                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
+}
+
+function timeSince(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval = Math.floor(seconds / 31536000);
+    if (interval > 1) return interval + "년";
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) return interval + "달";
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) return interval + "일";
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) return interval + "시간";
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) return interval + "분";
+    return Math.floor(seconds) + "초";
 }
 
 export {
