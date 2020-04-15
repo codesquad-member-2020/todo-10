@@ -1,11 +1,9 @@
 package com.codesquad.team10.todo.api;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.codesquad.team10.todo.entity.*;
-import com.codesquad.team10.todo.exception.custom.ForbiddenException;
-import com.codesquad.team10.todo.exception.custom.InvalidRequestException;
-import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
-import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
+import com.codesquad.team10.todo.exception.custom.*;
 import com.codesquad.team10.todo.repository.CardRepository;
 import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.repository.SectionRepository;
@@ -48,6 +46,8 @@ public class CardController {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
         } catch (SignatureVerificationException | NullPointerException e) {
             throw new ForbiddenException();
+        } catch (JWTDecodeException e) {
+            throw new InvalidTokenException();
         }
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         Card newCard = new Card(body.get("title"), body.get("content"), userData.getName(), userData.getId());
@@ -71,14 +71,17 @@ public class CardController {
 
     @PatchMapping("/{cardId}")
     public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int cardId, @RequestBody Map<String, String> body, HttpServletRequest request) {
+        if (body.get("content") == null) {
+            throw new InvalidRequestException();
+        }
         User userData = null;
         try {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
         } catch (SignatureVerificationException | NullPointerException e) {
             throw new ForbiddenException();
+        } catch (JWTDecodeException e) {
+            throw new InvalidTokenException();
         }
-        if (body.get("content") == null)
-            throw new InvalidRequestException();
         Card updateCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         if (section.getCards().size() == 0)
@@ -103,6 +106,8 @@ public class CardController {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
         } catch (SignatureVerificationException | NullPointerException e) {
             throw new ForbiddenException();
+        } catch (JWTDecodeException e) {
+            throw new InvalidTokenException();
         }
         Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);

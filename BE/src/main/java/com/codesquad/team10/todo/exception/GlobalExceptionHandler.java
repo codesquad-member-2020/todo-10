@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(InvalidTokenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseData handleInvalidTokenException(InvalidTokenException e) {
+        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseData handleUserNotFoundException(UserNotFoundException e) {
