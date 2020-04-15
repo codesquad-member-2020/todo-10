@@ -57,6 +57,7 @@ public class ModelMapper {
                   log.getUser(),
                   log.getAction(),
                   log.getTarget(),
+                  log.getTitle(),
                   log.getContent(),
                   log.getSource(),
                   log.getDestination(),

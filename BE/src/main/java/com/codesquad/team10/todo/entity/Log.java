@@ -15,6 +15,8 @@ public class Log {
 
     private Target target;
 
+    private String title;
+
     private String content;
 
     private String source;
@@ -28,21 +30,23 @@ public class Log {
     public Log() {
     }
 
-    public Log(String user, Action action, Target target, String content, String source, String destination, Integer board) {
+    public Log(String user, Action action, Target target, String title, String content, String source, String destination, Integer board) {
         this.user = user;
         this.action = action;
         this.target = target;
+        this.title = title;
         this.content = content;
         this.source = source;
         this.destination = destination;
         this.board = board;
     }
 
-    public Log(Integer id, String user, Action action, Target target, String content, String source, String destination, LocalDateTime createDateTime, Integer board) {
+    public Log(Integer id, String user, Action action, Target target, String title, String content, String source, String destination, LocalDateTime createDateTime, Integer board) {
         this.id = id;
         this.user = user;
         this.action = action;
         this.target = target;
+        this.title = title;
         this.content = content;
         this.source = source;
         this.destination = destination;
@@ -64,6 +68,10 @@ public class Log {
 
     public Target getTarget() {
         return target;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getContent() {

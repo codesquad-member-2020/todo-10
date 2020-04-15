@@ -54,7 +54,7 @@ public class CardController {
         CardDTO cardDTO = null;
         cardDTO = (CardDTO) ModelMapper.of(newCard);
         // 로그 추가
-        Log log = new Log(TEST_USER_NAME, Action.ADDED, Target.CARD, substractTarget(cardDTO.getTitle(), cardDTO.getContent()), null, section.getTitle(), TEST_BOARD_ID);
+        Log log = new Log(TEST_USER_NAME, Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), TEST_BOARD_ID);
         logRepository.save(log);
         // 반환 데이터
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, constructResonseData(cardDTO, log, section.getCards().size())), HttpStatus.OK);
@@ -74,7 +74,7 @@ public class CardController {
         CardDTO resultCard = (CardDTO) ModelMapper.of(section.updateCard(updateCard, body.get("title"), body.get("content")));
         sectionRepository.save(section);
         // 로그 추가
-        Log log = new Log(TEST_USER_NAME, Action.UPDATED, Target.CARD, substractTarget(resultCard.getTitle(), resultCard.getContent()), null, null, TEST_BOARD_ID);
+        Log log = new Log(TEST_USER_NAME, Action.UPDATED, Target.CARD, resultCard.getTitle(), resultCard.getContent(), null, null, TEST_BOARD_ID);
         logRepository.save(log);
         logger.debug("log: {}", log);
         //반환 데이터
@@ -91,22 +91,11 @@ public class CardController {
 
         section.deleteCard(targetCard);
         sectionRepository.save(section);
-        Log log = new Log(TEST_USER_NAME, Action.REMOVED, Target.CARD, substractTarget(targetCard.getTitle(), targetCard.getContent()), section.getTitle(), null, TEST_BOARD_ID);
+        Log log = new Log(TEST_USER_NAME, Action.REMOVED, Target.CARD, targetCard.getTitle(), targetCard.getContent(), section.getTitle(), null, TEST_BOARD_ID);
         logRepository.save(log);
         logger.debug("log: {}", log);
         Map<String, Object> responseData = constructResonseData(log, section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
-    }
-
-    private String substractTarget(String title, String content) {
-        if (title != null)
-            return title;
-
-        final String delimiter = "\r\n";
-        if (content.contains(delimiter))
-            return content.substring(0, content.indexOf(delimiter));
-
-        return content;
     }
 
     private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, int cardCount) {
