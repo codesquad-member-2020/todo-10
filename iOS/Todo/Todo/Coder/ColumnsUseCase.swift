@@ -8,15 +8,6 @@
 
 import Foundation
 
-enum LoginInfo {
-    static let user = """
-    {
-        "name": "nigayo",
-        "password": "1234"
-    }
-    """.data(using: .utf8)
-}
-
 struct ColumnsUseCase {
     enum EndPoints {
         static let columns = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board"

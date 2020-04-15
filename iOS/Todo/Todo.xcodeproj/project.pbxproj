@@ -25,6 +25,8 @@
 		5A7938252441BBAA00D59611 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7938242441BBAA00D59611 /* Controller.swift */; };
 		5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7A55B5244701A10041FC55 /* DragObject.swift */; };
 		5A7A55B82447246A0041FC55 /* LogsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7A55B72447246A0041FC55 /* LogsResponse.swift */; };
+		5A7A55BA244731940041FC55 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7A55B9244731930041FC55 /* LoginUseCase.swift */; };
+		5A7A55BC244732E30041FC55 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7A55BB244732E30041FC55 /* LoginResponse.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* ColumnsResponse.swift */; };
@@ -92,6 +94,8 @@
 		5A7938242441BBAA00D59611 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		5A7A55B5244701A10041FC55 /* DragObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DragObject.swift; path = TodoTests/DragObject.swift; sourceTree = SOURCE_ROOT; };
 		5A7A55B72447246A0041FC55 /* LogsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsResponse.swift; sourceTree = "<group>"; };
+		5A7A55B9244731930041FC55 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		5A7A55BB244732E30041FC55 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* ColumnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsResponse.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		5A838E4F243D9CE80081A42F /* Coder */ = {
 			isa = PBXGroup;
 			children = (
+				5A7A55B9244731930041FC55 /* LoginUseCase.swift */,
 				5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */,
 				5A7937F5243F194A00D59611 /* DeleteUseCase.swift */,
 				5A7937FF2441319F00D59611 /* NewCardViewModelUseCase.swift */,
@@ -249,6 +254,7 @@
 				5A838E53243DB4110081A42F /* ColumnsResponse.swift */,
 				5A7A55B72447246A0041FC55 /* LogsResponse.swift */,
 				5A7937F7243F1AFA00D59611 /* CardResponse.swift */,
+				5A7A55BB244732E30041FC55 /* LoginResponse.swift */,
 				5A838E5D243DF0470081A42F /* TitleModel.swift */,
 				5ADF26B824459E7B008C15CA /* NewCard.swift */,
 				5A7A55B5244701A10041FC55 /* DragObject.swift */,
@@ -496,6 +502,7 @@
 				5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */,
 				5AB8D556243B40FF00387EAE /* MainViewController.swift in Sources */,
 				5ADF26BF2445ED11008C15CA /* EditingCardViewController.swift in Sources */,
+				5A7A55BA244731940041FC55 /* LoginUseCase.swift in Sources */,
 				5A79380D2441A05100D59611 /* ContentView.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
 				5A79380724419F5600D59611 /* FormatImageView.swift in Sources */,
@@ -521,6 +528,7 @@
 				5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
+				5A7A55BC244732E30041FC55 /* LoginResponse.swift in Sources */,
 				5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

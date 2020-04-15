@@ -7,6 +7,13 @@
 //
 
 enum StubJsonData {
+    static let successLoginResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": "로그인 성공"
+    }
+    """
+    
     static let successColumnsResponseStub = """
     {
         "status": "SUCCESS",
