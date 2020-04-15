@@ -7,6 +7,7 @@ const URL = {
         ADD_CARD_API: (sectionId) => `${BASE_DEV_URL}/board/section/${sectionId}/card`,
         UPDATE_CARD_API: (sectionId, cardId) => `${BASE_DEV_URL}/board/section/${sectionId}/card/${cardId}`,
         LOGS_API: () => `${BASE_DEV_URL}/board/logs`,
+        LOG_API: (logId) => `${BASE_DEV_URL}/board/log/${logId}`,
     },
 }
 

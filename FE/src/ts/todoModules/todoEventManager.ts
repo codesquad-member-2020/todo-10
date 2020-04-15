@@ -25,6 +25,7 @@ class TodoEventManager {
     todoView: TodoView;
     todoAppEventList: ITodoAppEventList;
     todoModalEventList: ITodoEventList;
+
     constructor(todoView: TodoView) {
         this.todoView = todoView;
         this.todoHeaderEventList = {
@@ -74,7 +75,10 @@ class TodoEventManager {
                 showColumnForm(<HTMLElement>target);
                 break;
             case 'card':
-                deleteCard(<HTMLElement>target);
+                deleteCard({
+                    target: target,
+                    logCallBack: this.todoView.addLogUpdate.bind(this.todoView),
+                });
                 break;
             case 'form':
                 toggleClass({
@@ -106,7 +110,8 @@ class TodoEventManager {
                     event: evt,
                     parentClassName: '.todo-columns',
                     type: 'post',
-                    callback: this.todoView.addCardUpdate,
+                    cardCallback: this.todoView.addCardUpdate,
+                    logCallBack: this.todoView.addLogUpdate.bind(this.todoView),
                 });
                 break;
             case 'modal-form':
@@ -114,7 +119,8 @@ class TodoEventManager {
                     event: evt,
                     parentClassName: '.modal-contents',
                     type: 'patch',
-                    callback: this.todoView.modifyCardUpdate.bind(this.todoView),
+                    cardCallback: this.todoView.modifyCardUpdate.bind(this.todoView),
+                    logCallBack: this.todoView.addLogUpdate.bind(this.todoView),
                 });
                 break;
             default:

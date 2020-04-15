@@ -1,6 +1,6 @@
 import { getEl, getParentEl, removeClass } from '../utils/commonUtil';
 import { COMMON_RULE } from '../contants/constant';
-import { makeColumns, addCard, makeModal, makeMenu } from './todoViewTemplate';
+import { makeColumns, addCard, makeModal, makeMenu, injectLog } from './todoViewTemplate';
 
 class TodoView {
     public todoHeader: HTMLElement;
@@ -30,7 +30,7 @@ class TodoView {
     addCardUpdate({ target }, { content }): void {
         const { card, card_count } = content;
         const currColumn = getParentEl(target, '.todo-columns');
-        currColumn.querySelector('.card-wrap').innerHTML += addCard(card.id, card.content);
+        currColumn.querySelector('.card-wrap').innerHTML += addCard(card);
         currColumn.querySelector('.todo-count').innerHTML = card_count;
         removeClass(getParentEl(target, '.todo-form'), COMMON_RULE.ACTIVE_KEY);
         target.reset();
@@ -41,6 +41,11 @@ class TodoView {
         this.todoApp.querySelector(`#card-${cardId} .card-contents`).innerHTML = card.content;
         removeClass(this.todoModal, COMMON_RULE.ACTIVE_KEY);
         this.todoModal.querySelector('form').reset();
+    }
+
+    addLogUpdate({ content }) {
+        const logWrap = this.todoMenu.querySelector('.activity-log');
+        injectLog(logWrap, content);
     }
 }
 

@@ -15,18 +15,16 @@ class TodoController {
     }
 
     async runTodoApp(): void {
-        const loginUrl = URL.DEV.LOGIN_API();
-        const { status } = await httpRequest.login(loginUrl);
+        const { status } = await httpRequest.login(URL.DEV.LOGIN_API());
         if (status !== STATUS_KEY.SUCCESS) return;
 
-        const boardUrl = URL.DEV.BOARD_API();
-        httpRequest.get(boardUrl).then(todoData => {
+        httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
             removeClass(getEl('.loading-wrap'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
         });
-        const logsUrl = URL.DEV.LOGS_API();
-        httpRequest.get(logsUrl).then(logsData => {
+
+        httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
             this.todoView.renderTodoMenu(logsData);
         });
         this.todoEventManager.initTodoEvent();
