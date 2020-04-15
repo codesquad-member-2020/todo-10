@@ -61,6 +61,15 @@ extension MainViewController: ColumnViewControllerDelegate {
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
         let doneIndex = 2
         guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }
-        doneViewController.receiveToLast(cardViewModel: cardViewModel)
+        doneViewController.addToLast(cardViewModel: cardViewModel)
+    }
+    
+    func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int) {
+        children.forEach { viewController in
+            guard let columnViewController = viewController as? ColumnViewController,
+                let columnID = columnViewController.columnID,
+                columnID == sourceColumnID else { return }
+            columnViewController.removeCardViewModel(row: sourceRow)
+        }
     }
 }

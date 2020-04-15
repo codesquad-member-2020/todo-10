@@ -10,6 +10,7 @@ import UIKit
 
 protocol ColumnViewControllerDelegate {
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel)
+    func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int)
 }
 
 final class ColumnViewController: UIViewController {
@@ -32,6 +33,7 @@ final class ColumnViewController: UIViewController {
     private func configureDragAndDrop() {
         columnTable.dragInteractionEnabled = true
         columnTable.dragDelegate = self
+        columnTable.dropDelegate = self
     }
     
     private func configureTitleView() {
@@ -97,6 +99,14 @@ final class ColumnViewController: UIViewController {
         columnTableDataSource = ColumnTableDataSource(cardViewModels: cardViewModels)
         columnTable.dataSource = columnTableDataSource
     }
+    
+    func addToLast(cardViewModel: CardViewModel) {
+        columnTableDataSource.append(cardViewModel: cardViewModel)
+    }
+    
+    func removeCardViewModel(row: Int) {
+        columnTableDataSource.removeCardViewModel(at: row)
+    }
 }
 
 extension ColumnViewController: UITableViewDelegate {
@@ -122,10 +132,6 @@ extension ColumnViewController: UITableViewDelegate {
         guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
         delegate?.columnViewControllerDidMoveToDone(cardViewModel)
         columnTableDataSource.removeCardViewModel(at: indexPath.row)
-    }
-    
-    func receiveToLast(cardViewModel: CardViewModel) {
-        columnTableDataSource.append(cardViewModel: cardViewModel)
     }
     
     private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
@@ -176,9 +182,49 @@ extension ColumnViewController: UITableViewDelegate {
 
 extension ColumnViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        guard let columnID = columnID,
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return [] }
+        
         let itemProvider = NSItemProvider()
         let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = DragObject(cardViewModel: cardViewModel, columnID: columnID, row: indexPath.row)
         return [dragItem]
+    }
+}
+
+extension ColumnViewController: UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        // The .move operation is available only for dragging within a single app.
+        if tableView.hasActiveDrag {
+            if session.items.count > 1 {
+                return UITableViewDropProposal(operation: .cancel)
+            } else {
+                return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+        } else {
+            return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let destinationIndexPath: IndexPath
+        
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            // Get last index path of table view.
+            let section = tableView.numberOfSections - 1
+            let row = tableView.numberOfRows(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
+        
+        coordinator.items.forEach { item in
+            guard let dragObject = item.dragItem.localObject as? DragObject else { return }
+            delegate?.columnViewControllerDidMove(sourceColumnID: dragObject.columnID,
+                                                  sourceRow: dragObject.row)
+            columnTableDataSource.add(cardViewModel: dragObject.cardViewModel,
+                                      at: destinationIndexPath.row)
+        }
     }
 }
 

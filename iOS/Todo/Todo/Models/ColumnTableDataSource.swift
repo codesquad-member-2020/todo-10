@@ -52,6 +52,10 @@ final class ColumnTableDataSource: NSObject {
         cardViewModels.remove(at: sourceIndex)
         cardViewModels.insert(cardViewModel, at: destinationIndex)
     }
+    
+    func add(cardViewModel: CardViewModel, at index: Int) {
+        cardViewModels.insert(cardViewModel, at: index)
+    }
 }
 
 extension ColumnTableDataSource: UITableViewDataSource {
