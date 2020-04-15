@@ -143,7 +143,7 @@ extension ColumnViewController: UITableViewDelegate {
             let columnID = columnID,
             let cardID = cardViewModel.cardID else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
-        DeleteUseCase.makeDeleteResult(from: urlString, with: NetworkManager()) { result in
+        DeleteUseCase.requestDelete(from: urlString, with: NetworkManager()) { result in
             guard let result = result else { return }
             if result {
                 self.columnTableDataSource.removeCardViewModel(at: indexPath.row)

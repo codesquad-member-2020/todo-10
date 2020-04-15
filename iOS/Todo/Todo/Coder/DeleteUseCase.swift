@@ -9,7 +9,7 @@
 import Foundation
 
 struct DeleteUseCase {
-    static func makeDeleteResult(from string: String,
+    static func requestDelete(from string: String,
                                  with manager: NetworkManagable,
                                  result: @escaping (Bool?) -> ()) {
         try? manager.requestResource(from: string, method: .delete, body: nil, format: Format.jsonType,
