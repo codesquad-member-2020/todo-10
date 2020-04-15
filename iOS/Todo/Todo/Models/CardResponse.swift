@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct DeleteResponse: Codable {
-    let status: Status
-    let content: String
-}
-
 struct CardResponse: Codable {
     let status: Status
-    let content: Card
+    let content: Content
+}
+
+struct Content: Codable {
+    let log_id: Int
+    let card_count: Int
+    var card: Card?
 }

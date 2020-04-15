@@ -15,7 +15,7 @@ struct DeleteUseCase {
         try? manager.requestResource(from: string, method: .delete, body: nil, format: Format.jsonType,
                                      headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                                         guard error == nil, let data = data else { return }
-                                        guard let cardResponse = try? JSONDecoder().decode(DeleteResponse.self, from: data) else { return }
+                                        guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
                                         guard cardResponse.status == .success else { return }
                                         
                                         result(true)
