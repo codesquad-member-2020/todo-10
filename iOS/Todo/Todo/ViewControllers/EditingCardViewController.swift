@@ -16,7 +16,7 @@ final class EditingCardViewController: CardViewController {
     
     @objc override func createCard() {
         guard let columnID = columnID else { return }
-        guard let cardData = newCard().encodeToJSONData() else { return }
+        guard let cardData = generateNewCard().encodeToJSONData() else { return }
         guard let cardID = cardViewModel?.cardID, let row = row else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
         EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,

@@ -115,7 +115,7 @@ class CardViewController: UIViewController {
         contentView.text = text
     }
     
-    func newCard() -> NewCard {
+    func generateNewCard() -> NewCard {
         return NewCard(title: titleField.text, content: contentView.text)
     }
 }

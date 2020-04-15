@@ -16,7 +16,7 @@ final class NewCardViewController: CardViewController {
     
     @objc override func createCard() {
         guard let columnID = columnID else { return }
-        guard let cardData = newCard().encodeToJSONData() else { return }
+        guard let cardData = generateNewCard().encodeToJSONData() else { return }
         NewCardViewModelUseCase.makeNewCardViewModel(from: EndPointFactory.createNewCardURLString(columnID: columnID),
                                                      cardData: cardData, with: NetworkManager()) { cardViewModel in
                                                         guard let cardViewModel = cardViewModel else { return }
