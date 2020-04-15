@@ -1,8 +1,10 @@
 package com.codesquad.team10.todo.api;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.codesquad.team10.todo.entity.Section;
 import com.codesquad.team10.todo.exception.custom.ForbiddenException;
+import com.codesquad.team10.todo.exception.custom.InvalidTokenException;
 import com.codesquad.team10.todo.exception.custom.UnauthorizedException;
 import com.codesquad.team10.todo.exception.custom.UserNotFoundException;
 import com.codesquad.team10.todo.repository.SectionRepository;
@@ -61,6 +63,8 @@ public class BoardController {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
         } catch (SignatureVerificationException | NullPointerException e) {
             throw new ForbiddenException();
+        } catch (JWTDecodeException e) {
+            throw new InvalidTokenException();
         }
         List<SectionDTO> sectionDTOS = new ArrayList<>();
         List<Section> sections = sectionRepository.findByBoardId(userData.getBoard()).stream()

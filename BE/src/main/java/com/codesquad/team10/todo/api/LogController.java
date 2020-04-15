@@ -1,9 +1,11 @@
 package com.codesquad.team10.todo.api;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.codesquad.team10.todo.entity.Log;
 import com.codesquad.team10.todo.entity.User;
 import com.codesquad.team10.todo.exception.custom.ForbiddenException;
+import com.codesquad.team10.todo.exception.custom.InvalidTokenException;
 import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
 import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.response.ResponseData;
@@ -43,6 +45,8 @@ public class LogController {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
         } catch (SignatureVerificationException | NullPointerException e) {
             throw new ForbiddenException();
+        } catch (JWTDecodeException e) {
+            throw new InvalidTokenException();
         }
         List<LogDTO> logDTOs = logRepository.findByBoardId(userData.getBoard()).stream()
                 .map(log -> (LogDTO) ModelMapper.of(log))
