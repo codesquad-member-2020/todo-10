@@ -83,4 +83,8 @@ public class CardDTO {
     public Integer getSectionKey() {
         return sectionKey;
     }
+
+    public void setSectionKey(Integer sectionKey) {
+        this.sectionKey = sectionKey;
+    }
 }

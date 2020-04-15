@@ -40,20 +40,19 @@ public class CardController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseData> create(@PathVariable int sectionId, @RequestBody Card card) {
+    public ResponseEntity<ResponseData> create(@PathVariable int sectionId, @RequestBody Map<String, String> body) {
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
-        card.setAuthor(TEST_USER_NAME);
-        card.setUser(TEST_USER_ID);
-        section.addCard(card);
+        Card newCard = new Card(body.get("title"), body.get("content"), TEST_USER_NAME, TEST_USER_ID);
+        section.addCard(newCard);
 
-        logger.debug("new card: {}", card);
+        logger.debug("new card: {}", newCard);
 
         // 섹션 내용 변경
         sectionRepository.save(section);
-        card = cardRepository.findById(card.getId()).orElseThrow(ResourceNotFoundException::new);
+        newCard = cardRepository.findById(newCard.getId()).orElseThrow(ResourceNotFoundException::new);
         // dto 생성
         CardDTO cardDTO = null;
-        cardDTO = (CardDTO)ModelMapper.of(card);
+        cardDTO = (CardDTO) ModelMapper.of(newCard);
         // 로그 추가
         Log log = new Log(TEST_USER_NAME, Action.ADDED, Target.CARD, substractTarget(cardDTO.getTitle(), cardDTO.getContent()), null, section.getTitle(), TEST_BOARD_ID);
         logRepository.save(log);
@@ -62,28 +61,24 @@ public class CardController {
     }
 
     @PatchMapping("/{cardId}")
-    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int cardId, @RequestBody CardDTO updateCard) {
-        if (updateCard.getContent() == null)
+    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int cardId, @RequestBody Map<String, String> body) {
+        if (body.get("content") == null)
             throw new InvalidRequestException();
-        Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
+        Card updateCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+        if (section.getCards().size() == 0)
+            throw new UnmatchedRequestDataException();
+
         Map<String, Object> responseData = null;
-        try {
-            // 카드 내용 수정
-            targetCard.setTitle(updateCard.getTitle());
-            targetCard.setContent(updateCard.getContent());
-            section.updateCard(targetCard);
-            sectionRepository.save(section);
-            CardDTO resultCard = (CardDTO)ModelMapper.of(targetCard);
-            // 로그 추가
-            Log log = new Log(TEST_USER_NAME, Action.UPDATED, Target.CARD, substractTarget(targetCard.getTitle() ,targetCard.getContent()), null, null, TEST_BOARD_ID);
-            logRepository.save(log);
-            logger.debug("log: {}", log);
-            //반환 데이터
-            responseData = constructResonseData(resultCard, log, section.getCards().size());
-        } catch (IndexOutOfBoundsException e) {
-            throw new ResourceNotFoundException();
-        }
+        // 카드 내용 수정
+        CardDTO resultCard = (CardDTO) ModelMapper.of(section.updateCard(updateCard, body.get("title"), body.get("content")));
+        sectionRepository.save(section);
+        // 로그 추가
+        Log log = new Log(TEST_USER_NAME, Action.UPDATED, Target.CARD, substractTarget(resultCard.getTitle(), resultCard.getContent()), null, null, TEST_BOARD_ID);
+        logRepository.save(log);
+        logger.debug("log: {}", log);
+        //반환 데이터
+        responseData = constructResonseData(resultCard, log, section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
