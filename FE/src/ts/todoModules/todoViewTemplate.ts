@@ -73,7 +73,7 @@ function makeModal(): string {
             </div>`;
 }
 
-function makeMenu({ logs }): string {
+function makeMenu(logs): string {
     return `<div class="menu-header content-wrap" data-type="menu">
                 <h2>☰ menu</h2>
                 <div class="btn-wrap">
@@ -89,7 +89,7 @@ function makeMenu({ logs }): string {
 }
 
 function makeLogs(logs: []): string {
-    return logs.reduce((acc: string, log: ITodoViewTemplate) => {
+    return logs.reverse().reduce((acc: string, log: ITodoViewTemplate) => {
         acc += switchLog(log);
         return acc;
     }, '');
@@ -122,14 +122,14 @@ function makeAddActionLog(log) {
 
 function makeUpdateActionLog(log) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong>${log.content}</strong></p>
                 <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeDeleteActionLog(log) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong>${log.content}</strong>from<strong>${log.source}</strong></p>
                 <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }

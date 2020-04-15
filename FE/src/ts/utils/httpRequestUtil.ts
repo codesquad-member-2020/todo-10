@@ -14,7 +14,7 @@ const httpRequest = {
         return resPromise;
     },
 
-    async board(url: string) {
+    async get(url: string) {
         const option = {
             method: 'GET',
             mode: 'cors',

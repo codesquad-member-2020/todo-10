@@ -4,8 +4,6 @@ import { URL } from '../contants/url';
 import TodoView from './todoView';
 import TodoEventManager from './todoEventManager';
 
-import { logData } from '../../_data/logDummyData';
-
 class TodoController {
     private todoView: TodoView;
     private todoEventManager: TodoEventManager;
@@ -21,12 +19,15 @@ class TodoController {
         if (status !== STATUS_KEY.SUCCESS) return;
 
         const boardUrl = URL.DEV.BOARD_API();
-        httpRequest.board(boardUrl).then(todoData => {
+        httpRequest.get(boardUrl).then(todoData => {
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
-            this.todoView.renderTodoMenu(logData);
-            this.todoEventManager.initTodoEvent();
         });
+        const logsUrl = URL.DEV.LOGS_API();
+        httpRequest.get(logsUrl).then(logsData => {
+            this.todoView.renderTodoMenu(logsData);
+        });
+        this.todoEventManager.initTodoEvent();
     }
 }
 
