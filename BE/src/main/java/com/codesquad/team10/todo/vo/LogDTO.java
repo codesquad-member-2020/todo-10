@@ -5,7 +5,6 @@ import com.codesquad.team10.todo.entity.Target;
 import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class LogDTO {
 
