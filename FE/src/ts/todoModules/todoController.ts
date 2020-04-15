@@ -1,3 +1,4 @@
+import { getEl, removeClass } from '../utils/commonUtil';
 import { httpRequest } from '../utils/httpRequestUtil';
 import { COMMON_RULE, STATUS_KEY } from '../contants/constant';
 import { getEl, removeClass } from '../utils/commonUtil';
@@ -13,13 +14,12 @@ class TodoController {
         this.todoView = todoView;
         this.todoEventManager = todoEventManager;
     }
-
-    async runTodoApp(): void {
+    async runTodoApp(data): void {
         const { status } = await httpRequest.login(URL.DEV.LOGIN_API());
         if (status !== STATUS_KEY.SUCCESS) return;
 
-        httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
-            removeClass(getEl('.loading-wrap'), COMMON_RULE.ACTIVE_KEY);
+        httpRequest.get(URL.DEV.BOARD_API(), data).then(todoData => {
+            removeClass(getEl('#dimmed'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
         });
