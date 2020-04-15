@@ -1,5 +1,6 @@
 import { httpRequest } from '../utils/httpRequestUtil';
-import { STATUS_KEY } from '../contants/constant';
+import { COMMON_RULE, STATUS_KEY } from '../contants/constant';
+import { getEl, removeClass } from '../utils/commonUtil';
 import { URL } from '../contants/url';
 import TodoView from './todoView';
 import TodoEventManager from './todoEventManager';
@@ -20,6 +21,7 @@ class TodoController {
 
         const boardUrl = URL.DEV.BOARD_API();
         httpRequest.get(boardUrl).then(todoData => {
+            removeClass(getEl('.loading-wrap'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
         });
