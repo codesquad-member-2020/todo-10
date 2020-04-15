@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -57,7 +58,8 @@ public class CardController {
         Log log = new Log(TEST_USER_NAME, Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), TEST_BOARD_ID);
         logRepository.save(log);
         // 반환 데이터
-        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, constructResonseData(cardDTO, log, section.getCards().size())), HttpStatus.OK);
+        Map<String, Object> responseData = constructResonseData(cardDTO, log, getCountOfCardWithoutDeleted(section.getCards()));
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
     @PatchMapping("/{cardId}")
@@ -69,7 +71,6 @@ public class CardController {
         if (section.getCards().size() == 0)
             throw new UnmatchedRequestDataException();
 
-        Map<String, Object> responseData = null;
         // 카드 내용 수정
         CardDTO resultCard = (CardDTO) ModelMapper.of(section.updateCard(updateCard, body.get("title"), body.get("content")));
         sectionRepository.save(section);
@@ -78,7 +79,7 @@ public class CardController {
         logRepository.save(log);
         logger.debug("log: {}", log);
         //반환 데이터
-        responseData = constructResonseData(resultCard, log, section.getCards().size());
+        Map<String, Object> responseData = constructResonseData(resultCard, log, getCountOfCardWithoutDeleted(section.getCards()));
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -94,22 +95,28 @@ public class CardController {
         Log log = new Log(TEST_USER_NAME, Action.REMOVED, Target.CARD, targetCard.getTitle(), targetCard.getContent(), section.getTitle(), null, TEST_BOARD_ID);
         logRepository.save(log);
         logger.debug("log: {}", log);
-        Map<String, Object> responseData = constructResonseData(log, section.getCards().size());
+        Map<String, Object> responseData = constructResonseData(log, getCountOfCardWithoutDeleted(section.getCards()));
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
-    private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, int cardCount) {
+    private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, long countOfCard) {
         Map<String, Object> map = new HashMap<>();
         map.put("card", cardDTO);
         map.put("log_id", log.getId());
-        map.put("card_count", cardCount);
+        map.put("card_count", countOfCard);
         return map;
     }
 
-    private Map<String, Object> constructResonseData(Log log, int cardCount) {
+    private Map<String, Object> constructResonseData(Log log, long countOfCard) {
         Map<String, Object> map = new HashMap<>();
         map.put("log_id", log.getId());
-        map.put("card_count", cardCount);
+        map.put("card_count", countOfCard);
         return map;
+    }
+
+    private long getCountOfCardWithoutDeleted(List<Card> cards) {
+        return cards.stream()
+                .filter(card -> !card.isDeleted())
+                .count();
     }
 }
