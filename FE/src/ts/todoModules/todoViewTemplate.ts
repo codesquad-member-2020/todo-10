@@ -6,8 +6,8 @@ interface ITodoViewTemplate {
     sections: [];
 }
 
-function makeColumns({ sections }: ITodoViewTemplate): string {
-    return sections.reduce((acc: string, column: ITodoViewTemplate) => {
+function makeColumns(columns: ITodoViewTemplate): string {
+    return columns.reduce((acc: string, column: ITodoViewTemplate) => {
         acc +=
             `<div class="todo-columns content-wrap" data-type="column" id="column-${column.id}" data-column-id=${column.id} tabindex="0">
             <div class="todo-title">

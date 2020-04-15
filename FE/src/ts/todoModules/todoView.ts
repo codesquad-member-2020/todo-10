@@ -27,15 +27,17 @@ class TodoView {
         this.todoMenu.innerHTML = makeMenu(logData);
     }
 
-    addCardUpdate({ target }, { content: card }): void {
+    addCardUpdate({ target }, { content }): void {
+        const { card, card_count } = content;
         const currColumn = getParentEl(target, '.todo-columns');
         currColumn.querySelector('.card-wrap').innerHTML += addCard(card.id, card.content);
-        currColumn.querySelector('.todo-count').innerHTML++;
+        currColumn.querySelector('.todo-count').innerHTML = card_count;
         removeClass(getParentEl(target, '.todo-form'), COMMON_RULE.ACTIVE_KEY);
         target.reset();
     }
 
-    modifyCardUpdate(cardId, { content: card }): void {
+    modifyCardUpdate(cardId, { content }): void {
+        const { card } = content;
         this.todoApp.querySelector(`#card-${cardId} .card-contents`).innerHTML = card.content;
         removeClass(this.todoModal, COMMON_RULE.ACTIVE_KEY);
         this.todoModal.querySelector('form').reset();

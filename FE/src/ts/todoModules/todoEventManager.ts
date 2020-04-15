@@ -50,23 +50,17 @@ class TodoEventManager {
         };
     }
 
-    initTodoHeaderEvent(): void {
-        this.registerEvent(this.todoView.todoHeader, this.todoHeaderEventList);
+    initTodoEvent(): void {
+        const events = [
+            { target: this.todoView.todoHeader, eventList: this.todoHeaderEventList },
+            { target: this.todoView.todoMenu, eventList: this.todoMenuEventList },
+            { target: this.todoView.todoApp, eventList: this.todoAppEventList },
+            { target: this.todoView.todoModal, eventList: this.todoModalEventList },
+        ];
+        events.forEach(event => this.registerEvent(event));
     }
 
-    initTodoMenuEvent(): void {
-        this.registerEvent(this.todoView.todoMenu, this.todoMenuEventList);
-    }
-
-    initTodoAppEvent(): void {
-        this.registerEvent(this.todoView.todoApp, this.todoAppEventList);
-    }
-
-    initTodoModalEvent(): void {
-        this.registerEvent(this.todoView.todoModal, this.todoModalEventList);
-    }
-
-    registerEvent(target, eventList) {
+    registerEvent({ target, eventList }) {
         for (let [event, callback] of Object.entries(eventList)) {
             target.addEventListener(event, callback);
         }
