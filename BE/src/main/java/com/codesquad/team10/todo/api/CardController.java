@@ -62,21 +62,21 @@ public class CardController {
     }
 
     @PatchMapping("/{cardId}")
-    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int cardId, @RequestBody CardDTO card) {
-        if (card.getCardIndex() == null)
+    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int cardId, @RequestBody CardDTO updateCard) {
+        if (updateCard.getContent() == null)
             throw new InvalidRequestException();
-
+        Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
-        CardDTO resultCard = null;
         Map<String, Object> responseData = null;
         try {
             // 카드 내용 수정
-            section.updateCard((Card)ModelMapper.of(card));
+            targetCard.setTitle(updateCard.getTitle());
+            targetCard.setContent(updateCard.getContent());
+            section.updateCard(targetCard);
             sectionRepository.save(section);
-            // updateCreateTime 반영된 시간 받아오기 위해서 레포지토리에서 Get
-            resultCard = (CardDTO)ModelMapper.of(cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new));
+            CardDTO resultCard = (CardDTO)ModelMapper.of(targetCard);
             // 로그 추가
-            Log log = new Log(TEST_USER_NAME, Action.UPDATED, Target.CARD, substractTarget(card.getTitle() ,card.getContent()), null, null, TEST_BOARD_ID);
+            Log log = new Log(TEST_USER_NAME, Action.UPDATED, Target.CARD, substractTarget(targetCard.getTitle() ,targetCard.getContent()), null, null, TEST_BOARD_ID);
             logRepository.save(log);
             logger.debug("log: {}", log);
             //반환 데이터

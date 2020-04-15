@@ -38,7 +38,7 @@ public class ModelMapper {
                         cardDTO.getAuthor(),
                         cardDTO.isDeleted(),
                         cardDTO.getUser(),
-                        cardDTO.getCardIndex()
+                        cardDTO.getSectionKey()
                 );
             case "Section":
                 Section section = (Section)object;

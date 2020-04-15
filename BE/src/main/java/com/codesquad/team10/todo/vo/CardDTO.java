@@ -25,9 +25,10 @@ public class CardDTO {
     @JsonIgnore
     private Integer user;
 
-    private Integer cardIndex;
+    @JsonIgnore
+    private Integer sectionKey;
 
-    public CardDTO(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer user, Integer cardIndex) {
+    public CardDTO(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer user, Integer sectionKey) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -36,7 +37,7 @@ public class CardDTO {
         this.author = author;
         this.deleted = deleted;
         this.user = user;
-        this.cardIndex = cardIndex;
+        this.sectionKey = sectionKey;
     }
 
     public Integer getId() {
@@ -79,11 +80,7 @@ public class CardDTO {
         return user;
     }
 
-    public Integer getCardIndex() {
-        return cardIndex;
-    }
-
-    public void setCardIndex(Integer cardIndex) {
-        this.cardIndex = cardIndex;
+    public Integer getSectionKey() {
+        return sectionKey;
     }
 }

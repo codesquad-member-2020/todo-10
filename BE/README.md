@@ -64,8 +64,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
                     "content": "구현 API 내용 작성",
                     "createDateTime": "2020-04-15 03:12:32",
                     "updateDateTime": "2020-04-15 03:13:00",
-                    "author": "nigayo",
-                    "cardIndex": 0
+                    "author": "nigayo"
                 }
             ]
         },
@@ -124,8 +123,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
             "content": "회고하자",
             "createDateTime": "2020-04-14T15:44:19",
             "updateDateTime": "2020-04-14T15:44:19",
-            "author": "nigayo",
-            "cardIndex": 1
+            "author": "nigayo"
         }
     }
 }
@@ -138,13 +136,12 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ### 요청 데이터
 ```
 {
-    "cardIndex": 1,
     "title": "README.md 추가 안함",
     "content": "구현 API 내용 작성 안함",
 }
 ```
 - 카드 수정 요청 시, URL에 sectionId와 cardId를 전달해야 합니다.
-- Body에는 카드 객체 생성 시 반환받은 cardIndex와 변경하고자 하는 데이터(title, content)를 함께 보냅니다.
+- Body에는 변경하고자 하는 데이터(title, content)를 함께 보냅니다.
 - 프론트에서는 content에 변경될 카드 내용을 담아주세요.
 
 ### JSON 응답
@@ -163,8 +160,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
             "content": "구현 API 내용 작성 안함",
             "createDateTime": "2020-04-15 03:12:32",
             "updateDateTime": "2020-04-15 03:13:00",
-            "author": "nigayo",
-            "cardIndex": 1
+            "author": "nigayo"
         }
     }
 }
