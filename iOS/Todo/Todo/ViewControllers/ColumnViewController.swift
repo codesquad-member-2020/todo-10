@@ -194,7 +194,6 @@ extension ColumnViewController: UITableViewDragDelegate {
 
 extension ColumnViewController: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-        // The .move operation is available only for dragging within a single app.
         if tableView.hasActiveDrag {
             if session.items.count > 1 {
                 return UITableViewDropProposal(operation: .cancel)
