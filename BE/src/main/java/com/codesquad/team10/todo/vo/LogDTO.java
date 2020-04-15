@@ -2,6 +2,7 @@ package com.codesquad.team10.todo.vo;
 
 import com.codesquad.team10.todo.entity.Action;
 import com.codesquad.team10.todo.entity.Target;
+import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -16,25 +17,28 @@ public class LogDTO {
 
     private Target target;
 
+    private String title;
+
     private String content;
 
     private String source;
 
     private String destination;
 
-    private long minutesUntilNow;
+    private LocalDateTime createDateTime;
 
     private Integer board;
 
-    public LogDTO(Integer id, String user, Action action, Target target, String content, String source, String destination, LocalDateTime createDateTime, Integer board) {
+    public LogDTO(Integer id, String user, Action action, Target target, String title, String content, String source, String destination, LocalDateTime createDateTime, Integer board) {
         this.id = id;
         this.user = user;
         this.action = action;
         this.target = target;
+        this.title = title;
         this.content = content;
         this.source = source;
         this.destination = destination;
-        this.minutesUntilNow = createDateTime.until(LocalDateTime.now(), ChronoUnit.MINUTES);
+        this.createDateTime = createDateTime;
         this.board = board;
     }
 
@@ -54,6 +58,10 @@ public class LogDTO {
         return target;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -66,7 +74,7 @@ public class LogDTO {
         return destination;
     }
 
-    public long getMinutesUntilNow() {
-        return minutesUntilNow;
+    public String getCreateDateTime() {
+        return DateTimeFormatUtils.localDateTimeToString(createDateTime);
     }
 }
