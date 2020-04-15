@@ -29,11 +29,11 @@ async function deleteCard(target: HTMLElement) {
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
     const url = URL.DEV.UPDATE_CARD_API(columnId, cardId);
-    const { status } = await httpRequest.delete(url);
+    const { status, content } = await httpRequest.delete(url);
 
     if (status !== STATUS_KEY.SUCCESS) return;
     let count = column.querySelector('.todo-count');
-    count.innerHTML = (parseInt(count.innerHTML) - 1).toString();
+    count.innerHTML = content.card_count;
     card.remove();
 }
 
