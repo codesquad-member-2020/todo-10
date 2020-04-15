@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS section (
     title varchar(100) not null ,
     create_date_time timestamp not null default current_timestamp ,
     update_date_time timestamp not null default current_timestamp on update current_timestamp ,
-    deleted boolean ,
+    deleted boolean not null ,
     board INTEGER references board(id)
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS card (
   create_date_time timestamp not null default current_timestamp ,
   update_date_time timestamp not null default current_timestamp ,
   author varchar(64) ,
-  deleted boolean ,
+  deleted boolean not null ,
   user INTEGER references user(id) ,
   section INTEGER references section(id) ,
   section_key INTEGER
