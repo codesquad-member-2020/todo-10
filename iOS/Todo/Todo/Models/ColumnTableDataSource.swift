@@ -31,18 +31,30 @@ final class ColumnTableDataSource: NSObject {
         cardViewModels.remove(at: index)
     }
     
-    func append(cardViewModel: CardViewModel) {
-        cardViewModels.append(cardViewModel)
-    }
-    
     func cardViewModel(at index: Int) -> CardViewModel? {
         guard index < cardViewModels.count else { return nil }
         return cardViewModels[index]
     }
     
+    func append(cardViewModel: CardViewModel) {
+        cardViewModels.append(cardViewModel)
+    }
+    
     func update(cardViewModel: CardViewModel, at index: Int) {
         guard index < cardViewModels.count else { return }
         cardViewModels[index] = cardViewModel
+    }
+    
+    func moveCardViewModel(at sourceIndex: Int, to destinationIndex: Int) {
+        guard sourceIndex != destinationIndex else { return }
+        
+        let cardViewModel = cardViewModels[sourceIndex]
+        cardViewModels.remove(at: sourceIndex)
+        cardViewModels.insert(cardViewModel, at: destinationIndex)
+    }
+    
+    func add(cardViewModel: CardViewModel, at index: Int) {
+        cardViewModels.insert(cardViewModel, at: index)
     }
 }
 
@@ -63,5 +75,13 @@ extension ColumnTableDataSource: UITableViewDataSource {
             cardCell.contentLabel.text = card?.content
         }
         return cardCell
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        moveCardViewModel(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 }
