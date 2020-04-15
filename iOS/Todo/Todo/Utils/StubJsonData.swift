@@ -90,4 +90,34 @@ enum StubJsonData {
         }
     }
     """.data(using: .utf8)
+    
+    static let successLogsResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": [
+            {
+                "id": 1,
+                "user": "nigayo",
+                "action": "ADDED",
+                "target": "CARD",
+                "title": null,
+                "content": "과자 사기",
+                "source": null,
+                "destination": "해야할 일",
+                "createDateTime": "2020-04-15 16:15:11"
+            },
+            {
+                "id": 2,
+                "user": "nigayo",
+                "action": "UPDATED",
+                "target": "CARD",
+                "title": null,
+                "content": "음료 사기",
+                "source": null,
+                "destination": null,
+                "createDateTime": "2020-04-15 16:15:41"
+            }
+        ]
+    }
+    """.data(using: .utf8)
 }

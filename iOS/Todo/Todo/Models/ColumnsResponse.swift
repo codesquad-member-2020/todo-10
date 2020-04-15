@@ -29,12 +29,3 @@ struct Card: Codable {
     var updateDateTime: String
     var author: String
 }
-
-struct Log: Codable {
-    var action: String?
-    var card: String?
-    var source: String?
-    var destination: String?
-    var createDateTime: String?
-}
-
