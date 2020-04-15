@@ -19,6 +19,7 @@ struct NewCardViewModelUseCase {
                 guard error == nil, let data = data else { return }
                 guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
                 guard cardResponse.status == .success else { return }
+                
                 result(CardViewModel(card: cardResponse.content))
         }
     }

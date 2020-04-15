@@ -49,9 +49,18 @@ final class MainViewController: UIViewController {
             let controller = ColumnViewController()
             controller.configureTitleViewModel(column: column)
             controller.configureDataSource(column: column)
+            controller.delegate = self
             controller.columnID = column.id
             return controller
         }()
         return columnViewController
+    }
+}
+
+extension MainViewController: ColumnViewControllerDelegate {
+    func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
+        let doneIndex = 2
+        guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }
+        doneViewController.receiveToLast(cardViewModel: cardViewModel)
     }
 }

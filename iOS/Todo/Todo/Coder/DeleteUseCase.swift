@@ -17,6 +17,7 @@ struct DeleteUseCase {
                                         guard error == nil, let data = data else { return }
                                         guard let cardResponse = try? JSONDecoder().decode(DeleteResponse.self, from: data) else { return }
                                         guard cardResponse.status == .success else { return }
+                                        
                                         result(true)
         }
     }

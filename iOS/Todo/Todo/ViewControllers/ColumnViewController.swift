@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol ColumnViewControllerDelegate {
+    func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel)
+}
+
 final class ColumnViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()
     private var titleViewModel: TitleViewModel!
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
+    var delegate: ColumnViewControllerDelegate?
     var columnID: Int?
     
     override func viewDidLoad() {
@@ -103,8 +108,18 @@ extension ColumnViewController: UITableViewDelegate {
     
     private func moveToDone(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
         return UIAction(title: ButtonData.moveToDone) { action in
-            
+            self.moveRowToDone(tableView, for: indexPath)
         }
+    }
+    
+    private func moveRowToDone(_ tableView: UITableView, for indexPath: IndexPath) {
+        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
+        delegate?.columnViewControllerDidMoveToDone(cardViewModel)
+        columnTableDataSource.removeCardViewModel(at: indexPath.row)
+    }
+    
+    func receiveToLast(cardViewModel: CardViewModel) {
+        columnTableDataSource.append(cardViewModel: cardViewModel)
     }
     
     private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
