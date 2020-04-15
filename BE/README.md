@@ -248,20 +248,22 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
             "user": "nigayo",
             "action": "ADDED",
             "target": "CARD",
+            "title": null,
             "content": "과자 사기",
             "source": null,
             "destination": "해야할 일",
-            "minutesUntilNow": 2
+            "createDateTime": "2020-04-15 16:15:11"
         },
         {
             "id": 2,
             "user": "nigayo",
             "action": "UPDATED",
             "target": "CARD",
+            "title": null,
             "content": "음료 사기",
             "source": null,
             "destination": null,
-            "minutesUntilNow": 0
+            "createDateTime": "2020-04-15 16:15:41"
         }
     ]
 }
