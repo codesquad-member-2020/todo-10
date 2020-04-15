@@ -5,9 +5,19 @@ const httpRequest = {
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email: "nigayo@ggmail.com",
+                name: "nigayo",
                 password: "1234"
             })
+        };
+        const response = await fetch(url, option);
+        const resPromise = await response.json();
+        return resPromise;
+    },
+
+    async get(url: string) {
+        const option = {
+            method: 'GET',
+            mode: 'cors',
         };
         const response = await fetch(url, option);
         const resPromise = await response.json();

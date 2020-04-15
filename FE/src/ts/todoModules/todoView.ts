@@ -1,42 +1,51 @@
 import { getEl, getParentEl, removeClass } from '../utils/commonUtil';
 import { COMMON_RULE } from '../contants/constant';
-import { makeColumns, addCard, makeModal, makeMenu } from './todoViewTemplate';
+import { makeColumns, addCard, makeModal, makeMenu, injectLog } from './todoViewTemplate';
 
 class TodoView {
+    public todoHeader: HTMLElement;
     public todoApp: HTMLElement;
     public todoMenu: HTMLElement;
     public todoModal: HTMLElement;
 
     constructor() {
+        this.todoHeader = getEl('#todo-header');
         this.todoApp = getEl('#todo-app');
         this.todoMenu = getEl('#menu');
         this.todoModal = getEl('#modal');
     }
 
-    todoAppRender({content}): void {
+    renderTodoApp({ content }): void {
         this.todoApp.innerHTML = makeColumns(content);
     }
 
-    todoModalRender(): void {
+    renderTodoModal(): void {
         this.todoModal.innerHTML = makeModal();
     }
 
-    todoMenuRender(): void {
-        this.todoMenu.innerHTML = makeMenu();
+    renderTodoMenu({ content }): void {
+        this.todoMenu.innerHTML = makeMenu(content);
     }
 
-    addCardUpdate({ target }, { content: card }): void {
+    addCardUpdate({ target }, { content }): void {
+        const { card, card_count } = content;
         const currColumn = getParentEl(target, '.todo-columns');
-        currColumn.querySelector('.card-wrap').innerHTML += addCard(card.id, card.content);
-        currColumn.querySelector('.todo-count').innerHTML++;
+        currColumn.querySelector('.card-wrap').innerHTML += addCard(card);
+        currColumn.querySelector('.todo-count').innerHTML = card_count;
         removeClass(getParentEl(target, '.todo-form'), COMMON_RULE.ACTIVE_KEY);
         target.reset();
     }
 
-    modifyCardUpdate(cardId, { content: card }): void {
+    modifyCardUpdate(cardId, { content }): void {
+        const { card } = content;
         this.todoApp.querySelector(`#card-${cardId} .card-contents`).innerHTML = card.content;
         removeClass(this.todoModal, COMMON_RULE.ACTIVE_KEY);
         this.todoModal.querySelector('form').reset();
+    }
+
+    addLogUpdate({ content }) {
+        const logWrap = this.todoMenu.querySelector('.activity-log');
+        injectLog(logWrap, content);
     }
 }
 
