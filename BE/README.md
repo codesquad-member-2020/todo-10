@@ -121,8 +121,8 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
             "id": 2,
             "title": "회고",
             "content": "회고하자",
-            "createDateTime": "2020-04-14T15:44:19",
-            "updateDateTime": "2020-04-14T15:44:19",
+            "createDateTime": "2020-04-15 03:12:32",
+            "updateDateTime": "2020-04-15 03:12:32",
             "author": "nigayo"
         }
     }
