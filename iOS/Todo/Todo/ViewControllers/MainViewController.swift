@@ -11,7 +11,7 @@ import UIKit
 final class MainViewController: UIViewController {
     private let columScrollView = ColumnScrollView()
     private let activityLogViewController = AcitivitiyLogViewController()
-    
+
     override func viewDidLoad() {
         configureScrollView()
         requestLogin { result in
@@ -75,6 +75,10 @@ final class MainViewController: UIViewController {
         activityLogViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.28).isActive = true
         activityLogViewController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         activityLogViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    @IBAction func menuButtonTouched(_ sender: UIBarButtonItem) {
+        activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
     }
 }
 

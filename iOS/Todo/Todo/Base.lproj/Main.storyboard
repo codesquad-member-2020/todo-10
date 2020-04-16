@@ -20,6 +20,9 @@
                     <navigationItem key="navigationItem" id="2Hl-12-K0Z">
                         <barButtonItem key="rightBarButtonItem" title="Menu" id="mrC-RC-hhh">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="menuButtonTouched:" destination="BYZ-38-t0r" id="NJi-Nv-SeD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>

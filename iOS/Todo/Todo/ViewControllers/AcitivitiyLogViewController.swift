@@ -13,9 +13,17 @@ final class AcitivitiyLogViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+        configureLogsCase()
+    }
+    
+    private func configureView() {
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        configureLogsCase()
+        view.layer.borderWidth = 0.8
+        view.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = true
     }
     
     private func configureLogsCase() {
