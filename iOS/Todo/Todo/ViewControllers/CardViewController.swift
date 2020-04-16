@@ -38,10 +38,14 @@ class CardViewController: UIViewController {
                                                selector: #selector(updateCreateButton),
                                                name: Notification.isCorrectDidChange,
                                                object: contentViewDelegate)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateCreateButton),
+                                               name: Notification.isCorrectDidChange,
+                                               object: titleFieldDelegate)
     }
     
     @objc private func updateCreateButton() {
-        if contentViewDelegate.isCorrect {
+        if contentViewDelegate.isCorrect, titleFieldDelegate.isCorrect {
             createButton.configureEnable()
         } else {
             createButton.configureDisable()
