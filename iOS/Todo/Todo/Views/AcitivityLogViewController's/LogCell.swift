@@ -9,6 +9,12 @@
 import UIKit
 
 final class LogCell: UITableViewCell, ReusableView {
+    private let userLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let logContentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,14 +30,12 @@ final class LogCell: UITableViewCell, ReusableView {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureContentLabel()
-        configureTimeLabel()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureContentLabel()
-        configureTimeLabel()
+        configure()
     }
     
     override func awakeFromNib() {
@@ -42,19 +46,36 @@ final class LogCell: UITableViewCell, ReusableView {
         super.setSelected(selected, animated: animated)
     }
     
+    private func configure() {
+        configureUserLabel()
+        configureContentLabel()
+        configureTimeLabel()
+    }
+    
+    private func configureUserLabel() {
+        contentView.addSubview(userLabel)
+        
+        userLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+    }
+    
     private func configureContentLabel() {
         contentView.addSubview(logContentLabel)
         
-        logContentLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
-        logContentLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
+        logContentLabel.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 10).isActive = true
+        logContentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
     }
     
     private func configureTimeLabel() {
         contentView.addSubview(timeLabel)
         
         timeLabel.topAnchor.constraint(equalTo: logContentLabel.bottomAnchor, constant: 10).isActive = true
-        timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        timeLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+    }
+    
+    func configureUser(text: String) {
+        userLabel.text = text
     }
     
     func configureLogContent(text: String) {

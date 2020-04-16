@@ -48,6 +48,7 @@ final class AcitivitiyLogViewController: UITableViewController {
         guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell
             else { return LogCell() }
         logViewModels[indexPath.row].performBind(changed: { log in
+            logCell.configureUser(text: "@\(log.user)")
             logCell.configureLogContent(text: log.content)
             logCell.configureTime(text: DateFormat.cardDateFormatter.string(from: log.createDateTime))
         })
