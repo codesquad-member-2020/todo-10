@@ -1,7 +1,5 @@
 package com.codesquad.team10.todo.api;
 
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.codesquad.team10.todo.constants.ResponseMessage;
 import com.codesquad.team10.todo.entity.*;
 import com.codesquad.team10.todo.exception.custom.*;
@@ -9,12 +7,10 @@ import com.codesquad.team10.todo.repository.CardRepository;
 import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.repository.SectionRepository;
 import com.codesquad.team10.todo.response.ResponseData;
-import com.codesquad.team10.todo.util.JWTUtils;
 import com.codesquad.team10.todo.util.ModelMapper;
 import com.codesquad.team10.todo.dto.CardDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
