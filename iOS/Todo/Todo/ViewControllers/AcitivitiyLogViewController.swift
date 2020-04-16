@@ -9,8 +9,6 @@
 import UIKit
 
 final class AcitivitiyLogViewController: UITableViewController {
-    private var logViewModels = [LogViewModel]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -31,6 +29,18 @@ final class AcitivitiyLogViewController: UITableViewController {
         view.layer.borderColor = UIColor.opaqueSeparator.cgColor
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
+    }
+    
+    private var logViewModels = [LogViewModel]() {
+        didSet {
+            updateView()
+        }
+    }
+    
+    private func updateView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     private func configureLogsCase() {
