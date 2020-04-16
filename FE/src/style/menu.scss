@@ -3,18 +3,18 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 0;
+    width: 400px;
     height: 100%;
     border-left: 1px solid #e5e5e5;
     box-shadow: 0 1px 1px rgba(27, 31, 35, 0.1);
     background: #fff;
-    z-index: 10;
+    z-index: -1;
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     &.active {
-        width: 300px;
+        z-index: 10;
         visibility: visible;
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
@@ -54,6 +54,9 @@
     }
     .log-msg strong {
         margin: 0 5px;
+        &.log-text {
+            cursor: help;
+        }
     }
     .log-time {
         margin-top: 5px;
