@@ -9,7 +9,7 @@
 import UIKit
 
 final class ColumnScrollView: UIScrollView {
-    let columnStackView = ColumnStackView()
+    private let columnStackView = ColumnStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,5 +34,9 @@ final class ColumnScrollView: UIScrollView {
         columnStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         columnStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         contentLayoutGuide.widthAnchor.constraint(equalTo: columnStackView.widthAnchor, multiplier: 1).isActive = true
+    }
+    
+    func addToStack(for view: UIView) {
+        columnStackView.addArrangedSubview(view)
     }
 }

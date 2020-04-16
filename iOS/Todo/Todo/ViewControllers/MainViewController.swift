@@ -46,7 +46,7 @@ final class MainViewController: UIViewController {
         DispatchQueue.main.async {
             let columnViewController = self.columnViewController(column: column)
             self.addChild(columnViewController)
-            self.columScrollView.columnStackView.addArrangedSubview(columnViewController.view)
+            self.columScrollView.addToStack(for: columnViewController.view)
             columnViewController.view.translatesAutoresizingMaskIntoConstraints = false
             columnViewController.view.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.32).isActive = true
             columnViewController.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true
