@@ -52,7 +52,7 @@
 		5AB8D569243B410200387EAE /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D568243B410200387EAE /* TodoTests.swift */; };
 		5AB8D574243B410200387EAE /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D573243B410200387EAE /* TodoUITests.swift */; };
 		5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D584243B4FC700387EAE /* ColumnViewController.swift */; };
-		5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */; };
+		5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */; };
 		5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8D58C243B5CDC00387EAE /* TitleView.swift */; };
 		5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */; };
 		5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF26B824459E7B008C15CA /* NewCard.swift */; };
@@ -130,7 +130,7 @@
 		5AB8D573243B410200387EAE /* TodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUITests.swift; sourceTree = "<group>"; };
 		5AB8D575243B410200387EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AB8D584243B4FC700387EAE /* ColumnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewController.swift; sourceTree = "<group>"; };
-		5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogController.swift; sourceTree = "<group>"; };
+		5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcitivitiyLogViewController.swift; sourceTree = "<group>"; };
 		5AB8D58C243B5CDC00387EAE /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		5ACD2EC424441BB6002DD295 /* EditedCardViewModelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedCardViewModelUseCase.swift; sourceTree = "<group>"; };
 		5ADF26B824459E7B008C15CA /* NewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCard.swift; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 			children = (
 				5AB8D555243B40FF00387EAE /* MainViewController.swift */,
 				5AB8D584243B4FC700387EAE /* ColumnViewController.swift */,
-				5AB8D586243B54B600387EAE /* AcitivitiyLogController.swift */,
+				5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */,
 				5A7937FD2440150700D59611 /* CardViewController.swift */,
 				5ADF26BC2445ED02008C15CA /* NewCardViewController.swift */,
 				5ADF26BE2445ED11008C15CA /* EditingCardViewController.swift */,
@@ -541,7 +541,7 @@
 				5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5A79380924419F9400D59611 /* CancelButton.swift in Sources */,
-				5AB8D587243B54B600387EAE /* AcitivitiyLogController.swift in Sources */,
+				5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */,
 				5A7938252441BBAA00D59611 /* Controller.swift in Sources */,
 				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,
 				5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */,

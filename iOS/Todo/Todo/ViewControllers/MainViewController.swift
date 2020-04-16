@@ -10,7 +10,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
     private let columScrollView = ColumnScrollView()
-    private var activityLogViewController: AcitivitiyLogController!
+    private var activityLogViewController: AcitivitiyLogViewController!
     
     override func viewDidLoad() {
         configureScrollView()
@@ -67,7 +67,7 @@ final class MainViewController: UIViewController {
     func initAcitivityLogViewController(completed: @escaping (Bool?) -> ()) {
         DispatchQueue.main.async {
             guard let activityLogViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                "AcitivitiyLogController") as? AcitivitiyLogController else { return }
+                "AcitivitiyLogController") as? AcitivitiyLogViewController else { return }
             self.activityLogViewController = activityLogViewController
             completed(true)
         }

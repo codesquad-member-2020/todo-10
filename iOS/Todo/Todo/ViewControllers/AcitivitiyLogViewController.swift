@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AcitivitiyLogController: UITableViewController {
+final class AcitivitiyLogViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
