@@ -13,7 +13,7 @@ final class AcitivitiyLogViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    var logViewModels: [LogViewModel]? {
+    var logViewModels: LogViewModels? {
         didSet {
         
         }

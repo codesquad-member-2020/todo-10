@@ -53,13 +53,9 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func configureLogsCase(completed: @escaping ([LogViewModel]?) -> ()) {
-        LogsUseCase.makeLogs(with: NetworkManager()) { logsDataSource in
-            guard let logsDataSource = logsDataSource else { return }
-            var logViewModels = [LogViewModel]()
-            logsDataSource.iterateLogs { log in
-                logViewModels.append(LogViewModel(log: log))
-            }
+    private func configureLogsCase(completed: @escaping (LogViewModels?) -> ()) {
+        LogsUseCase.makeLogs(with: NetworkManager()) { logViewModels in
+            guard let logViewModels = logViewModels else { return }
             completed(logViewModels)
         }
     }
