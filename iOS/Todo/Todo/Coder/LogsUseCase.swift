@@ -7,15 +7,16 @@
 //
 import UIKit
 
+enum DateFormat {
+    static let cardDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter
+    }()
+}
+
 struct LogsUseCase {
-    enum DateFormat {
-        static let cardDateFormatter: DateFormatter = {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            return dateFormatter
-        }()
-    }
     
     enum EndPoints {
         static let logs = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/logs"
