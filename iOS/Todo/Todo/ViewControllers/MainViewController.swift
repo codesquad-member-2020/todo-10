@@ -37,7 +37,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
             guard let columnsDataSource = columnsDataSource else { return }
             columnsDataSource.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)

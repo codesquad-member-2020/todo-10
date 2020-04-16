@@ -12,7 +12,7 @@ struct EditedCardViewModelUseCase {
     static func makeEditedCardViewModel(from string: String,
                                         cardData: Data,
                                         with manager: NetworkManagable,
-                                        result: @escaping (CardViewModel?) -> () ) {
+                                        completed: @escaping (CardViewModel?) -> () ) {
         try? manager.requestResource(from: string, method: .patch, body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
                 guard error == nil, let data = data else { return }
@@ -20,7 +20,7 @@ struct EditedCardViewModelUseCase {
                 guard let card = cardResponse.content.card else { return }
                 guard cardResponse.status == .success else { return }
                 
-                result(CardViewModel(card: card))
+                completed(CardViewModel(card: card))
         }
     }
 }

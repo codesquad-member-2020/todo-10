@@ -12,7 +12,7 @@ struct NewCardViewModelUseCase {
     static func makeNewCardViewModel(from string: String,
                                      cardData: Data,
                                      with manager: NetworkManagable,
-                                     result: @escaping (CardViewModel?) -> ()) {
+                                     completed: @escaping (CardViewModel?) -> ()) {
         try? manager.requestResource(from: string, method: .post,
             body: cardData, format: Format.jsonType,
             headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
@@ -21,7 +21,7 @@ struct NewCardViewModelUseCase {
                 guard let card = cardResponse.content.card else { return }
                 guard cardResponse.status == .success else { return }
                 
-                result(CardViewModel(card: card))
+                completed(CardViewModel(card: card))
         }
     }
 }
