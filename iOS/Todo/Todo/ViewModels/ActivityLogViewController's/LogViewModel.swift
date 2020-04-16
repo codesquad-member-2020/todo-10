@@ -70,9 +70,10 @@ final class LogViewModel: ViewModelBinding {
         if let title = log.title {
             return title
         } else {
-            if log.content.count > 10 {
+            let maxCount = 15
+            if log.content.count > maxCount {
                 let startIndex = log.content.startIndex
-                let endIndex = log.content.index(startIndex, offsetBy: 9)
+                let endIndex = log.content.index(startIndex, offsetBy: maxCount - 1)
                 let abbreviatedContent = String(log.content[startIndex...endIndex])
                 return "\(abbreviatedContent)..."
             } else {

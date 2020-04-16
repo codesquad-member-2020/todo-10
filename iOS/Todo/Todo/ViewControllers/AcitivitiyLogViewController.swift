@@ -51,7 +51,9 @@ final class AcitivitiyLogViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return logViewModels.count
+        let maxCount = 15
+        let count = logViewModels.count < maxCount ? logViewModels.count : maxCount
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
