@@ -9,12 +9,32 @@
 import UIKit
 
 final class AcitivitiyLogViewController: UITableViewController {
-    private var logViewModels: LogViewModels!
+    private var logViewModels: LogViewModels?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
+        configureObserver()
         configureView()
         configureLogsCase()
+    }
+    
+    private func configureTableView() {
+        tableView.register(LogCell.self, forCellReuseIdentifier: LogCell.reuseIdentifier)
+        tableView.dataSource = self
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateView),
+                                               name: LogViewModels.Notification.logViewModelsDidChange,
+                                               object: logViewModels)
+    }
+    
+    @objc private func updateView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     private func configureView() {
@@ -32,14 +52,19 @@ final class AcitivitiyLogViewController: UITableViewController {
             self.logViewModels = logViewModels
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let logViewModels = logViewModels else { return  0 }
         return logViewModels.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell
-            else { return LogCell()}
+        guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell,
+            let logViewModels = logViewModels,
+            let logViewModel = logViewModels.logViewModel(at: indexPath.row) else { return LogCell() }
+            logViewModel.performBind(changed: { log in
+                logCell.configureLogContent(text: log.content)
+            })
         return logCell
     }
 }

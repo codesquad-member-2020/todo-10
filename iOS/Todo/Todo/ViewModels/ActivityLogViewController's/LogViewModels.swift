@@ -9,14 +9,27 @@
 import Foundation
 
 final class LogViewModels {
-    private var logViewModels = [LogViewModel]()
+    enum Notification {
+        static let logViewModelsDidChange = Foundation.Notification.Name("logViewModelsDidChange")
+    }
+    private var logViewModels: [LogViewModel] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.logViewModelsDidChange, object: self)
+        }
+    }
     
     init(logViewModels: [LogViewModel]) {
         self.logViewModels = logViewModels.reversed()
+        NotificationCenter.default.post(name: Notification.logViewModelsDidChange, object: self)
     }
     
     var count: Int {
         return logViewModels.count
+    }
+    
+    func logViewModel(at index: Int) -> LogViewModel? {
+        guard index < count else { return nil }
+        return logViewModels[index]
     }
 }
 

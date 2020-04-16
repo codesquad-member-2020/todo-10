@@ -20,6 +20,7 @@ final class LogViewModel: ViewModelBinding {
     }
     
     func performBind(changed handler: @escaping (Log) -> ()) {
-        
+        self.changedHandler = handler
+        changedHandler(log)
     }
 }
