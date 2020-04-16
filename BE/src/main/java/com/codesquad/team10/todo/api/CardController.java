@@ -145,22 +145,47 @@ public class CardController {
             throw new InvalidTokenException();
         }
         Card moveCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
-        if (moveCard.getSectionKey() == cardTo)
-            return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, ResponseMessage.CARD_NOT_MOVED.getMessage()), HttpStatus.OK);
 
-        Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
-        section.moveCard(moveCard, cardTo);
-        sectionRepository.save(section);
+        if (sectionTo == null) {
+            if (moveCard.getSectionKey() == cardTo)
+                return new ResponseEntity<>(new ResponseData(ResponseData.Status.ERROR, ResponseMessage.CARD_NOT_MOVED.getMessage()), HttpStatus.BAD_REQUEST);
+
+            Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+            if (section.getCards().size() <= cardTo)
+                throw new UnmatchedRequestDataException();
+
+            section.moveCard(moveCard, cardTo);
+            sectionRepository.save(section);
+            Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, userData.getBoard());
+            // dto 생성
+            CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
+            logRepository.save(log);
+            logger.debug("log: {}", log);
+            Map<String, Object> responseData = constructResonseData(log, section.getCards().size(), null);
+            return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
+        }
+        if (sectionId == sectionTo)
+            return new ResponseEntity<>(new ResponseData(ResponseData.Status.ERROR, ResponseMessage.CARD_NOT_MOVED.getMessage()), HttpStatus.BAD_REQUEST);
+
+        Section fromSection = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+        Section toSection = sectionRepository.findById(sectionTo).orElseThrow(ResourceNotFoundException::new);
+        if (toSection.getCards().size() != 0 && toSection.getCards().size() <= cardTo)
+            throw new UnmatchedRequestDataException();
+
+        fromSection.deleteCard(moveCard);
+        toSection.insertCard(cardTo, moveCard);
+        sectionRepository.save(fromSection);
+        sectionRepository.save(toSection);
+        Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), fromSection.getTitle(), toSection.getTitle(), userData.getBoard());
         // dto 생성
         CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
-        Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, userData.getBoard());
         logRepository.save(log);
         logger.debug("log: {}", log);
-        Map<String, Object> responseData = constructResonseData(cardDTO, log, section.getCards().size());
+        Map<String, Object> responseData = constructResonseData(log, fromSection.getCards().size(), toSection.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
-    private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, long countOfCard) {
+    private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, Integer countOfCard) {
         Map<String, Object> map = new HashMap<>();
         map.put("card", cardDTO);
         map.put("log_id", log.getId());
@@ -168,10 +193,18 @@ public class CardController {
         return map;
     }
 
-    private Map<String, Object> constructResonseData(Log log, long countOfCard) {
+    private Map<String, Object> constructResonseData(Log log, Integer countOfCard) {
         Map<String, Object> map = new HashMap<>();
         map.put("log_id", log.getId());
         map.put("card_count", countOfCard);
+        return map;
+    }
+
+    private Map<String, Object> constructResonseData(Log log, Integer countOfCardFromSection, Integer countOfCardToSection) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("log_id", log.getId());
+        map.put("card_count_from_section", countOfCardFromSection);
+        map.put("card_count_to_section", countOfCardToSection);
         return map;
     }
 }

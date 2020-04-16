@@ -62,8 +62,17 @@ public class Section {
         cards.add(newCard);
     }
 
+    public void insertCard(int index, Card insertCard) {
+        cards.add(index, insertCard);
+    }
+
     public Card updateCard(Card updateCard, String title, String content) {
-        Card target = cards.get(updateCard.getSectionKey());
+        Card target = null;
+        try {
+            target = cards.get(updateCard.getSectionKey());
+        } catch (IndexOutOfBoundsException e) {
+            throw new UnmatchedRequestDataException();
+        }
         if (!target.equals(updateCard))
             throw new UnmatchedRequestDataException();
 
@@ -71,7 +80,12 @@ public class Section {
     }
 
     public void deleteCard(Card deleteCard) {
-        Card target = cards.get(deleteCard.getSectionKey());
+        Card target = null;
+        try {
+            target = cards.get(deleteCard.getSectionKey());
+        } catch (IndexOutOfBoundsException e) {
+            throw new UnmatchedRequestDataException();
+        }
         if (!target.equals(deleteCard))
             throw new UnmatchedRequestDataException();
 
@@ -79,7 +93,12 @@ public class Section {
     }
 
     public void moveCard(Card moveCard, int cardTo) {
-        Card target = cards.get(moveCard.getSectionKey());
+        Card target = null;
+        try {
+            target = cards.get(moveCard.getSectionKey());
+        } catch (IndexOutOfBoundsException e) {
+            throw new UnmatchedRequestDataException();
+        }
         if (!target.equals(moveCard))
             throw new UnmatchedRequestDataException();
 
