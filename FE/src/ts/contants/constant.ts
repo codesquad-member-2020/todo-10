@@ -5,7 +5,8 @@ const ALERT_MESSAGE = {
 const COMMON_RULE = {
     ACTIVE_KEY: 'active',
     DRAG_KEY: 'draging',
-    LIMIT_LOG_LENGTH: 50,
+    LIMIT_LOG: 50,
+    LIMIT_LOG_CONTENT: 10,
 }
 
 const STATUS_KEY = {
