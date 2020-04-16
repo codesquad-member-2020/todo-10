@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Component
-public class SimpleCorsFilter implements Filter {
+public class ResponseHeaderFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleCorsFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResponseHeaderFilter.class);
     
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -23,10 +22,10 @@ public class SimpleCorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization, Access-Control-Request-Method, Access-Control-Request-Headers");
         response.setHeader("Access-Control-Expose-Headers", "*, Authorization");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, X-Requested-With, Authorization, Access-Control-Request-Method, Access-Control-Request-Headers");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS, DELETE, PUT, PATCH");
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS");
         chain.doFilter(req, res);
     }
 }
