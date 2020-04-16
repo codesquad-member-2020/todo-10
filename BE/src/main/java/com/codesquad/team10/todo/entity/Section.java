@@ -17,18 +17,15 @@ public class Section {
 
     private LocalDateTime updateDateTime;
 
-    private boolean deleted;
-
     private List<Card> cards;
 
     private Integer board;
 
-    public Section(Integer id, String title, LocalDateTime createDateTime, LocalDateTime updateDateTime, boolean deleted, List<Card> cards, Integer board) {
+    public Section(Integer id, String title, LocalDateTime createDateTime, LocalDateTime updateDateTime, List<Card> cards, Integer board) {
         this.id = id;
         this.title = title;
         this.createDateTime = createDateTime;
         this.updateDateTime = updateDateTime;
-        this.deleted = deleted;
         this.cards = cards;
         this.board = board;
     }
@@ -49,10 +46,6 @@ public class Section {
         return updateDateTime;
     }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
     public List<Card> getCards() {
         return cards;
     }
@@ -66,12 +59,7 @@ public class Section {
     }
 
     public void addCard(Card newCard) {
-        int index = 0;
-        for (;index < cards.size(); index++) {
-            if (cards.get(index).isDeleted())
-                break;
-        }
-        cards.add(index, newCard);
+        cards.add(newCard);
     }
 
     public Card updateCard(Card updateCard, String title, String content) {
@@ -87,9 +75,7 @@ public class Section {
         if (!target.equals(deleteCard))
             throw new UnmatchedRequestDataException();
 
-        target.setDeleted(true);
         cards.remove(target);
-        cards.add(target);
     }
 
     public void moveCard(Card moveCard, int cardTo) {
@@ -108,7 +94,6 @@ public class Section {
                 ", title='" + title + '\'' +
                 ", createDateTime=" + createDateTime +
                 ", updateDateTime=" + updateDateTime +
-                ", deleted=" + deleted +
                 ", cards=" + cards +
                 ", board=" + board +
                 '}';

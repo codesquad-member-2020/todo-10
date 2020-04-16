@@ -67,16 +67,12 @@ public class BoardController {
             throw new InvalidTokenException();
         }
         List<SectionDTO> sectionDTOS = new ArrayList<>();
-        List<Section> sections = sectionRepository.findByBoardId(userData.getBoard()).stream()
-                .filter(section -> !section.isDeleted())
-                .collect(Collectors.toList());
+        List<Section> sections = sectionRepository.findByBoardId(userData.getBoard());
         for (Section section : sections) {
             List<CardDTO> cards = section.getCards().stream()
-                    .filter(card -> !card.isDeleted())
                     .map(card -> (CardDTO)ModelMapper.of(card))
                     .collect(Collectors.toList());
             SectionDTO sectionDTO = (SectionDTO)ModelMapper.of(section);
-            sectionDTO.setCards(cards);
             sectionDTOS.add(sectionDTO);
         }
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, sectionDTOS), HttpStatus.OK);
