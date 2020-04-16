@@ -1,3 +1,5 @@
+const token = sessionStorage.getItem('TODO-TOKEN');
+
 const httpRequest = {
     async login(url: string, data: object) {
         const option = {
@@ -7,6 +9,10 @@ const httpRequest = {
             body: JSON.stringify(data)
         };
         const response = await fetch(url, option);
+        const headers = [...response.headers];
+        headers.forEach(([header, value]) => {
+            if (header === 'authorization') sessionStorage.setItem('TODO-TOKEN', value);
+        });
         const resPromise = await response.json();
         return resPromise;
     },
@@ -15,6 +21,9 @@ const httpRequest = {
         const option = {
             method: 'GET',
             mode: 'cors',
+            headers: {
+                'Authorization': token
+            }
         };
         const response = await fetch(url, option);
         const resPromise = await response.json();
@@ -25,7 +34,10 @@ const httpRequest = {
         const option = {
             method: 'POST',
             mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
             body: JSON.stringify(data),
         };
         const response = await fetch(url, option);
@@ -37,6 +49,9 @@ const httpRequest = {
         const option = {
             mode: 'cors',
             method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
         };
         const response = await fetch(url, option);
         const resPromise = await response.json();
@@ -47,7 +62,10 @@ const httpRequest = {
         const option = {
             method: 'PATCH',
             mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
             body: JSON.stringify(data),
         };
         const response = await fetch(url, option);
