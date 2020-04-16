@@ -124,28 +124,36 @@ function cutContent(content) {
 
 function makeAddActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>added<strong title="${log.content}">${content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>added
+                    <strong class="log-text" title="${log.content}">${content}</strong>to<strong>${log.destination}</strong></p>
                 <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeUpdateActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong title="${log.content}">${content}</strong></p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>updated
+                    <strong class="log-text" title="${log.content}">${content}</strong></p>
                 <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeDeleteActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong title="${log.content}">${content}</strong>from<strong>${log.source}</strong></p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>removed
+                    <strong class="log-text" title="${log.content}">${content}</strong>from<strong>${log.source}</strong></p>
                 <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
 function makeMoveActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>moved<strong title="${log.content}">${content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>moved
+                    <strong class="log-text" title="${log.content}">${content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
                 <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
