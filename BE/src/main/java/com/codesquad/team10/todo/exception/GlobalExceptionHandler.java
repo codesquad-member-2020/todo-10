@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(InvalidTokenException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResponseData handleInvalidTokenException(InvalidTokenException e) {
-        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
-    }
-
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseData handleUserNotFoundException(UserNotFoundException e) {
@@ -37,12 +31,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnmatchedRequestDataException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseData handleUnmatchedRequestDataException(UnmatchedRequestDataException e) {
-        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
-    }
-
-    @ExceptionHandler(UnauthorizedException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResponseData handleUnauthorizedException(UnauthorizedException e) {
         return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
     }
 
