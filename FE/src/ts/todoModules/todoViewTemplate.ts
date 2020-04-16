@@ -1,4 +1,5 @@
 import { timeSince } from '../utils/todoUtil';
+import { COMMON_RULE } from '../contants/constant';
 
 interface ITodoViewTemplate {
     id: string;
@@ -91,7 +92,8 @@ function makeMenu(logs): string {
 }
 
 function makeLogs(logs: []): string {
-    return logs.reverse().reduce((acc: string, log: ITodoViewTemplate) => {
+    const limitLogs = logs.reverse().slice(0, COMMON_RULE.LIMIT_LOG);
+    return limitLogs.reduce((acc: string, log: ITodoViewTemplate) => {
         acc += switchLog(log);
         return acc;
     }, '');
@@ -99,47 +101,60 @@ function makeLogs(logs: []): string {
 
 function switchLog(log): string {
     const action = log.action;
+    const content = log.content.length > COMMON_RULE.LIMIT_LOG_CONTENT ? cutContent(log.content) : log.content;
     switch (action) {
         case 'ADDED':
-            return makeAddActionLog(log);
+            return makeAddActionLog(log, content);
             break;
         case 'UPDATED':
-            return makeUpdateActionLog(log);
+            return makeUpdateActionLog(log, content);
             break;
         case 'REMOVED':
-            return makeDeleteActionLog(log);
+            return makeDeleteActionLog(log, content);
             break;
         case 'MOVED':
-            return makeMoveActionLog(log);
+            return makeMoveActionLog(log, content);
             break;
     }
 }
 
-function makeAddActionLog(log) {
+function cutContent(content) {
+    return `${content.substr(0, COMMON_RULE.LIMIT_LOG_CONTENT)}...`;
+}
+
+function makeAddActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>added<strong>${log.content}</strong>to<strong>${log.destination}</strong></p>
-                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>added
+                    <strong class="log-text" title="${log.content}">${content}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
-function makeUpdateActionLog(log) {
+function makeUpdateActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>updated<strong>${log.content}</strong></p>
-                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>updated
+                    <strong class="log-text" title="${log.content}">${content}</strong></p>
+                <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
-function makeDeleteActionLog(log) {
+function makeDeleteActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>removed<strong>${log.content}</strong>from<strong>${log.source}</strong></p>
-                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>removed
+                    <strong class="log-text" title="${log.content}">${content}</strong>from<strong>${log.source}</strong></p>
+                <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 
-function makeMoveActionLog(log) {
+function makeMoveActionLog(log, content) {
     return `<div class="log">
-                <p class="log-msg"><span class="user"><strong>@${log.user}</strong></span>moved<strong>${log.content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
-                <p class="log-time">${timeSince(new Date(log.createDateTime))} 전</p>
+                <p class="log-msg">
+                    <span class="user"><strong>@${log.user}</strong></span>moved
+                    <strong class="log-text" title="${log.content}">${content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
+                <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }
 

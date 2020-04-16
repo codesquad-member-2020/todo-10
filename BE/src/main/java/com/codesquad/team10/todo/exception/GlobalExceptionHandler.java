@@ -1,9 +1,6 @@
 package com.codesquad.team10.todo.exception;
 
-import com.codesquad.team10.todo.exception.custom.InvalidRequestException;
-import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
-import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
-import com.codesquad.team10.todo.exception.custom.UserNotFoundException;
+import com.codesquad.team10.todo.exception.custom.*;
 import com.codesquad.team10.todo.response.ResponseData;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +9,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(InvalidTokenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseData handleInvalidTokenException(InvalidTokenException e) {
+        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
+    }
 
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -34,6 +37,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnmatchedRequestDataException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseData handleUnmatchedRequestDataException(UnmatchedRequestDataException e) {
+        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseData handleUnauthorizedException(UnauthorizedException e) {
+        return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseData handleForbiddenException(ForbiddenException e) {
         return new ResponseData(ResponseData.Status.ERROR, e.getMessage());
     }
 }

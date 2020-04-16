@@ -54,6 +54,9 @@
     }
     .log-msg strong {
         margin: 0 5px;
+        &.log-text {
+            cursor: help;
+        }
     }
     .log-time {
         margin-top: 5px;

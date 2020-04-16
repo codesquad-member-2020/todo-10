@@ -13,17 +13,36 @@ public class User {
 
     private String password;
 
+    private Integer board;
+
     private Integer boardKey;
 
-    public User(Integer id, String name, String password, Integer boardKey) {
+    public User(Integer id, String name, String password, Integer board, Integer boardKey) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.board = board;
         this.boardKey = boardKey;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Integer getBoard() {
+        return board;
+    }
+
+    public Integer getBoardKey() {
+        return boardKey;
+    }
+
+    public boolean confirmPassword(User user) {
+        return this.password.equals(user.password);
     }
 
     @Override
