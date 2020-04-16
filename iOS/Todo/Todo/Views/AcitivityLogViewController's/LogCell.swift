@@ -9,6 +9,14 @@
 import UIKit
 
 final class LogCell: UITableViewCell, ReusableView {
+    private let userImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "jason"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     private let userLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,30 +55,40 @@ final class LogCell: UITableViewCell, ReusableView {
     }
     
     private func configure() {
+        configureUserImageView()
         configureUserLabel()
         configureContentLabel()
         configureTimeLabel()
     }
     
+    private func configureUserImageView() {
+        contentView.addSubview(userImageView)
+        
+        userImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        userImageView.widthAnchor.constraint(equalTo: userImageView.heightAnchor, multiplier: 1).isActive = true
+        userImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        userImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+    }
+    
     private func configureUserLabel() {
         contentView.addSubview(userLabel)
         
-        userLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        userLabel.topAnchor.constraint(equalTo: userImageView.topAnchor).isActive = true
+        userLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
     }
     
     private func configureContentLabel() {
         contentView.addSubview(logContentLabel)
         
         logContentLabel.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 10).isActive = true
-        logContentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        logContentLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
     }
     
     private func configureTimeLabel() {
         contentView.addSubview(timeLabel)
         
         timeLabel.topAnchor.constraint(equalTo: logContentLabel.bottomAnchor, constant: 10).isActive = true
-        timeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
         timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
     }
     
