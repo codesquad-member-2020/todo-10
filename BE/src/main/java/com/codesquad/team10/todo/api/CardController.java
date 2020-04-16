@@ -67,7 +67,7 @@ public class CardController {
         Log log = new Log(userData.getName(), Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), userData.getBoard());
         logRepository.save(log);
         // 반환 데이터
-        Map<String, Object> responseData = constructResonseData(cardDTO, log, getCountOfCardWithoutDeleted(section.getCards()));
+        Map<String, Object> responseData = constructResonseData(cardDTO, log, section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -100,7 +100,7 @@ public class CardController {
         logRepository.save(log);
         logger.debug("log: {}", log);
         //반환 데이터
-        Map<String, Object> responseData = constructResonseData(resultCard, log, getCountOfCardWithoutDeleted(section.getCards()));
+        Map<String, Object> responseData = constructResonseData(resultCard, log, section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -117,9 +117,6 @@ public class CardController {
             throw new InvalidTokenException();
         }
         Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
-        if (targetCard.isDeleted())
-            throw new ResourceNotFoundException();
-
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         if (section.getCards().size() == 0)
             throw new UnmatchedRequestDataException();
@@ -129,7 +126,7 @@ public class CardController {
         Log log = new Log(userData.getName(), Action.REMOVED, Target.CARD, targetCard.getTitle(), targetCard.getContent(), section.getTitle(), null, userData.getBoard());
         logRepository.save(log);
         logger.debug("log: {}", log);
-        Map<String, Object> responseData = constructResonseData(log, getCountOfCardWithoutDeleted(section.getCards()));
+        Map<String, Object> responseData = constructResonseData(log, section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -148,9 +145,6 @@ public class CardController {
             throw new InvalidTokenException();
         }
         Card moveCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
-        if (moveCard.isDeleted())
-            throw new ResourceNotFoundException();
-
         if (moveCard.getSectionKey() == cardTo)
             return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, ResponseMessage.CARD_NOT_MOVED.getMessage()), HttpStatus.OK);
 
@@ -162,7 +156,7 @@ public class CardController {
         Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, userData.getBoard());
         logRepository.save(log);
         logger.debug("log: {}", log);
-        Map<String, Object> responseData = constructResonseData(cardDTO, log, getCountOfCardWithoutDeleted(section.getCards()));
+        Map<String, Object> responseData = constructResonseData(cardDTO, log, section.getCards().size());
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -179,11 +173,5 @@ public class CardController {
         map.put("log_id", log.getId());
         map.put("card_count", countOfCard);
         return map;
-    }
-
-    private long getCountOfCardWithoutDeleted(List<Card> cards) {
-        return cards.stream()
-                .filter(card -> !card.isDeleted())
-                .count();
     }
 }

@@ -20,22 +20,18 @@ public class CardDTO {
     private String author;
 
     @JsonIgnore
-    private boolean deleted;
-
-    @JsonIgnore
     private Integer user;
 
     @JsonIgnore
     private Integer sectionKey;
 
-    public CardDTO(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer user, Integer sectionKey) {
+    public CardDTO(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, Integer user, Integer sectionKey) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createDateTime = createDateTime;
         this.updateDateTime = updateDateTime;
         this.author = author;
-        this.deleted = deleted;
         this.user = user;
         this.sectionKey = sectionKey;
     }
@@ -70,10 +66,6 @@ public class CardDTO {
 
     public String getAuthor() {
         return author;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
     }
 
     public Integer getUser() {
