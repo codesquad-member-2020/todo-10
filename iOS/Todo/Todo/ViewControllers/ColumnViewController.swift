@@ -179,7 +179,6 @@ extension ColumnViewController: UITableViewDelegate {
     }
 }
 
-
 extension ColumnViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let columnID = columnID,
@@ -244,5 +243,3 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         columnTableDataSource.update(cardViewModel: cardViewModel, at: row)
     }
 }
-
-

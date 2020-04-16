@@ -21,7 +21,7 @@ struct LogsUseCase {
         static let logs = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/logs"
     }
     
-    static func makeLogs(with manager: NetworkManagable, completed: @escaping (LogViewModels?) -> ()) {
+    static func makeLogs(with manager: NetworkManagable, completed: @escaping ([LogViewModel]?) -> ()) {
         try? manager.requestResource(from: EndPoints.logs, method: .get,
                                  body: nil, format: Format.jsonType,
                                  headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
@@ -35,7 +35,7 @@ struct LogsUseCase {
                                     guard let response = try? jsonDecoder.decode(LogsResponse.self, from: data) else { return }
                                     guard response.status == .success else { return }
                                     let logViewModels = response.content.map { LogViewModel(log: $0) }
-                                    completed(LogViewModels(logViewModels: logViewModels))
+                                    completed(logViewModels)
         }
     }
 }
