@@ -22,5 +22,5 @@ struct Log: Codable {
     let content: String
     var source: String?
     var destination: String?
-    let createDateTime: String
+    let createDateTime: Date
 }
