@@ -6,7 +6,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 로그인 요청
 
-### POST `/board/login`
+#### POST `/board/login`
 
 ### 요청 데이터
 ```
@@ -95,7 +95,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 카드 추가 요청
 
-### POST `/board/section/{sectionId}/card`
+#### POST `/board/section/{sectionId}/card`
 
 ### 요청 데이터
 ```
@@ -140,7 +140,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 카드 수정 요청
 
-### PATCH `/board/section/{sectionId}/card/{cardId}`
+#### PATCH `/board/section/{sectionId}/card/{cardId}`
 
 ### 요청 데이터
 ```
@@ -209,7 +209,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 카드 삭제 요청
 
-### DELETE `/board/section/{sectionId}/card/{cardId}`
+#### DELETE `/board/section/{sectionId}/card/{cardId}`
 
 ### 요청 데이터
 - 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
@@ -260,7 +260,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 카드 이동 요청 (동일 섹션 내)
 
-### PUT `/board/section/{sectionId}/card/{cardId}?cardTo={newIndex}`
+#### PUT `/board/section/{sectionId}/card/{cardId}?cardTo={newIndex}`
 - `newIndex` : 현재 섹션 내 이동하고자 하는 위치 인덱스 (0부터 시작)
 
 ### 요청 데이터
@@ -324,7 +324,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 카드 이동 요청 (다른 섹션으로 이동)
 
-### PUT `/board/section/{sectionId}/card/{cardId}?cardTo={newIndex}&sectionTo={newSectionId}`
+#### PUT `/board/section/{sectionId}/card/{cardId}?cardTo={newIndex}&sectionTo={newSectionId}`
 - `newIndex` : 새로운 섹션 내 이동하고자 하는 위치 인덱스 (0부터 시작)
 - `newSectionId` : 새로운 섹션의 아이디 (인덱스 아님)
 
@@ -389,10 +389,10 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 전체 로그 요청
 
-### GET /board/logs
+#### GET `/board/logs`
 
 ### 요청 데이터
-- 현재는 전달해야할 데이터가 존재하지 않습니다.
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
 
 ### JSON 응답
 
@@ -430,7 +430,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 
 ## 개별 로그 요청
 
-### GET /board/log/{id}
+#### GET `/board/log/{id}`
 
 ### 요청 데이터
 - 현재는 전달해야할 데이터가 존재하지 않습니다.
@@ -463,6 +463,24 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 {
     "status": "ERROR",
     "content": "리소스를 찾을 수 없습니다."
+}
+```
+
+## 로그 서버 시간 요청
+
+#### GET `/board/log/serverTime`
+
+### 요청 데이터
+- 현재는 전달해야할 데이터가 존재하지 않습니다.
+
+### JSON 응답
+
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": "2020-04-16 15:37:43"
 }
 ```
 ---
