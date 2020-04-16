@@ -25,11 +25,24 @@ struct Log: Codable {
     let createDateTime: Date
 }
 
-enum Action: String, Codable {
+enum Action: String, Codable, CustomStringConvertible {
     case added = "ADDED"
     case removed = "REMOVED"
     case updated = "UPDATED"
     case moved = "MOVED"
+    
+    var description: String {
+        switch self {
+        case .added:
+            return "Added"
+        case .removed:
+            return "Removed"
+        case .updated:
+            return "Updated"
+        case .moved:
+            return "Moved"
+        }
+    }
 }
 
 enum Target: String, Codable {
