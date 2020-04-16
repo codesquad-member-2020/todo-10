@@ -21,8 +21,8 @@ final class MainViewController: UIViewController {
         requestLogin { result in
             guard let result = result, result else { return }
             self.configureColumnsCase()
+            self.configureAcitivitiyLogViewController()
         }
-        configureAcitivitiyLogViewController()
     }
     
     private func configureScrollView() {
@@ -50,7 +50,7 @@ final class MainViewController: UIViewController {
             })
         }
     }
-
+    
     private func addColumnViewController(column: Column) {
         DispatchQueue.main.async {
             let columnViewController = self.columnViewController(column: column)
@@ -73,14 +73,20 @@ final class MainViewController: UIViewController {
         }()
         return columnViewController
     }
-
+    
     private func configureAcitivitiyLogViewController() {
-        addChild(activityLogViewController)
-        view.addSubview(activityLogViewController.view)
-        activityLogViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8).isActive = true
-        activityLogViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.28).isActive = true
-        activityLogViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 74).isActive = true
-        activityLogViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        DispatchQueue.main.async {
+            self.addChild(self.activityLogViewController)
+            self.view.addSubview(self.activityLogViewController.view)
+            self.activityLogViewController.view.heightAnchor.constraint(equalTo: self.view.heightAnchor,
+                                                                        multiplier: 0.8).isActive = true
+            self.activityLogViewController.view.widthAnchor.constraint(equalTo: self.view.widthAnchor,
+                                                                       multiplier: 0.28).isActive = true
+            self.activityLogViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor,
+                                                                     constant: 74).isActive = true
+            self.activityLogViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,
+                                                                          constant: -5).isActive = true
+        }
     }
     
     @IBAction func menuButtonTouched(_ sender: UIBarButtonItem) {
