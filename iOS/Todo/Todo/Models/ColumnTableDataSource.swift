@@ -72,9 +72,9 @@ extension ColumnTableDataSource: UITableViewDataSource {
         let index = indexPath.row
         cardViewModels[index].performBind { card in
             guard let card = card else { return }
-            cardCell.titleLabel.text = card.title
-            cardCell.contentLabel.text = card.content
-            cardCell.authorLabel.text = "Added by \(card.author)"
+            cardCell.configureTitle(text: card.title)
+            cardCell.configureContent(text: card.content)
+            cardCell.configureAuthor(text: "Added by \(card.author)")
         }
         return cardCell
     }
