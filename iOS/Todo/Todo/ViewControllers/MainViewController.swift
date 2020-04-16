@@ -10,12 +10,22 @@ import UIKit
 
 final class MainViewController: UIViewController {
     private let columScrollView = ColumnScrollView()
+    private var activityLogViewController: AcitivitiyLogController!
     
     override func viewDidLoad() {
         configureScrollView()
         requestLogin { result in
             guard let result = result, result else { return }
             self.configureColumnsCase()
+        }
+        configureLogsCase { logViewModels in
+            self.initAcitivityLogViewController { result in
+                guard let result = result else { return }
+                if result {
+                    guard self.activityLogViewController != nil else { return }
+                    self.activityLogViewController.logViewModels = logViewModels
+                }
+            }
         }
     }
     
@@ -33,12 +43,33 @@ final class MainViewController: UIViewController {
             completed(result)
         }
     }
-   
+    
     private func configureColumnsCase() {
         ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
-            columnsDataSource?.iterateColumns(with: { column in
+            guard let columnsDataSource = columnsDataSource else { return }
+            columnsDataSource.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
             })
+        }
+    }
+    
+    private func configureLogsCase(completed: @escaping ([LogViewModel]?) -> ()) {
+        LogsUseCase.makeLogs(with: NetworkManager()) { logsDataSource in
+            guard let logsDataSource = logsDataSource else { return }
+            var logViewModels = [LogViewModel]()
+            logsDataSource.iterateLogs { log in
+                logViewModels.append(LogViewModel(log: log))
+            }
+            completed(logViewModels)
+        }
+    }
+    
+    func initAcitivityLogViewController(completed: @escaping (Bool?) -> ()) {
+        DispatchQueue.main.async {
+            guard let activityLogViewController = self.storyboard?.instantiateViewController(withIdentifier:
+                "AcitivitiyLogController") as? AcitivitiyLogController else { return }
+            self.activityLogViewController = activityLogViewController
+            completed(true)
         }
     }
     

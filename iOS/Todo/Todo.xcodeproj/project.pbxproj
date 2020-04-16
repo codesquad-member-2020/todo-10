@@ -29,6 +29,7 @@
 		5A7A55BC244732E30041FC55 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7A55BB244732E30041FC55 /* LoginResponse.swift */; };
 		5A7CEB152448137800B2CFC7 /* LogsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB142448137800B2CFC7 /* LogsUseCase.swift */; };
 		5A7CEB172448173200B2CFC7 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB162448173200B2CFC7 /* Logs.swift */; };
+		5A7CEB1A2448206C00B2CFC7 /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB192448206C00B2CFC7 /* LogViewModel.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* ColumnsResponse.swift */; };
@@ -100,6 +101,7 @@
 		5A7A55BB244732E30041FC55 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		5A7CEB142448137800B2CFC7 /* LogsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsUseCase.swift; sourceTree = "<group>"; };
 		5A7CEB162448173200B2CFC7 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
+		5A7CEB192448206C00B2CFC7 /* LogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModel.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* ColumnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsResponse.swift; sourceTree = "<group>"; };
@@ -219,6 +221,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		5A7CEB182448204200B2CFC7 /* ActivityLogViewController's */ = {
+			isa = PBXGroup;
+			children = (
+				5A7CEB192448206C00B2CFC7 /* LogViewModel.swift */,
+			);
+			path = "ActivityLogViewController's";
+			sourceTree = "<group>";
+		};
 		5A838E4C243D66460081A42F /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7938172441B18A00D59611 /* ColumnViewController's */,
+				5A7CEB182448204200B2CFC7 /* ActivityLogViewController's */,
 				5A838E63243DFD530081A42F /* ViewModelBinding.swift */,
 			);
 			path = ViewModels;
@@ -536,6 +547,7 @@
 				5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
+				5A7CEB1A2448206C00B2CFC7 /* LogViewModel.swift in Sources */,
 				5A7A55BC244732E30041FC55 /* LoginResponse.swift in Sources */,
 				5AB8D58D243B5CDC00387EAE /* TitleView.swift in Sources */,
 			);

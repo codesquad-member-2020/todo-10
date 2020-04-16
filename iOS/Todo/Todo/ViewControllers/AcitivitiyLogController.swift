@@ -12,4 +12,10 @@ final class AcitivitiyLogController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    var logViewModels: [LogViewModel]? {
+        didSet {
+        
+        }
+    }
 }
