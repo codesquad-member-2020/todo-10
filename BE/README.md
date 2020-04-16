@@ -42,8 +42,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ### GET `/board`
 
 ### 요청 데이터
-- 현재는 전달해야할 데이터가 존재하지 않습니다.
-- JWT 구현 후, 헤더에 담긴 토큰이 유효한 경우에만 보드 내용을 성공적으로 반환합니다.
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
 
 ### JSON 응답
 - 성공적으로 반환하는 경우
@@ -107,6 +106,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 ```
 - 카드 추가 요청 시, URL에 sectionId와 Body 데이터를 전달해야 합니다.
 - 프론트에서는 content에 카드 내용을 담아주세요.
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
 
 ### JSON 응답
 - 성공적으로 반환하는 경우
@@ -128,6 +128,15 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
     }
 }
 ```
+- 실패한 경우
+   - 상태 코드 : FORBIDDEN (400)
+   - 토큰이 인증되지 않은 경우
+```
+{
+    "status": "ERROR",
+    "content": "접근 금지"
+}
+```
 
 ## 카드 수정 요청
 
@@ -143,6 +152,7 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 - 카드 수정 요청 시, URL에 sectionId와 cardId를 전달해야 합니다.
 - Body에는 변경하고자 하는 데이터(title, content)를 함께 보냅니다.
 - 프론트에서는 content에 변경될 카드 내용을 담아주세요.
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
 
 ### JSON 응답
 
@@ -187,12 +197,22 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 }
 ```
 
+- 실패한 경우 3
+   - 상태 코드 : FORBIDDEN (400)
+   - 토큰이 인증되지 않은 경우
+```
+{
+    "status": "ERROR",
+    "content": "접근 금지"
+}
+```
+
 ## 카드 삭제 요청
 
 ### DELETE `/board/section/{sectionId}/card/{cardId}`
 
 ### 요청 데이터
-- 현재는 전달해야할 데이터가 존재하지 않습니다.
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
 
 ### JSON 응답
 - 성공적으로 반환하는 경우
@@ -225,6 +245,145 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 {
     "status": "ERROR",
     "content": "요청 데이터가 서버와 일치하지 않습니다."
+}
+```
+
+- 실패한 경우 3
+   - 상태 코드 : FORBIDDEN (400)
+   - 토큰이 인증되지 않은 경우
+```
+{
+    "status": "ERROR",
+    "content": "접근 금지"
+}
+```
+
+## 카드 이동 요청 (동일 섹션 내)
+
+### PUT `/board/section/{sectionId}/card/{cardId}?cardTo={newIndex}`
+- `newIndex` : 현재 섹션 내 이동하고자 하는 위치 인덱스 (0부터 시작)
+
+### 요청 데이터
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
+
+### JSON 응답
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "log_id": 7,
+        "card_count_to_section": null,
+        "card_count_from_section": 3
+    }
+}
+```
+
+- 실패한 경우 1
+   - 상태 코드 : Not Found (404)
+   - 존재하지 않는 sectionId나 cardId를 전달하는 경우
+```
+{
+    "status": "ERROR",
+    "content": "리소스를 찾을 수 없습니다."
+}
+```
+
+- 실패한 경우 2
+   - 상태 코드 : Bad Request (400)
+   - 전달한 sectionId에 포함된 cardId가 아닌 경우 (즉, 다른 섹션에 존재하는 cardId인 경우)
+   - 전달한 sectionId에 카드가 존재하지 않는 경우
+   - 잘못된 newIndex를 전달하는 경우 (현재 섹션 개수를 넘어가는 인덱스 등)
+```
+{
+    "status": "ERROR",
+    "content": "요청 데이터가 서버와 일치하지 않습니다."
+}
+```
+
+- 실패한 경우 3
+   - 상태 코드 : Bad Request (400)
+   - 카드가 이동하지 않고 제자리에 놓인 경우
+```
+{
+    "status": "ERROR",
+    "content": "카드 이동 무효"
+}
+```
+
+- 실패한 경우 4
+   - 상태 코드 : FORBIDDEN (400)
+   - 토큰이 인증되지 않은 경우
+```
+{
+    "status": "ERROR",
+    "content": "접근 금지"
+}
+```
+
+## 카드 이동 요청 (다른 섹션으로 이동)
+
+### PUT `/board/section/{sectionId}/card/{cardId}?cardTo={newIndex}&sectionTo={newSectionId}`
+- `newIndex` : 새로운 섹션 내 이동하고자 하는 위치 인덱스 (0부터 시작)
+- `newSectionId` : 새로운 섹션의 아이디 (인덱스 아님)
+
+### 요청 데이터
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
+
+### JSON 응답
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "log_id": 5,
+        "card_count_to_section": 1,
+        "card_count_from_section": 3
+    }
+}
+```
+
+- 실패한 경우 1
+   - 상태 코드 : Not Found (404)
+   - 존재하지 않는 sectionId나 cardId를 전달하는 경우
+```
+{
+    "status": "ERROR",
+    "content": "리소스를 찾을 수 없습니다."
+}
+```
+
+- 실패한 경우 2
+   - 상태 코드 : Bad Request (400)
+   - 전달한 sectionId에 포함된 cardId가 아닌 경우 (즉, 다른 섹션에 존재하는 cardId인 경우)
+   - 전달한 sectionId에 카드가 존재하지 않는 경우
+   - 잘못된 newIndex를 전달하는 경우 (현재 섹션의 개수를 넘어가는 인덱스 등)
+```
+{
+    "status": "ERROR",
+    "content": "요청 데이터가 서버와 일치하지 않습니다."
+}
+```
+
+- 실패한 경우 3
+   - 상태 코드 : Bad Request (400)
+   - sectionId와 sectionTo가 동일한 경우 (동일한 섹션 아이디인 경우)
+```
+{
+    "status": "ERROR",
+    "content": "카드 이동 무효"
+}
+```
+
+- 실패한 경우 4
+   - 토큰이 인증되지 않은 경우
+   - 상태 코드 : FORBIDDEN (400)
+```
+{
+    "status": "ERROR",
+    "content": "접근 금지"
 }
 ```
 
