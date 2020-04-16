@@ -1,5 +1,5 @@
 import { httpRequest } from '../utils/httpRequestUtil';
-import { COMMON_RULE, STATUS_KEY } from '../contants/constant';
+import { COMMON_RULE } from '../contants/constant';
 import { getEl, removeClass } from '../utils/commonUtil';
 import { URL } from '../contants/url';
 import TodoView from './todoView';
@@ -14,11 +14,8 @@ class TodoController {
         this.todoEventManager = todoEventManager;
     }
 
-    async runTodoApp(data): void {
-        const { status } = await httpRequest.login(URL.DEV.LOGIN_API(), data);
-        if (status !== STATUS_KEY.SUCCESS) return;
-
-        httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
+    async runTodoApp(): void {
+            httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
             removeClass(getEl('#dimmed'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
