@@ -73,8 +73,8 @@ final class MainViewController: UIViewController {
         view.addSubview(activityLogViewController.view)
         activityLogViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8).isActive = true
         activityLogViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.28).isActive = true
-        activityLogViewController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        activityLogViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        activityLogViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 74).isActive = true
+        activityLogViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
     }
     
     @IBAction func menuButtonTouched(_ sender: UIBarButtonItem) {
