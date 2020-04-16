@@ -38,16 +38,7 @@ protocol NetworkManagable {
 }
 
 struct NetworkManager: NetworkManagable {
-<<<<<<< HEAD
-    enum EndPoints {
-        static let cardLists = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/mock/login"
-        static let selectedCardList = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080//mock/section"
-    }
-    
-    func getResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-=======
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
->>>>>>> dev
                      resultHandler: @escaping (Data?, Error?) -> ()) throws {
         guard let url = URL(string: urlString) else {
             throw NetworkErrorCase.invalidURL

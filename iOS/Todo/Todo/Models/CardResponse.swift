@@ -9,7 +9,12 @@
 import Foundation
 
 struct CardResponse: Codable {
-    var status: Status
-    var content: String
+    let status: Status
+    let content: Content
 }
 
+struct Content: Codable {
+    let log_id: Int
+    let card_count: Int
+    var card: Card?
+}

@@ -1,4 +1,4 @@
-package com.codesquad.team10.todo.vo;
+package com.codesquad.team10.todo.dto;
 
 import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;

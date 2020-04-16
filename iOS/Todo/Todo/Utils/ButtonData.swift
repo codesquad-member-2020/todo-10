@@ -6,11 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-<<<<<<< HEAD
-import Foundation
-
-=======
->>>>>>> dev
 enum ButtonData {
     static let deleteString = "Delete"
     static let moveToDone = "Move to done"

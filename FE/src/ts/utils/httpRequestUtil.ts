@@ -1,13 +1,20 @@
 const httpRequest = {
-    async login(url: string) {
+    async login(url: string, data: object) {
         const option = {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: "nigayo@ggmail.com",
-                password: "1234"
-            })
+            body: JSON.stringify(data)
+        };
+        const response = await fetch(url, option);
+        const resPromise = await response.json();
+        return resPromise;
+    },
+
+    async get(url: string) {
+        const option = {
+            method: 'GET',
+            mode: 'cors',
         };
         const response = await fetch(url, option);
         const resPromise = await response.json();

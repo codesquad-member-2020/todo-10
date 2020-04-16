@@ -8,7 +8,7 @@
 import Foundation
 
 struct NewCard: Codable {
-    let title: String?
+    var title: String?
     let content: String
     
     func encodeToJSONData() -> Data? {

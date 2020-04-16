@@ -13,7 +13,10 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         configureScrollView()
-        configureColumnsCase()
+        requestLogin { result in
+            guard let result = result, result else { return }
+            self.configureColumnsCase()
+        }
     }
     
     private func configureScrollView() {
@@ -25,24 +28,16 @@ final class MainViewController: UIViewController {
         columScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
     
-<<<<<<< HEAD
-    private func configureCardListsCase() {
-        CardListsUseCase.makeCardLists(with: NetworkManager()) { cardListsDataSource in
-            cardListsDataSource?.iterateCardList(with: { cardList in
-                DispatchQueue.main.async {
-                    let cardListViewController: CardListViewController = {
-                        let controller = CardListViewController()
-                        controller.cardList = cardList
-                        return controller
-                    }()
-                    self.addCardListViewController(cardListViewController: cardListViewController)
-                }
-=======
+    private func requestLogin(completed: @escaping (Bool?) -> ()) {
+        LoginUseCase.requestLogin(with: NetworkManager()) { result in
+            completed(result)
+        }
+    }
+   
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
             columnsDataSource?.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
->>>>>>> dev
             })
         }
     }
@@ -51,7 +46,7 @@ final class MainViewController: UIViewController {
         DispatchQueue.main.async {
             let columnViewController = self.columnViewController(column: column)
             self.addChild(columnViewController)
-            self.columScrollView.columnStackView.addArrangedSubview(columnViewController.view)
+            self.columScrollView.addToStack(for: columnViewController.view)
             columnViewController.view.translatesAutoresizingMaskIntoConstraints = false
             columnViewController.view.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.32).isActive = true
             columnViewController.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true

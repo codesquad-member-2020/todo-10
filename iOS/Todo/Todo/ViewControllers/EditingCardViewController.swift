@@ -20,7 +20,7 @@ final class EditingCardViewController: CardViewController {
         guard let cardID = cardViewModel?.cardID, let row = row else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
         EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
-                                                           with: MockCardEditSuccessStub()) { cardViewModel in
+                                                           with: NetworkManager()) { cardViewModel in
                                                             guard let cardViewModel = cardViewModel else { return }
                                                             self.delegate?.cardViewControllerDidCardEdit(cardViewModel,
                                                                                                          row: row)
@@ -32,11 +32,16 @@ final class EditingCardViewController: CardViewController {
     var cardViewModel: CardViewModel? {
         didSet {
             cardViewModel?.performBind(changed: { card in
-                DispatchQueue.main.async {
-                    self.configureTitle(text: card?.title)
-                    self.configureContent(text: card?.content)
-                }
+                guard let card = card else { return }
+                self.configureTexts(card: card)
             })
+        }
+    }
+    
+    private func configureTexts(card: Card) {
+        DispatchQueue.main.async {
+            self.configureTitle(text: card.title)
+            self.configureContent(text: card.content)
         }
     }
 }

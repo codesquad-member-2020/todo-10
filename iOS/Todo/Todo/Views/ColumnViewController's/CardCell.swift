@@ -9,10 +9,10 @@
 import UIKit
 
 final class CardCell: UITableViewCell, ReusableView {
-    let formatImageView = FormatImageView(frame: .zero)
-    let titleLabel = CardTitleLabel()
-    let contentLabel = ContentLabel()
-    let authorLabel = AuthorLabel()
+    private let formatImageView = FormatImageView(frame: .zero)
+    private let titleLabel = CardTitleLabel()
+    private let contentLabel = ContentLabel()
+    private let authorLabel = AuthorLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,6 +74,16 @@ final class CardCell: UITableViewCell, ReusableView {
         authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
         authorLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -constant).isActive = true
     }
+    
+    func configureTitle(text: String?) {
+        titleLabel.text = text
+    }
+    func configureContent(text: String) {
+        contentLabel.text = text
+    }
+    func configureAuthor(text: String) {
+        authorLabel.text = text
+    }
 }
 
 final class CardTitleLabel: UILabel {
@@ -124,7 +134,6 @@ final class AuthorLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        text = "author By iOS"
         font = UIFont.boldSystemFont(ofSize: 12)
     }
 }

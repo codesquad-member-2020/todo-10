@@ -1,5 +1,6 @@
 #wrap {
   overflow:hidden;
+  background: #fff;
 }
 .inner {
   width: 90%;
@@ -37,5 +38,24 @@ footer {
   p {
     font-size: $font-size-small;
     color: #888;
+  }
+}
+#dimmed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  &.active {
+      visibility: visible;
+      opacity: 1;
   }
 }
