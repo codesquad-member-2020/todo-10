@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface CardRepository extends CrudRepository<Card, Integer> {
+
     @Query("SELECT *" +
             " FROM card c" +
             " LEFT OUTER JOIN section s ON c.section = s.id" +
