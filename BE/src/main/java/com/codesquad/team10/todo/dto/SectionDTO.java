@@ -15,18 +15,16 @@ public class SectionDTO {
 
     private LocalDateTime updateDateTime;
 
-    private boolean deleted;
-
     private List<CardDTO> cards;
 
     private Integer board;
 
-    public SectionDTO(Integer id, String title, LocalDateTime createDateTime, LocalDateTime updateDateTime, boolean deleted, Integer board) {
+    public SectionDTO(Integer id, String title, LocalDateTime createDateTime, LocalDateTime updateDateTime, List<CardDTO> cards, Integer board) {
         this.id = id;
         this.title = title;
         this.createDateTime = createDateTime;
         this.updateDateTime = updateDateTime;
-        this.deleted = deleted;
+        this.cards = cards;
         this.board = board;
     }
 

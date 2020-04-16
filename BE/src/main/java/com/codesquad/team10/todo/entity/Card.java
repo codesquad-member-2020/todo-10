@@ -20,8 +20,6 @@ public class Card {
 
     private String author;
 
-    private boolean deleted;
-
     private Integer user;
 
     private Integer sectionKey;
@@ -35,14 +33,13 @@ public class Card {
         this.user = user;
     }
 
-    public Card(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, boolean deleted, Integer user, Integer sectionKey) {
+    public Card(Integer id, String title, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime, String author, Integer user, Integer sectionKey) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createDateTime = createDateTime;
         this.updateDateTime = updateDateTime;
         this.author = author;
-        this.deleted = deleted;
         this.user = user;
         this.sectionKey = sectionKey;
     }
@@ -83,14 +80,6 @@ public class Card {
         this.author = author;
     }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     public Integer getUser() {
         return user;
     }
@@ -123,6 +112,8 @@ public class Card {
                 ", createDateTime=" + createDateTime +
                 ", updateDateTime=" + updateDateTime +
                 ", author='" + author + '\'' +
+                ", user=" + user +
+                ", sectionKey=" + sectionKey +
                 '}';
     }
 
