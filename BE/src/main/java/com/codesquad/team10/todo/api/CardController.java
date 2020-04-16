@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -44,16 +43,9 @@ public class CardController {
     public ResponseEntity<ResponseData> create(@PathVariable int sectionId,
                                                @RequestBody Map<String, String> body,
                                                HttpServletRequest request) {
-        User userData = null;
-        try {
-            userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
-        } catch (SignatureVerificationException | NullPointerException e) {
-            throw new ForbiddenException();
-        } catch (JWTDecodeException e) {
-            throw new InvalidTokenException();
-        }
+        User loginUser = (User)request.getAttribute("user");
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
-        Card newCard = new Card(body.get("title"), body.get("content"), userData.getName(), userData.getId());
+        Card newCard = new Card(body.get("title"), body.get("content"), loginUser.getName(), loginUser.getId());
         section.addCard(newCard);
 
         logger.debug("new card: {}", newCard);
@@ -64,7 +56,7 @@ public class CardController {
         // dto 생성
         CardDTO cardDTO = (CardDTO) ModelMapper.of(newCard);
         // 로그 추가
-        Log log = new Log(userData.getName(), Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), userData.getBoard());
+        Log log = new Log(loginUser.getName(), Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), loginUser.getBoard());
         logRepository.save(log);
         // 반환 데이터
         Map<String, Object> responseData = constructResonseData(cardDTO, log, section.getCards().size());
@@ -76,17 +68,10 @@ public class CardController {
                                                @PathVariable int cardId,
                                                @RequestBody Map<String, String> body,
                                                HttpServletRequest request) {
-        if (body.get("content") == null) {
+        if (body.get("content") == null)
             throw new InvalidRequestException();
-        }
-        User userData = null;
-        try {
-            userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
-        } catch (SignatureVerificationException | NullPointerException e) {
-            throw new ForbiddenException();
-        } catch (JWTDecodeException e) {
-            throw new InvalidTokenException();
-        }
+
+        User loginUser = (User)request.getAttribute("user");
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         Card updateCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         if (section.getCards().size() == 0)
@@ -96,7 +81,7 @@ public class CardController {
         CardDTO resultCard = (CardDTO) ModelMapper.of(section.updateCard(updateCard, body.get("title"), body.get("content")));
         sectionRepository.save(section);
         // 로그 추가
-        Log log = new Log(userData.getName(), Action.UPDATED, Target.CARD, resultCard.getTitle(), resultCard.getContent(), null, null, userData.getBoard());
+        Log log = new Log(loginUser.getName(), Action.UPDATED, Target.CARD, resultCard.getTitle(), resultCard.getContent(), null, null, loginUser.getBoard());
         logRepository.save(log);
         logger.debug("log: {}", log);
         //반환 데이터
@@ -108,14 +93,7 @@ public class CardController {
     public ResponseEntity<ResponseData> delete(@PathVariable int sectionId,
                                                @PathVariable int cardId,
                                                HttpServletRequest request) {
-        User userData = null;
-        try {
-            userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
-        } catch (SignatureVerificationException | NullPointerException e) {
-            throw new ForbiddenException();
-        } catch (JWTDecodeException e) {
-            throw new InvalidTokenException();
-        }
+        User loginUser = (User)request.getAttribute("user");
         Card targetCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         if (section.getCards().size() == 0)
@@ -123,7 +101,7 @@ public class CardController {
 
         section.deleteCard(targetCard);
         sectionRepository.save(section);
-        Log log = new Log(userData.getName(), Action.REMOVED, Target.CARD, targetCard.getTitle(), targetCard.getContent(), section.getTitle(), null, userData.getBoard());
+        Log log = new Log(loginUser.getName(), Action.REMOVED, Target.CARD, targetCard.getTitle(), targetCard.getContent(), section.getTitle(), null, loginUser.getBoard());
         logRepository.save(log);
         logger.debug("log: {}", log);
         Map<String, Object> responseData = constructResonseData(log, section.getCards().size());
@@ -136,14 +114,7 @@ public class CardController {
                                              @RequestParam int cardTo,
                                              @RequestParam(required = false) Integer sectionTo,
                                              HttpServletRequest request) {
-        User userData = null;
-        try {
-            userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
-        } catch (SignatureVerificationException | NullPointerException e) {
-            throw new ForbiddenException();
-        } catch (JWTDecodeException e) {
-            throw new InvalidTokenException();
-        }
+        User loginUser = (User)request.getAttribute("user");
         Card moveCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
 
         if (sectionTo == null) {
@@ -156,7 +127,7 @@ public class CardController {
 
             section.moveCard(moveCard, cardTo);
             sectionRepository.save(section);
-            Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, userData.getBoard());
+            Log log = new Log(loginUser.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, loginUser.getBoard());
             // dto 생성
             CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
             logRepository.save(log);
@@ -176,7 +147,7 @@ public class CardController {
         toSection.insertCard(cardTo, moveCard);
         sectionRepository.save(fromSection);
         sectionRepository.save(toSection);
-        Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), fromSection.getTitle(), toSection.getTitle(), userData.getBoard());
+        Log log = new Log(loginUser.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), fromSection.getTitle(), toSection.getTitle(), loginUser.getBoard());
         // dto 생성
         CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
         logRepository.save(log);
