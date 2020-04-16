@@ -21,11 +21,22 @@ const option: ICardOption = {
     currColumn: null,
 }
 
-async function deleteCard({ target, logCallBack }) {
+const info = {
+    prevColumnId: null,
+    currColumnId: null,
+    cardId: null,
+    order: 0,
+}
+
+function deleteCard({ target, logCallBack }) {
     if (!target.classList.contains('btn-close')) return;
     if (!confirm(ALERT_MESSAGE.DELETE_CARD)) return;
     const column: HTMLElement = getParentEl(target, '.todo-columns');
     const card: HTMLElement = getParentEl(target, '.card-item');
+    deleteRequest(column, card, logCallBack);
+}
+
+async function deleteRequest(column, card, logCallBack) {
     const columnId = column.dataset.columnId;
     const cardId = card.dataset.cardId;
     const { status, content } = await httpRequest.delete(URL.DEV.UPDATE_CARD_API(columnId, cardId));
@@ -74,25 +85,41 @@ function dragenterCard(evt: Event) {
     else if (option.currColumn) option.currColumn.querySelector('.card-wrap').appendChild(option.dragTarget);
 }
 
-function dragendCard({ target }: Event) {
+function dragendCard(logCallBack, { target }: Event) {
     if (!option.dragTarget) return;
     removeClass(option.dragTarget, COMMON_RULE.DRAG_KEY);
     if (!option.dragTarget || !option.currColumn) return;
     if (!target.classList.contains('card-wrap')) target = option.currColumn.querySelector('.card-wrap');
-    option.prevColumn.querySelector('.todo-count').innerHTML--;
-    option.currColumn.querySelector('.todo-count').innerHTML++;
+    moveRequest(logCallBack);
 }
 
 function getDragedCardInfo() {
-    let order = 0;
-    const currColumnId = option.currColumn.dataset.columnId;
-    const cardId = option.dragTarget.dataset.cardId;
+    info.order = 0;
+    info.prevColumnId = option.prevColumn.dataset.columnId;
+    info.currColumnId = option.currColumn.dataset.columnId;
+    info.cardId = option.dragTarget.dataset.cardId;
     [...getParentEl(option.dragTarget, '.card-wrap').children].some(card => {
-        order++;
+        info.order++;
         return option.dragTarget === card;
     });
-    order--;
-    return { cardId, order, currColumnId };
+    info.order--;
+}
+
+async function moveRequest(logCallBack) {
+    getDragedCardInfo();
+    let data;
+    const { prevColumnId, currColumnId, cardId, order } = info;
+    if (prevColumnId === currColumnId) {
+        data = await httpRequest.put(URL.DEV.MOVE_CARD_API(prevColumnId, cardId, order))
+    } else {
+        data = await httpRequest.put(URL.DEV.COLUMN_MOVE_CARD_API(prevColumnId, cardId, order, currColumnId))
+    }
+
+    const { log_id, card_count_to_section, card_count_from_section } = data.content;
+    if (card_count_from_section === undefined) return;
+    option.currColumn.querySelector('.todo-count').innerHTML = card_count_to_section;
+    option.prevColumn.querySelector('.todo-count').innerHTML = card_count_from_section;
+    httpRequest.get(URL.DEV.LOG_API(log_id)).then((data) => logCallBack(data));
 }
 
 function resetOption() {

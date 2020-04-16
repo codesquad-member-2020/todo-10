@@ -72,6 +72,19 @@ const httpRequest = {
         const resPromise = await response.json();
         return resPromise;
     },
+
+    async put(url: string) {
+        const option = {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Authorization': token
+            },
+        };
+        const response = await fetch(url, option);
+        const resPromise = await response.json();
+        return resPromise;
+    },
 };
 
 export { httpRequest };

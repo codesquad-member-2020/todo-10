@@ -41,7 +41,7 @@ class TodoEventManager {
             dragstart: dragStartCard,
             dragover: dragoverCard,
             dragenter: dragenterCard,
-            dragend: dragendCard,
+            dragend: dragendCard.bind(null, this.todoView.addLogUpdate.bind(this.todoView)),
             input: checkDisabled,
         };
         this.todoModalEventList = {

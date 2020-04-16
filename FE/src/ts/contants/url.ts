@@ -8,6 +8,8 @@ const URL = {
         UPDATE_CARD_API: (sectionId, cardId) => `${BASE_DEV_URL}/board/section/${sectionId}/card/${cardId}`,
         LOGS_API: () => `${BASE_DEV_URL}/board/logs`,
         LOG_API: (logId) => `${BASE_DEV_URL}/board/log/${logId}`,
+        MOVE_CARD_API: (sectionId, cardId, newIndex) => `${BASE_DEV_URL}/board/section/${sectionId}/card/${cardId}?cardTo=${newIndex}`,
+        COLUMN_MOVE_CARD_API: (sectionId, cardId, newIndex, newSectionId) => `${BASE_DEV_URL}/board/section/${sectionId}/card/${cardId}?cardTo=${newIndex}&sectionTo=${newSectionId}`,
     },
 }
 
