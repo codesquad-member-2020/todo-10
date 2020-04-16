@@ -1,11 +1,15 @@
 package com.codesquad.team10.todo.api;
 
+<<<<<<< HEAD
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.codesquad.team10.todo.entity.Log;
 import com.codesquad.team10.todo.entity.User;
 import com.codesquad.team10.todo.exception.custom.ForbiddenException;
 import com.codesquad.team10.todo.exception.custom.InvalidTokenException;
+=======
+import com.codesquad.team10.todo.entity.Log;
+>>>>>>> 3f93f22d239bc4c1b6b7b375ce387fbfb7bf9dfb
 import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
 import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.response.ResponseData;
