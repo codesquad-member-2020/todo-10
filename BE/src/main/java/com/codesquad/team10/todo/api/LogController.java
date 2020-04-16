@@ -9,6 +9,7 @@ import com.codesquad.team10.todo.exception.custom.InvalidTokenException;
 import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
 import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.response.ResponseData;
+import com.codesquad.team10.todo.util.DateTimeFormatUtils;
 import com.codesquad.team10.todo.util.JWTUtils;
 import com.codesquad.team10.todo.util.ModelMapper;
 import com.codesquad.team10.todo.dto.LogDTO;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,10 @@ public class LogController {
     public ResponseEntity<ResponseData> showLog(@PathVariable int logId) {
         Log log = logRepository.findById(logId).orElseThrow(ResourceNotFoundException::new);
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, (LogDTO)ModelMapper.of(log)), HttpStatus.OK);
+    }
+
+    @GetMapping("/log/serverTime")
+    public ResponseEntity<ResponseData> getServerTime() {
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, DateTimeFormatUtils.localDateTimeToString(LocalDateTime.now())), HttpStatus.OK);
     }
 }
