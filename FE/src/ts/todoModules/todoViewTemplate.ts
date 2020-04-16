@@ -153,7 +153,7 @@ function makeMoveActionLog(log, content) {
     return `<div class="log">
                 <p class="log-msg">
                     <span class="user"><strong>@${log.user}</strong></span>moved
-                    <strong class="log-text" title="${log.content}">${content}</strong>from<strong>${log.source}</strong>to<strong>${log.destination}</strong></p>
+                    <strong class="log-text" title="${log.content}">${content}</strong>from<strong>${log.source}</strong>${log.destination ? `to<strong>${log.destination}</strong>` : ''}</p>
                 <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
             </div>`;
 }

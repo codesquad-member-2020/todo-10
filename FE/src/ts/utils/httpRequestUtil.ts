@@ -1,5 +1,3 @@
-const token = sessionStorage.getItem('TODO-TOKEN');
-
 const httpRequest = {
     async login(url: string, data: object) {
         const option = {
@@ -22,7 +20,7 @@ const httpRequest = {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'Authorization': token
+                'Authorization': sessionStorage.getItem('TODO-TOKEN')
             }
         };
         const response = await fetch(url, option);
@@ -36,7 +34,7 @@ const httpRequest = {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': sessionStorage.getItem('TODO-TOKEN')
             },
             body: JSON.stringify(data),
         };
@@ -50,7 +48,7 @@ const httpRequest = {
             mode: 'cors',
             method: 'DELETE',
             headers: {
-                'Authorization': token
+                'Authorization': sessionStorage.getItem('TODO-TOKEN')
             }
         };
         const response = await fetch(url, option);
@@ -64,9 +62,22 @@ const httpRequest = {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': sessionStorage.getItem('TODO-TOKEN')
             },
             body: JSON.stringify(data),
+        };
+        const response = await fetch(url, option);
+        const resPromise = await response.json();
+        return resPromise;
+    },
+
+    async put(url: string) {
+        const option = {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Authorization': sessionStorage.getItem('TODO-TOKEN')
+            },
         };
         const response = await fetch(url, option);
         const resPromise = await response.json();
