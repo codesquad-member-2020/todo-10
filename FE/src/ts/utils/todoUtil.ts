@@ -24,7 +24,7 @@ function timeSince(date) {
     if (interval > 1) return interval + "시간";
     interval = Math.floor(seconds / 60);
     if (interval > 1) return interval + "분";
-    return Math.floor(seconds) + "초";
+    return Math.floor(seconds) + "방금";
 }
 
 export {
