@@ -8,10 +8,14 @@
 
 import UIKit
 
+enum Token {
+    static var authorizationToken: String?
+}
+
 final class MainViewController: UIViewController {
     private let columScrollView = ColumnScrollView()
     private let activityLogViewController = AcitivitiyLogViewController()
-
+    
     override func viewDidLoad() {
         configureScrollView()
         requestLogin { result in
@@ -31,8 +35,10 @@ final class MainViewController: UIViewController {
     }
     
     private func requestLogin(completed: @escaping (Bool?) -> ()) {
-        LoginUseCase.requestLogin(with: NetworkManager()) { result in
-            completed(result)
+        LoginUseCase.makeToken(with: NetworkManager()) { token in
+            guard let token = token else { return }
+            Token.authorizationToken = token
+            completed(true)
         }
     }
     

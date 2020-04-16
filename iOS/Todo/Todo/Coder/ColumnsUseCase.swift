@@ -15,15 +15,16 @@ struct ColumnsUseCase {
     
     static func makeColumns(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {
         try? manager.requestResource(from: EndPoints.columns, method: .get,
-                                 body: nil, format: Format.jsonType,
-                                 headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
-                                    guard error == nil else { return }
-                                    guard let data = data else { return }
-                                    guard let response = try? JSONDecoder().decode(ColumnsResponse.self, from: data) else { return }
-                                    guard response.status == .success else { return }
-                                    
-                                    let column = Columns(columns: response.content)
-                                    completed(column)
+                                     body: nil, format: Format.jsonType,
+                                     headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) {
+                                        (data, urlResponse, error) in
+                                        guard error == nil else { return }
+                                        guard let data = data else { return }
+                                        guard let response = try? JSONDecoder().decode(ColumnsResponse.self, from: data) else { return }
+                                        guard response.status == .success else { return }
+                                        
+                                        let column = Columns(columns: response.content)
+                                        completed(column)
         }
     }
 }

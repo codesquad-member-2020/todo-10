@@ -14,14 +14,15 @@ struct NewCardViewModelUseCase {
                                      with manager: NetworkManagable,
                                      completed: @escaping (CardViewModel?) -> ()) {
         try? manager.requestResource(from: string, method: .post,
-            body: cardData, format: Format.jsonType,
-            headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
-                guard error == nil, let data = data else { return }
-                guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
-                guard let card = cardResponse.content.card else { return }
-                guard cardResponse.status == .success else { return }
-                
-                completed(CardViewModel(card: card))
+                                     body: cardData, format: Format.jsonType,
+                                     headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) {
+                                        (data, urlResponse, error) in
+                                        guard error == nil, let data = data else { return }
+                                        guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
+                                        guard let card = cardResponse.content.card else { return }
+                                        guard cardResponse.status == .success else { return }
+                                        
+                                        completed(CardViewModel(card: card))
         }
     }
 }
