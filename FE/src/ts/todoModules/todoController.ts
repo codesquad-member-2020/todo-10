@@ -15,13 +15,13 @@ class TodoController {
     }
 
     async runTodoApp(): void {
-            httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
+        await httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
             removeClass(getEl('#dimmed'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
         });
 
-        httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
+        await httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
             this.todoView.renderTodoMenu(logsData);
         });
 

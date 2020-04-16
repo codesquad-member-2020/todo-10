@@ -1,22 +1,21 @@
-import { getEl } from './utils/commonUtil';
-import { checkUser, loginInit } from './loginModule/login';
+import Login from './loginModules/login';
 import TodoController from './todoModules/todoController';
 import TodoView from './todoModules/todoView';
 import TodoEventManager from './todoModules/todoEventManager';
+
+const token = sessionStorage.getItem('TODO-TOKEN');
 
 const todoView = new TodoView();
 const todoEventManager = new TodoEventManager(todoView);
 const todoController = new TodoController(todoView, todoEventManager);
 
-loginInit();
+const login = new Login(todoController);
 
-getEl('#dimmed').querySelector('.btn').addEventListener('click', (e) => {
-    e.preventDefault();
-    const loginIdEl = <HTMLInputElement>getEl('#userID');
-    const loginPwEl = <HTMLInputElement>getEl('#password');
-    const data = {
-        name: loginIdEl.value,
-        password: loginPwEl.value,
-    };
-    return checkUser(data, todoController.runTodoApp);
-});
+function main() {
+    if (!token) {
+        login.loginInit();
+        login.loginHandler();
+    }
+    todoController.runTodoApp();
+}
+main();
