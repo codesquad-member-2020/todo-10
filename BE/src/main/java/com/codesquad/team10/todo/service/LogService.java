@@ -1,12 +1,17 @@
 package com.codesquad.team10.todo.service;
 
 import com.codesquad.team10.todo.dto.CardDTO;
+import com.codesquad.team10.todo.dto.LogDTO;
 import com.codesquad.team10.todo.entity.*;
+import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
 import com.codesquad.team10.todo.repository.LogRepository;
+import com.codesquad.team10.todo.util.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class LogService {
@@ -15,6 +20,16 @@ public class LogService {
 
     public LogService(LogRepository logRepository) {
         this.logRepository = logRepository;
+    }
+
+    public List<LogDTO> getLogs(Integer boardId) {
+        return logRepository.findByBoardId(boardId).stream()
+                .map(log -> (LogDTO) ModelMapper.of(log))
+                .collect(Collectors.toList());
+    }
+
+    public Log getLogById(int logId) {
+        return logRepository.findById(logId).orElseThrow(ResourceNotFoundException::new);
     }
 
     // 카드 추가, 수정 로그
