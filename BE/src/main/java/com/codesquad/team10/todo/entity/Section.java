@@ -66,7 +66,12 @@ public class Section {
     }
 
     public void addCard(Card newCard) {
-        cards.add(newCard);
+        int index = 0;
+        for (;index < cards.size(); index++) {
+            if (cards.get(index).isDeleted())
+                break;
+        }
+        cards.add(index, newCard);
     }
 
     public Card updateCard(Card updateCard, String title, String content) {
@@ -83,6 +88,17 @@ public class Section {
             throw new UnmatchedRequestDataException();
 
         target.setDeleted(true);
+        cards.remove(target);
+        cards.add(target);
+    }
+
+    public void moveCard(Card moveCard, int cardTo) {
+        Card target = cards.get(moveCard.getSectionKey());
+        if (!target.equals(moveCard))
+            throw new UnmatchedRequestDataException();
+
+        cards.remove(target);
+        cards.add(cardTo, target);
     }
 
     @Override

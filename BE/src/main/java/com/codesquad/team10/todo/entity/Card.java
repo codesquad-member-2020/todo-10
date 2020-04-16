@@ -103,6 +103,10 @@ public class Card {
         return sectionKey;
     }
 
+    public void setSectionKey(Integer sectionKey) {
+        this.sectionKey = sectionKey;
+    }
+
     public Card update(String title, String content) {
         this.title = title;
         this.content = content;
