@@ -9,9 +9,6 @@ import UIKit
 
 final class ContentViewDelegate: NSObject, UITextViewDelegate {
     static let placeHolderText = "Add a message what to do"
-    enum Notification {
-        static let isCorrectDidChange = Foundation.Notification.Name("isCorrectDidChange")
-    }
     private(set) var isCorrect = false {
         didSet {
             if isCorrect != oldValue {

@@ -39,7 +39,7 @@ final class AcitivitiyLogViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell
-            else { return LogCell()}        
+            else { return LogCell()}
         return logCell
     }
 }

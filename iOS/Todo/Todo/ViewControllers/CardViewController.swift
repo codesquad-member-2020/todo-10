@@ -36,7 +36,7 @@ class CardViewController: UIViewController {
     private func configureObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateCreateButton),
-                                               name: ContentViewDelegate.Notification.isCorrectDidChange,
+                                               name: Notification.isCorrectDidChange,
                                                object: contentViewDelegate)
     }
     
