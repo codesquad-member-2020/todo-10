@@ -2,6 +2,7 @@ package com.codesquad.team10.todo.api;
 
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.codesquad.team10.todo.constants.ResponseMessage;
 import com.codesquad.team10.todo.entity.*;
 import com.codesquad.team10.todo.exception.custom.*;
 import com.codesquad.team10.todo.repository.CardRepository;
@@ -40,7 +41,9 @@ public class CardController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseData> create(@PathVariable int sectionId, @RequestBody Map<String, String> body, HttpServletRequest request) {
+    public ResponseEntity<ResponseData> create(@PathVariable int sectionId,
+                                               @RequestBody Map<String, String> body,
+                                               HttpServletRequest request) {
         User userData = null;
         try {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
@@ -59,8 +62,7 @@ public class CardController {
         sectionRepository.save(section);
         newCard = cardRepository.findById(newCard.getId()).orElseThrow(ResourceNotFoundException::new);
         // dto 생성
-        CardDTO cardDTO = null;
-        cardDTO = (CardDTO) ModelMapper.of(newCard);
+        CardDTO cardDTO = (CardDTO) ModelMapper.of(newCard);
         // 로그 추가
         Log log = new Log(userData.getName(), Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), userData.getBoard());
         logRepository.save(log);
@@ -70,7 +72,10 @@ public class CardController {
     }
 
     @PatchMapping("/{cardId}")
-    public ResponseEntity<ResponseData> update(@PathVariable int sectionId, @PathVariable int cardId, @RequestBody Map<String, String> body, HttpServletRequest request) {
+    public ResponseEntity<ResponseData> update(@PathVariable int sectionId,
+                                               @PathVariable int cardId,
+                                               @RequestBody Map<String, String> body,
+                                               HttpServletRequest request) {
         if (body.get("content") == null) {
             throw new InvalidRequestException();
         }
@@ -82,8 +87,8 @@ public class CardController {
         } catch (JWTDecodeException e) {
             throw new InvalidTokenException();
         }
-        Card updateCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+        Card updateCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
         if (section.getCards().size() == 0)
             throw new UnmatchedRequestDataException();
 
@@ -100,7 +105,9 @@ public class CardController {
     }
 
     @DeleteMapping("/{cardId}")
-    public ResponseEntity<ResponseData> delete(@PathVariable int sectionId, @PathVariable int cardId, HttpServletRequest request) {
+    public ResponseEntity<ResponseData> delete(@PathVariable int sectionId,
+                                               @PathVariable int cardId,
+                                               HttpServletRequest request) {
         User userData = null;
         try {
             userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
@@ -123,6 +130,39 @@ public class CardController {
         logRepository.save(log);
         logger.debug("log: {}", log);
         Map<String, Object> responseData = constructResonseData(log, getCountOfCardWithoutDeleted(section.getCards()));
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
+    }
+
+    @PutMapping("/{cardId}")
+    public ResponseEntity<ResponseData> move(@PathVariable int sectionId,
+                                             @PathVariable int cardId,
+                                             @RequestParam int cardTo,
+                                             @RequestParam(required = false) Integer sectionTo,
+                                             HttpServletRequest request) {
+        User userData = null;
+        try {
+            userData = JWTUtils.getUserFromJWT(request.getHeader(HttpHeaders.AUTHORIZATION));
+        } catch (SignatureVerificationException | NullPointerException e) {
+            throw new ForbiddenException();
+        } catch (JWTDecodeException e) {
+            throw new InvalidTokenException();
+        }
+        Card moveCard = cardRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
+        if (moveCard.isDeleted())
+            throw new ResourceNotFoundException();
+
+        if (moveCard.getSectionKey() == cardTo)
+            return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, ResponseMessage.CARD_NOT_MOVED.getMessage()), HttpStatus.OK);
+
+        Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+        section.moveCard(moveCard, cardTo);
+        sectionRepository.save(section);
+        // dto 생성
+        CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
+        Log log = new Log(userData.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, userData.getBoard());
+        logRepository.save(log);
+        logger.debug("log: {}", log);
+        Map<String, Object> responseData = constructResonseData(cardDTO, log, getCountOfCardWithoutDeleted(section.getCards()));
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
