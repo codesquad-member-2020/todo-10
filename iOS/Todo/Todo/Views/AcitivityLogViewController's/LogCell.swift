@@ -105,7 +105,7 @@ final class LogCell: UITableViewCell, ReusableView {
         logContentLabel.text = text
     }
     
-    func configureTime(text: String) {
+    func configureTime(text: String?) {
         timeLabel.text = text
     }
 }

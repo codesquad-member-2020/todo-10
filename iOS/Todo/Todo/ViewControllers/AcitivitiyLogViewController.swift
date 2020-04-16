@@ -31,6 +31,12 @@ final class AcitivitiyLogViewController: UITableViewController {
         view.layer.masksToBounds = true
     }
     
+    var currentDate: Date? {
+        didSet {
+            updateView()
+        }
+    }
+    
     private var logViewModels = [LogViewModel]() {
         didSet {
             updateView()
@@ -62,8 +68,9 @@ final class AcitivitiyLogViewController: UITableViewController {
         let logViewModel = logViewModels[indexPath.row]
         logViewModel.performBind(changed: { log in
             logCell.configureUser(text: "@\(log.user)")
-            logCell.configureTime(text: DateFormat.cardDateFormatter.string(from: log.createDateTime))
         })
+        
+        logCell.configureTime(text: logViewModel.time(now: currentDate))
         logCell.configureLogContent(text: logViewModel.content)
         return logCell
     }

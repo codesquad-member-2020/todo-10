@@ -89,8 +89,10 @@ final class MainViewController: UIViewController {
         }
     }
     
+    private let dateProvider: () -> Date = Date.init
     @IBAction func menuButtonTouched(_ sender: UIBarButtonItem) {
         activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
+        activityLogViewController.currentDate = dateProvider()
     }
 }
 
