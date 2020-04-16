@@ -52,6 +52,9 @@ struct NetworkManager: NetworkManagable {
                 request.addValue(format, forHTTPHeaderField: $0)
             }
         }
+        if let authorizationToken = Token.authorizationToken {
+            request.addValue(authorizationToken, forHTTPHeaderField: "Authorization")
+        }
         
         URLSession.shared.dataTask(with: request) {
             (data, urlRepsonse, error) in
