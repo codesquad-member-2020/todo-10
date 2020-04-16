@@ -9,9 +9,14 @@
 import Foundation
 
 final class LogViewModels {
-    private var logViewModels: [LogViewModel]
+    private var logViewModels = [LogViewModel]()
     
     init(logViewModels: [LogViewModel]) {
-        self.logViewModels = logViewModels
+        self.logViewModels = logViewModels.reversed()
+    }
+    
+    var count: Int {
+        return logViewModels.count
     }
 }
+
