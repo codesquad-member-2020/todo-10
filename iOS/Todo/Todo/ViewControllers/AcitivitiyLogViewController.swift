@@ -9,13 +9,19 @@
 import UIKit
 
 final class AcitivitiyLogViewController: UITableViewController {
+    private var logViewModels: LogViewModels!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        configureLogsCase()
     }
     
-    var logViewModels: LogViewModels? {
-        didSet {
-        
+    private func configureLogsCase() {
+        LogsUseCase.makeLogs(with: NetworkManager()) { logViewModels in
+            guard let logViewModels = logViewModels else { return }
+            self.logViewModels = logViewModels
         }
     }
 }

@@ -20,35 +20,12 @@
                     <navigationItem key="navigationItem" id="2Hl-12-K0Z">
                         <barButtonItem key="rightBarButtonItem" title="Menu" id="mrC-RC-hhh">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="fNb-KW-dc6" kind="popoverPresentation" popoverAnchorBarButtonItem="mrC-RC-hhh" id="Th1-6T-o2J">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="892.46231155778889" y="129.49640287769785"/>
-        </scene>
-        <!--Acitivitiy Log View Controller-->
-        <scene sceneID="BiQ-gM-7eM">
-            <objects>
-                <tableViewController storyboardIdentifier="AcitivitiyLogController" id="fNb-KW-dc6" customClass="AcitivitiyLogViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qaF-sv-sUH">
-                        <rect key="frame" x="0.0" y="0.0" width="388" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="fNb-KW-dc6" id="loj-Ex-eYC"/>
-                            <outlet property="delegate" destination="fNb-KW-dc6" id="FOD-zc-ltB"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eRk-lj-MfR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1670" y="404"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="O5V-tx-X9O">

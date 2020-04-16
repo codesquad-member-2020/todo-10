@@ -10,7 +10,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
     private let columScrollView = ColumnScrollView()
-    private var activityLogViewController: AcitivitiyLogViewController!
+    private let activityLogViewController = AcitivitiyLogViewController()
     
     override func viewDidLoad() {
         configureScrollView()
@@ -18,15 +18,7 @@ final class MainViewController: UIViewController {
             guard let result = result, result else { return }
             self.configureColumnsCase()
         }
-        configureLogsCase { logViewModels in
-            self.initAcitivityLogViewController { result in
-                guard let result = result else { return }
-                if result {
-                    guard self.activityLogViewController != nil else { return }
-                    self.activityLogViewController.logViewModels = logViewModels
-                }
-            }
-        }
+        configureAcitivitiyLogViewController()
     }
     
     private func configureScrollView() {
@@ -52,23 +44,7 @@ final class MainViewController: UIViewController {
             })
         }
     }
-    
-    private func configureLogsCase(completed: @escaping (LogViewModels?) -> ()) {
-        LogsUseCase.makeLogs(with: NetworkManager()) { logViewModels in
-            guard let logViewModels = logViewModels else { return }
-            completed(logViewModels)
-        }
-    }
-    
-    func initAcitivityLogViewController(completed: @escaping (Bool?) -> ()) {
-        DispatchQueue.main.async {
-            guard let activityLogViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                "AcitivitiyLogController") as? AcitivitiyLogViewController else { return }
-            self.activityLogViewController = activityLogViewController
-            completed(true)
-        }
-    }
-    
+
     private func addColumnViewController(column: Column) {
         DispatchQueue.main.async {
             let columnViewController = self.columnViewController(column: column)
@@ -90,6 +66,15 @@ final class MainViewController: UIViewController {
             return controller
         }()
         return columnViewController
+    }
+
+    private func configureAcitivitiyLogViewController() {
+        addChild(activityLogViewController)
+        view.addSubview(activityLogViewController.view)
+        activityLogViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8).isActive = true
+        activityLogViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.28).isActive = true
+        activityLogViewController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        activityLogViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
 }
 
