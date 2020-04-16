@@ -169,7 +169,7 @@ public class CardController {
 
         Section fromSection = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
         Section toSection = sectionRepository.findById(sectionTo).orElseThrow(ResourceNotFoundException::new);
-        if (toSection.getCards().size() != 0 && toSection.getCards().size() <= cardTo)
+        if (toSection.getCards().size() != 0 && toSection.getCards().size() < cardTo)
             throw new UnmatchedRequestDataException();
 
         fromSection.deleteCard(moveCard);
