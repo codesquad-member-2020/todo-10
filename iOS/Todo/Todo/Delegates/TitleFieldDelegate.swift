@@ -20,7 +20,7 @@ final class TitleFieldDelegate: NSObject, UITextFieldDelegate {
     }
     
     var textLimit: Int {
-        return 25
+        return 10
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -26,6 +26,8 @@ final class LogCell: UITableViewCell, ReusableView {
     private let logContentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 3
         return label
     }()
     
@@ -75,6 +77,7 @@ final class LogCell: UITableViewCell, ReusableView {
         
         userLabel.topAnchor.constraint(equalTo: userImageView.topAnchor).isActive = true
         userLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
+        userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
     }
     
     private func configureContentLabel() {
@@ -82,6 +85,7 @@ final class LogCell: UITableViewCell, ReusableView {
         
         logContentLabel.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 10).isActive = true
         logContentLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
+        logContentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
     }
     
     private func configureTimeLabel() {
@@ -89,6 +93,7 @@ final class LogCell: UITableViewCell, ReusableView {
         
         timeLabel.topAnchor.constraint(equalTo: logContentLabel.bottomAnchor, constant: 10).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
+        timeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
     }
     

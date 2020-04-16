@@ -51,7 +51,7 @@ enum StubJsonData {
         ]
     }
     """.data(using: .utf8)
-
+    
     static let successCreateResponseStub = """
     {
         "status": "SUCCESS",
@@ -116,13 +116,46 @@ enum StubJsonData {
             {
                 "id": 2,
                 "user": "nigayo",
-                "action": "UPDATED",
+                "action": "REMOVED",
                 "target": "CARD",
                 "title": null,
+                "content": "나는 다 할 수 있다, 다 할 것이다",
+                "source": "해야할 일",
+                "destination": null,
+                "createDateTime": "2020-04-15 16:15:20"
+            },
+            {
+                "id": 3,
+                "user": "nigayo",
+                "action": "UPDATED",
+                "target": "CARD",
+                "title": "공부하기",
                 "content": "음료 사기",
                 "source": null,
                 "destination": null,
                 "createDateTime": "2020-04-15 16:15:41"
+            },
+            {
+                "id": 4,
+                "user": "nigayo",
+                "action": "MOVED",
+                "target": "CARD",
+                "title": null,
+                "content": "hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello",
+                "source": "하고있는 일",
+                "destination": "해야할 일",
+                "createDateTime": "2020-04-15 16:30:20"
+            },
+            {
+                "id": 5,
+                "user": "nigayo",
+                "action": "MOVED",
+                "target": "CARD",
+                "title": null,
+                "content": "음료 사기",
+                "source": "해야 할 일",
+                "destination": null,
+                "createDateTime": "2020-04-15 16:40:11"
             }
         ]
     }
