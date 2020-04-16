@@ -1,6 +1,6 @@
 import { httpRequest } from '../utils/httpRequestUtil';
 import { COMMON_RULE } from '../contants/constant';
-import { getEl, removeClass } from '../utils/commonUtil';
+import { getEl, addClass, removeClass } from '../utils/commonUtil';
 import { URL } from '../contants/url';
 import TodoView from './todoView';
 import TodoEventManager from './todoEventManager';
@@ -14,14 +14,15 @@ class TodoController {
         this.todoEventManager = todoEventManager;
     }
 
-    async runTodoApp(): void {
-        await httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
+    runTodoApp(): void {
+        httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
             removeClass(getEl('#dimmed'), COMMON_RULE.ACTIVE_KEY);
+            addClass(getEl('#logout'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
         });
 
-        await httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
+        httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
             this.todoView.renderTodoMenu(logsData);
         });
 
