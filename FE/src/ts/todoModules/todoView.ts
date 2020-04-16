@@ -1,4 +1,5 @@
 import { getEl, getParentEl, removeClass } from '../utils/commonUtil';
+import { timeSince } from '../utils/todoUtil';
 import { COMMON_RULE } from '../contants/constant';
 import { makeColumns, addCard, makeModal, makeMenu, injectLog } from './todoViewTemplate';
 
@@ -46,6 +47,14 @@ class TodoView {
     addLogUpdate({ content }) {
         const logWrap = this.todoMenu.querySelector('.activity-log');
         injectLog(logWrap, content);
+    }
+
+    updateLogTimeData(logs) {
+        logs.forEach(log => {
+            const timeEl = log.querySelector('.log-time');
+            const time = timeEl.dataset.time;
+            timeEl.innerHTML = `${timeSince(new Date(time))} 전`;
+        });
     }
 }
 
