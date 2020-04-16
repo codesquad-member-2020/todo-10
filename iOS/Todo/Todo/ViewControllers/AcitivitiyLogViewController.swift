@@ -54,4 +54,8 @@ final class AcitivitiyLogViewController: UITableViewController {
         })
         return logCell
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Activities"
+    }
 }
