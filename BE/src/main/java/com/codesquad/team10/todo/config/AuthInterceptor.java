@@ -1,6 +1,5 @@
 package com.codesquad.team10.todo.config;
 
-
 import com.codesquad.team10.todo.exception.custom.ForbiddenException;
 import com.codesquad.team10.todo.service.AuthService;
 import org.slf4j.Logger;
