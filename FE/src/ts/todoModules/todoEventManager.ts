@@ -4,7 +4,7 @@ import { showColumnForm } from './eventHandles/column';
 import { onClickSubmit } from './eventHandles/form';
 import { showMenu, closeMenu } from './eventHandles/menu';
 import { checkDisabled } from '../utils/todoUtil';
-import { getParentEl, toggleClass } from '../utils/commonUtil';
+import { getParentEl, toggleParentClass } from '../utils/commonUtil';
 import TodoView from './todoView';
 
 interface ITodoEventList {
@@ -81,7 +81,7 @@ class TodoEventManager {
                 });
                 break;
             case 'form':
-                toggleClass({
+                toggleParentClass({
                     target: target,
                     containsClassName: 'btn-close',
                     closestClass: '.todo-form',
@@ -89,7 +89,7 @@ class TodoEventManager {
                 });
                 break;
             case 'modal-form':
-                toggleClass({
+                toggleParentClass({
                     target: target,
                     containsClassName: 'btn-close',
                     closestClass: '#modal',

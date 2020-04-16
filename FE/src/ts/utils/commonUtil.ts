@@ -33,9 +33,13 @@ function hasClass(target: HTMLElement, className: string): boolean {
     return target.classList.contains(className);
 }
 
-function toggleClass({ target, closestClass, containsClassName, toggleClassName }: IToggleClass): void {
+function toggleClass(target: HTMLElement, className: string): void {
+    target.classList.toggle(className);
+}
+
+function toggleParentClass({ target, closestClass, containsClassName, toggleClassName }: IToggleClass): void {
     if (!target.classList.contains(containsClassName)) return;
     target.closest(closestClass).classList.toggle(toggleClassName);
 }
 
-export { getEl, getEls, getParentEl, getClosestEl, addClass, removeClass, hasClass, toggleClass };
+export { getEl, getEls, getParentEl, getClosestEl, addClass, removeClass, hasClass, toggleClass, toggleParentClass };
