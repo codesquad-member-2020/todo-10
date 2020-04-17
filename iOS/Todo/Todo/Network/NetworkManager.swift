@@ -22,6 +22,7 @@ enum HTTPMethod: String, CustomStringConvertible {
     case post = "POST"
     case patch = "PATCH"
     case delete = "DELETE"
+    case put = "PUT"
     var description: String {
         return self.rawValue
     }
