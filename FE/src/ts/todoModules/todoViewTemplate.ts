@@ -101,25 +101,38 @@ function makeLogs(logs: []): string {
 
 function switchLog(log): string {
     const action = log.action;
-    const content = log.content.length > COMMON_RULE.LIMIT_LOG_CONTENT ? cutContent(log.content) : log.content;
-    switch (action) {
-        case 'ADDED':
-            return makeAddActionLog(log, content);
-            break;
-        case 'UPDATED':
-            return makeUpdateActionLog(log, content);
-            break;
-        case 'REMOVED':
-            return makeDeleteActionLog(log, content);
-            break;
-        case 'MOVED':
-            return makeMoveActionLog(log, content);
-            break;
+    if (log.content === null) return makeAddSectionLog(log);
+    else {
+        const content = log.content.length > COMMON_RULE.LIMIT_LOG_CONTENT ? cutContent(log.content) : log.content;
+        switch (action) {
+            case 'ADDED':
+                return makeAddActionLog(log, content);
+                break;
+            case 'UPDATED':
+                return makeUpdateActionLog(log, content);
+                break;
+            case 'REMOVED':
+                return makeDeleteActionLog(log, content);
+                break;
+            case 'MOVED':
+                return makeMoveActionLog(log, content);
+                break;
+        }
     }
 }
 
+
 function cutContent(content) {
     return `${content.substr(0, COMMON_RULE.LIMIT_LOG_CONTENT)}...`;
+}
+
+function makeAddSectionLog(log) {
+    return `<div class="log">
+                            <p class="log-msg">
+                                <span class="user"><strong>@${log.user}</strong></span>section added
+                                <strong class="log-text" title="${log.title}">${log.title}</strong></p>
+                            <p class="log-time" data-time="${log.createDateTime}">${timeSince(new Date(log.createDateTime))} 전</p>
+                        </div>`;
 }
 
 function makeAddActionLog(log, content) {
