@@ -407,15 +407,14 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 {
     "status": "SUCCESS",
     "content": {
-        "id": 1,
-        "user": "nigayo",
-        "action": "ADDED",
-        "target": "SECTION",
-        "title": "나머지",
-        "content": null,
-        "source": null,
-        "destination": null,
-        "createDateTime": "2020-04-18 00:19:15"
+        "log_id": 1,
+        "section": {
+            "id": 4,
+            "title": "추가 섹션",
+            "createDateTime": "2020-04-18 00:56:38",
+            "updateDateTime": "2020-04-18 00:56:38",
+            "cards": []
+        }
     }
 }
 ```
