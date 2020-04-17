@@ -2,6 +2,7 @@ package com.codesquad.team10.todo.service;
 
 import com.codesquad.team10.todo.dto.CardDTO;
 import com.codesquad.team10.todo.dto.LogDTO;
+import com.codesquad.team10.todo.dto.SectionDTO;
 import com.codesquad.team10.todo.entity.*;
 import com.codesquad.team10.todo.exception.custom.ResourceNotFoundException;
 import com.codesquad.team10.todo.repository.LogRepository;
@@ -30,6 +31,13 @@ public class LogService {
 
     public Log getLogById(int logId) {
         return logRepository.findById(logId).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    // 섹션 추가 로그
+    public Map<String, Object> getResponseDataWithLog(Action action, SectionDTO section, User user) {
+        Log log = new Log(user.getName(), action, Target.SECTION, section.getTitle(), null, null, null, user.getBoard());
+        logRepository.save(log);
+        return constructResonseData(section, log);
     }
 
     // 카드 추가, 수정 로그
@@ -94,6 +102,13 @@ public class LogService {
         map.put("log_id", log.getId());
         map.put("card_count_from_section", countOfCardFromSection);
         map.put("card_count_to_section", countOfCardToSection);
+        return map;
+    }
+
+    private Map<String, Object> constructResonseData(SectionDTO sectionDTO, Log log) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("section", sectionDTO);
+        map.put("log_id", log.getId());
         return map;
     }
 }

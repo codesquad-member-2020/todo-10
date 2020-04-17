@@ -4,6 +4,7 @@ import com.codesquad.team10.todo.exception.custom.UnmatchedRequestDataException;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Section {
@@ -20,6 +21,14 @@ public class Section {
     private List<Card> cards;
 
     private Integer board;
+
+    public Section() {}
+
+    public Section(String title, Integer board) {
+        this.title = title;
+        this.board = board;
+        this.cards = new ArrayList<>();
+    }
 
     public Section(Integer id, String title, LocalDateTime createDateTime, LocalDateTime updateDateTime, List<Card> cards, Integer board) {
         this.id = id;
