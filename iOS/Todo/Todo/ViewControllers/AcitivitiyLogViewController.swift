@@ -60,8 +60,12 @@ final class AcitivitiyLogViewController: UITableViewController {
         let urlString = EndPointFactory.createLogURLString(logID: logID)
         LogUseCase.makeLog(from: urlString, with: NetworkManager()) { logViewModel in
             guard let logViewModel = logViewModel else { return }
-            
+            self.insertAtFirst(logViewModel: logViewModel)
         }
+    }
+    
+    private func insertAtFirst(logViewModel: LogViewModel) {
+        logViewModels.insert(logViewModel, at: 0)
     }
 }
 
