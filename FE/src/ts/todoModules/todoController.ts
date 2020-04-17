@@ -16,6 +16,7 @@ class TodoController {
 
     runTodoApp(): void {
         httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
+            addClass(getEl('#add'), COMMON_RULE.ACTIVE_KEY);
             addClass(getEl('#logout'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
