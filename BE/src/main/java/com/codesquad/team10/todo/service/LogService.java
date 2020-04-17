@@ -33,11 +33,17 @@ public class LogService {
         return logRepository.findById(logId).orElseThrow(ResourceNotFoundException::new);
     }
 
-    // 섹션 추가 로그
+    // 섹션 추가, 삭제 로그
     public Map<String, Object> getResponseDataWithLog(Action action, SectionDTO section, User user) {
         Log log = new Log(user.getName(), action, Target.SECTION, section.getTitle(), null, null, null, user.getBoard());
         logRepository.save(log);
-        return constructResonseData(section, log);
+        switch (action) {
+            case ADDED:
+                return constructResonseData(section, log);
+            case REMOVED:
+                return constructResonseData(log);
+        }
+        return null;
     }
 
     // 카드 추가, 수정 로그
@@ -108,6 +114,12 @@ public class LogService {
     private Map<String, Object> constructResonseData(SectionDTO sectionDTO, Log log) {
         Map<String, Object> map = new HashMap<>();
         map.put("section", sectionDTO);
+        map.put("log_id", log.getId());
+        return map;
+    }
+
+    private Map<String, Object> constructResonseData(Log log) {
+        Map<String, Object> map = new HashMap<>();
         map.put("log_id", log.getId());
         return map;
     }
