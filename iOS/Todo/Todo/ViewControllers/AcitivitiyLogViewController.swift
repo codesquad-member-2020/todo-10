@@ -52,7 +52,7 @@ final class AcitivitiyLogViewController: UITableViewController {
     private func configureLogsCase() {
         LogsUseCase.makeLogs(with: NetworkManager()) { logViewModels in
             guard let logViewModels = logViewModels else { return }
-            self.logViewModels = logViewModels
+            self.logViewModels = logViewModels.reversed()
         }
     }
     
