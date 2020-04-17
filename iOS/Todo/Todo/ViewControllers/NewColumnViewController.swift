@@ -9,10 +9,12 @@
 import UIKit
 
 protocol NewColumnViewControllerDelegate {
-    func newColumnViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
+    func newColumnViewControllerDidCardCreate(column: Column)
+    func columnViewControllerDidMake(logID: LogID)
 }
 
 final class NewColumnViewController: UIViewController {
+    var delegate: NewColumnViewControllerDelegate?
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     
@@ -32,7 +34,13 @@ final class NewColumnViewController: UIViewController {
     }
     
     @objc private func createColumn() {
-        
+        ColumnUseCase.makeColumn(from: "temp", with: NetworkManager()) { (column, logID) in
+            guard let column = column else { return }
+            self.delegate?.newColumnViewControllerDidCardCreate(column: column)
+            
+            guard let logID = logID else { return }
+            self.delegate?.columnViewControllerDidMake(logID: logID)
+        }
     }
     
     private func configureCancelButton() {

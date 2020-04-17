@@ -96,13 +96,8 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func createColumnButtonTouched(_ sender: UIBarButtonItem) {
-        ColumnUseCase.makeColumn(from: "temp", with: NetworkManager()) { (column, logID) in
-            guard let column = column else { return }
-            self.addColumnViewController(column: column)
-            
-            guard let logID = logID else { return }
-            self.columnViewControllerDidMake(logID: logID)
-        }
+        
+
     }
 }
 
