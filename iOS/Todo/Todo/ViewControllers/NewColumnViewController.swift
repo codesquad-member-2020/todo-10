@@ -17,16 +17,25 @@ final class NewColumnViewController: UIViewController {
     var delegate: NewColumnViewControllerDelegate?
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
+    private let titleField = TitleField()
+    private let titleFieldDelegate = TitleFieldDelegate()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         configureCreateButton()
         configureCancelButton()
+        configureObserver()
+        configureTitleField()
     }
     
     private func configureView() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemBackground
+        view.layer.borderWidth = 0.8
+        view.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = true
     }
     
     private func configureCreateButton() {
@@ -57,6 +66,32 @@ final class NewColumnViewController: UIViewController {
         let constant: CGFloat = 27
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
         cancelButton.trailingAnchor.constraint(equalTo: createButton.leadingAnchor, constant: -constant).isActive = true
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateCreateButton),
+                                               name: Notification.isCorrectDidChange,
+                                               object: titleFieldDelegate)
+    }
+    
+    @objc private func updateCreateButton() {
+        if titleFieldDelegate.isCorrect {
+            createButton.configureEnable()
+        } else {
+            createButton.configureDisable()
+        }
+    }
+    
+    
+    private func configureTitleField() {
+        titleField.delegate = titleFieldDelegate
+        
+        view.addSubview(titleField)
+        let constant: CGFloat = 27
+        titleField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
+        titleField.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: constant).isActive = true
+        titleField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
     }
     
     @objc private func dismissCardViewController() {

@@ -148,7 +148,7 @@ extension MainViewController: NewColumnViewControllerDelegate, UIViewControllerT
 final class HalfSizePresentationController : UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let realCotainerView = containerView else { return .null }
-        return CGRect(x: realCotainerView.bounds.width/3,
+        return CGRect(x: realCotainerView.bounds.width / 3,
                       y: realCotainerView.bounds.height / 3,
                       width: realCotainerView.bounds.width / 3,
                       height: realCotainerView.bounds.height / 2)

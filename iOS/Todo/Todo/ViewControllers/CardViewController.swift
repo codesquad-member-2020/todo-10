@@ -18,10 +18,10 @@ class CardViewController: UIViewController {
     var columnID: Int?
     var delegate: CardViewControllerDelegate?
     private let cancelButton = CancelButton()
+    private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
     private let contentViewDelegate = ContentViewDelegate()
     private let createButton = CreateButton()
-    private let titleField = TitleField()
     private let contentView = ContentView()
     
     override func viewDidLoad() {
