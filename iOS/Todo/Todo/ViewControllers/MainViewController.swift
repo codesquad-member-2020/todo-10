@@ -8,14 +8,20 @@
 
 import UIKit
 
+enum Token {
+    static var authorizationToken: String?
+}
+
 final class MainViewController: UIViewController {
     private let columScrollView = ColumnScrollView()
+    private let activityLogViewController = AcitivitiyLogViewController()
     
     override func viewDidLoad() {
         configureScrollView()
         requestLogin { result in
             guard let result = result, result else { return }
             self.configureColumnsCase()
+            self.configureAcitivitiyLogViewController()
         }
     }
     
@@ -29,14 +35,17 @@ final class MainViewController: UIViewController {
     }
     
     private func requestLogin(completed: @escaping (Bool?) -> ()) {
-        LoginUseCase.requestLogin(with: NetworkManager()) { result in
-            completed(result)
+        LoginUseCase.makeToken(with: NetworkManager()) { token in
+            guard let token = token else { return }
+            Token.authorizationToken = token
+            completed(true)
         }
     }
-   
+    
     private func configureColumnsCase() {
         ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
-            columnsDataSource?.iterateColumns(with: { column in
+            guard let columnsDataSource = columnsDataSource else { return }
+            columnsDataSource.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
             })
         }
@@ -64,9 +73,34 @@ final class MainViewController: UIViewController {
         }()
         return columnViewController
     }
+    
+    private func configureAcitivitiyLogViewController() {
+        DispatchQueue.main.async {
+            self.addChild(self.activityLogViewController)
+            self.view.addSubview(self.activityLogViewController.view)
+            self.activityLogViewController.view.heightAnchor.constraint(equalTo: self.view.heightAnchor,
+                                                                        multiplier: 0.8).isActive = true
+            self.activityLogViewController.view.widthAnchor.constraint(equalTo: self.view.widthAnchor,
+                                                                       multiplier: 0.28).isActive = true
+            self.activityLogViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor,
+                                                                     constant: 74).isActive = true
+            self.activityLogViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,
+                                                                          constant: -5).isActive = true
+        }
+    }
+    
+    private let dateProvider: () -> Date = Date.init
+    @IBAction func menuButtonTouched(_ sender: UIBarButtonItem) {
+        activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
+        activityLogViewController.currentDate = dateProvider()
+    }
 }
 
 extension MainViewController: ColumnViewControllerDelegate {
+    func columnViewControllerDidMake(logID: LogID) {
+        activityLogViewController.configureLogUseCase(for: logID)
+    }
+    
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
         let doneIndex = 2
         guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }

@@ -11,6 +11,7 @@ import UIKit
 protocol CardViewControllerDelegate {
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
     func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int)
+    func cardViewControllerDidMake(logID: LogID)
 }
 
 class CardViewController: UIViewController {
@@ -36,12 +37,16 @@ class CardViewController: UIViewController {
     private func configureObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateCreateButton),
-                                               name: ContentViewDelegate.Notification.isCorrectDidChange,
+                                               name: Notification.isCorrectDidChange,
                                                object: contentViewDelegate)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateCreateButton),
+                                               name: Notification.isCorrectDidChange,
+                                               object: titleFieldDelegate)
     }
     
     @objc private func updateCreateButton() {
-        if contentViewDelegate.isCorrect {
+        if contentViewDelegate.isCorrect, titleFieldDelegate.isCorrect {
             createButton.configureEnable()
         } else {
             createButton.configureDisable()
@@ -109,10 +114,12 @@ class CardViewController: UIViewController {
     
     func configureTitle(text: String?) {
         titleField.text = text
+        titleFieldDelegate.validText(titleField)
     }
     
     func configureContent(text: String) {
         contentView.text = text
+        contentViewDelegate.validText(contentView)
     }
     
     func generateNewCard() -> NewCard {

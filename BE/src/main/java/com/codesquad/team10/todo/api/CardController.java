@@ -1,26 +1,21 @@
 package com.codesquad.team10.todo.api;
 
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.codesquad.team10.todo.constants.ResponseMessage;
 import com.codesquad.team10.todo.entity.*;
 import com.codesquad.team10.todo.exception.custom.*;
 import com.codesquad.team10.todo.repository.CardRepository;
-import com.codesquad.team10.todo.repository.LogRepository;
 import com.codesquad.team10.todo.repository.SectionRepository;
 import com.codesquad.team10.todo.response.ResponseData;
-import com.codesquad.team10.todo.util.JWTUtils;
+import com.codesquad.team10.todo.service.LogService;
 import com.codesquad.team10.todo.util.ModelMapper;
 import com.codesquad.team10.todo.dto.CardDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -31,12 +26,12 @@ public class CardController {
 
     private SectionRepository sectionRepository;
     private CardRepository cardRepository;
-    private LogRepository logRepository;
+    private LogService logService;
 
-    public CardController(SectionRepository sectionRepository, CardRepository cardRepository, LogRepository logRepository) {
+    public CardController(SectionRepository sectionRepository, CardRepository cardRepository, LogService logService) {
         this.sectionRepository = sectionRepository;
         this.cardRepository = cardRepository;
-        this.logRepository = logRepository;
+        this.logService = logService;
     }
 
     @PostMapping("")
@@ -50,16 +45,11 @@ public class CardController {
 
         logger.debug("new card: {}", newCard);
 
-        // 섹션 내용 변경
+        // 섹션 내용 저장
         sectionRepository.save(section);
         newCard = cardRepository.findById(newCard.getId()).orElseThrow(ResourceNotFoundException::new);
-        // dto 생성
-        CardDTO cardDTO = (CardDTO) ModelMapper.of(newCard);
-        // 로그 추가
-        Log log = new Log(loginUser.getName(), Action.ADDED, Target.CARD, newCard.getTitle(), newCard.getContent(), null, section.getTitle(), loginUser.getBoard());
-        logRepository.save(log);
-        // 반환 데이터
-        Map<String, Object> responseData = constructResonseData(cardDTO, log, section.getCards().size());
+        // 응답 객체 및 로그 생성
+        Map<String, Object> responseData = logService.getResponseDataWithLog(Action.ADDED, (CardDTO) ModelMapper.of(newCard), section, loginUser);
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -77,15 +67,11 @@ public class CardController {
         if (section.getCards().size() == 0)
             throw new UnmatchedRequestDataException();
 
-        // 카드 내용 수정
+        // 섹션 내용 저장
         CardDTO resultCard = (CardDTO) ModelMapper.of(section.updateCard(updateCard, body.get("title"), body.get("content")));
         sectionRepository.save(section);
-        // 로그 추가
-        Log log = new Log(loginUser.getName(), Action.UPDATED, Target.CARD, resultCard.getTitle(), resultCard.getContent(), null, null, loginUser.getBoard());
-        logRepository.save(log);
-        logger.debug("log: {}", log);
-        //반환 데이터
-        Map<String, Object> responseData = constructResonseData(resultCard, log, section.getCards().size());
+        // 응답 객체 및 로그 생성
+        Map<String, Object> responseData = logService.getResponseDataWithLog(Action.UPDATED, resultCard, section, loginUser);
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -101,10 +87,8 @@ public class CardController {
 
         section.deleteCard(targetCard);
         sectionRepository.save(section);
-        Log log = new Log(loginUser.getName(), Action.REMOVED, Target.CARD, targetCard.getTitle(), targetCard.getContent(), section.getTitle(), null, loginUser.getBoard());
-        logRepository.save(log);
-        logger.debug("log: {}", log);
-        Map<String, Object> responseData = constructResonseData(log, section.getCards().size());
+        // 응답 객체 및 로그 생성
+        Map<String, Object> responseData = logService.getResponseDataWithLog(Action.REMOVED, targetCard, section, loginUser);
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 
@@ -127,12 +111,7 @@ public class CardController {
 
             section.moveCard(moveCard, cardTo);
             sectionRepository.save(section);
-            Log log = new Log(loginUser.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), section.getTitle(), null, loginUser.getBoard());
-            // dto 생성
-            CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
-            logRepository.save(log);
-            logger.debug("log: {}", log);
-            Map<String, Object> responseData = constructResonseData(log, section.getCards().size(), null);
+            Map<String, Object> responseData = logService.getResponseDataWithLog(Action.MOVED, moveCard, section, loginUser);
             return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
         }
         if (sectionId == sectionTo)
@@ -147,35 +126,7 @@ public class CardController {
         toSection.insertCard(cardTo, moveCard);
         sectionRepository.save(fromSection);
         sectionRepository.save(toSection);
-        Log log = new Log(loginUser.getName(), Action.MOVED, Target.CARD, moveCard.getTitle(), moveCard.getContent(), fromSection.getTitle(), toSection.getTitle(), loginUser.getBoard());
-        // dto 생성
-        CardDTO cardDTO = (CardDTO) ModelMapper.of(moveCard);
-        logRepository.save(log);
-        logger.debug("log: {}", log);
-        Map<String, Object> responseData = constructResonseData(log, fromSection.getCards().size(), toSection.getCards().size());
+        Map<String, Object> responseData = logService.getResponseDataWithLog(moveCard, fromSection, toSection, loginUser);
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
-    }
-
-    private Map<String, Object> constructResonseData(CardDTO cardDTO, Log log, Integer countOfCard) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("card", cardDTO);
-        map.put("log_id", log.getId());
-        map.put("card_count", countOfCard);
-        return map;
-    }
-
-    private Map<String, Object> constructResonseData(Log log, Integer countOfCard) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("log_id", log.getId());
-        map.put("card_count", countOfCard);
-        return map;
-    }
-
-    private Map<String, Object> constructResonseData(Log log, Integer countOfCardFromSection, Integer countOfCardToSection) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("log_id", log.getId());
-        map.put("card_count_from_section", countOfCardFromSection);
-        map.put("card_count_to_section", countOfCardToSection);
-        return map;
     }
 }
