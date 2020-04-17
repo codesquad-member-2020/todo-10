@@ -11,11 +11,7 @@ import UIKit
 final class AcitivitiyLogViewController: UITableViewController {
     private var logViewModels: LogViewModels!
     
-    var currentDate: Date? {
-        didSet {
-            updateView()
-        }
-    }
+    var currentDate: Date? { didSet { updateView() } }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +68,7 @@ extension AcitivitiyLogViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell,
-        let logViewModel = logViewModels.logViewModel(at: indexPath.row)
+            let logViewModel = logViewModels.logViewModel(at: indexPath.row)
             else { return LogCell() }
         
         logViewModel.performBind(changed: { log in
