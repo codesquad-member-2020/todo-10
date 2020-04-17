@@ -98,6 +98,8 @@ final class ColumnViewController: UIViewController {
         MoveUseCase.requestMove(from: urlString,
                                 with: MockCardMoveSameColumnsSuccessStub()) { logID in
                                     guard let logID = logID else { return }
+                                    self.columnTableDataSource.moveCardViewModel(at: sourceIndexPath.row,
+                                                                                 to: destinationIndexPath.row)
                                     self.delegate?.columnViewControllerDidMake(logID: logID)
         }
     }
