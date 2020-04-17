@@ -33,7 +33,7 @@ struct LogsUseCase {
                                             jsonDecoder.dateDecodingStrategy = .formatted(DateFormat.cardDateFormatter)
                                             return jsonDecoder
                                         }()
-                                        guard let response = try? jsonDecoder.decode(LogsResponse.self, from: data) else { return }
+                                        guard let response = try? jsonDecoder.decode(LogsResponse.self, from: data) else {  return }
                                         guard response.status == .success else { return }
                                         let logViewModels = response.content.map { LogViewModel(log: $0) }
                                         completed(logViewModels)

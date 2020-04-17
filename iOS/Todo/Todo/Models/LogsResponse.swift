@@ -19,7 +19,7 @@ struct Log: Codable {
     let action: Action
     let target: Target
     var title: String?
-    let content: String
+    var content: String?
     var source: String?
     var destination: String?
     let createDateTime: Date
