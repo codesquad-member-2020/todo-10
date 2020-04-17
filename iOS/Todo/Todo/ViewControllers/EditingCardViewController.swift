@@ -26,6 +26,7 @@ final class EditingCardViewController: CardViewController {
                                                                                                          row: row)
                                                             
                                                             guard let logID = logID else { return }
+                                                            self.delegate?.cardViewControllerDidMake(logID: logID)
         }
         dismiss(animated: true, completion: nil)
     }

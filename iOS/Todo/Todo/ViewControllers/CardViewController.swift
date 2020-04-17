@@ -11,6 +11,7 @@ import UIKit
 protocol CardViewControllerDelegate {
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
     func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int)
+    func cardViewControllerDidMake(logID: LogID)
 }
 
 class CardViewController: UIViewController {

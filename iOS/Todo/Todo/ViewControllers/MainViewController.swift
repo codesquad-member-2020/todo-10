@@ -97,6 +97,10 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: ColumnViewControllerDelegate {
+    func columnViewControllerDidMake(logID: LogID) {
+        
+    }
+    
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
         let doneIndex = 2
         guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }
