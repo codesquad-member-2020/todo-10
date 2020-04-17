@@ -87,25 +87,25 @@ final class LogViewModel: ViewModelBinding {
         return calendar
     }()
     
-    func time(now date: Date?) -> String? {
-        guard let date = date else { return nil }
-        let currentDateComponents = calendar.dateComponents([.day, .hour, .minute], from: date)
-        guard let currentDay = currentDateComponents.day,
-            let currentHour = currentDateComponents.hour,
-            let currentMinute = currentDateComponents.minute else { return nil }
-        let currentSumMinutes = currentDay * 24 * 60 + currentHour * 60 + currentMinute
+    func time(now currentDate: Date?) -> String? {
+        guard let currentDate = currentDate,
+            let currentMinutes = minutes(date: currentDate),
+        let createMinutes = minutes(date: log.createDateTime) else { return nil }
         
-        let createdTimeComponents = calendar.dateComponents([.day, .hour, .minute], from: log.createDateTime)
-        guard let createdDay = createdTimeComponents.day,
-            let createdHour = createdTimeComponents.hour,
-            let createdMinute = createdTimeComponents.minute else { return nil }
-        let createdSumMinutes = createdDay * 24 * 60 + createdHour * 60 + createdMinute
-        let diffMinutes = currentSumMinutes - createdSumMinutes
-        let resultHour = diffMinutes / 60
-        let resultMinute = diffMinutes % 60
+        let diff = currentMinutes - createMinutes
+        let resultHour = diff / 60
+        let resultMinute = diff % 60
         if resultHour > 0 {
             return "\(resultHour)hour \(resultMinute)minutes ago"
         }
         return "\(resultMinute)minutes ago"
+    }
+    
+    private func minutes(date: Date) -> Int? {
+        let components = calendar.dateComponents([.day, .hour, .minute], from: date)
+        guard let currentDay = components.day,
+        let currentHour = components.hour,
+        let currentMinute = components.minute else { return nil }
+        return currentDay * 24 * 60 + currentHour * 60 + currentMinute
     }
 }
