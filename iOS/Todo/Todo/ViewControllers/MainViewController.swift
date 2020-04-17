@@ -103,10 +103,12 @@ extension MainViewController: ColumnViewControllerDelegate {
     
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
         let doneColumnID = 3
-        children.forEach { viewController in
-            guard let columnViewController = viewController as? ColumnViewController,
-                columnViewController.columnID == doneColumnID else { return }
-            columnViewController.insertToFirst(cardViewModel: cardViewModel)
+        DispatchQueue.main.async {
+            self.children.forEach { viewController in
+                guard let columnViewController = viewController as? ColumnViewController,
+                    columnViewController.columnID == doneColumnID else { return }
+                columnViewController.insertToFirst(cardViewModel: cardViewModel)
+            }
         }
     }
     
