@@ -85,8 +85,20 @@ final class ColumnViewController: UIViewController {
         }
     }
     
-    @objc private func configureMoveUseCase() {
-        
+    @objc private func configureMoveUseCase(_ notification: NSNotification) {
+        guard let columnID = columnID ,
+            let userInfo = notification.userInfo,
+            let sourceIndexPath = userInfo["sourceIndexPath"] as? IndexPath,
+            let destinationIndexPath = userInfo["destinationIndexPath"] as? IndexPath,
+            let cardID = columnTableDataSource.cardViewModel(at: sourceIndexPath.row)?.cardID else { return }
+        let urlString = EndPointFactory.moveLogURLString(columnID: columnID,
+                                                         newColumnId: nil,
+                                                         cardID: cardID,
+                                                         newIndex: destinationIndexPath.row)
+        MoveUseCase.requestMove(from: urlString,
+                                with: MockCardMoveSameColumnsSuccessStub()) { logID in
+                                    
+        }
     }
     
     private func updateBadge() {

@@ -86,6 +86,8 @@ extension ColumnTableDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         NotificationCenter.default.post(name: Notification.cardViewModelDidMoveInSameColumn,
-                                        object: self)
+                                        object: self,
+                                        userInfo: ["sourceIndexPath": sourceIndexPath,
+                                                   "destinationIndexPath": destinationIndexPath])
     }
 }
