@@ -102,17 +102,24 @@ extension MainViewController: ColumnViewControllerDelegate {
     }
     
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
-        let doneIndex = 2
-        guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }
-        doneViewController.addToLast(cardViewModel: cardViewModel)
+        let doneColumnID = 3
+        DispatchQueue.main.async {
+            self.children.forEach { viewController in
+                guard let columnViewController = viewController as? ColumnViewController,
+                    columnViewController.columnID == doneColumnID else { return }
+                columnViewController.insertToFirst(cardViewModel: cardViewModel)
+            }
+        }
     }
     
     func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int) {
-        children.forEach { viewController in
-            guard let columnViewController = viewController as? ColumnViewController,
-                let columnID = columnViewController.columnID,
-                columnID == sourceColumnID else { return }
-            columnViewController.removeCardViewModel(row: sourceRow)
+        DispatchQueue.main.async {
+            self.children.forEach { viewController in
+                guard let columnViewController = viewController as? ColumnViewController,
+                    let columnID = columnViewController.columnID,
+                    columnID == sourceColumnID else { return }
+                columnViewController.removeCardViewModel(row: sourceRow)
+            }
         }
     }
 }

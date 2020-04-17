@@ -11,5 +11,6 @@ import Foundation
 struct DragObject {
     let cardViewModel: CardViewModel
     let columnID: Int
+    let cardID: Int
     let row: Int
 }

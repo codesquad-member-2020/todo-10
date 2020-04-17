@@ -98,6 +98,28 @@ enum StubJsonData {
     }
     """.data(using: .utf8)
     
+    static let successMoveSameColumnsResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": {
+            "log_id": 7,
+            "card_count_to_section": null,
+            "card_count_from_section": 3
+        }
+    }
+    """.data(using: .utf8)
+    
+    static let successMoveDifferentColumnsResponseStub = """
+    {
+        "status": "SUCCESS",
+        "content": {
+            "log_id": 5,
+            "card_count_to_section": 1,
+            "card_count_from_section": 3
+        }
+    }
+    """.data(using: .utf8)
+    
     static let successLogsResponseStub = """
     {
         "status": "SUCCESS",

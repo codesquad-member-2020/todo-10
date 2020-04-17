@@ -72,12 +72,35 @@ final class ColumnViewController: UIViewController {
                                                selector: #selector(updateView),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(configureMoveUseCase),
+                                               name: ColumnTableDataSource.Notification.cardViewModelDidMoveInSameColumn,
+                                               object: columnTableDataSource)
     }
     
     @objc private func updateView() {
         DispatchQueue.main.async {
             self.updateBadge()
             self.columnTable.reloadData()
+        }
+    }
+    
+    @objc private func configureMoveUseCase(_ notification: NSNotification) {
+        guard let columnID = columnID ,
+            let userInfo = notification.userInfo,
+            let sourceIndexPath = userInfo["sourceIndexPath"] as? IndexPath,
+            let destinationIndexPath = userInfo["destinationIndexPath"] as? IndexPath,
+            let cardID = columnTableDataSource.cardViewModel(at: sourceIndexPath.row)?.cardID else { return }
+        let urlString = EndPointFactory.createMoveLogURLString(columnID: columnID,
+                                                         newColumnId: nil,
+                                                         cardID: cardID,
+                                                         newIndex: destinationIndexPath.row)
+        MoveUseCase.requestMove(from: urlString,
+                                with: NetworkManager()) { logID in
+                                    guard let logID = logID else { return }
+                                    self.columnTableDataSource.moveCardViewModel(at: sourceIndexPath.row,
+                                                                                 to: destinationIndexPath.row)
+                                    self.delegate?.columnViewControllerDidMake(logID: logID)
         }
     }
     
@@ -101,8 +124,8 @@ final class ColumnViewController: UIViewController {
         columnTable.dataSource = columnTableDataSource
     }
     
-    func addToLast(cardViewModel: CardViewModel) {
-        columnTableDataSource.append(cardViewModel: cardViewModel)
+    func insertToFirst(cardViewModel: CardViewModel) {
+        columnTableDataSource.insert(cardViewModel: cardViewModel, at: 0)
     }
     
     func removeCardViewModel(row: Int) {
@@ -130,9 +153,20 @@ extension ColumnViewController: UITableViewDelegate {
     }
     
     private func moveRowToDone(_ tableView: UITableView, for indexPath: IndexPath) {
-        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
-        delegate?.columnViewControllerDidMoveToDone(cardViewModel)
-        columnTableDataSource.removeCardViewModel(at: indexPath.row)
+        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+        let columnID = columnID, let cardID = cardViewModel.cardID else { return }
+        let doneColumnID = 3
+        let firstIndex = 0
+        let urlString = EndPointFactory.createMoveLogURLString(columnID: columnID,
+                                                               newColumnId: doneColumnID,
+                                                               cardID: cardID,
+                                                               newIndex: firstIndex)
+        MoveUseCase.requestMove(from: urlString, with: NetworkManager()) { logID in
+            guard let logID = logID else { return }
+            self.delegate?.columnViewControllerDidMoveToDone(cardViewModel)
+            self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
+            self.delegate?.columnViewControllerDidMake(logID: logID)
+        }
     }
     
     private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
@@ -184,11 +218,15 @@ extension ColumnViewController: UITableViewDelegate {
 extension ColumnViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let columnID = columnID,
-            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return [] }
+            let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+            let cardID = cardViewModel.cardID else { return [] }
         
         let itemProvider = NSItemProvider()
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = DragObject(cardViewModel: cardViewModel, columnID: columnID, row: indexPath.row)
+        dragItem.localObject = DragObject(cardViewModel: cardViewModel,
+                                          columnID: columnID,
+                                          cardID: cardID,
+                                          row: indexPath.row)
         return [dragItem]
     }
 }
@@ -212,18 +250,27 @@ extension ColumnViewController: UITableViewDropDelegate {
         if let indexPath = coordinator.destinationIndexPath {
             destinationIndexPath = indexPath
         } else {
-            // Get last index path of table view.
             let section = tableView.numberOfSections - 1
             let row = tableView.numberOfRows(inSection: section)
             destinationIndexPath = IndexPath(row: row, section: section)
         }
         
         coordinator.items.forEach { item in
-            guard let dragObject = item.dragItem.localObject as? DragObject else { return }
-            delegate?.columnViewControllerDidMove(sourceColumnID: dragObject.columnID,
-                                                  sourceRow: dragObject.row)
-            columnTableDataSource.add(cardViewModel: dragObject.cardViewModel,
-                                      at: destinationIndexPath.row)
+            guard let dragObject = item.dragItem.localObject as? DragObject,
+                let columnID = columnID else { return }
+            let urlString = EndPointFactory.createMoveLogURLString(columnID: dragObject.columnID,
+                                                             newColumnId: columnID,
+                                                             cardID: dragObject.cardID,
+                                                             newIndex: destinationIndexPath.row)
+            MoveUseCase.requestMove(from: urlString,
+                                    with: NetworkManager()) { logID in
+                                        guard let logID = logID else { return }
+                                        self.delegate?.columnViewControllerDidMake(logID: logID)
+                                        self.delegate?.columnViewControllerDidMove(sourceColumnID: dragObject.columnID,
+                                                                                   sourceRow: dragObject.row)
+                                        self.columnTableDataSource.insert(cardViewModel: dragObject.cardViewModel,
+                                                                       at: destinationIndexPath.row)
+            }
         }
     }
 }

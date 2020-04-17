@@ -25,4 +25,12 @@ struct EndPointFactory {
     static func createLogURLString(logID: LogID) -> String {
         return "\(EndPoints.log)/\(logID.value)"
     }
+    
+    static func createMoveLogURLString(columnID: Int, newColumnId: Int?, cardID: Int, newIndex: Int) -> String {
+        if newColumnId == nil {
+            return "\(EndPoints.column)/\(columnID)/card/\(cardID)?cardTo=\(newIndex)"
+        } else {
+            return "\(EndPoints.column)/\(columnID)/card/\(cardID)?cardTo=\(newIndex)&sectionTo=\(newColumnId!)"
+        }
+    }
 }
