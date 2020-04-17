@@ -96,9 +96,12 @@ final class LogViewModel: ViewModelBinding {
         let resultHour = diff / 60
         let resultMinute = diff % 60
         if resultHour > 0 {
-            return "\(resultHour)hour \(resultMinute)minutes ago"
+            return "\(resultHour)hours ago"
+        } else if resultMinute > 0 {
+            return "\(resultMinute)minutes ago"
+        } else {
+            return "just before"
         }
-        return "\(resultMinute)minutes ago"
     }
     
     private func minutes(date: Date) -> Int? {
