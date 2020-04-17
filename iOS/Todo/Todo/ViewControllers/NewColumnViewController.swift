@@ -49,7 +49,9 @@ final class NewColumnViewController: UIViewController {
     }
     
     @objc private func createColumn() {
-        ColumnUseCase.makeColumn(from: "temp", with: NetworkManager()) { (column, logID) in
+        guard let text = titleField.text else { return }
+        guard let data = Title(value: text).encodeToJSONData() else { return }
+        ColumnUseCase.makeColumn(body: data, with: NetworkManager()) { (column, logID) in
             guard let column = column else { return }
             self.delegate?.newColumnViewControllerDidCardCreate(column: column)
             
@@ -99,3 +101,15 @@ final class NewColumnViewController: UIViewController {
     }
 }
 
+struct Title: Codable {
+    let title: String
+    
+    init(value: String) {
+        self.title = value
+    }
+    
+    func encodeToJSONData() -> Data? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        return data
+    }
+}
