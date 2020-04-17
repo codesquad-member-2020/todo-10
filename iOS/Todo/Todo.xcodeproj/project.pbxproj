@@ -38,6 +38,7 @@
 		5A7CEB2D2449559E00B2CFC7 /* MoveResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB2C2449559E00B2CFC7 /* MoveResponse.swift */; };
 		5A7CEB2F244956D300B2CFC7 /* MoveUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB2E244956D300B2CFC7 /* MoveUseCase.swift */; };
 		5A7CEB3124497C5900B2CFC7 /* ColumnUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB3024497C5900B2CFC7 /* ColumnUseCase.swift */; };
+		5A7CEB3324497E4200B2CFC7 /* NewColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB3224497E4200B2CFC7 /* NewColumnViewController.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* ColumnsResponse.swift */; };
@@ -118,6 +119,7 @@
 		5A7CEB2C2449559E00B2CFC7 /* MoveResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveResponse.swift; sourceTree = "<group>"; };
 		5A7CEB2E244956D300B2CFC7 /* MoveUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveUseCase.swift; sourceTree = "<group>"; };
 		5A7CEB3024497C5900B2CFC7 /* ColumnUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnUseCase.swift; sourceTree = "<group>"; };
+		5A7CEB3224497E4200B2CFC7 /* NewColumnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewColumnViewController.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* ColumnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsResponse.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				5AB8D555243B40FF00387EAE /* MainViewController.swift */,
 				5AB8D584243B4FC700387EAE /* ColumnViewController.swift */,
 				5AB8D586243B54B600387EAE /* AcitivitiyLogViewController.swift */,
+				5A7CEB3224497E4200B2CFC7 /* NewColumnViewController.swift */,
 				5A7937FD2440150700D59611 /* CardViewController.swift */,
 				5ADF26BC2445ED02008C15CA /* NewCardViewController.swift */,
 				5ADF26BE2445ED11008C15CA /* EditingCardViewController.swift */,
@@ -558,6 +561,7 @@
 				5A79380724419F5600D59611 /* FormatImageView.swift in Sources */,
 				5ADF26BB2445DF5B008C15CA /* EndPointFactory.swift in Sources */,
 				5A7CEB2D2449559E00B2CFC7 /* MoveResponse.swift in Sources */,
+				5A7CEB3324497E4200B2CFC7 /* NewColumnViewController.swift in Sources */,
 				5A7937FE2440150700D59611 /* CardViewController.swift in Sources */,
 				5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */,
 				5A7CEB152448137800B2CFC7 /* LogsUseCase.swift in Sources */,
