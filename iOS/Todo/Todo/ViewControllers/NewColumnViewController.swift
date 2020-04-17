@@ -26,7 +26,7 @@ final class NewColumnViewController: UIViewController {
     }
     
     private func configureView() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .lightGray
     }
     
     private func configureCreateButton() {
