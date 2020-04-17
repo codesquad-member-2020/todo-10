@@ -12,7 +12,13 @@ final class LogViewModels {
     enum Notification {
         static let logViewModelsDidChange = Foundation.Notification.Name("logViewModelsDidChange")
     }
-    private var logViewModels: [LogViewModel]
+    
+    private var logViewModels: [LogViewModel] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.logViewModelsDidChange,
+                                            object: self)
+        }
+    }
     
     init(logViewModels: [LogViewModel]) {
         self.logViewModels = logViewModels
