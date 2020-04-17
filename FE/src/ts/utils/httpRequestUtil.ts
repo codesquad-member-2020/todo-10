@@ -24,6 +24,7 @@ const httpRequest = {
                 'Authorization': sessionStorage.getItem('TODO-TOKEN')
             }
         };
+        document.querySelector('#dimmed').classList.add('active');
         document.querySelector('#dimmed').innerHTML = drawLoading();
         const response = await fetch(url, option);
         const resPromise = await response.json();
