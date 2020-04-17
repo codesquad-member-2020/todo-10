@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: MockColumnsSuccessStub()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
             guard let columnsDataSource = columnsDataSource else { return }
             columnsDataSource.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
@@ -108,11 +108,13 @@ extension MainViewController: ColumnViewControllerDelegate {
     }
     
     func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int) {
-        children.forEach { viewController in
-            guard let columnViewController = viewController as? ColumnViewController,
-                let columnID = columnViewController.columnID,
-                columnID == sourceColumnID else { return }
-            columnViewController.removeCardViewModel(row: sourceRow)
+        DispatchQueue.main.async {
+            self.children.forEach { viewController in
+                guard let columnViewController = viewController as? ColumnViewController,
+                    let columnID = columnViewController.columnID,
+                    columnID == sourceColumnID else { return }
+                columnViewController.removeCardViewModel(row: sourceRow)
+            }
         }
     }
 }
