@@ -72,6 +72,10 @@ final class ColumnViewController: UIViewController {
                                                selector: #selector(updateView),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
                                                object: columnTableDataSource)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(configureMoveUseCase),
+                                               name: ColumnTableDataSource.Notification.cardViewModelDidMoveInSameColumn,
+                                               object: columnTableDataSource)
     }
     
     @objc private func updateView() {
@@ -79,6 +83,10 @@ final class ColumnViewController: UIViewController {
             self.updateBadge()
             self.columnTable.reloadData()
         }
+    }
+    
+    @objc private func configureMoveUseCase() {
+        
     }
     
     private func updateBadge() {
