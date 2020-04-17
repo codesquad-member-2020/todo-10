@@ -20,8 +20,13 @@ final class NewColumnViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCancelButton()
+        configureView()
         configureCreateButton()
+        configureCancelButton()
+    }
+    
+    private func configureView() {
+        view.backgroundColor = .systemBackground
     }
     
     private func configureCreateButton() {
@@ -41,6 +46,7 @@ final class NewColumnViewController: UIViewController {
             guard let logID = logID else { return }
             self.delegate?.columnViewControllerDidMake(logID: logID)
         }
+        dismiss(animated: true, completion: nil)
     }
     
     private func configureCancelButton() {

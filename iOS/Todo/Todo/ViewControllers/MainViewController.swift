@@ -94,11 +94,6 @@ final class MainViewController: UIViewController {
         activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
         activityLogViewController.currentDate = dateProvider()
     }
-    
-    @IBAction func createColumnButtonTouched(_ sender: UIBarButtonItem) {
-        
-
-    }
 }
 
 extension MainViewController: ColumnViewControllerDelegate {
@@ -126,5 +121,17 @@ extension MainViewController: ColumnViewControllerDelegate {
                 columnViewController.removeCardViewModel(row: sourceRow)
             }
         }
+    }
+}
+
+extension MainViewController: NewColumnViewControllerDelegate {
+    func newColumnViewControllerDidCardCreate(column: Column) {
+        addColumnViewController(column: column)
+    }
+    
+    @IBAction func createColumnButtonTouched(_ sender: UIBarButtonItem) {
+        let newColumnViewController = NewColumnViewController()
+        newColumnViewController.delegate = self
+        present(newColumnViewController, animated: true)
     }
 }
