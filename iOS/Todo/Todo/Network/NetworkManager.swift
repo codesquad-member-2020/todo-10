@@ -71,13 +71,6 @@ struct MockColumnsSuccessStub: NetworkManagable {
     }
 }
 
-struct MockLogsSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successLogsResponseStub, nil, nil)
-    }
-}
-
 struct MockCardDeleteSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
@@ -94,5 +87,19 @@ struct MockCardCreateSuccessStub: NetworkManagable {
 struct MockCardEditSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         resultHandler(StubJsonData.successEditingResponseStub, nil, nil)
+    }
+}
+
+struct MockLogsSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successLogsResponseStub, nil, nil)
+    }
+}
+
+struct MockLogSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
+                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successLogResponseStub, nil, nil)
     }
 }
