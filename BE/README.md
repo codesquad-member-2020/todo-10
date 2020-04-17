@@ -420,6 +420,25 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 }
 ```
 
+## 섹션 삭제 요청
+
+#### DELETE `/board/section/{sectionId}`
+
+### 요청 데이터
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
+
+### JSON 응답
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "log_id": 4
+    }
+}
+```
+
 ## 전체 로그 요청
 
 #### GET `/board/logs`
