@@ -17,13 +17,12 @@ enum DateFormat {
 }
 
 struct LogsUseCase {
-    
     enum EndPoints {
-        static let logs = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/logs"
+        static let log = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/logs"
     }
     
     static func makeLogs(with manager: NetworkManagable, completed: @escaping ([LogViewModel]?) -> ()) {
-        try? manager.requestResource(from: EndPoints.logs, method: .get,
+        try? manager.requestResource(from: EndPoints.log, method: .get,
                                      body: nil, format: Format.jsonType,
                                      headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) {
                                         (data, urlResponse, error) in

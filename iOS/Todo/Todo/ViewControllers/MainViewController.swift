@@ -98,7 +98,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: ColumnViewControllerDelegate {
     func columnViewControllerDidMake(logID: LogID) {
-        
+        activityLogViewController.configureLogUseCase(for: logID)
     }
     
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {

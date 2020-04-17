@@ -56,6 +56,17 @@ final class AcitivitiyLogViewController: UITableViewController {
         }
     }
     
+    func configureLogUseCase(for logID: LogID) {
+        let urlString = EndPointFactory.createLogURLString(logID: logID)
+        LogUseCase.makeLog(from: urlString, with: NetworkManager()) { logViewModel in
+            guard let logViewModel = logViewModel else { return }
+            
+        }
+    }
+}
+
+extension AcitivitiyLogViewController {
+    //MARK:- UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let maxCount = 15
         let count = logViewModels.count < maxCount ? logViewModels.count : maxCount
