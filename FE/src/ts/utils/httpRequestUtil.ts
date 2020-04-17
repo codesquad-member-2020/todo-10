@@ -1,11 +1,13 @@
 import { drawLoading } from '../loginModules/tamplate';
 const httpRequest = {
+    dimmed: document.querySelector('#dimmed'),
+
     async login(url: string, data: object) {
         const option = {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         };
         const response = await fetch(url, option);
         const headers = [...response.headers];
@@ -21,13 +23,14 @@ const httpRequest = {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'Authorization': sessionStorage.getItem('TODO-TOKEN')
-            }
+                Authorization: sessionStorage.getItem('TODO-TOKEN'),
+            },
         };
-        document.querySelector('#dimmed').classList.add('active');
-        document.querySelector('#dimmed').innerHTML = drawLoading();
+        this.dimmed.classList.add('active');
+        this.dimmed.innerHTML = drawLoading();
         const response = await fetch(url, option);
         const resPromise = await response.json();
+        this.dimmed.classList.remove('active');
         return resPromise;
     },
 
@@ -37,7 +40,7 @@ const httpRequest = {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': sessionStorage.getItem('TODO-TOKEN')
+                Authorization: sessionStorage.getItem('TODO-TOKEN'),
             },
             body: JSON.stringify(data),
         };
@@ -51,8 +54,8 @@ const httpRequest = {
             mode: 'cors',
             method: 'DELETE',
             headers: {
-                'Authorization': sessionStorage.getItem('TODO-TOKEN')
-            }
+                Authorization: sessionStorage.getItem('TODO-TOKEN'),
+            },
         };
         const response = await fetch(url, option);
         const resPromise = await response.json();
@@ -65,7 +68,7 @@ const httpRequest = {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': sessionStorage.getItem('TODO-TOKEN')
+                Authorization: sessionStorage.getItem('TODO-TOKEN'),
             },
             body: JSON.stringify(data),
         };
@@ -79,7 +82,7 @@ const httpRequest = {
             method: 'PUT',
             mode: 'cors',
             headers: {
-                'Authorization': sessionStorage.getItem('TODO-TOKEN')
+                Authorization: sessionStorage.getItem('TODO-TOKEN'),
             },
         };
         const response = await fetch(url, option);

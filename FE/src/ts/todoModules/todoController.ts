@@ -16,13 +16,13 @@ class TodoController {
 
     runTodoApp(): void {
         httpRequest.get(URL.DEV.BOARD_API()).then(todoData => {
-            removeClass(getEl('#dimmed'), COMMON_RULE.ACTIVE_KEY);
             addClass(getEl('#logout'), COMMON_RULE.ACTIVE_KEY);
             this.todoView.renderTodoApp(todoData);
             this.todoView.renderTodoModal();
         });
 
         httpRequest.get(URL.DEV.LOGS_API()).then(logsData => {
+            debugger;
             this.todoView.renderTodoMenu(logsData);
         });
 
