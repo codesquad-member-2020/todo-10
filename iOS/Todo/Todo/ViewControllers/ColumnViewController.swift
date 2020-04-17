@@ -97,7 +97,8 @@ final class ColumnViewController: UIViewController {
                                                          newIndex: destinationIndexPath.row)
         MoveUseCase.requestMove(from: urlString,
                                 with: MockCardMoveSameColumnsSuccessStub()) { logID in
-                                    
+                                    guard let logID = logID else { return }
+                                    self.delegate?.columnViewControllerDidMake(logID: logID)
         }
     }
     
