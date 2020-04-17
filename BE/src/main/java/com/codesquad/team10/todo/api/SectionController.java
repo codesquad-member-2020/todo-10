@@ -13,10 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -48,6 +45,16 @@ public class SectionController {
         sectionRepository.save(section);
         SectionDTO sectionDTO = (SectionDTO) ModelMapper.of(sectionRepository.findById(section.getId()).orElseThrow(ResourceNotFoundException::new));
         Map<String, Object> responseData = logService.getResponseDataWithLog(Action.ADDED, sectionDTO, loginUser);
+        return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{sectionId}")
+    public ResponseEntity<ResponseData> delete(@PathVariable int sectionId,
+                                               HttpServletRequest request) {
+        User loginUser = (User)request.getAttribute("user");
+        Section section = sectionRepository.findById(sectionId).orElseThrow(ResourceNotFoundException::new);
+        sectionRepository.delete(section);
+        Map<String, Object> responseData = logService.getResponseDataWithLog(Action.REMOVED, (SectionDTO) ModelMapper.of(section), loginUser);
         return new ResponseEntity<>(new ResponseData(ResponseData.Status.SUCCESS, responseData), HttpStatus.OK);
     }
 }
