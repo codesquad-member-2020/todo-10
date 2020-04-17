@@ -212,7 +212,6 @@ extension ColumnViewController: UITableViewDropDelegate {
         if let indexPath = coordinator.destinationIndexPath {
             destinationIndexPath = indexPath
         } else {
-            // Get last index path of table view.
             let section = tableView.numberOfSections - 1
             let row = tableView.numberOfRows(inSection: section)
             destinationIndexPath = IndexPath(row: row, section: section)
