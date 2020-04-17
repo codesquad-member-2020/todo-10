@@ -30,6 +30,7 @@ final class NewColumnViewController: UIViewController {
     }
     
     private func configureCreateButton() {
+        createButton.isEnabled = true
         createButton.addTarget(self, action: #selector(createColumn), for: .touchUpInside)
         
         view.addSubview(createButton)

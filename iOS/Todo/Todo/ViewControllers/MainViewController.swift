@@ -130,6 +130,7 @@ extension MainViewController: NewColumnViewControllerDelegate {
     }
     
     @IBAction func createColumnButtonTouched(_ sender: UIBarButtonItem) {
+        guard Token.authorizationToken != nil else { return }
         let newColumnViewController = NewColumnViewController()
         newColumnViewController.delegate = self
         present(newColumnViewController, animated: true)
