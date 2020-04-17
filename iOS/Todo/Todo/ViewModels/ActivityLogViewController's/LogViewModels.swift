@@ -9,10 +9,15 @@
 import Foundation
 
 final class LogViewModels {
+    enum Notification {
+        static let logViewModelsDidChange = Foundation.Notification.Name("logViewModelsDidChange")
+    }
     private var logViewModels: [LogViewModel]
     
     init(logViewModels: [LogViewModel]) {
         self.logViewModels = logViewModels
+        NotificationCenter.default.post(name: Notification.logViewModelsDidChange,
+                                        object: self)
     }
     
     var count: Int {

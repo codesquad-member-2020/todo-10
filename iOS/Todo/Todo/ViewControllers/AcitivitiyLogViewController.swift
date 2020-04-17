@@ -15,9 +15,23 @@ final class AcitivitiyLogViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureObserver()
         configureTableView()
         configureView()
         configureLogsCase()
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateView),
+                                               name: LogViewModels.Notification.logViewModelsDidChange,
+                                               object: logViewModels)
+    }
+    
+    @objc private func updateView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     private func configureTableView() {
@@ -33,12 +47,6 @@ final class AcitivitiyLogViewController: UITableViewController {
         view.layer.borderColor = UIColor.opaqueSeparator.cgColor
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
-    }
-    
-    private func updateView() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
     
     private func configureLogsCase() {
