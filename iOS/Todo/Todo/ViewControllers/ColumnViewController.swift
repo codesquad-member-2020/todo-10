@@ -91,7 +91,7 @@ final class ColumnViewController: UIViewController {
             let sourceIndexPath = userInfo["sourceIndexPath"] as? IndexPath,
             let destinationIndexPath = userInfo["destinationIndexPath"] as? IndexPath,
             let cardID = columnTableDataSource.cardViewModel(at: sourceIndexPath.row)?.cardID else { return }
-        let urlString = EndPointFactory.moveLogURLString(columnID: columnID,
+        let urlString = EndPointFactory.createMoveLogURLString(columnID: columnID,
                                                          newColumnId: nil,
                                                          cardID: cardID,
                                                          newIndex: destinationIndexPath.row)
@@ -124,8 +124,8 @@ final class ColumnViewController: UIViewController {
         columnTable.dataSource = columnTableDataSource
     }
     
-    func addToLast(cardViewModel: CardViewModel) {
-        columnTableDataSource.append(cardViewModel: cardViewModel)
+    func insertToFirst(cardViewModel: CardViewModel) {
+        columnTableDataSource.insert(cardViewModel: cardViewModel, at: 0)
     }
     
     func removeCardViewModel(row: Int) {
@@ -153,9 +153,20 @@ extension ColumnViewController: UITableViewDelegate {
     }
     
     private func moveRowToDone(_ tableView: UITableView, for indexPath: IndexPath) {
-        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row) else { return }
-        delegate?.columnViewControllerDidMoveToDone(cardViewModel)
-        columnTableDataSource.removeCardViewModel(at: indexPath.row)
+        guard let cardViewModel = columnTableDataSource.cardViewModel(at: indexPath.row),
+        let columnID = columnID, let cardID = cardViewModel.cardID else { return }
+        let doneColumnID = 3
+        let firstIndex = 0
+        let urlString = EndPointFactory.createMoveLogURLString(columnID: columnID,
+                                                               newColumnId: doneColumnID,
+                                                               cardID: cardID,
+                                                               newIndex: firstIndex)
+        MoveUseCase.requestMove(from: urlString, with: NetworkManager()) { logID in
+            guard let logID = logID else { return }
+            self.delegate?.columnViewControllerDidMoveToDone(cardViewModel)
+            self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
+            self.delegate?.columnViewControllerDidMake(logID: logID)
+        }
     }
     
     private func edit(_ tableView: UITableView, for indexPath: IndexPath) -> UIAction {
@@ -247,7 +258,7 @@ extension ColumnViewController: UITableViewDropDelegate {
         coordinator.items.forEach { item in
             guard let dragObject = item.dragItem.localObject as? DragObject,
                 let columnID = columnID else { return }
-            let urlString = EndPointFactory.moveLogURLString(columnID: dragObject.columnID,
+            let urlString = EndPointFactory.createMoveLogURLString(columnID: dragObject.columnID,
                                                              newColumnId: columnID,
                                                              cardID: dragObject.cardID,
                                                              newIndex: destinationIndexPath.row)
