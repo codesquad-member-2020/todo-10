@@ -27,6 +27,24 @@ class TodoController {
         });
 
         this.todoEventManager.initTodoEvent();
+
+        getEl('#add').addEventListener('click', this.addSection);
+    }
+
+    addSection() {
+        const url = 'http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/section';
+        const data = { title: '테스트' };
+        const token = sessionStorage.getItem('TODO-TOKEN');
+        const option = {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }
+        fetch(url, option);
     }
 }
 
