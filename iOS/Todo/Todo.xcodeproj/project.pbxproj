@@ -34,6 +34,7 @@
 		5A7CEB232449307600B2CFC7 /* LogID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB222449307600B2CFC7 /* LogID.swift */; };
 		5A7CEB252449352700B2CFC7 /* LogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB242449352700B2CFC7 /* LogUseCase.swift */; };
 		5A7CEB272449371300B2CFC7 /* LogResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB262449371300B2CFC7 /* LogResponse.swift */; };
+		5A7CEB2924493D4B00B2CFC7 /* LogViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CEB2824493D4B00B2CFC7 /* LogViewModels.swift */; };
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* ColumnsResponse.swift */; };
@@ -110,6 +111,7 @@
 		5A7CEB222449307600B2CFC7 /* LogID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogID.swift; sourceTree = "<group>"; };
 		5A7CEB242449352700B2CFC7 /* LogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUseCase.swift; sourceTree = "<group>"; };
 		5A7CEB262449371300B2CFC7 /* LogResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogResponse.swift; sourceTree = "<group>"; };
+		5A7CEB2824493D4B00B2CFC7 /* LogViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModels.swift; sourceTree = "<group>"; };
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* ColumnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsResponse.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7CEB192448206C00B2CFC7 /* LogViewModel.swift */,
+				5A7CEB2824493D4B00B2CFC7 /* LogViewModels.swift */,
 			);
 			path = "ActivityLogViewController's";
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				5A79380924419F9400D59611 /* CancelButton.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */,
 				5A7938252441BBAA00D59611 /* Controller.swift in Sources */,
+				5A7CEB2924493D4B00B2CFC7 /* LogViewModels.swift in Sources */,
 				5A7CEB252449352700B2CFC7 /* LogUseCase.swift in Sources */,
 				5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */,
 				5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */,

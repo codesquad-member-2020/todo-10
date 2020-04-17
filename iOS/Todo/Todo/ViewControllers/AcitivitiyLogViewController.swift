@@ -9,6 +9,14 @@
 import UIKit
 
 final class AcitivitiyLogViewController: UITableViewController {
+    private var logViewModels: LogViewModels!
+    
+    var currentDate: Date? {
+        didSet {
+            updateView()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -31,18 +39,6 @@ final class AcitivitiyLogViewController: UITableViewController {
         view.layer.masksToBounds = true
     }
     
-    var currentDate: Date? {
-        didSet {
-            updateView()
-        }
-    }
-    
-    private var logViewModels = [LogViewModel]() {
-        didSet {
-            updateView()
-        }
-    }
-    
     private func updateView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -52,7 +48,7 @@ final class AcitivitiyLogViewController: UITableViewController {
     private func configureLogsCase() {
         LogsUseCase.makeLogs(with: NetworkManager()) { logViewModels in
             guard let logViewModels = logViewModels else { return }
-            self.logViewModels = logViewModels.reversed()
+            self.logViewModels = LogViewModels(logViewModels: logViewModels.reversed())
         }
     }
     
@@ -60,27 +56,25 @@ final class AcitivitiyLogViewController: UITableViewController {
         let urlString = EndPointFactory.createLogURLString(logID: logID)
         LogUseCase.makeLog(from: urlString, with: NetworkManager()) { logViewModel in
             guard let logViewModel = logViewModel else { return }
-            self.insertAtFirst(logViewModel: logViewModel)
+            self.logViewModels.insertAtFirst(logViewModel: logViewModel)
         }
-    }
-    
-    private func insertAtFirst(logViewModel: LogViewModel) {
-        logViewModels.insert(logViewModel, at: 0)
     }
 }
 
 extension AcitivitiyLogViewController {
     //MARK:- UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let logViewModels = logViewModels else { return 0 }
         let maxCount = 15
         let count = logViewModels.count < maxCount ? logViewModels.count : maxCount
         return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell
+        guard let logCell = tableView.dequeueReusableCell(withIdentifier: LogCell.reuseIdentifier) as? LogCell,
+        let logViewModel = logViewModels.logViewModel(at: indexPath.row)
             else { return LogCell() }
-        let logViewModel = logViewModels[indexPath.row]
+        
         logViewModel.performBind(changed: { log in
             logCell.configureUser(text: "@\(log.user)")
         })
