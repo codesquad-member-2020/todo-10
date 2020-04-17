@@ -43,17 +43,17 @@ final class CardCell: UITableViewCell, ReusableView {
         contentView.addSubview(formatImageView)
         
         let constant: CGFloat = 10
-        formatImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: constant).isActive = true
-        formatImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: constant).isActive = true
+        formatImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant).isActive = true
+        formatImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: constant).isActive = true
     }
     
     private func configureTitle() {
         contentView.addSubview(titleLabel)
         
         let constant: CGFloat = 10
-        titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: constant).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: constant).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant).isActive = true
     }
     
     private func configureContext() {
@@ -62,7 +62,7 @@ final class CardCell: UITableViewCell, ReusableView {
         let constant: CGFloat = 10
         contentLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: constant).isActive = true
         contentLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant: constant).isActive = true
-        contentLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
+        contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant).isActive = true
     }
     
     private func configureDetailText() {
@@ -71,8 +71,8 @@ final class CardCell: UITableViewCell, ReusableView {
         let constant: CGFloat = 10
         authorLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: constant).isActive = true
         authorLabel.leadingAnchor.constraint(equalTo: formatImageView.trailingAnchor, constant:  constant).isActive = true
-        authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -constant).isActive = true
-        authorLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -constant).isActive = true
+        authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant).isActive = true
+        authorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -constant).isActive = true
     }
     
     func configureTitle(text: String?) {

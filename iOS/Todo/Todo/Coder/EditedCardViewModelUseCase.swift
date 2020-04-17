@@ -12,15 +12,15 @@ struct EditedCardViewModelUseCase {
     static func makeEditedCardViewModel(from string: String,
                                         cardData: Data,
                                         with manager: NetworkManagable,
-                                        result: @escaping (CardViewModel?) -> () ) {
+                                        completed: @escaping (CardViewModel?, LogID?) -> () ) {
         try? manager.requestResource(from: string, method: .patch, body: cardData, format: Format.jsonType,
-            headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, error) in
+            headers: [HTTPHeader.headerContentType, HTTPHeader.headerAccept]) { (data, urlResponse, error) in
                 guard error == nil, let data = data else { return }
                 guard let cardResponse = try? JSONDecoder().decode(CardResponse.self, from: data) else { return }
                 guard let card = cardResponse.content.card else { return }
                 guard cardResponse.status == .success else { return }
-                
-                result(CardViewModel(card: card))
+                let logID = LogID(cardResponse.content.log_id)
+                completed(CardViewModel(card: card), logID)
         }
     }
 }

@@ -9,9 +9,6 @@ import UIKit
 
 final class ContentViewDelegate: NSObject, UITextViewDelegate {
     static let placeHolderText = "Add a message what to do"
-    enum Notification {
-        static let isCorrectDidChange = Foundation.Notification.Name("isCorrectDidChange")
-    }
     private(set) var isCorrect = false {
         didSet {
             if isCorrect != oldValue {
@@ -70,5 +67,14 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
         guard text != Self.placeHolderText,
             Controller.isLengthNotZero(count: text.count) else { return false }
         return true
+    }
+    
+    func validText(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        if text != Self.placeHolderText, Controller.isLengthNotZero(count: text.count) {
+            isCorrect = true
+        } else {
+            isCorrect = false
+        }
     }
 }

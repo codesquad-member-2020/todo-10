@@ -16,11 +16,36 @@ struct LogsResponse: Codable {
 struct Log: Codable {
     let id: Int
     let user: String
-    let action: String
-    let target: String
+    let action: Action
+    let target: Target
     var title: String?
     let content: String
     var source: String?
     var destination: String?
-    let createDateTime: String
+    let createDateTime: Date
+}
+
+enum Action: String, Codable, CustomStringConvertible {
+    case added = "ADDED"
+    case removed = "REMOVED"
+    case updated = "UPDATED"
+    case moved = "MOVED"
+    
+    var description: String {
+        switch self {
+        case .added:
+            return "Added"
+        case .removed:
+            return "Removed"
+        case .updated:
+            return "Updated"
+        case .moved:
+            return "Moved"
+        }
+    }
+}
+
+enum Target: String, Codable {
+    case column = "SECTION"
+    case card = "CARD"
 }

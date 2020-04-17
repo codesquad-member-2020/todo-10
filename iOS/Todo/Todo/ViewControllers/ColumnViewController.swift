@@ -11,6 +11,7 @@ import UIKit
 protocol ColumnViewControllerDelegate {
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel)
     func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int)
+    func columnViewControllerDidMake(logID: LogID)
 }
 
 final class ColumnViewController: UIViewController {
@@ -172,13 +173,13 @@ extension ColumnViewController: UITableViewDelegate {
             let columnID = columnID,
             let cardID = cardViewModel.cardID else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
-        DeleteUseCase.requestDelete(from: urlString, with: NetworkManager()) { result in
-            guard let result = result else { return }
-            if result { self.columnTableDataSource.removeCardViewModel(at: indexPath.row) }
+        DeleteUseCase.requestDelete(from: urlString, with: NetworkManager()) { logID in
+            guard let logID = logID else { return }
+            self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
+            self.delegate?.columnViewControllerDidMake(logID: logID)
         }
     }
 }
-
 
 extension ColumnViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
@@ -236,6 +237,10 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         present(newCardViewController, animated: true)
     }
     
+    func cardViewControllerDidMake(logID: LogID) {
+        delegate?.columnViewControllerDidMake(logID: logID)
+    }
+    
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel) {
         columnTableDataSource.append(cardViewModel: cardViewModel)
     }
@@ -244,5 +249,3 @@ extension ColumnViewController: PlusButtonDelegate, CardViewControllerDelegate {
         columnTableDataSource.update(cardViewModel: cardViewModel, at: row)
     }
 }
-
-

@@ -11,6 +11,7 @@ import Foundation
 struct EndPointFactory {
     enum EndPoints {
         static let column = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/section"
+        static let log = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/log"
     }
     
     static func createExistedCardURLString(columnID: Int, cardID: Int) -> String {
@@ -19,5 +20,9 @@ struct EndPointFactory {
     
     static func createNewCardURLString(columnID: Int) -> String {
         return "\(EndPoints.column)/\(columnID)/card"
+    }
+    
+    static func createLogURLString(logID: LogID) -> String {
+        return "\(EndPoints.log)/\(logID.value)"
     }
 }
