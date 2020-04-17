@@ -30,6 +30,10 @@ final class TitleFieldDelegate: NSObject, UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        validText(textField)
+    }
+    
+    func validText(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if Controller.isLengthNotZero(count: text.count) {
             isCorrect = true

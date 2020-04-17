@@ -114,10 +114,12 @@ class CardViewController: UIViewController {
     
     func configureTitle(text: String?) {
         titleField.text = text
+        titleFieldDelegate.validText(titleField)
     }
     
     func configureContent(text: String) {
         contentView.text = text
+        contentViewDelegate.validText(contentView)
     }
     
     func generateNewCard() -> NewCard {

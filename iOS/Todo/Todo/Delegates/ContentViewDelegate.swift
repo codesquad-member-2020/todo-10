@@ -68,4 +68,13 @@ final class ContentViewDelegate: NSObject, UITextViewDelegate {
             Controller.isLengthNotZero(count: text.count) else { return false }
         return true
     }
+    
+    func validText(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        if text != Self.placeHolderText, Controller.isLengthNotZero(count: text.count) {
+            isCorrect = true
+        } else {
+            isCorrect = false
+        }
+    }
 }
