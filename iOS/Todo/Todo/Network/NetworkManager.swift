@@ -90,6 +90,18 @@ struct MockCardEditSuccessStub: NetworkManagable {
     }
 }
 
+struct MockCardMoveSameColumnsSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successMoveSameColumnsResponseStub, nil, nil)
+    }
+}
+
+struct MockCardMoveDifferentColumnsSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successMoveDifferentColumnsResponseStub, nil, nil)
+    }
+}
+
 struct MockLogsSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                      resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
