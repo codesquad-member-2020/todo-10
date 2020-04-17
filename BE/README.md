@@ -387,6 +387,39 @@ http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080
 }
 ```
 
+## 섹션 추가 요청
+
+#### POST `/board/section`
+
+### 요청 데이터
+- 로그인하고 발급받은 토큰을 Authorization 헤더에 넣어서 요청 해주세요.
+- Body에 생성하고자 하는 섹션의 title을 함께 전달해주세요.
+```
+{
+    "title": "나머지"
+}
+```
+
+### JSON 응답
+- 성공적으로 반환하는 경우
+   - 상태 코드 : OK (200)
+```
+{
+    "status": "SUCCESS",
+    "content": {
+        "id": 1,
+        "user": "nigayo",
+        "action": "ADDED",
+        "target": "SECTION",
+        "title": "나머지",
+        "content": null,
+        "source": null,
+        "destination": null,
+        "createDateTime": "2020-04-18 00:19:15"
+    }
+}
+```
+
 ## 전체 로그 요청
 
 #### GET `/board/logs`
