@@ -102,9 +102,12 @@ extension MainViewController: ColumnViewControllerDelegate {
     }
     
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel) {
-        let doneIndex = 2
-        guard let doneViewController = children[doneIndex] as? ColumnViewController else { return }
-        doneViewController.addToLast(cardViewModel: cardViewModel)
+        let doneColumnID = 3
+        children.forEach { viewController in
+            guard let columnViewController = viewController as? ColumnViewController,
+                columnViewController.columnID == doneColumnID else { return }
+            columnViewController.insertToFirst(cardViewModel: cardViewModel)
+        }
     }
     
     func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int) {
