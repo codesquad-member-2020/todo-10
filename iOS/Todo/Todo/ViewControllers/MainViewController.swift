@@ -94,6 +94,13 @@ final class MainViewController: UIViewController {
         activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
         activityLogViewController.currentDate = dateProvider()
     }
+    
+    @IBAction func createColumnButtonTouched(_ sender: UIBarButtonItem) {
+        addColumnViewController(column: Column(id: 100,
+                                               title: "^^",
+                                               createDateTime: "123",
+                                               updateDateTime: "1234", cards: []))
+    }
 }
 
 extension MainViewController: ColumnViewControllerDelegate {
