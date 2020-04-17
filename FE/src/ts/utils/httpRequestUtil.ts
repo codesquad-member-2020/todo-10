@@ -1,3 +1,4 @@
+import { drawLoading } from '../loginModules/tamplate';
 const httpRequest = {
     async login(url: string, data: object) {
         const option = {
@@ -23,6 +24,7 @@ const httpRequest = {
                 'Authorization': sessionStorage.getItem('TODO-TOKEN')
             }
         };
+        document.querySelector('#dimmed').innerHTML = drawLoading();
         const response = await fetch(url, option);
         const resPromise = await response.json();
         return resPromise;
