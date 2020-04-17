@@ -18,10 +18,10 @@ class CardViewController: UIViewController {
     var columnID: Int?
     var delegate: CardViewControllerDelegate?
     private let cancelButton = CancelButton()
+    private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
     private let contentViewDelegate = ContentViewDelegate()
     private let createButton = CreateButton()
-    private let titleField = TitleField()
     private let contentView = ContentView()
     
     override func viewDidLoad() {
@@ -71,7 +71,7 @@ class CardViewController: UIViewController {
     }
     
     private func configureCancelButton() {
-        cancelButton.addTarget(self, action: #selector(cancelCardViewController), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(dismissCardViewController), for: .touchUpInside)
         
         view.addSubview(cancelButton)
         let constant: CGFloat = 27
@@ -79,7 +79,7 @@ class CardViewController: UIViewController {
         cancelButton.trailingAnchor.constraint(equalTo: createButton.leadingAnchor, constant: -constant).isActive = true
     }
     
-    @objc private func cancelCardViewController() {
+    @objc private func dismissCardViewController() {
         dismiss(animated: true, completion: nil)
     }
     
