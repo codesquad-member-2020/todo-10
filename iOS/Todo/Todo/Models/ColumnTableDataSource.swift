@@ -10,6 +10,7 @@ import UIKit
 final class ColumnTableDataSource: NSObject {
     enum Notification {
         static let cardViewModelsDidChange = Foundation.Notification.Name("cardViewModelsDidChange")
+        static let cardViewModelDidMoveInSameColumn = Foundation.Notification.Name("cardViewModelDidMoveInSameColumn")
     }
     
     private var cardViewModels: [CardViewModel] {
@@ -66,7 +67,7 @@ extension ColumnTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cardCell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier,
                                                            for: indexPath) as? CardCell else {
-            return CardCell()
+                                                            return CardCell()
         }
         
         let index = indexPath.row
@@ -84,6 +85,7 @@ extension ColumnTableDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        moveCardViewModel(at: sourceIndexPath.row, to: destinationIndexPath.row)
+        NotificationCenter.default.post(name: Notification.cardViewModelDidMoveInSameColumn,
+                                        object: self)
     }
 }
