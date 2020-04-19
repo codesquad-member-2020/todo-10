@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 struct TitleModel {
     let title: String
     let cardsCount: Int

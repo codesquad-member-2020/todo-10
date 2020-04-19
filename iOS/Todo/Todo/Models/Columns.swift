@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 protocol ColumnsDataSource {
     func iterateColumns(with handler: (Column) -> ())
 }

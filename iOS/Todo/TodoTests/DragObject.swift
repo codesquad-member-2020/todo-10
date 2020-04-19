@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 struct DragObject {
     let cardViewModel: CardViewModel
     let columnID: Int

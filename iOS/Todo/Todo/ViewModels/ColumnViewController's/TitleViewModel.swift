@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 final class TitleViewModel: ViewModelBinding {
     typealias Key = TitleModel?
     private var titleModel: Key
