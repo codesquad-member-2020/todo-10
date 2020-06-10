@@ -19,14 +19,15 @@ final class EditingCardViewController: CardViewController {
         guard let cardData = generateNewCard().encodeToJSONData() else { return }
         guard let cardID = cardViewModel?.cardID, let row = row else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
-        EditedCardViewModelUseCase.makeEditedCardViewModel(from: urlString, cardData: cardData,
-                                                           with: NetworkManager()) { cardViewModel, logID in
-                                                            guard let cardViewModel = cardViewModel else { return }
-                                                            self.delegate?.cardViewControllerDidCardEdit(cardViewModel,
-                                                                                                         row: row)
-                                                            
-                                                            guard let logID = logID else { return }
-                                                            self.delegate?.cardViewControllerDidMake(logID: logID)
+        EditedCardViewModelUseCase.makeEditedCardViewModel(
+            from: urlString, cardData: cardData,
+            with: NetworkManager()) { cardViewModel, logID in
+                guard let cardViewModel = cardViewModel else { return }
+                self.delegate?.cardViewControllerDidCardEdit(cardViewModel,
+                                                             row: row)
+                
+                guard let logID = logID else { return }
+                self.delegate?.cardViewControllerDidMake(logID: logID)
         }
         dismiss(animated: true, completion: nil)
     }

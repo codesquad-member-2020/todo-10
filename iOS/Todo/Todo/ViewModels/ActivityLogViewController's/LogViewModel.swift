@@ -13,7 +13,7 @@ final class LogViewModel: ViewModelBinding {
     private var log: Key
     private var changedHandler : (Key) -> ()
     
-    init(log: Log, changed handler: @escaping (Key) -> () = { _ in }) {
+    init(log: Log,  handler: @escaping (Key) -> () = { _ in }) {
         self.changedHandler = handler
         self.log = log
         changedHandler(self.log)

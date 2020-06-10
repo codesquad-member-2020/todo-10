@@ -17,13 +17,14 @@ final class NewCardViewController: CardViewController {
     @objc override func createCard() {
         guard let columnID = columnID else { return }
         guard let cardData = generateNewCard().encodeToJSONData() else { return }
-        NewCardViewModelUseCase.makeNewCardViewModel(from: EndPointFactory.createNewCardURLString(columnID: columnID),
-                                                     cardData: cardData, with: NetworkManager()) { cardViewModel, logID in
-                                                        guard let cardViewModel = cardViewModel else { return }
-                                                        self.delegate?.cardViewControllerDidCardCreate(cardViewModel)
-                                                        
-                                                        guard let logID = logID else { return }
-                                                        self.delegate?.cardViewControllerDidMake(logID: logID)
+        NewCardViewModelUseCase.makeNewCardViewModel(
+            from: EndPointFactory.createNewCardURLString(columnID: columnID),
+            cardData: cardData, with: NetworkManager()) { cardViewModel, logID in
+                guard let cardViewModel = cardViewModel else { return }
+                self.delegate?.cardViewControllerDidCardCreate(cardViewModel)
+                
+                guard let logID = logID else { return }
+                self.delegate?.cardViewControllerDidMake(logID: logID)
         }
         dismiss(animated: true, completion: nil)
     }

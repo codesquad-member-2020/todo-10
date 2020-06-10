@@ -136,12 +136,12 @@ final class TitleLabel: UILabel {
     }
 }
 
-protocol PlusButtonDelegate {
+protocol PlusButtonDelegate: class {
     func plusButtonDidTouch()
 }
 
 final class PlusButton: UIButton {
-    var delegate: PlusButtonDelegate?
+    weak var delegate: PlusButtonDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

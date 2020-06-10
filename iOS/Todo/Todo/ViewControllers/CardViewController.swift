@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CardViewControllerDelegate {
+protocol CardViewControllerDelegate: class {
     func cardViewControllerDidCardCreate(_ cardViewModel: CardViewModel)
     func cardViewControllerDidCardEdit(_ cardViewModel: CardViewModel, row: Int)
     func cardViewControllerDidMake(logID: LogID)
@@ -16,7 +16,7 @@ protocol CardViewControllerDelegate {
 
 class CardViewController: UIViewController {
     var columnID: Int?
-    var delegate: CardViewControllerDelegate?
+    weak var delegate: CardViewControllerDelegate?
     private let cancelButton = CancelButton()
     private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
@@ -26,7 +26,7 @@ class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureObserver()
+        configureObservers()
         configureView()
         configureCreateButton()
         configureCancelButton()
@@ -34,7 +34,7 @@ class CardViewController: UIViewController {
         configureContentTextView()
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateCreateButton),
                                                name: Notification.isCorrectDidChange,

@@ -18,10 +18,10 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         configureScrollView()
-        requestLogin { result in
+        requestLogin { [weak self] result in
             guard let result = result, result else { return }
-            self.configureColumnsCase()
-            self.configureAcitivitiyLogViewController()
+            self?.configureColumnsCase()
+            self?.configureAcitivitiyLogViewController()
         }
     }
     

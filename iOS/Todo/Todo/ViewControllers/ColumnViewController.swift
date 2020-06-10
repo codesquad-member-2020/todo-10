@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ColumnViewControllerDelegate {
+protocol ColumnViewControllerDelegate: class {
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel)
     func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int)
     func columnViewControllerDidMake(logID: LogID)
@@ -20,7 +20,7 @@ final class ColumnViewController: UIViewController {
     private var titleViewModel: TitleViewModel!
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
-    var delegate: ColumnViewControllerDelegate?
+    weak var delegate: ColumnViewControllerDelegate?
     var columnID: Int?
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ final class ColumnViewController: UIViewController {
         configureDragAndDrop()
         configureTitleView()
         configureTableView()
-        configureObserver()
+        configureObservers()
     }
     
     private func configureDragAndDrop() {
@@ -67,7 +67,7 @@ final class ColumnViewController: UIViewController {
         columnTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateView),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
