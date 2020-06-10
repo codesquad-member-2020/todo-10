@@ -86,7 +86,7 @@ final class ColumnViewController: UIViewController {
     }
     
     @objc private func configureMoveUseCase(_ notification: NSNotification) {
-        guard let columnID = columnID ,
+        guard let columnID = columnID,
             let userInfo = notification.userInfo,
             let sourceIndexPath = userInfo["sourceIndexPath"] as? IndexPath,
             let destinationIndexPath = userInfo["destinationIndexPath"] as? IndexPath,
