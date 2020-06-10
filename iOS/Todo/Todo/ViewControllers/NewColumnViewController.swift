@@ -20,6 +20,10 @@ final class NewColumnViewController: UIViewController {
     private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
     
+    deinit {
+        createButton.removeTarget(self, action: #selector(createColumn), for: .touchUpInside)
+        cancelButton.removeTarget(self, action: #selector(dismissCardViewController), for: .touchUpInside)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

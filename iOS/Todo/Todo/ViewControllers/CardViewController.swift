@@ -24,6 +24,11 @@ class CardViewController: UIViewController {
     private let createButton = CreateButton()
     private let contentView = ContentView()
     
+    deinit {
+        createButton.removeTarget(self, action: #selector(createCard), for: .touchUpInside)
+        cancelButton.removeTarget(self, action: #selector(dismissCardViewController), for: .touchUpInside)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureObservers()
