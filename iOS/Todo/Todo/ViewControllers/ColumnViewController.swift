@@ -96,7 +96,7 @@ final class ColumnViewController: UIViewController {
                                                          cardID: cardID,
                                                          newIndex: destinationIndexPath.row)
         MoveUseCase.requestMove(from: urlString,
-                                with: MockCardMoveSameColumnsSuccessStub()) { logID in
+                                with: CardMoveSameColumnsSuccessStub()) { logID in
                                     guard let logID = logID else { return }
                                     self.columnTableDataSource.moveCardViewModel(at: sourceIndexPath.row,
                                                                                  to: destinationIndexPath.row)
@@ -207,7 +207,7 @@ extension ColumnViewController: UITableViewDelegate {
             let columnID = columnID,
             let cardID = cardViewModel.cardID else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
-        DeleteUseCase.requestDelete(from: urlString, with: MockCardDeleteSuccessStub()) { logID in
+        DeleteUseCase.requestDelete(from: urlString, with: CardDeleteSuccessStub()) { logID in
             guard let logID = logID else { return }
             self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
             self.delegate?.columnViewControllerDidMake(logID: logID)
@@ -263,7 +263,7 @@ extension ColumnViewController: UITableViewDropDelegate {
                                                              cardID: dragObject.cardID,
                                                              newIndex: destinationIndexPath.row)
             MoveUseCase.requestMove(from: urlString,
-                                    with: MockCardMoveDifferentColumnsSuccessStub()) { logID in
+                                    with: CardMoveDifferentColumnsSuccessStub()) { logID in
                                         guard let logID = logID else { return }
                                         self.delegate?.columnViewControllerDidMake(logID: logID)
                                         self.delegate?.columnViewControllerDidMove(sourceColumnID: dragObject.columnID,

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A11BE4624ADCD3400EC499E /* ColumnsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4524ADCD3400EC499E /* ColumnsSuccessStub.swift */; };
+		5A11BE4824ADCD5300EC499E /* CardDeleteSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4724ADCD5300EC499E /* CardDeleteSuccessStub.swift */; };
+		5A11BE4A24ADCD6E00EC499E /* CardCreateSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4924ADCD6E00EC499E /* CardCreateSuccessStub.swift */; };
+		5A11BE4C24ADCD8A00EC499E /* CardEditSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4B24ADCD8A00EC499E /* CardEditSuccessStub.swift */; };
+		5A11BE4E24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4D24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift */; };
+		5A11BE5024ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4F24ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift */; };
+		5A11BE5224ADCDC700EC499E /* LogsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE5124ADCDC700EC499E /* LogsSuccessStub.swift */; };
+		5A11BE5424ADCDF200EC499E /* LogSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE5324ADCDF200EC499E /* LogSuccessStub.swift */; };
+		5A11BE5624ADCE0800EC499E /* LoginSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE5524ADCE0800EC499E /* LoginSuccessStub.swift */; };
 		5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* Columns.swift */; };
 		5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F3243EEFFE00D59611 /* ButtonData.swift */; };
 		5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F5243F194A00D59611 /* DeleteUseCase.swift */; };
@@ -88,6 +97,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A11BE4524ADCD3400EC499E /* ColumnsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4724ADCD5300EC499E /* CardDeleteSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeleteSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4924ADCD6E00EC499E /* CardCreateSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCreateSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4B24ADCD8A00EC499E /* CardEditSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4D24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMoveSameColumnsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4F24ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMoveDifferentColumnsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5124ADCDC700EC499E /* LogsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5324ADCDF200EC499E /* LogSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5524ADCE0800EC499E /* LoginSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessStub.swift; sourceTree = "<group>"; };
 		5A7937F0243ED9FC00D59611 /* Columns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Columns.swift; sourceTree = "<group>"; };
 		5A7937F3243EEFFE00D59611 /* ButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonData.swift; sourceTree = "<group>"; };
 		5A7937F5243F194A00D59611 /* DeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCase.swift; sourceTree = "<group>"; };
@@ -182,6 +200,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A11BE4424ADCD1E00EC499E /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				5A11BE4524ADCD3400EC499E /* ColumnsSuccessStub.swift */,
+				5A11BE4724ADCD5300EC499E /* CardDeleteSuccessStub.swift */,
+				5A11BE4924ADCD6E00EC499E /* CardCreateSuccessStub.swift */,
+				5A11BE4B24ADCD8A00EC499E /* CardEditSuccessStub.swift */,
+				5A11BE4D24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift */,
+				5A11BE4F24ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift */,
+				5A11BE5124ADCDC700EC499E /* LogsSuccessStub.swift */,
+				5A11BE5324ADCDF200EC499E /* LogSuccessStub.swift */,
+				5A11BE5524ADCE0800EC499E /* LoginSuccessStub.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
 		5A7937F2243EEFDF00D59611 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +293,7 @@
 		5A838E4C243D66460081A42F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5A11BE4424ADCD1E00EC499E /* Stubs */,
 				5A838E4D243D66620081A42F /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -546,11 +581,13 @@
 				5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */,
 				5A7938002441319F00D59611 /* NewCardViewModelUseCase.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* ColumnTable.swift in Sources */,
+				5A11BE5424ADCDF200EC499E /* LogSuccessStub.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
 				5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */,
 				5A7A55B82447246A0041FC55 /* LogsResponse.swift in Sources */,
 				5A79380B2441A02600D59611 /* TitleField.swift in Sources */,
 				5A7CEB2124483CFB00B2CFC7 /* Notification.swift in Sources */,
+				5A11BE5624ADCE0800EC499E /* LoginSuccessStub.swift in Sources */,
 				5A838E62243DFD0E0081A42F /* CardViewModel.swift in Sources */,
 				5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */,
 				5AB8D556243B40FF00387EAE /* MainViewController.swift in Sources */,
@@ -564,14 +601,18 @@
 				5A7CEB3324497E4200B2CFC7 /* NewColumnViewController.swift in Sources */,
 				5A7937FE2440150700D59611 /* CardViewController.swift in Sources */,
 				5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */,
+				5A11BE4824ADCD5300EC499E /* CardDeleteSuccessStub.swift in Sources */,
 				5A7CEB152448137800B2CFC7 /* LogsUseCase.swift in Sources */,
 				5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */,
+				5A11BE4E24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift in Sources */,
 				5A7CEB1F24483AAB00B2CFC7 /* LogCell.swift in Sources */,
 				5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */,
+				5A11BE5024ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift in Sources */,
 				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */,
 				5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */,
+				5A11BE4C24ADCD8A00EC499E /* CardEditSuccessStub.swift in Sources */,
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
 				5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */,
 				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
@@ -579,9 +620,11 @@
 				5A7CEB232449307600B2CFC7 /* LogID.swift in Sources */,
 				5A874648243CAB5500FD1751 /* ColumnScrollView.swift in Sources */,
 				5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */,
+				5A11BE4A24ADCD6E00EC499E /* CardCreateSuccessStub.swift in Sources */,
 				5A7CEB272449371300B2CFC7 /* LogResponse.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5A79380924419F9400D59611 /* CancelButton.swift in Sources */,
+				5A11BE5224ADCDC700EC499E /* LogsSuccessStub.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */,
 				5A7938252441BBAA00D59611 /* Controller.swift in Sources */,
 				5A7CEB2924493D4B00B2CFC7 /* LogViewModels.swift in Sources */,
@@ -590,6 +633,7 @@
 				5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
+				5A11BE4624ADCD3400EC499E /* ColumnsSuccessStub.swift in Sources */,
 				5A7CEB3124497C5900B2CFC7 /* ColumnUseCase.swift in Sources */,
 				5A7CEB1A2448206C00B2CFC7 /* LogViewModel.swift in Sources */,
 				5A7A55BC244732E30041FC55 /* LoginResponse.swift in Sources */,
