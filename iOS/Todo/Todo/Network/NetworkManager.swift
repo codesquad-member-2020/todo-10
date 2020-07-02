@@ -35,12 +35,12 @@ enum NetworkErrorCase: Error {
 
 protocol NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws
 }
 
 struct NetworkManager: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         guard let url = URL(string: urlString) else {
             throw NetworkErrorCase.invalidURL
         }
@@ -61,57 +61,5 @@ struct NetworkManager: NetworkManagable {
             (data, urlRepsonse, error) in
             resultHandler(data, urlRepsonse, error)
         }.resume()
-    }
-}
-
-struct MockColumnsSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successColumnsResponseStub, nil, nil)
-    }
-}
-
-struct MockCardDeleteSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successDeleteResponseStub, nil, nil)
-    }
-}
-
-struct MockCardCreateSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successCreateResponseStub, nil, nil)
-    }
-}
-
-struct MockCardEditSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successEditingResponseStub, nil, nil)
-    }
-}
-
-struct MockCardMoveSameColumnsSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successMoveSameColumnsResponseStub, nil, nil)
-    }
-}
-
-struct MockCardMoveDifferentColumnsSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successMoveDifferentColumnsResponseStub, nil, nil)
-    }
-}
-
-struct MockLogsSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successLogsResponseStub, nil, nil)
-    }
-}
-
-struct MockLogSuccessStub: NetworkManagable {
-    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successLogResponseStub, nil, nil)
     }
 }

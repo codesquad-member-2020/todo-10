@@ -7,8 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A11BE4624ADCD3400EC499E /* ColumnsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4524ADCD3400EC499E /* ColumnsSuccessStub.swift */; };
+		5A11BE4824ADCD5300EC499E /* CardDeleteSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4724ADCD5300EC499E /* CardDeleteSuccessStub.swift */; };
+		5A11BE4A24ADCD6E00EC499E /* CardCreateSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4924ADCD6E00EC499E /* CardCreateSuccessStub.swift */; };
+		5A11BE4C24ADCD8A00EC499E /* CardEditSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4B24ADCD8A00EC499E /* CardEditSuccessStub.swift */; };
+		5A11BE4E24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4D24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift */; };
+		5A11BE5024ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE4F24ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift */; };
+		5A11BE5224ADCDC700EC499E /* LogsSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE5124ADCDC700EC499E /* LogsSuccessStub.swift */; };
+		5A11BE5424ADCDF200EC499E /* LogSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE5324ADCDF200EC499E /* LogSuccessStub.swift */; };
+		5A11BE5624ADCE0800EC499E /* LoginSuccessStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE5524ADCE0800EC499E /* LoginSuccessStub.swift */; };
+		5A11BE5924ADD06B00EC499E /* SuccessLoginResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE5824ADD06B00EC499E /* SuccessLoginResponseData.json */; };
+		5A11BE5B24ADD0AB00EC499E /* SuccessColumnsResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE5A24ADD0AB00EC499E /* SuccessColumnsResponseData.json */; };
+		5A11BE5D24ADD0E800EC499E /* SuccessCreateResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE5C24ADD0E800EC499E /* SuccessCreateResponseData.json */; };
+		5A11BE5F24ADD15300EC499E /* SuccessEditingResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE5E24ADD15300EC499E /* SuccessEditingResponseData.json */; };
+		5A11BE6124ADD17900EC499E /* SuccessDeleteResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE6024ADD17900EC499E /* SuccessDeleteResponseData.json */; };
+		5A11BE6324ADD1AB00EC499E /* SuccessMoveSameColumnsResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE6224ADD1AB00EC499E /* SuccessMoveSameColumnsResponseData.json */; };
+		5A11BE6524ADD1C500EC499E /* SuccessMoveDifferentColumnsResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE6424ADD1C500EC499E /* SuccessMoveDifferentColumnsResponseData.json */; };
+		5A11BE6724ADD1E500EC499E /* SuccessLogsResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE6624ADD1E500EC499E /* SuccessLogsResponseData.json */; };
+		5A11BE6924ADD20700EC499E /* SuccessLogResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE6824ADD20700EC499E /* SuccessLogResponseData.json */; };
+		5A11BE6B24ADD27700EC499E /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE6A24ADD27700EC499E /* DataExtensions.swift */; };
 		5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* Columns.swift */; };
-		5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F3243EEFFE00D59611 /* ButtonData.swift */; };
 		5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F5243F194A00D59611 /* DeleteUseCase.swift */; };
 		5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F7243F1AFA00D59611 /* CardResponse.swift */; };
 		5A7937FA243F1B1200D59611 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F9243F1B1200D59611 /* Status.swift */; };
@@ -42,7 +60,6 @@
 		5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E4D243D66620081A42F /* NetworkManager.swift */; };
 		5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */; };
 		5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E53243DB4110081A42F /* ColumnsResponse.swift */; };
-		5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E58243DC8AF0081A42F /* StubJsonData.swift */; };
 		5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */; };
 		5A838E5E243DF0470081A42F /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E5D243DF0470081A42F /* TitleModel.swift */; };
 		5A838E62243DFD0E0081A42F /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A838E61243DFD0E0081A42F /* CardViewModel.swift */; };
@@ -88,8 +105,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A11BE4524ADCD3400EC499E /* ColumnsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4724ADCD5300EC499E /* CardDeleteSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeleteSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4924ADCD6E00EC499E /* CardCreateSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCreateSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4B24ADCD8A00EC499E /* CardEditSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4D24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMoveSameColumnsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE4F24ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMoveDifferentColumnsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5124ADCDC700EC499E /* LogsSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5324ADCDF200EC499E /* LogSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5524ADCE0800EC499E /* LoginSuccessStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessStub.swift; sourceTree = "<group>"; };
+		5A11BE5824ADD06B00EC499E /* SuccessLoginResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessLoginResponseData.json; sourceTree = "<group>"; };
+		5A11BE5A24ADD0AB00EC499E /* SuccessColumnsResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessColumnsResponseData.json; sourceTree = "<group>"; };
+		5A11BE5C24ADD0E800EC499E /* SuccessCreateResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessCreateResponseData.json; sourceTree = "<group>"; };
+		5A11BE5E24ADD15300EC499E /* SuccessEditingResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessEditingResponseData.json; sourceTree = "<group>"; };
+		5A11BE6024ADD17900EC499E /* SuccessDeleteResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessDeleteResponseData.json; sourceTree = "<group>"; };
+		5A11BE6224ADD1AB00EC499E /* SuccessMoveSameColumnsResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessMoveSameColumnsResponseData.json; sourceTree = "<group>"; };
+		5A11BE6424ADD1C500EC499E /* SuccessMoveDifferentColumnsResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessMoveDifferentColumnsResponseData.json; sourceTree = "<group>"; };
+		5A11BE6624ADD1E500EC499E /* SuccessLogsResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessLogsResponseData.json; sourceTree = "<group>"; };
+		5A11BE6824ADD20700EC499E /* SuccessLogResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessLogResponseData.json; sourceTree = "<group>"; };
+		5A11BE6A24ADD27700EC499E /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		5A7937F0243ED9FC00D59611 /* Columns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Columns.swift; sourceTree = "<group>"; };
-		5A7937F3243EEFFE00D59611 /* ButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonData.swift; sourceTree = "<group>"; };
 		5A7937F5243F194A00D59611 /* DeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCase.swift; sourceTree = "<group>"; };
 		5A7937F7243F1AFA00D59611 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
 		5A7937F9243F1B1200D59611 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
@@ -123,7 +158,6 @@
 		5A838E4D243D66620081A42F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5A838E50243D9D0A0081A42F /* ColumnsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsUseCase.swift; sourceTree = "<group>"; };
 		5A838E53243DB4110081A42F /* ColumnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsResponse.swift; sourceTree = "<group>"; };
-		5A838E58243DC8AF0081A42F /* StubJsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJsonData.swift; sourceTree = "<group>"; };
 		5A838E5B243DEBAE0081A42F /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		5A838E5D243DF0470081A42F /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
 		5A838E61243DFD0E0081A42F /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -182,11 +216,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A11BE4424ADCD1E00EC499E /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				5A11BE4524ADCD3400EC499E /* ColumnsSuccessStub.swift */,
+				5A11BE4724ADCD5300EC499E /* CardDeleteSuccessStub.swift */,
+				5A11BE4924ADCD6E00EC499E /* CardCreateSuccessStub.swift */,
+				5A11BE4B24ADCD8A00EC499E /* CardEditSuccessStub.swift */,
+				5A11BE4D24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift */,
+				5A11BE4F24ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift */,
+				5A11BE5124ADCDC700EC499E /* LogsSuccessStub.swift */,
+				5A11BE5324ADCDF200EC499E /* LogSuccessStub.swift */,
+				5A11BE5524ADCE0800EC499E /* LoginSuccessStub.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		5A11BE5724ADD03500EC499E /* jsons */ = {
+			isa = PBXGroup;
+			children = (
+				5A11BE5A24ADD0AB00EC499E /* SuccessColumnsResponseData.json */,
+				5A11BE5C24ADD0E800EC499E /* SuccessCreateResponseData.json */,
+				5A11BE5E24ADD15300EC499E /* SuccessEditingResponseData.json */,
+				5A11BE6024ADD17900EC499E /* SuccessDeleteResponseData.json */,
+				5A11BE6224ADD1AB00EC499E /* SuccessMoveSameColumnsResponseData.json */,
+				5A11BE6424ADD1C500EC499E /* SuccessMoveDifferentColumnsResponseData.json */,
+				5A11BE6624ADD1E500EC499E /* SuccessLogsResponseData.json */,
+				5A11BE6824ADD20700EC499E /* SuccessLogResponseData.json */,
+				5A11BE5824ADD06B00EC499E /* SuccessLoginResponseData.json */,
+			);
+			path = jsons;
+			sourceTree = "<group>";
+		};
 		5A7937F2243EEFDF00D59611 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				5A838E58243DC8AF0081A42F /* StubJsonData.swift */,
-				5A7937F3243EEFFE00D59611 /* ButtonData.swift */,
+				5A11BE6A24ADD27700EC499E /* DataExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -259,6 +324,8 @@
 		5A838E4C243D66460081A42F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5A11BE5724ADD03500EC499E /* jsons */,
+				5A11BE4424ADCD1E00EC499E /* Stubs */,
 				5A838E4D243D66620081A42F /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -511,9 +578,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A11BE5924ADD06B00EC499E /* SuccessLoginResponseData.json in Resources */,
 				5AB8D55E243B410200387EAE /* LaunchScreen.storyboard in Resources */,
 				5AB8D55B243B410200387EAE /* Assets.xcassets in Resources */,
+				5A11BE6924ADD20700EC499E /* SuccessLogResponseData.json in Resources */,
+				5A11BE6324ADD1AB00EC499E /* SuccessMoveSameColumnsResponseData.json in Resources */,
+				5A11BE6124ADD17900EC499E /* SuccessDeleteResponseData.json in Resources */,
+				5A11BE6724ADD1E500EC499E /* SuccessLogsResponseData.json in Resources */,
 				5AB8D559243B40FF00387EAE /* Main.storyboard in Resources */,
+				5A11BE5D24ADD0E800EC499E /* SuccessCreateResponseData.json in Resources */,
+				5A11BE6524ADD1C500EC499E /* SuccessMoveDifferentColumnsResponseData.json in Resources */,
+				5A11BE5F24ADD15300EC499E /* SuccessEditingResponseData.json in Resources */,
+				5A11BE5B24ADD0AB00EC499E /* SuccessColumnsResponseData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,17 +616,18 @@
 			files = (
 				5A7938222441B84200D59611 /* TitleFieldDelegate.swift in Sources */,
 				5ADF26BD2445ED02008C15CA /* NewCardViewController.swift in Sources */,
-				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
 				5A7938202441B60D00D59611 /* ContentViewDelegate.swift in Sources */,
 				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
 				5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */,
 				5A7938002441319F00D59611 /* NewCardViewModelUseCase.swift in Sources */,
 				5A874634243C1D4E00FD1751 /* ColumnTable.swift in Sources */,
+				5A11BE5424ADCDF200EC499E /* LogSuccessStub.swift in Sources */,
 				5A874641243C2D3300FD1751 /* ReusableView.swift in Sources */,
 				5A838E4E243D66620081A42F /* NetworkManager.swift in Sources */,
 				5A7A55B82447246A0041FC55 /* LogsResponse.swift in Sources */,
 				5A79380B2441A02600D59611 /* TitleField.swift in Sources */,
 				5A7CEB2124483CFB00B2CFC7 /* Notification.swift in Sources */,
+				5A11BE5624ADCE0800EC499E /* LoginSuccessStub.swift in Sources */,
 				5A838E62243DFD0E0081A42F /* CardViewModel.swift in Sources */,
 				5A838E54243DB4110081A42F /* ColumnsResponse.swift in Sources */,
 				5AB8D556243B40FF00387EAE /* MainViewController.swift in Sources */,
@@ -559,19 +636,23 @@
 				5A79380D2441A05100D59611 /* ContentView.swift in Sources */,
 				5AB8D552243B40FF00387EAE /* AppDelegate.swift in Sources */,
 				5A79380724419F5600D59611 /* FormatImageView.swift in Sources */,
+				5A11BE6B24ADD27700EC499E /* DataExtensions.swift in Sources */,
 				5ADF26BB2445DF5B008C15CA /* EndPointFactory.swift in Sources */,
 				5A7CEB2D2449559E00B2CFC7 /* MoveResponse.swift in Sources */,
 				5A7CEB3324497E4200B2CFC7 /* NewColumnViewController.swift in Sources */,
 				5A7937FE2440150700D59611 /* CardViewController.swift in Sources */,
 				5A79380F2441A08E00D59611 /* ColumnStackView.swift in Sources */,
+				5A11BE4824ADCD5300EC499E /* CardDeleteSuccessStub.swift in Sources */,
 				5A7CEB152448137800B2CFC7 /* LogsUseCase.swift in Sources */,
 				5ADF26B924459E7B008C15CA /* NewCard.swift in Sources */,
+				5A11BE4E24ADCD9D00EC499E /* CardMoveSameColumnsSuccessStub.swift in Sources */,
 				5A7CEB1F24483AAB00B2CFC7 /* LogCell.swift in Sources */,
 				5A87463C243C1F2900FD1751 /* CardCell.swift in Sources */,
-				5A838E59243DC8AF0081A42F /* StubJsonData.swift in Sources */,
+				5A11BE5024ADCDB400EC499E /* CardMoveDifferentColumnsSuccessStub.swift in Sources */,
 				5A838E5C243DEBAE0081A42F /* TitleViewModel.swift in Sources */,
 				5A838E51243D9D0A0081A42F /* ColumnsUseCase.swift in Sources */,
 				5ACD2EC524441BB6002DD295 /* EditedCardViewModelUseCase.swift in Sources */,
+				5A11BE4C24ADCD8A00EC499E /* CardEditSuccessStub.swift in Sources */,
 				5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */,
 				5A7938132441ADBA00D59611 /* CreateButton.swift in Sources */,
 				5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */,
@@ -579,9 +660,11 @@
 				5A7CEB232449307600B2CFC7 /* LogID.swift in Sources */,
 				5A874648243CAB5500FD1751 /* ColumnScrollView.swift in Sources */,
 				5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */,
+				5A11BE4A24ADCD6E00EC499E /* CardCreateSuccessStub.swift in Sources */,
 				5A7CEB272449371300B2CFC7 /* LogResponse.swift in Sources */,
 				5A838E64243DFD530081A42F /* ViewModelBinding.swift in Sources */,
 				5A79380924419F9400D59611 /* CancelButton.swift in Sources */,
+				5A11BE5224ADCDC700EC499E /* LogsSuccessStub.swift in Sources */,
 				5AB8D587243B54B600387EAE /* AcitivitiyLogViewController.swift in Sources */,
 				5A7938252441BBAA00D59611 /* Controller.swift in Sources */,
 				5A7CEB2924493D4B00B2CFC7 /* LogViewModels.swift in Sources */,
@@ -590,6 +673,7 @@
 				5A7A55B6244701A10041FC55 /* DragObject.swift in Sources */,
 				5AB8D585243B4FC700387EAE /* ColumnViewController.swift in Sources */,
 				5AB8D554243B40FF00387EAE /* SceneDelegate.swift in Sources */,
+				5A11BE4624ADCD3400EC499E /* ColumnsSuccessStub.swift in Sources */,
 				5A7CEB3124497C5900B2CFC7 /* ColumnUseCase.swift in Sources */,
 				5A7CEB1A2448206C00B2CFC7 /* LogViewModel.swift in Sources */,
 				5A7A55BC244732E30041FC55 /* LoginResponse.swift in Sources */,

@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 final class Controller {
     static func isLengthNotZero(count: Int?) -> Bool {
         guard let count = count else { return  false }

@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 final class CardViewModel: ViewModelBinding {
     typealias Key = Card?
     private var card: Key

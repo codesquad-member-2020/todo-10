@@ -8,25 +8,29 @@
 
 import UIKit
 
-protocol NewColumnViewControllerDelegate {
+protocol NewColumnViewControllerDelegate: class {
     func newColumnViewControllerDidCardCreate(column: Column)
     func columnViewControllerDidMake(logID: LogID)
 }
 
 final class NewColumnViewController: UIViewController {
-    var delegate: NewColumnViewControllerDelegate?
+    weak var delegate: NewColumnViewControllerDelegate?
     private let cancelButton = CancelButton()
     private let createButton = CreateButton()
     private let titleField = TitleField()
     private let titleFieldDelegate = TitleFieldDelegate()
     
+    deinit {
+        createButton.removeTarget(self, action: #selector(createColumn), for: .touchUpInside)
+        cancelButton.removeTarget(self, action: #selector(dismissCardViewController), for: .touchUpInside)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         configureCreateButton()
         configureCancelButton()
-        configureObserver()
+        configureObservers()
         configureTitleField()
     }
     
@@ -70,7 +74,7 @@ final class NewColumnViewController: UIViewController {
         cancelButton.trailingAnchor.constraint(equalTo: createButton.leadingAnchor, constant: -constant).isActive = true
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateCreateButton),
                                                name: Notification.isCorrectDidChange,

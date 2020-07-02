@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 protocol ViewModelBinding {
     associatedtype Key
     func performBind(changed handler: @escaping (Key) -> ()) 

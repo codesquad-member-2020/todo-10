@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 struct MoveResponse: Codable {
     let status: Status
     let content: MoveContent

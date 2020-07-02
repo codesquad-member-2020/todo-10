@@ -6,8 +6,6 @@
 //  Copyright © 2020 Jason. All rights reserved.
 //
 
-import Foundation
-
 struct EndPointFactory {
     enum EndPoints {
         static let column = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/section"

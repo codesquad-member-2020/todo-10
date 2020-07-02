@@ -18,10 +18,10 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         configureScrollView()
-        requestLogin { result in
+        requestLogin { [weak self] result in
             guard let result = result, result else { return }
-            self.configureColumnsCase()
-            self.configureAcitivitiyLogViewController()
+            self?.configureColumnsCase()
+            self?.configureAcitivitiyLogViewController()
         }
     }
     
@@ -35,7 +35,7 @@ final class MainViewController: UIViewController {
     }
     
     private func requestLogin(completed: @escaping (Bool?) -> ()) {
-        LoginUseCase.makeToken(with: NetworkManager()) { token in
+        LoginUseCase.makeToken(with: LoginSuccessStub()) { token in
             guard let token = token else { return }
             Token.authorizationToken = token
             completed(true)
@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: ColumnsSuccessStub()) { columnsDataSource in
             guard let columnsDataSource = columnsDataSource else { return }
             columnsDataSource.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)

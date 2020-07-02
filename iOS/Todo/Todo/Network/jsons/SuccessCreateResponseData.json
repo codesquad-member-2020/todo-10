@@ -1,0 +1,15 @@
+{
+    "status": "SUCCESS",
+    "content": {
+        "log_id": 2,
+        "card_count": 2,
+        "card": {
+            "id": 2,
+            "title": "추가 기능 적용됨",
+            "content": "추가 기능 적용됨 ^^",
+            "createDateTime": "2020-04-15 03:12:32",
+            "updateDateTime": "2020-04-15 03:12:32",
+            "author": "nigayo"
+        }
+    }
+}

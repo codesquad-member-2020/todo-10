@@ -8,10 +8,16 @@
 
 import UIKit
 
-protocol ColumnViewControllerDelegate {
+protocol ColumnViewControllerDelegate: class {
     func columnViewControllerDidMoveToDone(_ cardViewModel: CardViewModel)
     func columnViewControllerDidMove(sourceColumnID: Int, sourceRow: Int)
     func columnViewControllerDidMake(logID: LogID)
+}
+
+enum ButtonData {
+    static let deleteString = "Delete"
+    static let moveToDone = "Move to done"
+    static let edit = "Edit..."
 }
 
 final class ColumnViewController: UIViewController {
@@ -20,7 +26,7 @@ final class ColumnViewController: UIViewController {
     private var titleViewModel: TitleViewModel!
     private var columnTable = ColumnTable()
     private var columnTableDataSource: ColumnTableDataSource!
-    var delegate: ColumnViewControllerDelegate?
+    weak var delegate: ColumnViewControllerDelegate?
     var columnID: Int?
     
     override func viewDidLoad() {
@@ -28,7 +34,7 @@ final class ColumnViewController: UIViewController {
         configureDragAndDrop()
         configureTitleView()
         configureTableView()
-        configureObserver()
+        configureObservers()
     }
     
     private func configureDragAndDrop() {
@@ -67,7 +73,7 @@ final class ColumnViewController: UIViewController {
         columnTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateView),
                                                name: ColumnTableDataSource.Notification.cardViewModelsDidChange,
@@ -86,7 +92,7 @@ final class ColumnViewController: UIViewController {
     }
     
     @objc private func configureMoveUseCase(_ notification: NSNotification) {
-        guard let columnID = columnID ,
+        guard let columnID = columnID,
             let userInfo = notification.userInfo,
             let sourceIndexPath = userInfo["sourceIndexPath"] as? IndexPath,
             let destinationIndexPath = userInfo["destinationIndexPath"] as? IndexPath,
@@ -96,7 +102,7 @@ final class ColumnViewController: UIViewController {
                                                          cardID: cardID,
                                                          newIndex: destinationIndexPath.row)
         MoveUseCase.requestMove(from: urlString,
-                                with: NetworkManager()) { logID in
+                                with: CardMoveSameColumnsSuccessStub()) { logID in
                                     guard let logID = logID else { return }
                                     self.columnTableDataSource.moveCardViewModel(at: sourceIndexPath.row,
                                                                                  to: destinationIndexPath.row)
@@ -207,7 +213,7 @@ extension ColumnViewController: UITableViewDelegate {
             let columnID = columnID,
             let cardID = cardViewModel.cardID else { return }
         let urlString = EndPointFactory.createExistedCardURLString(columnID: columnID, cardID: cardID)
-        DeleteUseCase.requestDelete(from: urlString, with: NetworkManager()) { logID in
+        DeleteUseCase.requestDelete(from: urlString, with: CardDeleteSuccessStub()) { logID in
             guard let logID = logID else { return }
             self.columnTableDataSource.removeCardViewModel(at: indexPath.row)
             self.delegate?.columnViewControllerDidMake(logID: logID)
@@ -263,7 +269,7 @@ extension ColumnViewController: UITableViewDropDelegate {
                                                              cardID: dragObject.cardID,
                                                              newIndex: destinationIndexPath.row)
             MoveUseCase.requestMove(from: urlString,
-                                    with: NetworkManager()) { logID in
+                                    with: CardMoveDifferentColumnsSuccessStub()) { logID in
                                         guard let logID = logID else { return }
                                         self.delegate?.columnViewControllerDidMake(logID: logID)
                                         self.delegate?.columnViewControllerDidMove(sourceColumnID: dragObject.columnID,
