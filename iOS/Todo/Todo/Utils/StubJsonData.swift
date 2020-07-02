@@ -39,14 +39,32 @@ enum StubJsonData {
                 "title": "하고 있는 일",
                 "createDateTime": "2020-04-15 03:12:00",
                 "updateDateTime": "2020-04-15 03:12:00",
-                "cards": []
+                "cards": [
+                    {
+                        "id": 2,
+                        "title": "OAuth 기능 구현",
+                        "content": "요청 보내고 토큰 받아오기",
+                        "createDateTime": "2020-04-15 03:12:32",
+                        "updateDateTime": "2020-04-15 03:13:00",
+                        "author": "nigayo"
+                    }
+                ]
             },
             {
                 "id": 3,
                 "title": "완료된 일",
                 "createDateTime": "2020-04-15 03:12:00",
                 "updateDateTime": "2020-04-15 03:12:00",
-                "cards": []
+                "cards": [
+                    {
+                        "id": 3,
+                        "title": "상세 화면 만들기",
+                        "content": "테이블 뷰 사용",
+                        "createDateTime": "2020-04-15 03:12:32",
+                        "updateDateTime": "2020-04-15 03:13:00",
+                        "author": "nigayo"
+                    }
+                ]
             }
         ]
     }
