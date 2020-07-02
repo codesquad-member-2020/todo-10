@@ -11,6 +11,8 @@ import Foundation
 struct ColumnsSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                          resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successColumnsResponseStub, nil, nil)
+        guard let data = Data.readJSON(for: "SuccessColumnsResponseData") else { return }
+        
+        resultHandler(data, nil, nil)
     }
 }

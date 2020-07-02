@@ -10,7 +10,9 @@ import Foundation
 
 struct LoginSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successLoginResponse, LoginHTTPURLResponseStub(), nil)
+        guard let data = Data.readJSON(for: "SuccessLoginResponseData") else { return }
+        
+        resultHandler(data, LoginHTTPURLResponseStub(), nil)
     }
 }
 

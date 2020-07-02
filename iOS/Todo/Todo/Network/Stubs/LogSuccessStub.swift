@@ -11,6 +11,8 @@ import Foundation
 struct LogSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
                          resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successLogResponseStub, nil, nil)
+        guard let data = Data.readJSON(for: "SuccessLogResponseData") else { return }
+        
+        resultHandler(data, nil, nil)
     }
 }

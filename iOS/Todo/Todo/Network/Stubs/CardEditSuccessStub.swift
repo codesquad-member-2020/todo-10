@@ -10,6 +10,8 @@ import Foundation
 
 struct CardEditSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
-        resultHandler(StubJsonData.successEditingResponseStub, nil, nil)
+        guard let data = Data.readJSON(for: "SuccessEditingResponseData") else { return }
+        
+        resultHandler(data, nil, nil)
     }
 }
