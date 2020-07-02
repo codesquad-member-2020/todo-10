@@ -14,6 +14,12 @@ protocol ColumnViewControllerDelegate: class {
     func columnViewControllerDidMake(logID: LogID)
 }
 
+enum ButtonData {
+    static let deleteString = "Delete"
+    static let moveToDone = "Move to done"
+    static let edit = "Edit..."
+}
+
 final class ColumnViewController: UIViewController {
     //MARK:- internal property
     private let titleView = TitleView()

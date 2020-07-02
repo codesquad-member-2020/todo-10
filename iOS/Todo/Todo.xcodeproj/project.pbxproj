@@ -27,7 +27,6 @@
 		5A11BE6924ADD20700EC499E /* SuccessLogResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A11BE6824ADD20700EC499E /* SuccessLogResponseData.json */; };
 		5A11BE6B24ADD27700EC499E /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11BE6A24ADD27700EC499E /* DataExtensions.swift */; };
 		5A7937F1243ED9FC00D59611 /* Columns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F0243ED9FC00D59611 /* Columns.swift */; };
-		5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F3243EEFFE00D59611 /* ButtonData.swift */; };
 		5A7937F6243F194A00D59611 /* DeleteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F5243F194A00D59611 /* DeleteUseCase.swift */; };
 		5A7937F8243F1AFA00D59611 /* CardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F7243F1AFA00D59611 /* CardResponse.swift */; };
 		5A7937FA243F1B1200D59611 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7937F9243F1B1200D59611 /* Status.swift */; };
@@ -126,7 +125,6 @@
 		5A11BE6824ADD20700EC499E /* SuccessLogResponseData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SuccessLogResponseData.json; sourceTree = "<group>"; };
 		5A11BE6A24ADD27700EC499E /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		5A7937F0243ED9FC00D59611 /* Columns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Columns.swift; sourceTree = "<group>"; };
-		5A7937F3243EEFFE00D59611 /* ButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonData.swift; sourceTree = "<group>"; };
 		5A7937F5243F194A00D59611 /* DeleteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUseCase.swift; sourceTree = "<group>"; };
 		5A7937F7243F1AFA00D59611 /* CardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardResponse.swift; sourceTree = "<group>"; };
 		5A7937F9243F1B1200D59611 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 		5A7937F2243EEFDF00D59611 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				5A7937F3243EEFFE00D59611 /* ButtonData.swift */,
 				5A11BE6A24ADD27700EC499E /* DataExtensions.swift */,
 			);
 			path = Utils;
@@ -619,7 +616,6 @@
 			files = (
 				5A7938222441B84200D59611 /* TitleFieldDelegate.swift in Sources */,
 				5ADF26BD2445ED02008C15CA /* NewCardViewController.swift in Sources */,
-				5A7937F4243EEFFE00D59611 /* ButtonData.swift in Sources */,
 				5A7938202441B60D00D59611 /* ContentViewDelegate.swift in Sources */,
 				5A7937FA243F1B1200D59611 /* Status.swift in Sources */,
 				5A87463F243C2C8C00FD1751 /* ColumnTableDataSource.swift in Sources */,
