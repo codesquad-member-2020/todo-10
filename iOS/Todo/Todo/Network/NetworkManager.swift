@@ -35,12 +35,12 @@ enum NetworkErrorCase: Error {
 
 protocol NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws
 }
 
 struct NetworkManager: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         guard let url = URL(string: urlString) else {
             throw NetworkErrorCase.invalidURL
         }
@@ -66,14 +66,14 @@ struct NetworkManager: NetworkManagable {
 
 struct MockColumnsSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         resultHandler(StubJsonData.successColumnsResponseStub, nil, nil)
     }
 }
 
 struct MockCardDeleteSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         resultHandler(StubJsonData.successDeleteResponseStub, nil, nil)
     }
 }
@@ -104,14 +104,36 @@ struct MockCardMoveDifferentColumnsSuccessStub: NetworkManagable {
 
 struct MockLogsSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         resultHandler(StubJsonData.successLogsResponseStub, nil, nil)
     }
 }
 
 struct MockLogSuccessStub: NetworkManagable {
     func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?,
-                     resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+                         resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
         resultHandler(StubJsonData.successLogResponseStub, nil, nil)
     }
 }
+
+struct LoginSuccessStub: NetworkManagable {
+    func requestResource(from urlString: String, method: HTTPMethod, body: Data?, format: String?, headers: [String]?, resultHandler: @escaping (Data?, URLResponse?, Error?) -> ()) throws {
+        resultHandler(StubJsonData.successLoginResponse, LoginHTTPURLResponseStub(), nil)
+    }
+}
+
+final class LoginHTTPURLResponseStub: HTTPURLResponse {
+    init() {
+        super.init(
+            url: URL(string: LoginUseCase.EndPoints.login)!,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: ["Authorization": "fakeToken"]
+            )!
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+

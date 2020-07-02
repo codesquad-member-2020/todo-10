@@ -199,4 +199,11 @@ enum StubJsonData {
         }
     }
     """.data(using: .utf8)
+    
+    static let successLoginResponse = """
+    {
+       "status": "SUCCESS",
+       "content": ""
+    }
+    """.data(using: .utf8)
 }
