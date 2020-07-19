@@ -35,7 +35,7 @@ final class MainViewController: UIViewController {
     }
     
     private func requestLogin(completed: @escaping (Bool?) -> ()) {
-        LoginUseCase.makeToken(with: LoginSuccessStub()) { token in
+        LoginUseCase.makeToken(with: NetworkManager()) { token in
             guard let token = token else { return }
             Token.authorizationToken = token
             completed(true)
@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureColumnsCase() {
-        ColumnsUseCase.makeColumns(with: ColumnsSuccessStub()) { columnsDataSource in
+        ColumnsUseCase.makeColumns(with: NetworkManager()) { columnsDataSource in
             guard let columnsDataSource = columnsDataSource else { return }
             columnsDataSource.iterateColumns(with: { column in
                 self.addColumnViewController(column: column)
