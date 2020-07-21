@@ -12,14 +12,14 @@ struct LoginUseCase {
     enum LoginInfo {
         static let user = """
         {
-            "name": "nigayo",
+            "name": "testUser",
             "password": "1234"
         }
         """.data(using: .utf8)
     }
     
     enum EndPoints {
-        static let login = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board/login"
+        static let login = "http://\((EndPointFactory.EndPoints.baseURL))/board/login"
     }
     
     static func makeToken(with manager: NetworkManagable, completed: @escaping (String?) -> ()) {

@@ -19,7 +19,7 @@ final class NewCardViewController: CardViewController {
         guard let cardData = generateNewCard().encodeToJSONData() else { return }
         NewCardViewModelUseCase.makeNewCardViewModel(
             from: EndPointFactory.createNewCardURLString(columnID: columnID),
-            cardData: cardData, with: CardCreateSuccessStub()) { cardViewModel, logID in
+            cardData: cardData, with: NetworkManager()) { cardViewModel, logID in
                 guard let cardViewModel = cardViewModel else { return }
                 self.delegate?.cardViewControllerDidCardCreate(cardViewModel)
                 

@@ -105,6 +105,12 @@ final class NewColumnViewController: UIViewController {
     }
 }
 
+extension NewColumnViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
+
 struct Title: Codable {
     let title: String
     

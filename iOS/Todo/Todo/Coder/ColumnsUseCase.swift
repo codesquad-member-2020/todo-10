@@ -10,7 +10,7 @@ import Foundation
 
 struct ColumnsUseCase {
     enum EndPoints {
-        static let columns = "http://ec2-15-164-63-83.ap-northeast-2.compute.amazonaws.com:8080/board"
+        static let columns = "http://\(EndPointFactory.EndPoints.baseURL)/board"
     }
     
     static func makeColumns(with manager: NetworkManagable, completed: @escaping (ColumnsDataSource?) -> ()) {

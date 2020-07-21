@@ -50,7 +50,7 @@ final class AcitivitiyLogViewController: UITableViewController {
     }
     
     private func configureLogsCase() {
-        LogsUseCase.makeLogs(with: LogsSuccessStub()) { logViewModels in
+        LogsUseCase.makeLogs(with: NetworkManager()) { logViewModels in
             guard let logViewModels = logViewModels else { return }
             self.logViewModels = LogViewModels(logViewModels: logViewModels.reversed())
         }
@@ -58,7 +58,7 @@ final class AcitivitiyLogViewController: UITableViewController {
     
     func configureLogUseCase(for logID: LogID) {
         let urlString = EndPointFactory.createLogURLString(logID: logID)
-        LogUseCase.makeLog(from: urlString, with: LogSuccessStub()) { logViewModel in
+        LogUseCase.makeLog(from: urlString, with: NetworkManager()) { logViewModel in
             guard let logViewModel = logViewModel else { return }
             self.logViewModels.insertAtFirst(logViewModel: logViewModel)
         }

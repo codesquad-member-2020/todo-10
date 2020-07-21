@@ -131,3 +131,9 @@ class CardViewController: UIViewController {
         return NewCard(title: titleField.text, content: contentView.text)
     }
 }
+
+extension CardViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
