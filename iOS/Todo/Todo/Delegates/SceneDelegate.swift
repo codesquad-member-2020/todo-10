@@ -15,11 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         configureWindow(scene: windowScene, rootViewController: navigationController)
+        
     }
     
     private func configureWindow(scene: UIWindowScene, rootViewController: UIViewController) {
         let window = UIWindow(windowScene: scene)
         window.rootViewController = navigationController
+        window.makeKeyAndVisible()
         self.window = window
     }
     
