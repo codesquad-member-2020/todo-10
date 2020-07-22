@@ -17,12 +17,60 @@ final class MainViewController: UIViewController {
     private let activityLogViewController = AcitivitiyLogViewController()
     
     override func viewDidLoad() {
+        configureView()
         configureScrollView()
         requestLogin { [weak self] result in
             guard let result = result, result else { return }
             self?.configureColumnsCase()
             self?.configureAcitivitiyLogViewController()
         }
+    }
+    
+    private func configureView() {
+        view.backgroundColor = .white
+        configureNavigationItem()
+    }
+    
+    private func configureNavigationItem() {
+        configureLeftBarButtonItem()
+        configureRightBarButtonItem()
+    }
+    
+    private func configureLeftBarButtonItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Create Column",
+            style: .plain,
+            target: self,
+            action: #selector(createColumnButtonDidTouch)
+        )
+    }
+    
+    @objc private func createColumnButtonDidTouch() {
+        guard Token.authorizationToken != nil else { return }
+        let newColumnViewController = NewColumnViewController()
+        newColumnViewController.delegate = self
+        
+        newColumnViewController.modalPresentationStyle = .custom
+        newColumnViewController.transitioningDelegate = self
+        
+        self.present(newColumnViewController, animated: true)
+    }
+    
+    private func configureRightBarButtonItem() {
+        let barButtonItem = UIBarButtonItem(
+            title: "Menu",
+            style: .plain,
+            target: self,
+            action: #selector(menuButtonDidTouch)
+        )
+        barButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    private let dateProvider: () -> Date = Date.init
+    @objc private func menuButtonDidTouch() {
+        activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
+        activityLogViewController.currentDate = dateProvider()
     }
     
     private func configureScrollView() {
@@ -88,12 +136,6 @@ final class MainViewController: UIViewController {
                                                                           constant: -5).isActive = true
         }
     }
-    
-    private let dateProvider: () -> Date = Date.init
-    @IBAction func menuButtonTouched(_ sender: UIBarButtonItem) {
-        activityLogViewController.view.isHidden = !activityLogViewController.view.isHidden
-        activityLogViewController.currentDate = dateProvider()
-    }
 }
 
 extension MainViewController: ColumnViewControllerDelegate {
@@ -124,22 +166,13 @@ extension MainViewController: ColumnViewControllerDelegate {
     }
 }
 
-extension MainViewController: NewColumnViewControllerDelegate, UIViewControllerTransitioningDelegate {
+extension MainViewController: NewColumnViewControllerDelegate {
     func newColumnViewControllerDidCardCreate(column: Column) {
         addColumnViewController(column: column)
     }
-    
-    @IBAction func createColumnButtonTouched(_ sender: UIBarButtonItem) {
-        guard Token.authorizationToken != nil else { return }
-        let newColumnViewController = NewColumnViewController()
-        newColumnViewController.delegate = self
-        
-        newColumnViewController.modalPresentationStyle = .custom
-        newColumnViewController.transitioningDelegate = self
-        
-        self.present(newColumnViewController, animated: true)
-    }
-    
+}
+
+extension MainViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
     }
